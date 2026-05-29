@@ -2,7 +2,7 @@
 name: Michael Chen
 role: MSc Student
 email: m.chen@plen.ku.dk
-avatar: /images/people/michael-chen.png
+avatar: /images/people/michael-chen.webp
 tags: ["Metabolic Engineering", "Enzyme Kinetics"]
 ---
 

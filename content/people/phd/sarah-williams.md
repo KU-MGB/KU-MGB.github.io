@@ -2,7 +2,7 @@
 name: Sarah Williams
 role: PhD Student
 email: s.williams@plen.ku.dk
-avatar: /images/people/sarah-williams.png
+avatar: /images/people/sarah-williams.webp
 tags: ["Metagenomics", "Microbial Ecology"]
 ---
 

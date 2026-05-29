@@ -2,7 +2,7 @@
 name: Benedetta Togni
 role: MSc Student
 email: benedetta.t@plen.ku.dk
-avatar: /images/people/benedetta-togni.png
+avatar: /images/people/benedetta-togni.webp
 tags: ["Microbial Ecology", "Biotechnology", "Plant-Microbe Interactions"]
 ---
 

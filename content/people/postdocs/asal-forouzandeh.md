@@ -2,7 +2,7 @@
 name: Asal Forouzandeh
 role: Postdoctoral Researcher
 email: asal.f@plen.ku.dk
-avatar: /images/people/asal-forouzandeh.png
+avatar: /images/people/asal-forouzandeh.webp
 tags: ["Microbial Ecology", "Biotechnology", "Microbial Systems"]
 ---
 

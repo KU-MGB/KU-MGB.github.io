@@ -2,7 +2,7 @@
 name: Jonas Borup Randløv
 role: BSc Student
 email: jonas.r@plen.ku.dk
-avatar: /images/people/jonas-randlov.png
+avatar: /images/people/jonas-randlov.webp
 tags: ["Natural Resources", "Plant Science", "Environmental Science"]
 ---
 

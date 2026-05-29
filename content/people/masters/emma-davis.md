@@ -2,7 +2,7 @@
 name: Emma Davis
 role: MSc Student
 email: e.davis@plen.ku.dk
-avatar: /images/people/emma-davis.png
+avatar: /images/people/emma-davis.webp
 tags: ["Bioinformatics", "Data Science"]
 ---
 

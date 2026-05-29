@@ -2,7 +2,7 @@
 name: David Miller
 role: PhD Student
 email: d.miller@plen.ku.dk
-avatar: /images/people/david-miller.png
+avatar: /images/people/david-miller.webp
 tags: ["Protein Design", "Structural Biology"]
 ---
 
