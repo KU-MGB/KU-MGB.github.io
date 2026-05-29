@@ -5,7 +5,7 @@ email: shaban@plen.ku.dk
 github: https://github.com/shabanahmad
 website: https://shabanahmad.github.io/
 tags: ["AI in Biology", "Bioinformatics", "Molecular Modelling", "PFAS Biodegradation"]
-avatar: https://github.com/shabanahmad.png
+avatar: /images/people/shaban-ahmad.png
 ---
 
 Shaban Ahmad is a Postdoctoral Scientist at the University of Copenhagen. His work focuses on the intersection of Artificial Intelligence and Biology, specifically in the areas of enzyme mining and translational computational pharmacology.
