@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ArrowRight, Dna, FlaskConical, Network, Leaf } from "lucide-react";
 
 export default function Home() {
-  const FADE_DOWN_ANIMATION_VARIANTS = {
+  const FADE_DOWN_ANIMATION_VARIANTS: Variants = {
     hidden: { opacity: 0, y: -10 },
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
