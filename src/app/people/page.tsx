@@ -3,7 +3,14 @@ import { getContentData } from "@/lib/content";
 export default function PeoplePage() {
   const people = getContentData("people");
 
-  const categories = ["Faculty", "Postdocs", "PhD", "Masters", "Bachelors", "Alumni"];
+  const categories = [
+    { id: "faculty", label: "Faculty / Group Leaders" },
+    { id: "postdocs", label: "Postdoctoral Researchers" },
+    { id: "phd", label: "PhD Students" },
+    { id: "masters", label: "MSc Students" },
+    { id: "bachelors", label: "BSc Students" },
+    { id: "alumni", label: "Alumni" }
+  ];
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-20">
@@ -11,17 +18,14 @@ export default function PeoplePage() {
       
       <div className="space-y-20">
         {categories.map((cat) => {
-          const catPeople = people.filter((p: any) => 
-            p.role?.toLowerCase().includes(cat.toLowerCase()) || 
-            (cat === "PhD" && p.role?.toLowerCase().includes("phd"))
-          );
+          const catPeople = people.filter((p: any) => p.category === cat.id);
 
           if (catPeople.length === 0) return null;
 
           return (
-            <section key={cat}>
+            <section key={cat.id}>
               <h2 className="text-2xl font-semibold text-cyan-400 mb-8 pb-2 border-b border-white/5">
-                {cat}
+                {cat.label}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {catPeople.map((person: any) => (

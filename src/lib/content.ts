@@ -27,9 +27,13 @@ export function getContentData(subfolder: string): ContentItem[] {
     const fileContent = fs.readFileSync(path.join(fullPath, file.name), "utf-8");
     const { data, content } = matter(fileContent);
 
+    // Use the immediate parent folder name as the category
+    const category = path.basename(subfolder);
+
     return [
       {
         id: file.name.replace(/\.md$/, ""),
+        category,
         ...data,
         content,
       },
