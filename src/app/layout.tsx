@@ -30,26 +30,28 @@ export default function RootLayout({
   );
 }
 
+import Link from "next/link";
+
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center">
             <span className="font-bold text-slate-950 text-sm">M</span>
           </div>
-          <span className="font-bold tracking-tight text-xl tracking-widest text-white">MGB</span>
-        </div>
+          <span className="font-bold tracking-tight text-xl tracking-widest text-white uppercase">MGB</span>
+        </Link>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <a href="#" className="hover:text-cyan-400 transition-colors">Research</a>
-          <a href="#" className="hover:text-cyan-400 transition-colors">Publications</a>
-          <a href="#" className="hover:text-cyan-400 transition-colors">People</a>
-          <a href="#" className="hover:text-cyan-400 transition-colors">Projects</a>
+          <Link href="/research" className="hover:text-cyan-400 transition-colors uppercase tracking-wider text-[11px]">Research</Link>
+          <Link href="/publications" className="hover:text-cyan-400 transition-colors uppercase tracking-wider text-[11px]">Publications</Link>
+          <Link href="/people" className="hover:text-cyan-400 transition-colors uppercase tracking-wider text-[11px]">People</Link>
+          <Link href="/projects" className="hover:text-cyan-400 transition-colors uppercase tracking-wider text-[11px]">Projects</Link>
         </div>
         <div>
-          <a href="#" className="px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-medium transition-all">
+          <Link href="#" className="px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold uppercase tracking-widest transition-all">
             Join Us
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
