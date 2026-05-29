@@ -32,7 +32,13 @@ export default function PeoplePage() {
                   <div key={person.id} className="glass-panel p-6 rounded-xl hover:bg-white/[0.03] transition-all flex flex-col items-center text-center">
                     {person.avatar && (
                       <div className="w-24 h-24 rounded-full overflow-hidden mb-6 border-2 border-cyan-500/20">
-                        <img src={person.avatar} alt={person.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+                        <img 
+                          src={person.avatar} 
+                          alt={person.name} 
+                          decoding="async"
+                          loading="lazy"
+                          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" 
+                        />
                       </div>
                     )}
                     <h3 className="text-xl font-bold text-white mb-1">{person.name}</h3>
