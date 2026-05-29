@@ -4,14 +4,20 @@ import matter from "gray-matter";
 
 const contentDirectory = path.join(process.cwd(), "content");
 
-export function getContentData(subfolder: string) {
+export interface ContentItem {
+  id: string;
+  content: string;
+  [key: string]: any;
+}
+
+export function getContentData(subfolder: string): ContentItem[] {
   const fullPath = path.join(contentDirectory, subfolder);
   
   if (!fs.existsSync(fullPath)) return [];
 
   const files = fs.readdirSync(fullPath, { withFileTypes: true });
   
-  const allData = files.flatMap((file) => {
+  const allData: ContentItem[] = files.flatMap((file) => {
     if (file.isDirectory()) {
       return getContentData(path.join(subfolder, file.name));
     }
