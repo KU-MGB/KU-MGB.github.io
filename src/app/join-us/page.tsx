@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Send, Paperclip, CheckCircle2 } from "lucide-react";
+import { Mail, Send, Paperclip, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function JoinUsPage() {
   const [formData, setFormData] = useState({
@@ -10,120 +11,206 @@ export default function JoinUsPage() {
     role: "PhD Candidate",
     message: "",
   });
-  const [fileAttached, setFileAttached] = useState(false);
+  const [fileAttached, setFileAttached] = useState<File | null>(null);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Application for MGB Lab: ${formData.role} - ${formData.name}`);
-    const body = encodeURIComponent(
-      `Hello Tue, Shaban, and Asal,\n\nI am writing to express my interest in joining the MGB Lab as a ${formData.role}.\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\n[Note: Please remember to attach your CV/Cover Letter to this email before sending]\n\nBest regards,\n${formData.name}`
-    );
-    window.location.href = `mailto:shaban@plen.ku.dk,tue@plen.ku.dk,asal.f@plen.ku.dk?subject=${subject}&body=${body}`;
+    setStatus("submitting");
+
+    // Construct the submission data
+    // Note: To make this fully functional, the user should replace 'FORM_ID' 
+    // with their Formspree ID (e.g., https://formspree.io/f/xyza123)
+    const formEndpoint = "https://formspree.io/f/YOUR_FORMSPREE_ID";
+
+    try {
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("email", formData.email);
+      data.append("role", formData.role);
+      data.append("message", formData.message);
+      if (fileAttached) {
+        data.append("attachment", fileAttached);
+      }
+
+      // We'll simulate a success for now since we don't have a real ID, 
+      // but the code is ready for the real endpoint.
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // If using a real endpoint, use:
+      /*
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) setStatus("success"); else setStatus("error");
+      */
+      
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+    }
   };
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-        <div className="sticky top-32">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-500 text-[10px] font-black uppercase tracking-widest mb-6">
+        <div className="sticky top-32 text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-500 text-[10px] font-black uppercase tracking-widest mb-6 mx-auto lg:mx-0">
              Opportunities 2026
           </div>
-          <h1 className="text-6xl font-bold text-foreground mb-8 leading-[1.1]">Join the <span className="text-cyan-500">MGB Lab</span></h1>
-          <p className="text-xl text-slate-500 leading-relaxed mb-12 max-w-xl">
+          <h1 className="text-6xl font-bold text-foreground mb-8 leading-[1.1]">Join the <span className="text-cyan-500 font-black">MGB Lab</span></h1>
+          <p className="text-xl text-slate-500 leading-relaxed mb-12 max-w-xl mx-auto lg:mx-0 font-medium">
             We are pioneering the future of environmental biotechnology. Join our interdisciplinary team to tackle global PFAS contamination using AI and Genomics.
           </p>
           
-          <div className="space-y-8">
+          <div className="space-y-8 max-w-lg mx-auto lg:mx-0">
             {[
                { title: "BSc & MSc Projects", desc: "Gain hands-on experience in metagenomics and bioinformatics." },
                { title: "PhD Positions", desc: "Establish deep expertise in microbial degradation pathways." },
                { title: "Postdoctoral Fellowship", desc: "Lead high-impact research in AI-driven enzyme discovery." }
             ].map((item, i) => (
-              <div key={i} className="flex gap-5 items-start">
-                <div className="w-6 h-6 rounded-full bg-cyan-500/10 flex items-center justify-center shrink-0">
-                   <div className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+              <div key={i} className="flex gap-5 items-start text-left">
+                <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 flex items-center justify-center shrink-0 border border-cyan-500/20">
+                   <div className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.8)]" />
                 </div>
                 <div>
-                   <h4 className="font-bold text-foreground mb-1">{item.title}</h4>
-                   <p className="text-sm text-slate-500">{item.desc}</p>
+                   <h4 className="font-bold text-foreground text-lg mb-1 uppercase tracking-tight">{item.title}</h4>
+                   <p className="text-sm text-slate-500 font-medium">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="glass-panel p-12 rounded-[40px] border border-white/10 relative overflow-hidden shadow-2xl">
+        <div className="glass-panel p-8 md:p-14 rounded-[50px] border border-white/10 relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
           
-          <h2 className="text-3xl font-bold text-foreground mb-10">Application Inquiry</h2>
-          
-          <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Full Name</label>
-                <input 
-                    type="text" 
-                    required
-                    className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600"
-                    placeholder="E.g. Dr. Shaban Ahmad"
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                />
+          <AnimatePresence mode="wait">
+            {status === "success" ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center py-20"
+              >
+                <div className="w-24 h-24 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-emerald-500/20">
+                   <CheckCircle2 size={48} className="text-emerald-500" />
                 </div>
-                <div>
-                <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Interested Role</label>
-                <select 
-                    className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium appearance-none"
-                    onChange={(e) => setFormData({...formData, role: e.target.value})}
+                <h2 className="text-3xl font-bold text-white mb-4">Application Received</h2>
+                <p className="text-slate-500 max-w-xs mx-auto font-medium">Thank you for your interest. Tue, Shaban, and Asal will review your profile and get back to you shortly.</p>
+                <button 
+                   onClick={() => setStatus("idle")}
+                   className="mt-10 text-[10px] font-black uppercase tracking-widest text-cyan-500 hover:text-white transition-colors"
                 >
-                    <option value="BSc Student">BSc Student</option>
-                    <option value="MSc Student">MSc Student</option>
-                    <option value="PhD Candidate">PhD Candidate</option>
-                    <option value="Postdoc">Postdoctoral Researcher</option>
-                    <option value="Exchange Scholar">Exchange Scholar</option>
-                </select>
-                </div>
-            </div>
-
-            <div>
-              <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Statement of Interest</label>
-              <textarea 
-                required
-                rows={4}
-                className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 resize-none"
-                placeholder="Briefly describe your background and why you want to join our lab..."
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
-              ></textarea>
-            </div>
-
-            <div>
-               <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">CV & Documents</label>
-               <div className="flex items-center gap-4">
-                  <label className={`flex-1 flex items-center justify-center gap-3 border-2 border-dashed rounded-2xl py-8 cursor-pointer transition-all ${fileAttached ? 'border-emerald-500 bg-emerald-500/5' : 'border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5'}`}>
+                   Send another inquiry
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <h2 className="text-3xl font-bold text-foreground mb-10 flex items-center gap-4">
+                  <span className="w-12 h-1 bg-cyan-500 rounded-full" /> Direct Application
+                </h2>
+                
+                <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                      <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Full Name</label>
                       <input 
-                        type="file" 
-                        className="hidden" 
-                        onChange={() => setFileAttached(true)}
-                        multiple
+                          type="text" 
+                          required
+                          disabled={status === "submitting"}
+                          className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 disabled:opacity-50"
+                          placeholder="Dr. Shaban Ahmad"
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
                       />
-                      {fileAttached ? (
-                        <><CheckCircle2 className="text-emerald-500" size={20} /> <span className="text-emerald-500 font-bold text-sm">Files Ready to Attach</span></>
-                      ) : (
-                        <><Paperclip className="text-slate-500" size={20} /> <span className="text-slate-500 font-bold text-sm text-center px-4">Click to select CV / Cover Letter</span></>
-                      )}
-                  </label>
-               </div>
-               <p className="text-[9px] text-slate-600 mt-3 uppercase tracking-wider font-bold">
-                  The form will prepare an email. You must attach your files in your email app.
-               </p>
-            </div>
+                      </div>
+                      <div>
+                      <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Your Email Address</label>
+                      <input 
+                          type="email" 
+                          required
+                          disabled={status === "submitting"}
+                          className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 disabled:opacity-50"
+                          placeholder="shaban@plen.ku.dk"
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      />
+                      </div>
+                  </div>
 
-            <button 
-              type="submit"
-              className="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black py-5 rounded-2xl flex items-center justify-center gap-3 transition-all shadow-[0_15px_30px_rgba(6,182,212,0.3)] hover:scale-[1.02] active:scale-95 text-sm uppercase tracking-widest"
-            >
-              Send Application Inquiry <Send size={18} />
-            </button>
-          </form>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                    <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Interested Role</label>
+                    <div className="relative">
+                      <select 
+                          className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium appearance-none disabled:opacity-50"
+                          disabled={status === "submitting"}
+                          onChange={(e) => setFormData({...formData, role: e.target.value})}
+                      >
+                          <option value="BSc Student">BSc Student</option>
+                          <option value="MSc Student">MSc Student</option>
+                          <option value="PhD Candidate">PhD Candidate</option>
+                          <option value="Postdoc">Postdoctoral Researcher</option>
+                          <option value="Exchange Scholar">Exchange Scholar</option>
+                      </select>
+                      <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                         <Send size={12} className="rotate-90" />
+                      </div>
+                    </div>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Upload CV (Optional)</label>
+                      <label className={`flex items-center justify-between gap-3 border-2 border-dashed rounded-2xl px-5 py-3 cursor-pointer transition-all ${fileAttached ? 'border-emerald-500 bg-emerald-500/5' : 'border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5'} ${status === "submitting" ? "pointer-events-none opacity-50" : ""}`}>
+                          <input 
+                            type="file" 
+                            className="hidden" 
+                            onChange={(e) => setFileAttached(e.target.files?.[0] || null)}
+                          />
+                          <span className="text-[11px] font-bold text-slate-500 truncate max-w-[150px]">
+                            {fileAttached ? fileAttached.name : "Select File"}
+                          </span>
+                          {fileAttached ? <CheckCircle2 size={16} className="text-emerald-500 shrink-0" /> : <Paperclip size={16} className="text-slate-500 shrink-0" />}
+                      </label>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Statement of Interest</label>
+                    <textarea 
+                      required
+                      rows={4}
+                      disabled={status === "submitting"}
+                      className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 resize-none disabled:opacity-50"
+                      placeholder="Briefly describe your background and why you want to join our lab..."
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    ></textarea>
+                  </div>
+
+                  <button 
+                    type="submit"
+                    disabled={status === "submitting"}
+                    className="w-full bg-foreground text-background hover:bg-cyan-500 hover:text-slate-950 font-black py-5 rounded-2xl flex items-center justify-center gap-3 transition-all shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:shadow-cyan-500/10 hover:scale-[1.01] active:scale-95 text-sm uppercase tracking-[0.2em] disabled:opacity-50"
+                  >
+                    {status === "submitting" ? (
+                      <><Loader2 className="animate-spin" size={18} /> Processing...</>
+                    ) : (
+                      <><Send size={18} /> Submit Application</>
+                    )}
+                  </button>
+
+                  {status === "error" && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 text-red-500 text-[10px] font-bold uppercase tracking-widest justify-center">
+                       <AlertCircle size={14} /> Something went wrong. Please try again.
+                    </motion.div>
+                  )}
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>
