@@ -3,7 +3,7 @@ name: Tue Kjærgaard Nielsen
 role: Tenure Track Assistant Professor / Group Leader
 email: tue@plen.ku.dk
 orcid: 0000-0001-6610-8450
-avatar: /images/people/tue-nielsen.png
+avatar: /images/people/tue-nielsen.webp
 tags: ["Microbial Evolution", "Nanopore Sequencing", "PFAS Degradation", "Bacteriophages"]
 ---
 
