@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" style={{ colorScheme: 'dark' }}>
+    <html lang="en" className="light" style={{ colorScheme: 'light' }}>
       <body className="antialiased selection:bg-cyan-500/30">
         <ThemeProvider>
           {/* Cinematic Ambient Glow */}

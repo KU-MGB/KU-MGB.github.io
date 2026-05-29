@@ -45,9 +45,25 @@ export default function Navbar() {
                     <ChevronDown size={10} className={`${langOpen ? 'rotate-180' : ''} transition-transform`} />
                 </button>
                 {langOpen && (
-                  <div className="absolute top-full right-0 mt-4 w-32 glass-panel rounded-xl py-2 overflow-hidden shadow-2xl animate-fade-in">
-                    <button className="w-full text-left px-4 py-2 text-[10px] font-bold text-foreground hover:bg-cyan-500 hover:text-slate-950 transition-colors">EN (English)</button>
-                    <button className="w-full text-left px-4 py-2 text-[10px] font-bold text-foreground hover:bg-cyan-500 hover:text-slate-950 transition-colors">DA (Dansk)</button>
+                  <div className="absolute top-full right-0 mt-4 w-48 glass-panel rounded-2xl py-3 overflow-hidden shadow-2xl animate-fade-in border border-white/10 max-h-[400px] overflow-y-auto custom-scrollbar">
+                    {[
+                      { code: "EN", name: "English" },
+                      { code: "DA", name: "Dansk" },
+                      { code: "AR", name: "العربية" },
+                      { code: "HI", name: "हिन्दी" },
+                      { code: "ES", name: "Español" },
+                      { code: "FR", name: "Français" },
+                      { code: "DE", name: "Deutsch" },
+                      { code: "ZH", name: "中文" },
+                      { code: "UR", name: "اردو" },
+                      { code: "RU", name: "Русский" },
+                      { code: "JA", name: "日本語" }
+                    ].map((lang) => (
+                      <button key={lang.code} className="w-full text-left px-5 py-2.5 text-[11px] font-bold text-foreground hover:bg-cyan-500 hover:text-slate-950 transition-colors flex justify-between items-center group/lang">
+                        <span>{lang.name}</span>
+                        <span className="text-[9px] opacity-50 group-hover/lang:opacity-100">{lang.code}</span>
+                      </button>
+                    ))}
                   </div>
                 )}
              </div>

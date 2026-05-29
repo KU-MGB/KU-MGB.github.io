@@ -39,7 +39,7 @@ export default function PeoplePage() {
                       <a 
                         href={person.website || person.github || person.scholar || `mailto:${person.email}`} 
                         target="_blank" 
-                        className="w-32 h-28 rounded-[30px] overflow-hidden mb-8 border-2 border-white/5 group-hover:border-cyan-500/40 transition-all duration-500 block relative group/avatar shadow-2xl"
+                        className="w-40 h-36 rounded-[30px] overflow-hidden mb-8 border-2 border-white/10 dark:border-white/5 group-hover:border-cyan-500/40 transition-all duration-500 block relative group/avatar shadow-2xl bg-slate-900"
                         title={`View ${person.name}'s profile`}
                       >
                         <img 
@@ -47,7 +47,7 @@ export default function PeoplePage() {
                           alt={person.name} 
                           decoding="async"
                           loading="lazy"
-                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
+                          className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" 
                         />
                         <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex items-center justify-center">
                            <span className="text-[8px] font-black text-white uppercase tracking-widest bg-cyan-500/80 px-2 py-1 rounded">View Profile</span>
