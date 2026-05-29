@@ -1,7 +1,7 @@
 ---
-name: Placeholder MSc Student
+name: Current Students
 role: MSc Student
-email: msc@plen.ku.dk
-tags: ["Bioinformatics"]
+email: tue@plen.ku.dk
+tags: ["Bioinformatics", "Microbiology"]
 ---
-A placeholder for current MSc students.
+MSc students currently conducting their thesis work in the MGB Lab.

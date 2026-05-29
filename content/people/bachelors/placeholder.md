@@ -1,7 +1,7 @@
 ---
-name: Placeholder BSc Student
+name: Current Students
 role: BSc Student
-email: bsc@plen.ku.dk
+email: tue@plen.ku.dk
 tags: ["Microbiology"]
 ---
-A placeholder for current BSc students.
+BSc students currently conducting their thesis work in the MGB Lab.

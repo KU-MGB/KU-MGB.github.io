@@ -1,7 +1,7 @@
 ---
-name: Placeholder Student
+name: Open Position
 role: PhD Student
-email: phd@plen.ku.dk
+email: tue@plen.ku.dk
 tags: ["Microbial Genomics"]
 ---
-A placeholder for upcoming PhD students in the MGB group.
+We are always looking for talented PhD students interested in microbial genomics and biodegradation. Contact Tue for open opportunities.
