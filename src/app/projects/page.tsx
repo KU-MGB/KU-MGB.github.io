@@ -7,7 +7,7 @@ export default function ProjectsPage() {
     <div className="max-w-7xl mx-auto px-6 py-20">
       <h1 className="text-5xl font-bold text-white mb-4">Active Projects</h1>
       <p className="text-slate-400 mb-16 max-w-2xl text-lg">
-        Ongoing initiatives and large-scale collaborations within the MGB Institute.
+        Ongoing initiatives and large-scale collaborations within the MGB Lab.
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

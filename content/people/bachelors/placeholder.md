@@ -1,7 +1,7 @@
 ---
 name: Placeholder BSc Student
 role: BSc Student
-email: bsc@mgb-institute.org
+email: bsc@plen.ku.dk
 tags: ["Microbiology"]
 ---
 A placeholder for current BSc students.

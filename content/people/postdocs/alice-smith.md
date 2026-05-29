@@ -1,7 +1,7 @@
 ---
 name: Dr. Alice Smith
 role: Postdoctoral Researcher
-email: alice.smith@mgb-institute.org
+email: alice.smith@plen.ku.dk
 github: https://github.com/alicesmith
 tags: ["Metagenomics", "PFAS"]
 ---

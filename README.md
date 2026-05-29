@@ -1,4 +1,4 @@
-# MGB Institute Website
+# MGB Lab Website
 
 This is the source code for the official **Microbial Genomics and Biodegradation (MGB)** organization website.
 
