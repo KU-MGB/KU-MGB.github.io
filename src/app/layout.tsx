@@ -6,6 +6,10 @@ import Navbar from "@/components/layout/Navbar";
 export const metadata: Metadata = {
   title: "MGB Lab | Microbial Genomics and Biodegradation",
   description: "Microbial Genomics and Biodegradation Lab @ PLEN, University of Copenhagen. Advancing PFAS Defluorination and Environmental Biotechnology.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
