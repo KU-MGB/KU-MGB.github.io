@@ -1,6 +1,6 @@
 ---
-name: Dr. Michael Chen
-role: Postdoctoral Researcher
+name: Michael Chen
+role: MSc Student
 email: m.chen@plen.ku.dk
 avatar: /images/people/michael-chen.png
 tags: ["Metabolic Engineering", "Enzyme Kinetics"]
