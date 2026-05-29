@@ -31,23 +31,41 @@ export default function RootLayout({
 }
 
 import Link from "next/link";
+import { Search, Globe, Moon } from "lucide-react";
 
 function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <img src="/logo.png" alt="MGB Lab Logo" className="h-10 w-auto" />
+        <Link href="/" className="flex items-center gap-3 group">
+          <img src="/logo.png" alt="MGB Lab Logo" className="h-10 w-auto group-hover:scale-110 transition-transform duration-500" />
           <span className="font-bold tracking-tight text-xl tracking-widest text-white uppercase">MGB</span>
         </Link>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <Link href="/research" className="hover:text-cyan-400 transition-colors uppercase tracking-wider text-[11px]">Research</Link>
-          <Link href="/publications" className="hover:text-cyan-400 transition-colors uppercase tracking-wider text-[11px]">Publications</Link>
-          <Link href="/people" className="hover:text-cyan-400 transition-colors uppercase tracking-wider text-[11px]">People</Link>
-          <Link href="/projects" className="hover:text-cyan-400 transition-colors uppercase tracking-wider text-[11px]">Projects</Link>
+        
+        <div className="hidden lg:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
+          <Link href="/research" className="hover:text-cyan-400 transition-colors">Research</Link>
+          <Link href="/publications" className="hover:text-cyan-400 transition-colors">Publications</Link>
+          <Link href="/people" className="hover:text-cyan-400 transition-colors">People</Link>
+          <Link href="/projects" className="hover:text-cyan-400 transition-colors">Projects</Link>
+          <Link href="/news" className="hover:text-cyan-400 transition-colors">News</Link>
         </div>
-        <div>
-          <Link href="#" className="px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-bold uppercase tracking-widest transition-all">
+
+        <div className="flex items-center gap-6">
+          {/* Utility Bar */}
+          <div className="hidden sm:flex items-center gap-4 border-r border-white/10 pr-6">
+             <button className="text-slate-400 hover:text-white transition-colors cursor-pointer">
+                <Search size={16} />
+             </button>
+             <button className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
+                <Globe size={16} />
+                <span className="text-[10px] font-bold">EN</span>
+             </button>
+             <button className="text-slate-400 hover:text-white transition-colors cursor-pointer">
+                <Moon size={16} />
+             </button>
+          </div>
+          
+          <Link href="/join-us" className="px-5 py-2.5 rounded-full bg-cyan-500 text-slate-950 text-[11px] font-bold uppercase tracking-widest hover:bg-cyan-400 transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)]">
             Join Us
           </Link>
         </div>
