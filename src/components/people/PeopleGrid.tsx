@@ -49,37 +49,40 @@ export default function PeopleGrid({ people }: { people: any[] }) {
                   <motion.div
                     key={person.id}
                     whileHover={{ y: -8 }}
-                    className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl transition-all duration-500"
+                    className="glass-panel p-10 rounded-[40px] super-card-hover shadow-xl transition-all duration-500 group relative overflow-hidden"
                   >
+                    {/* decorative blob that appears on hover */}
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/6 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
                     {person.avatar ? (
-                      <div className="relative mx-auto mb-8 w-40 h-40 rounded-[36px] overflow-hidden border border-white/10 shadow-2xl">
+                      <div className="relative mx-auto mb-8 w-40 h-40 rounded-[36px] overflow-hidden border border-white/10 shadow-2xl group-hover:border-cyan-500/40 transition-all">
                         <img
                           src={person.avatar}
                           alt={person.name}
                           decoding="async"
                           loading="lazy"
-                          className="w-full h-full object-cover grayscale transition duration-700 hover:grayscale-0"
+                          className="w-full h-full object-cover grayscale transition duration-700 group-hover:grayscale-0 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-black/5 pointer-events-none" />
                       </div>
                     ) : null}
 
-                    <h3 className="text-2xl font-bold text-foreground mb-2 tracking-tight">{person.name}</h3>
-                    <div className="inline-flex items-center rounded-full border border-white/10 bg-slate-900 px-4 py-2 text-[9px] font-black uppercase tracking-[0.25em] text-cyan-300 mb-6">
+                    <h3 className="text-2xl font-bold text-foreground mb-2 tracking-tight group-hover:text-cyan-400 transition-colors">{person.name}</h3>
+                    <div className="inline-flex items-center rounded-full px-4 py-2 text-[9px] font-black uppercase tracking-[0.25em] mb-6 bg-foreground/[0.03] border border-white/6 text-foreground">
                       {person.role}
                     </div>
 
-                    <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-4">{person.content}</p>
+                    <p className="text-slate-700 dark:text-slate-400 text-sm leading-relaxed mb-6 line-clamp-4">{person.content}</p>
 
                     <div className="flex flex-wrap gap-2 mb-8">
                       {person.tags?.map((tag: string) => (
-                        <span key={tag} className="text-[9px] uppercase tracking-widest font-black px-3 py-1 rounded-md bg-white/5 text-slate-400 border border-white/5 transition-colors">
+                        <span key={tag} className="text-[9px] uppercase tracking-widest font-black px-3 py-1 rounded-md bg-white/5 dark:bg-white/5 text-slate-600 dark:text-slate-400 border border-white/5 transition-colors">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3 text-[10px] font-black uppercase tracking-[0.28em] text-slate-400">
+                    <div className="grid grid-cols-2 gap-3 text-[10px] font-black uppercase tracking-[0.28em] text-slate-600 dark:text-slate-300">
                       {person.email && (
                         <a href={`mailto:${person.email}`} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-300 transition-all">
                           <Mail size={12} /> {t("people.contact.email")}
