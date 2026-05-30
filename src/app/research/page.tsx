@@ -17,10 +17,23 @@ export default function ResearchPage() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-20">
       <h1 className="text-6xl font-bold text-foreground mb-4 tracking-tighter">Research Themes</h1>
-      <p className="text-slate-500 mb-20 max-w-2xl text-xl font-medium leading-relaxed">
+      <p className="text-slate-500 mb-10 max-w-2xl text-xl font-medium leading-relaxed">
         We integrate microbial ecology, genomics, and computational biology to solve high-stakes environmental challenges, specifically focusing on the mineralization of recalcitrant fluorinated compounds.
       </p>
-      
+
+      <div className="grid gap-6 md:grid-cols-3 mb-20">
+        {[
+          { title: "Discovery", text: "Capturing the genetic diversity of uncultivated microbes to reveal hidden biodegradation potential." },
+          { title: "Prediction", text: "Applying AI and structural biology to prioritize enzymes that can break PFAS bonds." },
+          { title: "Impact", text: "Translating computational leads into biochemical, environmental, and remediation strategies." }
+        ].map((item, idx) => (
+          <div key={idx} className="glass-panel p-8 rounded-[40px] border border-white/10 bg-slate-950/80">
+            <h3 className="text-xl font-bold text-foreground mb-4">{item.title}</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">{item.text}</p>
+          </div>
+        ))}
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {research.map((item: any) => {
           const Icon = iconMap[item.icon] || FlaskConical;

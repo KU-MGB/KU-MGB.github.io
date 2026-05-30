@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { LocaleProvider } from "@/components/locale/LocaleProvider";
 import Navbar from "@/components/layout/Navbar";
 
 export const metadata: Metadata = {
@@ -18,9 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light" style={{ colorScheme: 'light' }}>
+    <html lang="en">
       <body className="antialiased selection:bg-cyan-500/30">
         <ThemeProvider>
+          <LocaleProvider>
           {/* Cinematic Ambient Glow */}
           <div className="fixed inset-0 z-[-1] pointer-events-none">
               <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-900/10 dark:bg-cyan-900/10 blur-[120px] rounded-full" />
@@ -32,6 +34,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

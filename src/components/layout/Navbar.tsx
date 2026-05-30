@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { Search, Globe, Moon, Sun, ChevronDown, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { useLocale } from "@/components/locale/LocaleProvider";
+import { languageNames } from "@/lib/i18n";
 import { useState, useEffect } from "react";
 import SearchOverlay from "@/components/ui/SearchOverlay";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { locale, localeLabel, t, setLocale } = useLocale();
   const [langOpen, setLangOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,11 +23,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: "/research", label: "Research" },
-    { href: "/publications", label: "Publications" },
-    { href: "/people", label: "People" },
-    { href: "/projects", label: "Projects" },
-    { href: "/news", label: "News" },
+    { href: "/research", label: t("nav.research") },
+    { href: "/publications", label: t("nav.publications") },
+    { href: "/people", label: t("nav.people") },
+    { href: "/projects", label: t("nav.projects") },
+    { href: "/news", label: t("nav.news") },
   ];
 
   return (
@@ -59,22 +62,28 @@ export default function Navbar() {
                   <button 
                     onClick={() => setLangOpen(!langOpen)}
                     className="text-slate-500 hover:text-cyan-500 transition-colors flex items-center gap-1 cursor-pointer p-2"
+                    aria-label={t("nav.language")}
                   >
                       <Globe size={18} strokeWidth={2.5} />
-                      <span className="text-[10px] font-black">EN</span>
+                      <span className="text-[10px] font-black">{localeLabel}</span>
                       <ChevronDown size={10} className={`${langOpen ? 'rotate-180' : ''} transition-transform`} />
                   </button>
                   {langOpen && (
-                    <div className="absolute top-full right-0 mt-4 w-48 glass-panel rounded-2xl py-3 overflow-hidden shadow-2xl animate-fade-in border border-white/10 max-h-[400px] overflow-y-auto custom-scrollbar">
+                    <div className="absolute top-full right-0 mt-4 w-48 glass-panel rounded-2xl py-3 overflow-hidden shadow-2xl animate-fade-in border border-white/10">
                       {[
-                        { code: "EN", name: "English" }, { code: "DA", name: "Dansk" }, { code: "AR", name: "العربية" },
-                        { code: "HI", name: "हिन्दी" }, { code: "ES", name: "Español" }, { code: "FR", name: "Français" },
-                        { code: "DE", name: "Deutsch" }, { code: "ZH", name: "中文" }, { code: "UR", name: "اردو" },
-                        { code: "RU", name: "Русский" }, { code: "JA", name: "日本語" }
+                        { code: "en", name: languageNames.en },
+                        { code: "da", name: languageNames.da }
                       ].map((lang) => (
-                        <button key={lang.code} className="w-full text-left px-5 py-2.5 text-[11px] font-bold text-foreground hover:bg-cyan-500 hover:text-slate-950 transition-colors flex justify-between items-center group/lang">
+                        <button 
+                          key={lang.code}
+                          onClick={() => {
+                            setLocale(lang.code as any);
+                            setLangOpen(false);
+                          }}
+                          className="w-full text-left px-5 py-2.5 text-[11px] font-bold text-foreground hover:bg-cyan-500 hover:text-slate-950 transition-colors flex justify-between items-center"
+                        >
                           <span>{lang.name}</span>
-                          <span className="text-[9px] opacity-50 group-hover/lang:opacity-100">{lang.code}</span>
+                          <span className="text-[9px] opacity-50">{lang.code.toUpperCase()}</span>
                         </button>
                       ))}
                     </div>
@@ -90,7 +99,7 @@ export default function Navbar() {
             </div>
             
             <Link href="/join-us" className="hidden sm:flex px-6 py-3 rounded-full bg-foreground text-background text-[10px] font-black uppercase tracking-[0.2em] hover:bg-cyan-500 hover:text-slate-950 transition-all shadow-lg hover:shadow-cyan-500/20 active:scale-95">
-              Join Us
+              {t("nav.joinUs")}
             </Link>
 
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 text-slate-500 hover:text-white">

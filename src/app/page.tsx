@@ -5,8 +5,10 @@ import { ArrowRight, Dna, FlaskConical, Network, Binary, ShieldAlert, Microscope
 import Link from "next/link";
 import PFASReaction from "@/components/ui/PFASReaction";
 import Counter from "@/components/ui/Counter";
+import { useLocale } from "@/components/locale/LocaleProvider";
 
 export default function Home() {
+  const { t } = useLocale();
   const FADE_DOWN_ANIMATION_VARIANTS: Variants = {
     hidden: { opacity: 0, y: -10 },
     show: { opacity: 1, y: 0, transition: { type: "spring", duration: 1.2 } },
@@ -39,25 +41,40 @@ export default function Home() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
-            Pioneering Dehalogenase Engineering
+            {String(t("hero.badge"))}
           </motion.div>
 
           <motion.h1 variants={FADE_DOWN_ANIMATION_VARIANTS} className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-tighter text-foreground max-w-5xl leading-[0.9] mb-10 mx-auto lg:mx-0">
-            Breaking the <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-blue-500">Strongest Bonds</span> <br/> 
-            in Nature.
+            {String(t("hero.titlePrefix"))} <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-blue-500">{String(t("hero.titleHighlight"))}</span> <br />
+            {String(t("hero.titleSuffix"))}
           </motion.h1>
 
           <motion.p variants={FADE_DOWN_ANIMATION_VARIANTS} className="text-lg md:text-2xl text-slate-500 max-w-3xl mb-12 leading-relaxed font-medium mx-auto lg:mx-0">
-            We discover and engineer microbial enzymes that mineralize PFAS and other recalcitrant pollutants at the molecular scale. 
+            {String(t("hero.subtitle"))}
           </motion.p>
 
           <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="flex flex-wrap justify-center lg:justify-start gap-6">
             <Link href="/research" className="px-10 py-5 rounded-full bg-foreground text-background font-black uppercase tracking-widest text-[11px] hover:bg-cyan-500 transition-all flex items-center gap-3 shadow-2xl hover:shadow-cyan-500/30 group">
-              Explore PFAS Science <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              {String(t("hero.ctaResearch"))} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link href="/join-us" className="px-10 py-5 rounded-full bg-white/5 border border-white/10 text-foreground font-black uppercase tracking-widest text-[11px] hover:bg-white/10 transition-all">
-              Join the Mission
+              {String(t("hero.ctaJoin"))}
             </Link>
+          </motion.div>
+
+          <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="mt-14 grid gap-4 sm:grid-cols-3 max-w-4xl mx-auto lg:mx-0">
+            {(t("hero.stats") as any[]).map((item, idx) => (
+              <div key={idx} className="glass-panel p-6 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl">
+                <div className="text-xs uppercase tracking-[0.3em] text-slate-500 font-black mb-3">{item.label}</div>
+                <div className="text-4xl md:text-5xl font-black text-foreground">{item.value}</div>
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="mt-10 flex flex-wrap gap-3 max-w-4xl mx-auto lg:mx-0">
+            <Link href="#why-mgb" className="px-4 py-3 rounded-full border border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-300 hover:bg-slate-900 transition-all">Why MGB</Link>
+            <Link href="#workflow" className="px-4 py-3 rounded-full border border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-300 hover:bg-slate-900 transition-all">Our Process</Link>
+            <Link href="#pipeline" className="px-4 py-3 rounded-full border border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-300 hover:bg-slate-900 transition-all">PFAS Journey</Link>
           </motion.div>
         </motion.div>
         
@@ -65,6 +82,36 @@ export default function Home() {
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
            <span className="text-[9px] font-black uppercase tracking-widest">Discover</span>
            <div className="w-[1px] h-12 bg-gradient-to-b from-cyan-500 to-transparent animate-pulse" />
+        </div>
+      </section>
+
+      <section id="why-mgb" className="py-24 border-t border-white/5 bg-slate-950/10">
+        <div className="max-w-7xl mx-auto px-6 grid gap-12 lg:grid-cols-3">
+          <div className="lg:col-span-1">
+            <div className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-500 mb-6">{t("mgb.sectionLabel")}</div>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">{t("mgb.title")}</h2>
+            <p className="text-slate-500 text-lg leading-relaxed font-medium">
+              {t("mgb.intro")}
+            </p>
+          </div>
+
+          <div className="glass-panel p-8 rounded-[40px] border border-white/10 bg-slate-950/80">
+            <h3 className="text-xl font-bold text-white mb-4">{t("mgb.whyTitle")}</h3>
+            <ul className="space-y-4 text-slate-400 text-sm leading-relaxed">
+              {(t("mgb.whyItems") as any[]).map((item, idx) => (
+                <li key={idx}><span className="font-bold text-foreground">{item.strong}</span> {item.text}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="glass-panel p-8 rounded-[40px] border border-white/10 bg-slate-950/80">
+            <h3 className="text-xl font-bold text-white mb-4">{t("mgb.focusTitle")}</h3>
+            <div className="space-y-4 text-slate-400 text-sm leading-relaxed">
+              {(t("mgb.focusItems") as any[]).map((item, idx) => (
+                <p key={idx}><span className="font-bold text-foreground">{item.strong}</span> — {item.text}</p>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -101,13 +148,39 @@ export default function Home() {
          </div>
       </section>
 
+      <section id="workflow" className="py-24 bg-slate-950/10 border-t border-white/5">
+         <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
+               <div>
+                 <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-500 mb-6">{t("workflow.sectionLabel")}</h2>
+                 <h3 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">{t("workflow.title")}</h3>
+               </div>
+               <p className="text-slate-500 max-w-2xl text-lg font-medium leading-relaxed">
+                 {t("workflow.intro")}
+               </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+               {(t("workflow.steps") as any[]).map((item, idx) => (
+                 <div key={idx} className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/70 shadow-xl">
+                   <div className={`inline-flex items-center justify-center rounded-full w-14 h-14 mb-6 ${idx === 0 ? "bg-cyan-500/10 text-cyan-300" : idx === 1 ? "bg-emerald-500/10 text-emerald-300" : idx === 2 ? "bg-blue-500/10 text-blue-300" : "bg-teal-500/10 text-teal-300"}`}>
+                     <span className="text-sm font-black uppercase tracking-[0.3em]">{item.title[0]}</span>
+                   </div>
+                   <h4 className="text-2xl font-bold text-foreground mb-4">{item.title}</h4>
+                   <p className="text-slate-500 text-sm leading-relaxed font-medium">{item.description}</p>
+                 </div>
+               ))}
+            </div>
+         </div>
+      </section>
+
       {/* The Solution: Reaction Journey */}
-      <section className="py-40 bg-slate-950/20">
+      <section id="pipeline" className="py-40 bg-slate-950/20">
          <div className="max-w-7xl mx-auto px-6 text-center mb-24">
-            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-6">The Reaction Pipeline</h2>
-            <h3 className="text-5xl md:text-6xl font-bold text-foreground mb-8">Molecular Dehalogenation</h3>
+            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-6">{t("pipeline.sectionLabel")}</h2>
+            <h3 className="text-5xl md:text-6xl font-bold text-foreground mb-8">{t("pipeline.title")}</h3>
             <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
-               Scroll to see how our engineered enzymes find, bind, and break the carbon-fluorine bond in environmental pollutants.
+               {t("pipeline.subtitle")}
             </p>
          </div>
          
@@ -177,6 +250,50 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="py-28">
+         <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+               <div>
+                  <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-500 mb-6">Research Engine</h2>
+                  <h3 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">Why our methods drive breakthrough science</h3>
+               </div>
+               <p className="text-slate-500 max-w-2xl text-lg font-medium leading-relaxed">
+                  At MGB we deploy a balanced research strategy that values both deep sequencing insights and practical environmental impact, ensuring our discoveries are ready for real-world PFAS remediation.
+               </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+               <div className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl">
+                  <h4 className="text-2xl font-bold text-foreground mb-4">Integrated data science</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed font-medium mb-6">We fuse genomics, structural bioinformatics, and machine learning to predict enzymes that can tackle legacy contaminants.</p>
+                  <ul className="space-y-3 text-slate-400 text-sm">
+                     <li>Genome-wide discovery</li>
+                     <li>Active-site prioritization</li>
+                     <li>Pathway modeling</li>
+                  </ul>
+               </div>
+               <div className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl">
+                  <h4 className="text-2xl font-bold text-foreground mb-4">Experimental grounding</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed font-medium mb-6">Lab validation is essential: we confirm candidate enzymes with structural simulation, kinetics, and degradation tests.</p>
+                  <ul className="space-y-3 text-slate-400 text-sm">
+                     <li>Protein structure modeling</li>
+                     <li>Enzyme assay design</li>
+                     <li>Toxicity screening</li>
+                  </ul>
+               </div>
+               <div className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl">
+                  <h4 className="text-2xl font-bold text-foreground mb-4">Field-ready outcomes</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed font-medium mb-6">Our goal is not just discovery, but practical remediation pathways that can be translated to soil and water systems.</p>
+                  <ul className="space-y-3 text-slate-400 text-sm">
+                     <li>Scalable biotechnologies</li>
+                     <li>Environmental monitoring</li>
+                     <li>Cross-sector partnerships</li>
+                  </ul>
+               </div>
+            </div>
+         </div>
       </section>
 
       {/* Lab Highlights */}
