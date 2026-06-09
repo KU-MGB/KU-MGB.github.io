@@ -42,7 +42,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'h-16 glass-panel border-b border-slate-200 dark:border-white/5 shadow-2xl' : 'h-24'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white dark:bg-background border-b border-slate-200 dark:border-slate-800/50 shadow-sm ${scrolled ? 'h-16' : 'h-24'}`}>
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             <img src="/logo.png" alt="MGB Lab Logo" className="h-10 w-auto group-hover:rotate-[360deg] transition-transform duration-1000" />
@@ -112,7 +112,7 @@ export default function Navbar() {
               {t("nav.joinUs")}
             </Link>
 
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 text-slate-500 hover:text-white">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 text-slate-500 hover:text-foreground cursor-pointer">
                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -120,15 +120,15 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-           <div className="lg:hidden fixed inset-0 top-20 bg-slate-950 z-40 p-8 flex flex-col gap-8 animate-fade-in overflow-y-auto">
+            <div className={`lg:hidden fixed inset-0 ${scrolled ? 'top-16' : 'top-24'} bg-background z-40 p-8 flex flex-col gap-8 animate-fade-in overflow-y-auto`}>
               {navLinks.map(link => (
-                 <Link key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-3xl font-bold text-white hover:text-cyan-500 transition-colors">
+                  <Link key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-3xl font-bold text-foreground hover:text-cyan-500 transition-colors">
                     {link.label}
                  </Link>
               ))}
-              <div className="h-[1px] bg-white/10 w-full" />
+               <div className="h-[1px] bg-foreground/10 w-full" />
               <div className="flex flex-wrap gap-4">
-                 <button onClick={toggleTheme} className="p-4 rounded-2xl bg-white/5 text-white flex items-center gap-3 w-full">
+                  <button onClick={toggleTheme} className="p-4 rounded-2xl bg-foreground/5 text-foreground flex items-center gap-3 w-full cursor-pointer">
                     {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />} 
                     <span className="font-bold text-sm uppercase tracking-widest">{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
                  </button>
