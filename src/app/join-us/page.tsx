@@ -84,7 +84,7 @@ export default function JoinUsPage() {
           </div>
         </div>
 
-        <div className="glass-panel p-8 md:p-14 rounded-[50px] border border-white/10 relative overflow-hidden shadow-2xl">
+        <div className="glass-panel p-8 md:p-14 rounded-[50px] relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
           
           <AnimatePresence mode="wait">
@@ -97,11 +97,11 @@ export default function JoinUsPage() {
                 <div className="w-24 h-24 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-emerald-500/20">
                    <CheckCircle2 size={48} className="text-emerald-500" />
                 </div>
-                <h2 className="text-3xl font-bold text-white mb-4">Application Received</h2>
+                <h2 className="text-3xl font-bold text-foreground mb-4">Application Received</h2>
                 <p className="text-slate-500 max-w-xs mx-auto font-medium">Thank you for your interest. Tue, Shaban, and Asal will review your profile and get back to you shortly.</p>
                 <button 
                    onClick={() => setStatus("idle")}
-                   className="mt-10 text-[10px] font-black uppercase tracking-widest text-cyan-500 hover:text-white transition-colors"
+                   className="mt-10 text-[10px] font-black uppercase tracking-widest text-cyan-500 hover:text-foreground transition-colors"
                 >
                    Send another inquiry
                 </button>
@@ -124,7 +124,7 @@ export default function JoinUsPage() {
                           type="text" 
                           required
                           disabled={status === "submitting"}
-                          className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 disabled:opacity-50"
+                          className="w-full bg-foreground/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 disabled:opacity-50"
                           placeholder="Dr. Shaban Ahmad"
                           onChange={(e) => setFormData({...formData, name: e.target.value})}
                       />
@@ -135,7 +135,7 @@ export default function JoinUsPage() {
                           type="email" 
                           required
                           disabled={status === "submitting"}
-                          className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 disabled:opacity-50"
+                          className="w-full bg-foreground/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 disabled:opacity-50"
                           placeholder="shaban@plen.ku.dk"
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
                       />
@@ -147,15 +147,15 @@ export default function JoinUsPage() {
                     <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Interested Role</label>
                     <div className="relative">
                       <select 
-                          className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium appearance-none disabled:opacity-50"
+                          className="w-full bg-foreground/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium appearance-none disabled:opacity-50"
                           disabled={status === "submitting"}
                           onChange={(e) => setFormData({...formData, role: e.target.value})}
                       >
-                          <option value="BSc Student">BSc Student</option>
-                          <option value="MSc Student">MSc Student</option>
-                          <option value="PhD Candidate">PhD Candidate</option>
-                          <option value="Postdoc">Postdoctoral Researcher</option>
-                          <option value="Exchange Scholar">Exchange Scholar</option>
+                          <option value="BSc Student" className="bg-background text-foreground">BSc Student</option>
+                          <option value="MSc Student" className="bg-background text-foreground">MSc Student</option>
+                          <option value="PhD Candidate" className="bg-background text-foreground">PhD Candidate</option>
+                          <option value="Postdoc" className="bg-background text-foreground">Postdoctoral Researcher</option>
+                          <option value="Exchange Scholar" className="bg-background text-foreground">Exchange Scholar</option>
                       </select>
                       <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
                          <Send size={12} className="rotate-90" />
@@ -164,7 +164,7 @@ export default function JoinUsPage() {
                     </div>
                     <div>
                       <label className="block text-[10px] uppercase tracking-widest text-slate-500 font-black mb-3">Upload CV (Optional)</label>
-                      <label className={`flex items-center justify-between gap-3 border-2 border-dashed rounded-2xl px-5 py-3 cursor-pointer transition-all ${fileAttached ? 'border-emerald-500 bg-emerald-500/5' : 'border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5'} ${status === "submitting" ? "pointer-events-none opacity-50" : ""}`}>
+                      <label className={`flex items-center justify-between gap-3 border-2 border-dashed rounded-2xl px-5 py-3 cursor-pointer transition-all ${fileAttached ? 'border-emerald-500 bg-emerald-500/5' : 'border-slate-200 dark:border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5'} ${status === "submitting" ? "pointer-events-none opacity-50" : ""}`}>
                           <input 
                             type="file" 
                             className="hidden" 
@@ -184,7 +184,7 @@ export default function JoinUsPage() {
                       required
                       rows={4}
                       disabled={status === "submitting"}
-                      className="w-full bg-foreground/[0.03] border border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 resize-none disabled:opacity-50"
+                      className="w-full bg-foreground/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 text-foreground focus:outline-none focus:border-cyan-500 transition-all font-medium placeholder:text-slate-600 resize-none disabled:opacity-50"
                       placeholder="Briefly describe your background and why you want to join our lab..."
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
                     ></textarea>

@@ -26,7 +26,7 @@ export default function PeopleGrid({ people }: { people: any[] }) {
           </div>
           <div className="flex flex-wrap gap-3">
             {categories.map((cat) => (
-              <a key={cat.id} href={`#${cat.id}`} className="rounded-full border border-white/10 bg-slate-950/70 px-4 py-2 text-[10px] font-black uppercase tracking-[0.24em] text-slate-300 hover:bg-cyan-500/15 hover:text-cyan-300 transition-all">
+              <a key={cat.id} href={`#${cat.id}`} className="rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-950/70 px-4 py-2 text-[10px] font-black uppercase tracking-[0.24em] text-slate-600 dark:text-slate-300 hover:bg-cyan-500/15 hover:text-cyan-500 dark:hover:text-cyan-300 transition-all">
                 {cat.label}
               </a>
             ))}
@@ -41,7 +41,7 @@ export default function PeopleGrid({ people }: { people: any[] }) {
 
           return (
             <section key={cat.id} id={cat.id} className="scroll-mt-24">
-              <h2 className="text-[11px] font-black text-cyan-500 mb-8 pb-4 border-b border-white/5 uppercase tracking-[0.4em]">
+              <h2 className="text-[11px] font-black text-cyan-500 mb-8 pb-4 border-b border-slate-200 dark:border-white/5 uppercase tracking-[0.4em]">
                 {cat.label}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
@@ -67,7 +67,7 @@ export default function PeopleGrid({ people }: { people: any[] }) {
                       </div>
                     ) : null}
 
-                    <h3 className="text-2xl font-bold text-foreground mb-2 tracking-tight group-hover:text-cyan-400 transition-colors">{person.name}</h3>
+                    <h3 className="text-2xl font-bold text-foreground mb-2 tracking-tight group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{person.name}</h3>
                     <div className="inline-flex items-center rounded-full px-4 py-2 text-[9px] font-black uppercase tracking-[0.25em] mb-6 bg-foreground/[0.03] border border-white/6 text-foreground">
                       {person.role}
                     </div>
@@ -76,7 +76,7 @@ export default function PeopleGrid({ people }: { people: any[] }) {
 
                     <div className="flex flex-wrap gap-2 mb-8">
                       {person.tags?.map((tag: string) => (
-                        <span key={tag} className="text-[9px] uppercase tracking-widest font-black px-3 py-1 rounded-md bg-white/5 dark:bg-white/5 text-slate-600 dark:text-slate-400 border border-white/5 transition-colors">
+                        <span key={tag} className="text-[9px] uppercase tracking-widest font-black px-3 py-1 rounded-md bg-white/5 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/5 transition-colors">
                           {tag}
                         </span>
                       ))}
@@ -84,22 +84,22 @@ export default function PeopleGrid({ people }: { people: any[] }) {
 
                     <div className="grid grid-cols-2 gap-3 text-[10px] font-black uppercase tracking-[0.28em] text-slate-600 dark:text-slate-300">
                       {person.email && (
-                        <a href={`mailto:${person.email}`} className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-300 transition-all">
+                        <a href={`mailto:${person.email}`} className="flex items-center gap-2 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-500 dark:hover:text-cyan-300 transition-all">
                           <Mail size={12} /> {t("people.contact.email")}
                         </a>
                       )}
                       {person.github && (
-                        <a href={person.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-300 transition-all">
+                        <a href={person.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-500 dark:hover:text-cyan-300 transition-all">
                           <GitBranch size={12} /> {t("people.contact.github")}
                         </a>
                       )}
                       {person.website && (
-                        <a href={person.website} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-300 transition-all">
+                        <a href={person.website} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-500 dark:hover:text-cyan-300 transition-all">
                           <ExternalLink size={12} /> {t("people.contact.website")}
                         </a>
                       )}
                       {person.orcid && (
-                        <a href={`https://orcid.org/${person.orcid}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-300 transition-all">
+                        <a href={`https://orcid.org/${person.orcid}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 px-3 py-3 hover:border-cyan-500/30 hover:text-cyan-500 dark:hover:text-cyan-300 transition-all">
                           <Globe2 size={12} /> ORCID
                         </a>
                       )}

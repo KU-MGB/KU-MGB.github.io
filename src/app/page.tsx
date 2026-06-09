@@ -64,7 +64,7 @@ export default function Home() {
 
           <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="mt-14 grid gap-4 sm:grid-cols-3 max-w-4xl mx-auto lg:mx-0">
             {(t("hero.stats") as any[]).map((item, idx) => (
-              <div key={idx} className="glass-panel p-6 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl">
+              <div key={idx} className="glass-panel p-6 rounded-[40px] shadow-xl">
                 <div className="text-xs uppercase tracking-[0.3em] text-slate-500 font-black mb-3">{item.label}</div>
                 <div className="text-4xl md:text-5xl font-black text-foreground">{item.value}</div>
               </div>
@@ -72,9 +72,9 @@ export default function Home() {
           </motion.div>
 
           <motion.div variants={FADE_DOWN_ANIMATION_VARIANTS} className="mt-10 flex flex-wrap gap-3 max-w-4xl mx-auto lg:mx-0">
-            <Link href="#why-mgb" className="px-4 py-3 rounded-full border border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-300 hover:bg-slate-900 transition-all">Why MGB</Link>
-            <Link href="#workflow" className="px-4 py-3 rounded-full border border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-300 hover:bg-slate-900 transition-all">Our Process</Link>
-            <Link href="#pipeline" className="px-4 py-3 rounded-full border border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-300 hover:bg-slate-900 transition-all">PFAS Journey</Link>
+            <Link href="#why-mgb" className="px-4 py-3 rounded-full border border-slate-200 dark:border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all">Why MGB</Link>
+            <Link href="#workflow" className="px-4 py-3 rounded-full border border-slate-200 dark:border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all">Our Process</Link>
+            <Link href="#pipeline" className="px-4 py-3 rounded-full border border-slate-200 dark:border-white/10 text-[11px] uppercase tracking-[0.3em] font-black text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all">PFAS Journey</Link>
           </motion.div>
         </motion.div>
         
@@ -85,7 +85,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="why-mgb" className="py-24 border-t border-white/5 bg-slate-950/10">
+      <section id="why-mgb" className="py-24 border-t border-slate-200 dark:border-white/5 bg-slate-100/30 dark:bg-slate-950/10">
         <div className="max-w-7xl mx-auto px-6 grid gap-12 lg:grid-cols-3">
           <div className="lg:col-span-1">
             <div className="text-[10px] font-black uppercase tracking-[0.4em] text-cyan-500 mb-6">{t("mgb.sectionLabel")}</div>
@@ -95,18 +95,18 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="glass-panel p-8 rounded-[40px] border border-white/10 bg-slate-950/80">
-            <h3 className="text-xl font-bold text-white mb-4">{t("mgb.whyTitle")}</h3>
-            <ul className="space-y-4 text-slate-400 text-sm leading-relaxed">
+          <div className="glass-panel p-8 rounded-[40px]">
+            <h3 className="text-xl font-bold text-foreground mb-4">{t("mgb.whyTitle")}</h3>
+            <ul className="space-y-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               {(t("mgb.whyItems") as any[]).map((item, idx) => (
                 <li key={idx}><span className="font-bold text-foreground">{item.strong}</span> {item.text}</li>
               ))}
             </ul>
           </div>
 
-          <div className="glass-panel p-8 rounded-[40px] border border-white/10 bg-slate-950/80">
-            <h3 className="text-xl font-bold text-white mb-4">{t("mgb.focusTitle")}</h3>
-            <div className="space-y-4 text-slate-400 text-sm leading-relaxed">
+          <div className="glass-panel p-8 rounded-[40px]">
+            <h3 className="text-xl font-bold text-foreground mb-4">{t("mgb.focusTitle")}</h3>
+            <div className="space-y-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               {(t("mgb.focusItems") as any[]).map((item, idx) => (
                 <p key={idx}><span className="font-bold text-foreground">{item.strong}</span> — {item.text}</p>
               ))}
@@ -148,7 +148,7 @@ export default function Home() {
          </div>
       </section>
 
-      <section id="workflow" className="py-24 bg-slate-950/10 border-t border-white/5">
+      <section id="workflow" className="py-24 bg-slate-100/30 dark:bg-slate-950/10 border-t border-slate-200 dark:border-white/5">
          <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16">
                <div>
@@ -162,7 +162,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                {(t("workflow.steps") as any[]).map((item, idx) => (
-                 <div key={idx} className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/70 shadow-xl">
+                 <div key={idx} className="glass-panel p-10 rounded-[40px] shadow-xl">
                    <div className={`inline-flex items-center justify-center rounded-full w-14 h-14 mb-6 ${idx === 0 ? "bg-cyan-500/10 text-cyan-300" : idx === 1 ? "bg-emerald-500/10 text-emerald-300" : idx === 2 ? "bg-blue-500/10 text-blue-300" : "bg-teal-500/10 text-teal-300"}`}>
                      <span className="text-sm font-black uppercase tracking-[0.3em]">{item.title[0]}</span>
                    </div>
@@ -175,7 +175,7 @@ export default function Home() {
       </section>
 
       {/* The Solution: Reaction Journey */}
-      <section id="pipeline" className="py-40 bg-slate-950/20">
+      <section id="pipeline" className="py-40 bg-slate-100/10 dark:bg-slate-950/20">
          <div className="max-w-7xl mx-auto px-6 text-center mb-24">
             <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-6">{t("pipeline.sectionLabel")}</h2>
             <h3 className="text-5xl md:text-6xl font-bold text-foreground mb-8">{t("pipeline.title")}</h3>
@@ -265,28 +265,28 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-               <div className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl">
+               <div className="glass-panel p-10 rounded-[40px] shadow-xl">
                   <h4 className="text-2xl font-bold text-foreground mb-4">Integrated data science</h4>
                   <p className="text-slate-500 text-sm leading-relaxed font-medium mb-6">We fuse genomics, structural bioinformatics, and machine learning to predict enzymes that can tackle legacy contaminants.</p>
-                  <ul className="space-y-3 text-slate-400 text-sm">
+                  <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm">
                      <li>Genome-wide discovery</li>
                      <li>Active-site prioritization</li>
                      <li>Pathway modeling</li>
                   </ul>
                </div>
-               <div className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl">
+               <div className="glass-panel p-10 rounded-[40px] shadow-xl">
                   <h4 className="text-2xl font-bold text-foreground mb-4">Experimental grounding</h4>
                   <p className="text-slate-500 text-sm leading-relaxed font-medium mb-6">Lab validation is essential: we confirm candidate enzymes with structural simulation, kinetics, and degradation tests.</p>
-                  <ul className="space-y-3 text-slate-400 text-sm">
+                  <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm">
                      <li>Protein structure modeling</li>
                      <li>Enzyme assay design</li>
                      <li>Toxicity screening</li>
                   </ul>
                </div>
-               <div className="glass-panel p-10 rounded-[40px] border border-white/10 bg-slate-950/80 shadow-xl">
+               <div className="glass-panel p-10 rounded-[40px] shadow-xl">
                   <h4 className="text-2xl font-bold text-foreground mb-4">Field-ready outcomes</h4>
                   <p className="text-slate-500 text-sm leading-relaxed font-medium mb-6">Our goal is not just discovery, but practical remediation pathways that can be translated to soil and water systems.</p>
-                  <ul className="space-y-3 text-slate-400 text-sm">
+                  <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm">
                      <li>Scalable biotechnologies</li>
                      <li>Environmental monitoring</li>
                      <li>Cross-sector partnerships</li>
@@ -297,11 +297,11 @@ export default function Home() {
       </section>
 
       {/* Lab Highlights */}
-      <section className="py-32 bg-slate-950/40 relative">
+      <section className="py-32 bg-slate-100/30 dark:bg-slate-950/40 relative border-t border-slate-200 dark:border-white/5">
          <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center gap-6 mb-16">
                <h2 className="text-3xl font-bold text-foreground shrink-0">Recent Lab Milestones</h2>
-               <div className="h-[1px] flex-1 bg-white/5" />
+               <div className="h-[1px] flex-1 bg-slate-200 dark:bg-white/5" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                {[
@@ -314,8 +314,8 @@ export default function Home() {
                      <h4 className="text-2xl font-bold text-foreground mb-4 group-hover:text-cyan-400 transition-colors leading-tight">{news.title}</h4>
                      <p className="text-slate-500 text-sm leading-relaxed mb-6 font-medium">{news.desc}</p>
                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-black text-slate-700 uppercase tracking-widest">{news.date}</span>
-                        <Link href="/news" className="text-[9px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">Read More &rarr;</Link>
+                        <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">{news.date}</span>
+                        <Link href="/news" className="text-[9px] font-black uppercase tracking-widest text-slate-500 hover:text-cyan-500 dark:hover:text-white transition-colors">Read More &rarr;</Link>
                      </div>
                   </div>
                ))}

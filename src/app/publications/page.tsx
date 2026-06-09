@@ -20,13 +20,13 @@ export default function PublicationsPage() {
                 </span>
                 <span className="text-[10px] text-slate-500 font-black uppercase tracking-widest">{pub.venue}</span>
               </div>
-              <h3 className="text-2xl font-bold text-foreground mb-4 leading-tight group-hover:text-cyan-500 transition-colors">{pub.title}</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-4 leading-tight group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-colors">{pub.title}</h3>
               <p className="text-sm text-slate-500 mb-6 font-medium italic">
                 {pub.authors?.join(", ")}
               </p>
               <div className="flex flex-wrap gap-2">
                 {pub.tags?.map((tag: string) => (
-                  <span key={tag} className="text-[9px] uppercase tracking-widest font-black px-3 py-1 rounded-md bg-white/5 text-slate-600 border border-white/5 group-hover:border-cyan-500/20 group-hover:text-cyan-500 transition-all">
+                  <span key={tag} className="text-[9px] uppercase tracking-widest font-black px-3 py-1 rounded-md bg-slate-50 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/5 group-hover:border-cyan-500/20 group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-all">
                     {tag}
                   </span>
                 ))}
@@ -34,13 +34,15 @@ export default function PublicationsPage() {
             </div>
             <div className="flex gap-4 relative z-10">
               {pub.doi && (
-                <a href={`https://doi.org/${pub.doi}`} target="_blank" className="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-[10px] font-black uppercase tracking-[0.2em] text-foreground transition-all border border-white/10">
+                <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-[10px] font-black uppercase tracking-[0.2em] text-foreground transition-all border border-slate-200 dark:border-white/10">
                   DOI Reference
                 </a>
               )}
-              <a href="#" className="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 hover:bg-cyan-400 text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-cyan-500/10">
-                Full Paper (PDF)
-              </a>
+              {pub.pdf && (
+                <a href={pub.pdf} target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 hover:bg-cyan-400 text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-cyan-500/10">
+                  Full Paper (PDF)
+                </a>
+              )}
             </div>
           </div>
         ))}

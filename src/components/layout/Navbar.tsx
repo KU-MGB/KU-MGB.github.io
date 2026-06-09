@@ -18,8 +18,18 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const navLinks = [
@@ -32,7 +42,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'h-16 glass-panel border-b border-white/5 shadow-2xl' : 'h-24'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'h-16 glass-panel border-b border-slate-200 dark:border-white/5 shadow-2xl' : 'h-24'}`}>
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             <img src="/logo.png" alt="MGB Lab Logo" className="h-10 w-auto group-hover:rotate-[360deg] transition-transform duration-1000" />
@@ -53,7 +63,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-4 lg:gap-6">
             {/* Utility Bar */}
-            <div className="hidden sm:flex items-center gap-5 border-r border-white/10 dark:border-white/10 pr-6">
+            <div className="hidden sm:flex items-center gap-5 border-r border-slate-200 dark:border-white/10 pr-6">
                <button onClick={() => setSearchOpen(true)} className="text-slate-500 hover:text-cyan-500 transition-colors cursor-pointer p-2">
                   <Search size={18} strokeWidth={2.5} />
                </button>
@@ -69,7 +79,7 @@ export default function Navbar() {
                       <ChevronDown size={10} className={`${langOpen ? 'rotate-180' : ''} transition-transform`} />
                   </button>
                   {langOpen && (
-                    <div className="absolute top-full right-0 mt-4 w-48 glass-panel rounded-2xl py-3 overflow-hidden shadow-2xl animate-fade-in border border-white/10">
+                    <div className="absolute top-full right-0 mt-4 w-48 glass-panel rounded-2xl py-3 overflow-hidden shadow-2xl animate-fade-in">
                       {[
                         { code: "en", name: languageNames.en },
                         { code: "da", name: languageNames.da }
