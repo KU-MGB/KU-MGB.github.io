@@ -92,6 +92,28 @@ export const translations: Record<LocaleCode, Record<string, any>> = {
         prediction: { title: "Prediction", text: "Applying AI and structural biology to prioritize enzymes that can break PFAS bonds." },
         impact: { title: "Impact", text: "Translating computational leads into biochemical, environmental, and remediation strategies." }
       }
+    },
+    sustainability: {
+      sectionLabel: "Sustainable Bioremediation",
+      title: "Beyond Incineration: A Smarter Approach to PFAS",
+      subtitle: "Traditional PFAS remediation relies on extreme heat or harsh chemical oxidation. We harness natural, AI-engineered dehalogenases to mineralise pollutants under ambient conditions.",
+      pillars: [
+        {
+          title: "Ambient Biocatalysis",
+          desc: "Cleaving C-F bonds at natural temperature and pressure without fossil fuels, avoiding the massive thermal footprint of incineration.",
+          badge: "Low Carbon"
+        },
+        {
+          title: "Microbial Dark Matter",
+          desc: "Bypassing the cultivation bottleneck by mining functional dehalogenase genes directly from uncultivated metagenomes.",
+          badge: "AI-Mined"
+        },
+        {
+          title: "Complete Mineralisation",
+          desc: "Designing multi-species consortia to fully degrade fluorinated backbones into carbon dioxide, water, and harmless fluoride.",
+          badge: "Zero Waste"
+        }
+      ]
     }
   },
   da: {
@@ -178,6 +200,28 @@ export const translations: Record<LocaleCode, Record<string, any>> = {
         prediction: { title: "Forudsigelse", text: "Anvendelse af AI og strukturel biologi til at prioritere enzymer, der kan bryde PFAS-bindinger." },
         impact: { title: "Indvirkning", text: "Oversættelse af computational fører til biokemiske, miljømæssige og oprensningsmæssige strategier." }
       }
+    },
+    sustainability: {
+      sectionLabel: "Bæredygtig Oprensning",
+      title: "Udover forbrænding: En smartere tilgang til PFAS",
+      subtitle: "Traditionel PFAS-oprensning bygger på ekstrem varme eller aggressive kemikalier. Vi udnytter naturlige, AI-designede dehalogenaser til at mineralisere forurenende stoffer under omgivende forhold.",
+      pillars: [
+        {
+          title: "Ambient biokatalyse",
+          desc: "Spaltning af C-F-bindinger ved naturlig temperatur og tryk uden fossile brændstoffer, hvilket undgår forbrændingens store CO2-aftryk.",
+          badge: "Lav CO2"
+        },
+        {
+          title: "Mikrobielt mørkt stof",
+          desc: "Omgåelse af dyrkningsflaskehalsen ved at udvinde funktionelle dehalogenase-gener direkte fra ukultiverede metagenomer.",
+          badge: "AI-Udvundet"
+        },
+        {
+          title: "Komplet mineralisering",
+          desc: "Design af flersports-konsortier til fuldstændig at nedbryde fluorerede skeletter til kuldioxid, vand og uskadeligt fluorid.",
+          badge: "Nul Affald"
+        }
+      ]
     }
   }
 };

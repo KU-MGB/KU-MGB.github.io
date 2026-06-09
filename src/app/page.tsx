@@ -175,17 +175,50 @@ export default function Home() {
       </section>
 
       {/* The Solution: Reaction Journey */}
-      <section id="pipeline" className="py-40 bg-slate-100/10 dark:bg-slate-950/20">
-         <div className="max-w-7xl mx-auto px-6 text-center mb-24">
-            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-6">{t("pipeline.sectionLabel")}</h2>
-            <h3 className="text-5xl md:text-6xl font-bold text-foreground mb-8">{t("pipeline.title")}</h3>
-            <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
-               {t("pipeline.subtitle")}
-            </p>
-         </div>
-         
-         <div className="max-w-6xl mx-auto px-6">
-            <PFASReaction />
+      <PFASReaction />
+
+      {/* Sustainable Bioremediation Section */}
+      <section className="py-32 border-t border-slate-200 dark:border-white/5 relative overflow-hidden bg-background">
+         <div className="absolute top-1/2 left-0 w-80 h-80 bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+         <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-20">
+               <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-6">
+                  {t("sustainability.sectionLabel")}
+               </h2>
+               <h3 className="text-4xl md:text-6xl font-bold text-foreground mb-8 tracking-tight max-w-3xl mx-auto leading-tight">
+                  {t("sustainability.title")}
+               </h3>
+               <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+                  {t("sustainability.subtitle")}
+               </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+               {(t("sustainability.pillars") as any[]).map((pillar, idx) => (
+                  <motion.div
+                     key={idx}
+                     initial={{ opacity: 0, y: 30 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     viewport={{ once: true }}
+                     transition={{ delay: idx * 0.15 }}
+                     className="glass-panel p-10 rounded-[40px] super-card-hover group relative overflow-hidden flex flex-col justify-between"
+                  >
+                     <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                     <div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-widest mb-8">
+                           {pillar.badge}
+                        </div>
+                        <h4 className="text-2xl font-bold text-foreground mb-4 leading-tight group-hover:text-emerald-500 transition-colors">
+                           {pillar.title}
+                        </h4>
+                        <p className="text-slate-500 text-sm leading-relaxed font-medium mb-8">
+                           {pillar.desc}
+                        </p>
+                     </div>
+                     <div className="h-[1px] bg-slate-200 dark:bg-white/5 w-full mt-4" />
+                  </motion.div>
+               ))}
+            </div>
          </div>
       </section>
 

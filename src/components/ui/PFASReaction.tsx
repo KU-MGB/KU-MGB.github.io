@@ -8,7 +8,7 @@ export default function PFASReaction() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"],
+    offset: ["start start", "end end"],
   });
 
   // --- Phase scroll ranges ---
@@ -56,10 +56,23 @@ export default function PFASReaction() {
   const scalePhase3 = useTransform(scrollYProgress, [0.7, 1], [0.2, 1]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[650px] glass-panel rounded-[60px] overflow-hidden flex items-center justify-center">
-      {/* Background grid representing active site grid lines */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(circle, #06b6d4 1.5px, transparent 1.5px)', backgroundSize: '30px 30px' }} />
+    <section ref={containerRef} className="relative w-full h-[300vh] bg-slate-50/30 dark:bg-slate-950/10 border-t border-slate-200 dark:border-white/5 py-20">
+      <div className="sticky top-0 left-0 w-full h-screen flex flex-col justify-center overflow-hidden">
+        {/* Narrative / Section Header */}
+        <div className="max-w-7xl mx-auto px-6 text-center mb-8 shrink-0">
+          <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-4">The Reaction Pipeline</h2>
+          <h3 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Molecular Dehalogenation</h3>
+          <p className="text-slate-500 max-w-2xl mx-auto text-sm font-medium">
+             Scroll down slowly to observe the enzymatic cleavage of the carbon-fluorine bond in real time.
+          </p>
+        </div>
+        
+        {/* Main Animation Box */}
+        <div className="max-w-6xl w-full mx-auto px-6 flex-1 flex items-center justify-center min-h-0 pb-16">
+          <div className="relative w-full h-[75vh] max-h-[580px] glass-panel rounded-[40px] md:rounded-[50px] overflow-hidden flex items-center justify-center shadow-2xl">
+            {/* Background grid representing active site grid lines */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none" 
+                 style={{ backgroundImage: 'radial-gradient(circle, #06b6d4 1.5px, transparent 1.5px)', backgroundSize: '30px 30px' }} />
 
       {/* Dynamic Ambient Background Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
@@ -312,5 +325,8 @@ export default function PFASReaction() {
         </div>
       </div>
     </div>
+  </div>
+</div>
+</section>
   );
 }
