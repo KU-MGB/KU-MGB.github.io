@@ -1,0 +1,15 @@
+{
+  "id": "jonas-randlov",
+  "name": "Jonas Randløv",
+  "role": "Postdoctoral Researcher",
+  "email": "jonas@plen.ku.dk",
+  "orcid": "",
+  "website": "",
+  "tags": [
+    "Environmental Microbiology",
+    "Community Ecology",
+    "Metagenomics"
+  ],
+  "bio": "Jonas studies microbial community dynamics in PFAS-contaminated field sites. He integrates amplicon sequencing and metatranscriptomics to identify active degraders under real-world conditions.",
+  "avatar": "jonas-randlov.webp"
+}

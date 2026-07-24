@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MGB Lab at the University of Copenhagen. We combine environmental DNA sequencing, bioinformatics, and biochemistry to discover how microbes evolve to break down persistent pollutants like PFAS.">
+  <meta property="og:title" content="Microbial Genomics & Biodegradation Lab">
+  <meta property="og:description" content="Discover how microbes evolve to break down persistent pollutants.">
+  <meta property="og:type" content="website">
+  <title>MGB Lab | Microbial Genomics & Biodegradation</title>
+  <link rel="icon" type="image/png" href="2_images/2_logo/logo.png">
+  <link rel="apple-touch-icon" href="2_images/2_logo/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;0,8..60,800;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="scroll-progress" style="position:fixed; top:0; left:0; height:2px; background:var(--accent); z-index:9999; width:0%; transition:width 0.1s;"></div>
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="logo">
+        <img src="2_images/2_logo/logo-lockup.svg" alt="MGB Lab — Microbial Genomics & Biodegradation" class="logo-lockup">
+      </a>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#people">People</a>
+        <a href="#publications">Publications</a>
+        <a href="#blogs-news">Blogs/News</a>
+      </div>
+      <div class="nav-utils">
+        <button class="nav-icon-btn" onclick="openSearchModal()" data-tip="Search" aria-label="Search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </button>
+        <button class="nav-icon-btn lang-toggle-btn notranslate" onclick="toggleLanguage()" data-lang="en" aria-label="Switch Language" data-tip="Switch to Danish">
+          <img src="https://flagcdn.com/w40/gb.png" alt="EN" width="20" height="14">
+        </button>
+        <button class="nav-icon-btn" id="theme-toggle" onclick="toggleTheme()" data-tip="Toggle Theme" aria-label="Toggle Theme">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path id="theme-icon-path" stroke-linecap="round" stroke-linejoin="round" d=""></path></svg>
+        </button>
+        <a href="#join" class="join-btn">Join Us</a>
+        <button class="nav-icon-btn" id="hamburger" data-tip="Menu" aria-label="Menu">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu">
+    <a href="#projects">Projects</a>
+    <a href="#people">People</a>
+    <a href="#publications">Publications</a>
+    <a href="#blogs-news">Blogs/News</a>
+    <a href="#join" style="color:var(--accent)">Join Us &rarr;</a>
+  </div>
+
+  <!-- Command Palette Search -->
+  <div id="srch-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="srch-box" role="document">
+      <div class="srch-header">
+        <i class="fas fa-search srch-icon-lbl" aria-hidden="true"></i>
+        <input type="text" id="srch-input" class="srch-input" placeholder="Search research, projects, people, publications…" autocomplete="off" spellcheck="false" aria-label="Search">
+        <div class="srch-kbd"><span class="srch-key">Esc</span></div>
+      </div>
+      <div class="srch-pills" id="srch-pills">
+        <span class="srch-pill" data-section="projects">Projects</span>
+        <span class="srch-pill" data-section="people">People</span>
+        <span class="srch-pill" data-section="publications">Publications</span>
+        <span class="srch-pill" data-section="blogs-news">Blogs/News</span>
+      </div>
+      <div class="srch-body" id="srch-body"></div>
+      <div class="srch-footer">
+        <span class="srch-hint"><span class="srch-key">↑↓</span> Navigate</span>
+        <span class="srch-hint"><span class="srch-key">↵</span> Go to</span>
+        <span class="srch-hint"><span class="srch-key">Esc</span> Close</span>
+        <span class="srch-hint" style="margin-left:auto"><span class="srch-key">Ctrl K</span> Toggle</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="site-main">
+
+  <!-- HOME -->
+  <div id="page-home" class="page-view active">
+    <div class="home-banner" data-reveal>
+      <span class="section-label">MGB Lab</span>
+      <h1>Microbes evolved to eat pollution. We find them.</h1>
+      <p class="section-desc">We combine environmental DNA sequencing, bioinformatics, and biochemistry to discover the rare microbial enzymes capable of breaking the carbon&ndash;fluorine bond in PFAS.</p>
+      <div class="chip-container">
+        <span class="chip">PFAS Defluorination</span>
+        <span class="chip">Metagenomics</span>
+        <span class="chip">Enzyme Engineering</span>
+        <span class="chip">Environmental Biotech</span>
+      </div>
+      <div id="home-slideshow" class="photo-frame photo-placeholder" style="height:260px; margin: 20px 0;">
+        <i class="fas fa-image" aria-hidden="true"></i>
+        <span>Lab photos — coming soon</span>
+      </div>
+      <div id="latest-news-callout" style="margin: 18px 0;"></div>
+      <div id="facts-container" class="stat-strip"></div>
+    </div>
+    <section class="page-section" data-reveal>
+      <span class="section-label">How MGB Works</span>
+      <h2 class="section-title">From sample to enzyme.</h2>
+      <p class="section-desc">Discovering and engineering the enzymes of tomorrow.</p>
+      <div id="research-themes-container"></div>
+    </section>
+    <section class="page-section" data-reveal>
+      <span class="section-label">Molecular Dehalogenation</span>
+      <h2 class="section-title">The reaction pipeline.</h2>
+      <p class="section-desc">How a dehalogenase actually breaks the C&ndash;F bond, step by step, inside the active site.</p>
+      <div class="card-academic" style="margin-bottom:24px; overflow-x:auto;">
+        <svg viewBox="0 0 820 260" width="100%" height="auto" style="min-width:640px; display:block;" role="img" aria-label="Diagram of the FAcD dehalogenation mechanism: substrate enters the active site, Asp10 attacks the C-F bond via SN2, fluoride is released, and a water molecule regenerates the enzyme.">
+          <defs>
+            <marker id="rxArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#5c5850"/>
+            </marker>
+          </defs>
+          <path d="M 20 40 Q 10 130 40 220 L 260 220 Q 300 130 260 40 Z" fill="none" stroke="#0f766e" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
+          <text x="140" y="24" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#0f766e" letter-spacing="1">ACTIVE SITE</text>
+          <g stroke="#2c2a25" stroke-width="3" fill="none" stroke-linecap="round">
+            <path d="M 55 130 L 90 110 L 125 130 L 160 110 L 195 130"/>
+          </g>
+          <g fill="#dc2626" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700">
+            <circle cx="90" cy="110" r="3" fill="#dc2626"/>
+            <text x="90" y="98" text-anchor="middle">F</text>
+            <circle cx="160" cy="110" r="3" fill="#dc2626"/>
+            <text x="160" y="98" text-anchor="middle">F</text>
+          </g>
+          <circle cx="195" cy="130" r="5" fill="#2c2a25"/>
+          <circle cx="235" cy="150" r="14" fill="#0f766e"/>
+          <text x="235" y="154" text-anchor="middle" fill="#fff" font-family="'DM Sans', sans-serif" font-size="10" font-weight="700">O&#8315;</text>
+          <text x="235" y="182" text-anchor="middle" fill="#5c5850" font-family="'DM Sans', sans-serif" font-size="11" font-weight="600">Asp10</text>
+          <line x1="195" y1="130" x2="222" y2="145" stroke="#0f766e" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <text x="205" y="120" font-family="'DM Sans', sans-serif" font-size="10" fill="#5c5850">~3.2 &#197;</text>
+          <text x="55" y="205" font-family="'DM Sans', sans-serif" font-size="10" fill="#8a857c">Arg41 / Trp179 cradle</text>
+          <path d="M 320 130 L 400 130" stroke="#5c5850" stroke-width="2" marker-end="url(#rxArrow)"/>
+          <text x="360" y="115" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#5c5850" letter-spacing="0.5">SN2 ATTACK</text>
+          <g stroke="#2c2a25" stroke-width="3" fill="none" stroke-linecap="round">
+            <path d="M 470 130 L 505 110 L 540 130 L 575 110"/>
+          </g>
+          <g fill="#dc2626" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700">
+            <circle cx="505" cy="110" r="3" fill="#dc2626"/>
+            <text x="505" y="98" text-anchor="middle">F</text>
+          </g>
+          <circle cx="575" cy="110" r="5" fill="#2c2a25"/>
+          <line x1="575" y1="110" x2="600" y2="128" stroke="#2c2a25" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="612" cy="136" r="14" fill="#059669"/>
+          <text x="612" y="140" text-anchor="middle" fill="#fff" font-family="'DM Sans', sans-serif" font-size="10" font-weight="700">O</text>
+          <text x="612" y="168" text-anchor="middle" fill="#5c5850" font-family="'DM Sans', sans-serif" font-size="11" font-weight="600">Asp10-ester</text>
+          <circle cx="470" cy="60" r="12" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <text x="470" y="64" text-anchor="middle" fill="#dc2626" font-family="'DM Sans', sans-serif" font-size="11" font-weight="700">F&#8315;</text>
+          <path d="M 450 90 Q 460 75 468 65" stroke="#dc2626" stroke-width="1.2" fill="none" marker-end="url(#rxArrow)" opacity="0.6"/>
+          <path d="M 680 150 Q 730 150 730 195 Q 730 230 665 225" stroke="#5c5850" stroke-width="1.5" fill="none" marker-end="url(#rxArrow)" stroke-dasharray="3 3"/>
+          <text x="700" y="140" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#5c5850">H&#8322;O</text>
+          <text x="695" y="245" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" font-weight="600" fill="#5c5850">Asp10 regenerated</text>
+        </svg>
+      </div>
+      <div id="reaction-container"></div>
+    </section>
+  </div>
+
+  <!-- PROJECTS -->
+  <div id="page-projects" class="page-view">
+    <section class="page-section" data-reveal style="padding-top:88px;">
+      <span class="section-label">Projects</span>
+      <h2 class="section-title">Active work.</h2>
+      <div id="projects-container"></div>
+    </section>
+  </div>
+
+  <!-- PEOPLE -->
+  <div id="page-people" class="page-view">
+    <section class="page-section" data-reveal style="padding-top:88px;">
+      <span class="section-label">Our Team</span>
+      <h2 class="section-title">The MGB Lab.</h2>
+      <div id="group-photo-container" class="photo-frame photo-placeholder" style="height:460px; margin-bottom:32px;">
+        <i class="fas fa-users" aria-hidden="true"></i>
+        <span>Group photo — coming soon</span>
+      </div>
+      <div id="people-container"></div>
+    </section>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div id="page-publications" class="page-view">
+    <section class="page-section" data-reveal style="padding-top:88px;">
+      <span class="section-label">Publications</span>
+      <h2 class="section-title">Latest output.</h2>
+      <div id="publications-container"></div>
+    </section>
+  </div>
+
+  <!-- BLOGS / NEWS -->
+  <div id="page-blogs-news" class="page-view">
+    <section class="page-section" data-reveal style="padding-top:88px;">
+      <span class="section-label">Lab Blog</span>
+      <h2 class="section-title">Notes from the bench.</h2>
+      <div id="blogs-container"></div>
+    </section>
+    <section class="page-section" data-reveal>
+      <span class="section-label">Timeline</span>
+      <h2 class="section-title">Lab news.</h2>
+      <div id="news-container" style="max-width:720px;"></div>
+    </section>
+  </div>
+
+  <!-- BLOG POST (reached via a blog card, ?id=<slug>#blog-post) -->
+  <div id="page-blog-post" class="page-view">
+    <section class="page-section" style="padding-top:88px;">
+      <div id="blog-post-container"></div>
+    </section>
+  </div>
+
+  <!-- JOIN -->
+  <div id="page-join" class="page-view">
+    <section class="page-section" data-reveal style="padding-top:88px;">
+      <div class="join-grid">
+        <div class="join-info">
+          <span class="section-label">Join the Lab</span>
+          <h2 class="section-title" style="margin-bottom: 16px;">Work with us.</h2>
+          <p class="section-desc" style="margin-bottom: 28px;">We are always looking for motivated students and postdocs to help uncover enzymes that break down persistent pollutants.</p>
+          <div class="join-opp">
+            <div class="join-opp-icon"><div class="join-opp-dot"></div></div>
+            <div>
+              <h3 style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:4px;">BSc / MSc Projects</h3>
+              <p style="font-size:13.5px; color:var(--muted); line-height:1.6;">We offer highly supervised projects in bioinformatics, metagenomics, and enzyme assays.</p>
+            </div>
+          </div>
+          <div class="join-opp">
+            <div class="join-opp-icon"><div class="join-opp-dot"></div></div>
+            <div>
+              <h3 style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:4px;">PhD / Postdocs</h3>
+              <p style="font-size:13.5px; color:var(--muted); line-height:1.6;">Funded positions will be announced via KU portals, but we also welcome candidates bringing their own fellowships.</p>
+            </div>
+          </div>
+          <div class="join-opp">
+            <div class="join-opp-icon"><div class="join-opp-dot"></div></div>
+            <div>
+              <h3 style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:4px;">Research Areas</h3>
+              <p style="font-size:13.5px; color:var(--muted); line-height:1.6;">PFAS defluorination, metagenomics, enzyme engineering, and environmental biotechnology — see the Research and Projects sections for what we're actively working on.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:36px; padding-top:28px; border-top:1px solid var(--border);">
+            <h3 style="font-family:var(--serif); font-size:17px; margin-bottom:16px;">What you'll gain</h3>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
+              <li style="display:flex; gap:10px; font-size:13.5px; color:var(--muted); line-height:1.6;"><i class="fas fa-check" style="color:var(--accent); margin-top:3px; flex-shrink:0;"></i>Hands-on training across the full pipeline — sequencing, bioinformatics, structural modelling, and wet-lab assays</li>
+              <li style="display:flex; gap:10px; font-size:13.5px; color:var(--muted); line-height:1.6;"><i class="fas fa-check" style="color:var(--accent); margin-top:3px; flex-shrink:0;"></i>Direct supervision and a genuinely collaborative lab environment</li>
+              <li style="display:flex; gap:10px; font-size:13.5px; color:var(--muted); line-height:1.6;"><i class="fas fa-check" style="color:var(--accent); margin-top:3px; flex-shrink:0;"></i>Co-authorship on publications where your contribution warrants it</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:36px; padding-top:28px; border-top:1px solid var(--border);">
+            <h3 style="font-family:var(--serif); font-size:17px; margin-bottom:16px;">How it works</h3>
+            <ol style="list-style:none; display:flex; flex-direction:column; gap:14px; counter-reset:steps;">
+              <li style="display:flex; gap:12px; align-items:flex-start;">
+                <span class="badge" style="flex-shrink:0;">1</span>
+                <span style="font-size:13.5px; color:var(--muted); line-height:1.6;">Submit the form with your CV and a short statement of interest.</span>
+              </li>
+              <li style="display:flex; gap:12px; align-items:flex-start;">
+                <span class="badge" style="flex-shrink:0;">2</span>
+                <span style="font-size:13.5px; color:var(--muted); line-height:1.6;">We review your background against current openings and ongoing projects.</span>
+              </li>
+              <li style="display:flex; gap:12px; align-items:flex-start;">
+                <span class="badge" style="flex-shrink:0;">3</span>
+                <span style="font-size:13.5px; color:var(--muted); line-height:1.6;">Shortlisted candidates are invited for an informal interview.</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div>
+          <div class="join-form-wrap">
+            <h2 style="font-size:22px; margin-bottom:20px;">Direct Application</h2>
+            <form id="join-form" action="https://docs.google.com/forms/d/e/1FAIpQLSefO5_mx0BQGi7PKl6FLA1A45f_YptwJ6Lp79k_s_e_gSsuYA/formResponse" method="POST" target="_blank" style="display:flex; flex-direction:column; gap:16px;">
+              <div><label class="form-label">Full Name *</label><input type="text" name="entry.2005620554" class="form-input" required placeholder="Enter your full name"></div>
+              <div><label class="form-label">Email Address *</label><input type="email" name="entry.1045781291" class="form-input" required placeholder="Enter your email address"></div>
+              <div>
+                <label class="form-label">Position of Interest *</label>
+                <select name="entry.1065046570" class="form-select" required>
+                  <option value="">Select a position...</option>
+                  <option value="BSc Student">BSc Student</option>
+                  <option value="MSc Student">MSc Student</option>
+                  <option value="PhD Scholar">PhD Scholar</option>
+                  <option value="Postdoc">Postdoc</option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label">CV / Resume Link *</label>
+                <input type="url" name="entry.827071692" class="form-input" required placeholder="Link to your CV (Google Drive, Dropbox, etc.)">
+                <p style="font-size:11px; color:var(--muted); margin-top:6px;">Please provide a viewable link to your CV since direct file uploads require Google login.</p>
+              </div>
+              <div>
+                <label class="form-label">Statement of Interest</label>
+                <textarea name="entry.1166974658" class="form-input" rows="5" placeholder="Briefly describe your background and why you want to join the MGB Lab..."></textarea>
+              </div>
+              <button type="submit" class="btn-primary" style="justify-content:center; width:100%; margin-top:8px;">Submit Application</button>
+            </form>
+            <div id="join-status" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="logo">
+        <img src="2_images/2_logo/logo-lockup.svg" alt="MGB Lab — Microbial Genomics & Biodegradation" class="logo-lockup">
+      </div>
+      <a href="#join" class="btn-outline">Join the Lab</a>
+      <p>© <span id="footer-year">2026</span> MGB Lab, University of Copenhagen</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.renderResearch) window.renderResearch();
+      if (window.renderReaction) window.renderReaction();
+      if (window.renderProjects) window.renderProjects();
+      if (window.renderPublications) window.renderPublications();
+      if (window.renderNews) window.renderNews();
+      if (window.renderFacts) window.renderFacts();
+      if (window.renderLatestNewsCallout) window.renderLatestNewsCallout();
+      if (window.initJoinForm) window.initJoinForm();
+
+      window.MGB_DATA_READY.then(() => {
+        if (window.renderPeople) window.renderPeople();
+        if (window.renderBlogs) window.renderBlogs();
+        if (window.renderBlogPost) window.renderBlogPost();
+        if (window.renderGroupPhoto) window.renderGroupPhoto();
+        if (window.renderHomeSlideshow) window.renderHomeSlideshow();
+      });
+    });
+  </script>
+
+  <div id="google_translate_element" style="display:none;"></div>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,da,es,fr,de,hi,zh-CN,ar,ur,ru,ja', autoDisplay: false}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<button id="scroll-to-top" data-tip="Back to Top" class="nav-icon-btn" style="position:fixed; bottom:24px; right:24px; background:var(--bg-card); border:1px solid var(--border); border-radius:50%; width:40px; height:40px; display:none; align-items:center; justify-content:center; z-index:90; box-shadow:var(--shadow-md); cursor:pointer; color:var(--fg);" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Scroll to top"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path></svg></button>
+</body>
+</html>

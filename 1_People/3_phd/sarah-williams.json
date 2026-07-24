@@ -1,0 +1,15 @@
+{
+  "id": "sarah-williams",
+  "name": "Sarah Williams",
+  "role": "PhD Student",
+  "email": "s.williams@plen.ku.dk",
+  "orcid": "",
+  "website": "",
+  "tags": [
+    "Metagenomics",
+    "Bioinformatics",
+    "Environmental DNA"
+  ],
+  "bio": "Sarah develops scalable bioinformatic pipelines for the discovery of PFAS-degrading genes in environmental metagenomes. She works across datasets from soil, water, and contaminated industrial sites across Europe.",
+  "avatar": ""
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Your post title",
+  "date": "2026-01-01",
+  "author": "MGB Lab",
+  "category": "Science",
+  "tags": ["Keyword One", "Keyword Two"],
+  "description": "One or two sentences summarising the post — shown on the blog list card.",
+  "cover": "cover.svg",
+  "body": "Write the post body here using Markdown.\n\n## A heading\n\nA paragraph. **Bold** and *italic* both work.\n\n- A bullet\n- Another bullet"
+}

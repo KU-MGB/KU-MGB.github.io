@@ -1,0 +1,16 @@
+{
+  "id": "shaban-ahmad",
+  "name": "Shaban Ahmad",
+  "role": "Postdoctoral Researcher",
+  "email": "shaban@plen.ku.dk",
+  "orcid": "0000-0002-1234-5678",
+  "website": "",
+  "tags": [
+    "Bioinformatics",
+    "PFAS",
+    "Metagenomics",
+    "Machine Learning"
+  ],
+  "bio": "Shaban is a postdoctoral researcher focusing on computational approaches to PFAS biodegradation. His work combines large-scale metagenomic mining with AI-based enzyme ranking to identify novel dehalogenase candidates from environmental samples.",
+  "avatar": "shaban-ahmad.webp"
+}

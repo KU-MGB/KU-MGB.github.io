@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0a2a2f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg1)"/>
+  <g stroke="#06b6d4" stroke-width="2" opacity="0.35">
+    <line x1="0" y1="90" x2="800" y2="90"/>
+    <line x1="0" y1="360" x2="800" y2="360"/>
+  </g>
+  <circle cx="330" cy="225" r="46" fill="#0f172a" stroke="#f43f5e" stroke-width="3"/>
+  <text x="330" y="235" text-anchor="middle" fill="#f43f5e" font-family="Inter, sans-serif" font-size="28" font-weight="700">C</text>
+  <line x1="376" y1="225" x2="470" y2="225" stroke="#06b6d4" stroke-width="5"/>
+  <circle cx="516" cy="225" r="40" fill="#0f172a" stroke="#06b6d4" stroke-width="3"/>
+  <text x="516" y="234" text-anchor="middle" fill="#06b6d4" font-family="Inter, sans-serif" font-size="26" font-weight="700">F</text>
+  <text x="423" y="195" text-anchor="middle" fill="#10b981" font-family="Inter, sans-serif" font-size="12" font-weight="900" letter-spacing="2">130 KCAL/MOL</text>
+  <text x="423" y="270" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="3">THE C–F BOND</text>
+</svg>

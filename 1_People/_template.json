@@ -1,0 +1,15 @@
+{
+  "id": "your-id-here",
+  "name": "Full Name",
+  "role": "Job Title (e.g. PhD Student, Postdoctoral Researcher)",
+  "email": "name@plen.ku.dk",
+  "orcid": "",
+  "website": "",
+  "tags": [
+    "Keyword One",
+    "Keyword Two",
+    "Keyword Three"
+  ],
+  "bio": "One or two sentences describing what this person works on.",
+  "avatar": "your-id-here.webp"
+}

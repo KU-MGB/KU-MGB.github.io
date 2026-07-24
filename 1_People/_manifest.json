@@ -1,0 +1,9 @@
+{
+  "1_faculty": ["tue-nielsen"],
+  "2_postdocs": ["asal-forouzandeh", "shaban-ahmad"],
+  "3_phd": ["david-miller", "sarah-williams"],
+  "4_masters": ["benedetta-togni", "emma-davis", "james-wilson"],
+  "5_bachelors": ["jonas-randlov"],
+  "6_others": [],
+  "7_alumni": ["former-student", "sarah-johnson"]
+}

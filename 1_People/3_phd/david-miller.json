@@ -1,0 +1,16 @@
+{
+  "id": "david-miller",
+  "name": "David Miller",
+  "role": "PhD Student",
+  "email": "d.miller@plen.ku.dk",
+  "orcid": "",
+  "website": "",
+  "tags": [
+    "Protein Design",
+    "Structural Biology",
+    "AlphaFold",
+    "Boltz-2"
+  ],
+  "bio": "David uses deep learning tools like AlphaFold and Boltz-2 to design novel enzymes with improved specificity for long-chain PFAS compounds. His project combines structure prediction with molecular dynamics to guide experimental engineering cycles.",
+  "avatar": ""
+}
