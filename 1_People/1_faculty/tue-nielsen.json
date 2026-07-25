@@ -2,15 +2,15 @@
   "id": "tue-nielsen",
   "name": "Tue Kjærgaard Nielsen",
   "role": "Tenure Track Assistant Professor / Group Leader",
-  "email": "tue@plen.ku.dk",
+  "email": "tkn@plen.ku.dk",
   "orcid": "0000-0001-6610-8450",
-  "website": "",
+  "website": "https://researchprofiles.ku.dk/en/persons/tue-kj%C3%A6rgaard-nielsen/",
   "tags": [
     "Microbial Evolution",
     "Nanopore Sequencing",
     "PFAS Degradation",
     "Bacteriophages"
   ],
-  "bio": "Tue Kjærgaard Nielsen is a Tenure Track Assistant Professor at the Department of Plant and Environmental Sciences, University of Copenhagen. He is a molecular microbiologist specialising in microbial evolution and the role of mobile genetic elements.\n\n### Research Focus\n- PFAS Biodegradation: investigating microbial pathways for the degradation of PFAS and fluoride toxicity.\n- Genomics & Bioinformatics: utilising 3rd generation sequencing (Nanopore) for genetic context analysis.\n- Mobile Genetic Elements: studying the impact of MGEs and bacteriophages on microbial evolution.\n\n### Background\nTue earned his PhD in Environmental Science from Aarhus University and has extensive experience in bioinformatic analysis of exotic DNA modifications and microbial ecology.",
+  "bio": "Tue Kjærgaard Nielsen is a Tenure Track Assistant Professor in the Section for Microbial Ecology and Biotechnology at the Department of Plant and Environmental Sciences, University of Copenhagen. He is a molecular microbiologist specialising in microbial evolution and the role of mobile genetic elements.\n\n### Research Focus\n- PFAS Biodegradation: investigating microbial pathways for the degradation of PFAS and fluoride toxicity.\n- Genomics & Bioinformatics: utilising 3rd generation (Nanopore) and Illumina sequencing for genetic context analysis and antibiotic resistance gene prediction.\n- Mobile Genetic Elements: studying the impact of MGEs, plasmids, and bacteriophages on microbial evolution, including detection of nucleotide modifications.\n\n### Background\nTue earned his PhD in Environmental Science from Aarhus University (2017) and has extensive experience in bioinformatic analysis of exotic DNA modifications and microbial ecology.",
   "avatar": "tue-nielsen.webp"
 }

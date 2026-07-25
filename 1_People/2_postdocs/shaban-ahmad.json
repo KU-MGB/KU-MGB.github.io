@@ -3,14 +3,14 @@
   "name": "Shaban Ahmad",
   "role": "Postdoctoral Researcher",
   "email": "shaban@plen.ku.dk",
-  "orcid": "0000-0002-1234-5678",
-  "website": "",
+  "orcid": "0000-0001-9832-2830",
+  "website": "https://shabanahmad.github.io/",
   "tags": [
     "Bioinformatics",
     "PFAS",
     "Metagenomics",
     "Machine Learning"
   ],
-  "bio": "Shaban is a postdoctoral researcher focusing on computational approaches to PFAS biodegradation. His work combines large-scale metagenomic mining with AI-based enzyme ranking to identify novel dehalogenase candidates from environmental samples.",
+  "bio": "Shaban is a postdoctoral researcher (PhD, Artificial Intelligence in Biology; MSc Bioinformatics) working on AI-driven discovery of PFAS-degrading enzymes. His PFAS-Flow project mines fluoroacetate and haloacid dehalogenases from environmental sequence data and studies C–F bond cleavage mechanisms with QM/MM, feeding directly into the lab's FAcDs and HADs screening work. He also works more broadly on explainable AI methods for computational drug discovery and genomics.",
   "avatar": "shaban-ahmad.webp"
 }

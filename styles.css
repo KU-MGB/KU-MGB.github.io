@@ -199,6 +199,10 @@ a:hover { color: var(--accent-hover); }
   .nav-links { display: none; }
   #hamburger { display: flex; }
 }
+@media (max-width: 480px) {
+  .join-btn { display: none; }
+  .nav-utils { gap: 2px; }
+}
 
 /* ---------------------------------------------------------- Layout & type */
 .page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 76px; }
@@ -438,13 +442,17 @@ a:hover { color: var(--accent-hover); }
 .people-section { margin-bottom: 32px; }
 .people-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 16px;
 }
-.people-grid.people-grid-duo { grid-template-columns: repeat(2, 1fr); }
-.people-grid.people-grid-solo { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
-@media (max-width: 760px) { .people-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .people-grid { grid-template-columns: 1fr; } }
+@media (min-width: 521px) {
+  .people-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 761px) {
+  .people-grid { grid-template-columns: repeat(3, 1fr); }
+  .people-grid.people-grid-duo { grid-template-columns: repeat(2, 1fr); }
+  .people-grid.people-grid-solo { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+}
 
 /* ---------------------------------------------------------- Academic cards (Research / Projects) */
 .card-academic {
