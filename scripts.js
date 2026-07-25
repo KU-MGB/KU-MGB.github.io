@@ -674,14 +674,57 @@ window.renderHomeSlideshow = function() {
     `<img src='${src}' class='slide-fade${i === 0 ? ' active' : ''}' alt='MGB Lab photo ${i + 1}'>`
   ).join('');
   const imgs = container.querySelectorAll('img');
-  if (imgs.length > 1) {
-    let cur = 0;
-    setInterval(() => {
-      imgs[cur].classList.remove('active');
-      cur = (cur + 1) % imgs.length;
-      imgs[cur].classList.add('active');
-    }, 4000);
-  }
+  if (imgs.length <= 1) return;
+
+  let cur = 0;
+  let timer = null;
+  const dots = document.createElement('div');
+  dots.className = 'slide-dots';
+  imgs.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
+    dots.appendChild(dot);
+  });
+  container.appendChild(dots);
+  const dotEls = dots.querySelectorAll('.slide-dot');
+
+  const goTo = (i) => {
+    imgs[cur].classList.remove('active');
+    dotEls[cur].classList.remove('active');
+    cur = (i + imgs.length) % imgs.length;
+    imgs[cur].classList.add('active');
+    dotEls[cur].classList.add('active');
+  };
+  const startAutoplay = () => {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(cur + 1), 4000);
+  };
+  startAutoplay();
+
+  dotEls.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); startAutoplay(); }));
+
+  let touchStartX = 0, touchStartY = 0, swiping = false;
+  container.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    swiping = true;
+  }, { passive: true });
+  container.addEventListener('touchmove', (e) => {
+    if (!swiping) return;
+    const dx = e.touches[0].clientX - touchStartX;
+    const dy = e.touches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
+  }, { passive: false });
+  container.addEventListener('touchend', (e) => {
+    if (!swiping) return;
+    swiping = false;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) < 40) return;
+    goTo(dx < 0 ? cur + 1 : cur - 1);
+    startAutoplay();
+  });
 }
 
 // 13. Join Form

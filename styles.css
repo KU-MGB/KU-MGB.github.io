@@ -101,24 +101,29 @@ a:hover { color: var(--accent-hover); }
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--border);
-  height: 96px;
-  transition: box-shadow var(--t-base), background var(--t-base);
+  height: 72px;
+  transition: box-shadow var(--t-base), background var(--t-base), height var(--t-base);
 }
 .dark #navbar { background: rgba(28, 27, 24, 0.86); }
 #navbar.scrolled { box-shadow: var(--shadow-sm); }
+@media (min-width: 640px) { #navbar { height: 84px; } }
+@media (min-width: 900px) { #navbar { height: 92px; } }
 
 .nav-inner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 14px;
 }
-.logo { display: flex; align-items: center; height: 100%; text-decoration: none; }
-.logo-lockup { height: 100%; width: auto; display: block; }
+@media (min-width: 640px) { .nav-inner { padding: 0 24px; gap: 24px; } }
+.logo { display: flex; align-items: center; height: 100%; flex-shrink: 0; min-width: 0; text-decoration: none; }
+.logo-lockup { height: 36px; width: auto; max-width: 100%; display: block; }
+@media (min-width: 640px) { .logo-lockup { height: 52px; } }
+@media (min-width: 900px) { .logo-lockup { height: 66px; } }
 .logo-text { font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: 0; }
 .word-microbial { color: var(--emerald); }
 .word-genomics { color: var(--amber); }
@@ -137,7 +142,8 @@ a:hover { color: var(--accent-hover); }
 .nav-links a:hover { color: var(--accent); background: var(--accent-light); }
 .nav-links a.active { color: var(--accent); background: var(--accent-light); }
 
-.nav-utils { display: flex; align-items: center; gap: 6px; }
+.nav-utils { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+@media (min-width: 640px) { .nav-utils { gap: 6px; } }
 .nav-icon-btn {
   background: none;
   border: none;
@@ -174,7 +180,7 @@ a:hover { color: var(--accent-hover); }
   display: none;
   position: fixed;
   inset: 0;
-  top: 96px;
+  top: 72px;
   background: var(--bg);
   z-index: 99;
   flex-direction: column;
@@ -196,6 +202,7 @@ a:hover { color: var(--accent-hover); }
   .nav-links { display: none; }
   #hamburger { display: flex; }
 }
+@media (min-width: 640px) { #mobile-menu { top: 84px; } }
 @media (max-width: 480px) {
   .join-btn { display: none; }
   .nav-utils { gap: 2px; }
@@ -351,6 +358,10 @@ a:hover { color: var(--accent-hover); }
   transition: opacity 1.2s ease;
 }
 .photo-frame img.slide-fade.active { opacity: 1; }
+.photo-frame img.slide-fade { touch-action: pan-y; user-select: none; -webkit-user-drag: none; }
+.slide-dots { position: absolute; left: 0; right: 0; bottom: 12px; z-index: 2; display: flex; justify-content: center; gap: 6px; }
+.slide-dot { width: 7px; height: 7px; border-radius: 50%; border: none; background: rgba(255,255,255,0.55); cursor: pointer; padding: 0; transition: background var(--t-fast), transform var(--t-fast); }
+.slide-dot.active { background: #fff; transform: scale(1.3); }
 .stat-value { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--accent); }
 .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
 
@@ -620,9 +631,9 @@ body > .skiptranslate {
 }
 
 /* ---------------------------------------------------------- Footer */
-footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 40px; padding: 24px 0; }
-footer .logo-lockup { height: 56px; }
-@media (min-width: 640px) { footer .logo-lockup { height: 78px; } }
+footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 32px; padding: 14px 0; }
+footer .logo-lockup { height: 38px; }
+@media (min-width: 640px) { footer .logo-lockup { height: 48px; } }
 .footer-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 24px; }
 .footer-brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .footer-inner p { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
