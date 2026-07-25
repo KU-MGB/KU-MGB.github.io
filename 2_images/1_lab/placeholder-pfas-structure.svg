@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="'DM Sans', sans-serif">
+  <rect width="1200" height="800" fill="#f0ece4"/>
+  <g stroke="#8a857c" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+    <line x1="300" y1="0" x2="300" y2="800"/>
+    <line x1="600" y1="0" x2="600" y2="800"/>
+    <line x1="900" y1="0" x2="900" y2="800"/>
+  </g>
+
+  <!-- PFAS carbon-fluorine backbone (stylised PFOA-type chain) -->
+  <g stroke="#2c2a25" stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M 190 470 L 280 400 L 370 470 L 460 400 L 550 470 L 640 400 L 730 470 L 820 400 L 910 470"/>
+  </g>
+
+  <!-- Fluorine substituents -->
+  <g stroke="#0f766e" stroke-width="5" stroke-linecap="round">
+    <line x1="280" y1="400" x2="280" y2="330"/>
+    <line x1="280" y1="400" x2="230" y2="345"/>
+    <line x1="460" y1="400" x2="460" y2="330"/>
+    <line x1="460" y1="400" x2="410" y2="345"/>
+    <line x1="640" y1="400" x2="640" y2="330"/>
+    <line x1="640" y1="400" x2="590" y2="345"/>
+    <line x1="820" y1="400" x2="820" y2="330"/>
+    <line x1="820" y1="400" x2="770" y2="345"/>
+  </g>
+
+  <!-- Carboxylic head group -->
+  <g stroke="#d97706" stroke-width="5" stroke-linecap="round">
+    <line x1="190" y1="470" x2="140" y2="530"/>
+    <line x1="190" y1="470" x2="140" y2="410"/>
+  </g>
+
+  <!-- atom nodes -->
+  <g>
+    <circle cx="190" cy="470" r="12" fill="#2c2a25"/>
+    <circle cx="280" cy="400" r="12" fill="#2c2a25"/>
+    <circle cx="370" cy="470" r="12" fill="#2c2a25"/>
+    <circle cx="460" cy="400" r="12" fill="#2c2a25"/>
+    <circle cx="550" cy="470" r="12" fill="#2c2a25"/>
+    <circle cx="640" cy="400" r="12" fill="#2c2a25"/>
+    <circle cx="730" cy="470" r="12" fill="#2c2a25"/>
+    <circle cx="820" cy="400" r="12" fill="#2c2a25"/>
+    <circle cx="910" cy="470" r="12" fill="#2c2a25"/>
+
+    <circle cx="280" cy="330" r="9" fill="#0f766e"/>
+    <circle cx="230" cy="345" r="9" fill="#0f766e"/>
+    <circle cx="460" cy="330" r="9" fill="#0f766e"/>
+    <circle cx="410" cy="345" r="9" fill="#0f766e"/>
+    <circle cx="640" cy="330" r="9" fill="#0f766e"/>
+    <circle cx="590" cy="345" r="9" fill="#0f766e"/>
+    <circle cx="820" cy="330" r="9" fill="#0f766e"/>
+    <circle cx="770" cy="345" r="9" fill="#0f766e"/>
+
+    <circle cx="140" cy="530" r="9" fill="#d97706"/>
+    <circle cx="140" cy="410" r="9" fill="#d97706"/>
+  </g>
+
+  <text x="80" y="140" font-size="34" font-weight="700" fill="#2c2a25">Per- and Polyfluoroalkyl Substances</text>
+  <text x="80" y="180" font-size="17" fill="#5c5850" letter-spacing="0.5">Stable C–F backbone targeted by defluorinase and dehalogenase enzymes</text>
+
+  <text x="1120" y="770" font-size="12" fill="#8a857c" text-anchor="end" font-family="monospace" letter-spacing="1">PLACEHOLDER — REPLACE WITH LAB PHOTO</text>
+</svg>

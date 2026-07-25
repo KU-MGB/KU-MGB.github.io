@@ -101,7 +101,7 @@ a:hover { color: var(--accent-hover); }
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--border);
-  height: 84px;
+  height: 96px;
   transition: box-shadow var(--t-base), background var(--t-base);
 }
 .dark #navbar { background: rgba(28, 27, 24, 0.86); }
@@ -117,9 +117,8 @@ a:hover { color: var(--accent-hover); }
   justify-content: space-between;
   gap: 24px;
 }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.logo-lockup { height: 44px; }
-@media (min-width: 640px) { .logo-lockup { height: 62px; } }
+.logo { display: flex; align-items: center; height: 100%; text-decoration: none; }
+.logo-lockup { height: 100%; width: auto; display: block; }
 .logo-text { font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: 0; }
 .word-microbial { color: var(--emerald); }
 .word-genomics { color: var(--amber); }
@@ -175,7 +174,7 @@ a:hover { color: var(--accent-hover); }
   display: none;
   position: fixed;
   inset: 0;
-  top: 60px;
+  top: 96px;
   background: var(--bg);
   z-index: 99;
   flex-direction: column;
@@ -203,7 +202,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* ---------------------------------------------------------- Layout & type */
-.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 92px; }
+.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 104px; }
 .section-label {
   font-family: var(--mono);
   font-size: 11px;
@@ -294,7 +293,7 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 116px 24px 32px;
+  padding: 128px 24px 32px;
 }
 .home-banner h1 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 12px; max-width: 760px; }
 .home-banner .section-desc { font-size: 16px; margin-bottom: 16px; max-width: 620px; }
@@ -609,17 +608,32 @@ a:hover { color: var(--accent-hover); }
   box-shadow: 0 0 0 1px var(--border);
 }
 
+/* Suppress Google Translate's own UI (top banner, tooltip, loading spinner) —
+   Google's script injects these as fixed body children and pushes body down
+   with an inline top offset; neutralise both. */
+html { margin-top: 0 !important; }
+body { top: 0 !important; position: static !important; }
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+body > .skiptranslate {
+  display: none !important;
+}
+
 /* ---------------------------------------------------------- Footer */
 footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 40px; padding: 24px 0; }
 footer .logo-lockup { height: 56px; }
 @media (min-width: 640px) { footer .logo-lockup { height: 78px; } }
-.footer-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+.footer-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 24px; }
+.footer-brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .footer-inner p { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
 @media (max-width: 700px) {
   .footer-inner { flex-direction: column; text-align: center; gap: 20px; }
+  .footer-brand { justify-content: center; }
 }
 
 /* Back to top — circular scroll-progress ring */
+/* #scroll-to-top (id selector) guards position:fixed against the [data-tip] attribute rule below, which shares .back-to-top's specificity and would otherwise win by source order */
+#scroll-to-top { position: fixed; }
 .back-to-top {
   position: fixed;
   bottom: 24px;

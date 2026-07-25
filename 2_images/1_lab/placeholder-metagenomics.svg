@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="'DM Sans', sans-serif">
+  <rect width="1200" height="800" fill="#f0ece4"/>
+  <g stroke="#8a857c" stroke-width="1" opacity="0.3">
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>
+
+  <!-- DNA double helix, right side -->
+  <g stroke-width="4" fill="none">
+    <path d="M 780 260 C 860 320, 700 380, 780 440 C 860 500, 700 560, 780 620" stroke="#0f766e"/>
+    <path d="M 980 260 C 900 320, 1060 380, 980 440 C 900 500, 1060 560, 980 620" stroke="#2563eb"/>
+  </g>
+  <g stroke="#8a857c" stroke-width="2" opacity="0.7">
+    <line x1="792" y1="272" x2="968" y2="272"/>
+    <line x1="810" y1="310" x2="950" y2="310"/>
+    <line x1="800" y1="350" x2="960" y2="350"/>
+    <line x1="800" y1="390" x2="960" y2="390"/>
+    <line x1="810" y1="430" x2="950" y2="430"/>
+    <line x1="800" y1="470" x2="960" y2="470"/>
+    <line x1="800" y1="510" x2="960" y2="510"/>
+    <line x1="810" y1="550" x2="950" y2="550"/>
+    <line x1="800" y1="590" x2="960" y2="590"/>
+  </g>
+  <g fill="#d97706">
+    <circle cx="792" cy="272" r="6"/><circle cx="968" cy="272" r="6"/>
+    <circle cx="810" cy="310" r="6"/><circle cx="950" cy="310" r="6"/>
+    <circle cx="800" cy="350" r="6"/><circle cx="960" cy="350" r="6"/>
+    <circle cx="800" cy="390" r="6"/><circle cx="960" cy="390" r="6"/>
+    <circle cx="810" cy="430" r="6"/><circle cx="950" cy="430" r="6"/>
+    <circle cx="800" cy="470" r="6"/><circle cx="960" cy="470" r="6"/>
+    <circle cx="800" cy="510" r="6"/><circle cx="960" cy="510" r="6"/>
+    <circle cx="810" cy="550" r="6"/><circle cx="950" cy="550" r="6"/>
+    <circle cx="800" cy="590" r="6"/><circle cx="960" cy="590" r="6"/>
+  </g>
+
+  <!-- sequencing trace, left side -->
+  <g fill="none" stroke-width="3">
+    <polyline points="90,560 110,540 130,580 150,500 170,560 190,460 210,560 230,520 250,570 270,480 290,560 310,530 330,580 350,500 370,560 390,460 410,560 430,520 450,570 470,480 490,560" stroke="#059669"/>
+    <polyline points="90,600 110,590 130,610 150,580 170,600 190,570 210,600 230,585 250,605 270,575 290,600 310,590 330,610 350,580 370,600 390,570 410,600 430,585 450,605 470,575 490,600" stroke="#2563eb" opacity="0.7"/>
+  </g>
+  <g stroke="#e2ded6" stroke-width="1">
+    <line x1="90" y1="440" x2="90" y2="620"/>
+    <line x1="490" y1="440" x2="490" y2="620"/>
+  </g>
+
+  <text x="80" y="140" font-size="34" font-weight="700" fill="#2c2a25">Environmental Metagenomics</text>
+  <text x="80" y="180" font-size="17" fill="#5c5850">Nanopore &amp; Illumina sequencing of PFAS-impacted microbial communities</text>
+
+  <text x="1120" y="770" font-size="12" fill="#8a857c" text-anchor="end" font-family="monospace" letter-spacing="1">PLACEHOLDER — REPLACE WITH LAB PHOTO</text>
+</svg>
