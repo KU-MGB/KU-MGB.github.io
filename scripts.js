@@ -771,12 +771,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('footer-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const scrollToTopBtn = document.getElementById('scroll-to-top');
+  // Back to top — circular scroll-progress ring
+  const backToTop = document.getElementById('scroll-to-top');
+  const ptCircle = document.querySelector('.progress-ring__circle');
+  let ptCircumference = 0;
+  if (ptCircle) {
+    const radius = ptCircle.r.baseVal.value;
+    ptCircumference = 2 * Math.PI * radius;
+    ptCircle.style.strokeDasharray = `${ptCircumference} ${ptCircumference}`;
+    ptCircle.style.strokeDashoffset = ptCircumference;
+  }
+  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  let ptScrolling = false;
   window.addEventListener('scroll', () => {
-    if (scrollToTopBtn) {
-      scrollToTopBtn.style.display = (document.documentElement.scrollTop > 500) ? 'flex' : 'none';
-    }
-  });
+    if (ptScrolling) return;
+    ptScrolling = true;
+    window.requestAnimationFrame(() => {
+      if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 300);
+      if (ptCircle && ptCircumference) {
+        const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = scrollTotal > 0 ? (window.scrollY / scrollTotal) : 0;
+        ptCircle.style.strokeDashoffset = ptCircumference - (pct * ptCircumference);
+      }
+      ptScrolling = false;
+    });
+  }, { passive: true });
 });
 
 
