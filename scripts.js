@@ -291,9 +291,13 @@ function initNavbar() {
   if (mobileToggle && mobileMenu) {
     mobileToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('open');
+      mobileToggle.classList.toggle('open');
     });
     const links = mobileMenu.querySelectorAll('a');
-    links.forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+    links.forEach(l => l.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      mobileToggle.classList.remove('open');
+    }));
   }
 }
 
