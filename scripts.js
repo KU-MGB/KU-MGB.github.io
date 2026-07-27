@@ -298,6 +298,12 @@ function initNavbar() {
       mobileMenu.classList.remove('open');
       mobileToggle.classList.remove('open');
     }));
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.classList.contains('open')) return;
+      if (e.target.closest('#mobile-menu') || e.target.closest('#hamburger')) return;
+      mobileMenu.classList.remove('open');
+      mobileToggle.classList.remove('open');
+    });
   }
 }
 

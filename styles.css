@@ -194,27 +194,38 @@ a:hover { color: var(--accent-hover); }
 }
 .join-btn:hover { background: var(--accent-hover); color: #fff; }
 
-/* Mobile Menu */
+/* Mobile Menu — compact side panel, app-style, not a full-page takeover */
 #mobile-menu {
   display: none;
   position: fixed;
-  inset: 0;
   top: 84px;
-  background: var(--bg);
+  right: -100%;
+  bottom: auto;
+  width: 220px;
+  max-width: 80vw;
+  background: var(--bg-card);
   z-index: 99;
   flex-direction: column;
-  gap: 6px;
-  padding: 16px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-right: none;
+  border-radius: 0 0 0 var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: right var(--t-base);
 }
-#mobile-menu.open { display: flex; }
+@media (max-width: 900px) { #mobile-menu { display: flex; } }
+#mobile-menu.open { right: 0; }
 #mobile-menu a {
   font-family: var(--sans);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--fg);
-  padding: 12px 14px;
-  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
 }
+#mobile-menu a:last-child { border-bottom: none; }
 #mobile-menu a:hover { background: var(--accent-light); color: var(--accent); }
 
 @media (max-width: 900px) {
