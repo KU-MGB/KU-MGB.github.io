@@ -36,8 +36,8 @@
   <circle cx="180" cy="430" r="16" fill="#d97706"/>
   <text x="205" y="437" font-size="14" fill="#5c5850">C–F cleavage site</text>
 
-  <text x="80" y="140" font-size="34" font-weight="700" fill="#2c2a25">Dehalogenase Screening</text>
-  <text x="80" y="180" font-size="17" fill="#5c5850">High-throughput enzyme assay against fluoroacetate &amp; haloacid substrates</text>
+  <text x="80" y="220" font-size="34" font-weight="700" fill="#2c2a25">Dehalogenase Screening</text>
+  <text x="80" y="260" font-size="17" fill="#5c5850">High-throughput enzyme assay against fluoroacetate &amp; haloacid substrates</text>
 
   <text x="1120" y="770" font-size="12" fill="#8a857c" text-anchor="end" font-family="monospace" letter-spacing="1">PLACEHOLDER — REPLACE WITH LAB PHOTO</text>
 </svg>
