@@ -662,7 +662,7 @@ body > .skiptranslate {
 footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 32px; padding: 14px 0; }
 footer .logo-lockup { height: 38px; }
 @media (min-width: 640px) { footer .logo-lockup { height: 48px; } }
-.footer-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 24px; }
+.footer-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 32px; }
 .footer-brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .footer-inner p { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
 @media (max-width: 700px) {
