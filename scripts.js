@@ -728,6 +728,28 @@ window.renderHomeSlideshow = function() {
     goTo(dx < 0 ? cur + 1 : cur - 1);
     startAutoplay();
   });
+
+  let dragStartX = 0, dragging = false;
+  container.style.cursor = 'grab';
+  container.addEventListener('mousedown', (e) => {
+    dragStartX = e.clientX;
+    dragging = true;
+    container.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    e.preventDefault();
+  });
+  window.addEventListener('mouseup', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    container.style.cursor = 'grab';
+    const dx = e.clientX - dragStartX;
+    if (Math.abs(dx) < 40) return;
+    goTo(dx < 0 ? cur + 1 : cur - 1);
+    startAutoplay();
+  });
 }
 
 // 13. Join Form

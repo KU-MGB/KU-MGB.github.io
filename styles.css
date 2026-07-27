@@ -9,13 +9,13 @@
   --blue: #2563eb;
   --amber: #d97706;
 
-  --bg: #f8f6f1;
-  --bg-alt: #f0ece4;
-  --bg-card: #ffffff;
+  --bg: #f2e9d8;
+  --bg-alt: #e9dcc0;
+  --bg-card: #fbf6ea;
   --fg: #2c2a25;
   --muted: #5c5850;
   --faint: #8a857c;
-  --border: #e2ded6;
+  --border: #ddccaa;
 
   --shadow-sm: 0 1px 3px rgba(44, 42, 37, 0.06);
   --shadow-md: 0 4px 12px rgba(44, 42, 37, 0.08);
@@ -67,6 +67,8 @@ body {
   line-height: 1.7;
   color: var(--fg);
   background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s ease, color 0.3s ease;
   display: flex;
