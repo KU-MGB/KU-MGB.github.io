@@ -18,7 +18,7 @@ in their category folder — e.g. `2_postdocs/asal-forouzandeh.json` and
 
 ## Adding a person
 
-1. Copy `_template.json` into the right category folder, rename it to `<id>.json`
+1. Copy `template.json` into the right category folder, rename it to `<id>.json`
    (e.g. `4_masters/jane-doe.json`).
 2. Fill in the fields:
    - `id` — must match the filename (no `.json`).
@@ -28,7 +28,7 @@ in their category folder — e.g. `2_postdocs/asal-forouzandeh.json` and
      assumed to be in the same folder as the JSON. Leave as `""` to fall back to a
      coloured initials circle.
 3. If you have a photo, drop it in the same folder using that exact filename.
-4. Add the `id` under the matching category in `_manifest.json` (the folder alone
+4. Add the `id` under the matching category in `manifest.json` (the folder alone
    isn't enough — the site can't list folder contents on its own, so the manifest
    says which files to actually load).
 
@@ -38,7 +38,7 @@ E.g. MSc → PhD, or MSc → Alumni:
 
 1. Cut their `.json` (and photo, if any) from the old category folder and paste them
    into the new one.
-2. In `_manifest.json`, remove their `id` from the old category's array and add it to
+2. In `manifest.json`, remove their `id` from the old category's array and add it to
    the new one.
 
 That's it — no need to touch the JSON file itself, `role_group` isn't stored in it

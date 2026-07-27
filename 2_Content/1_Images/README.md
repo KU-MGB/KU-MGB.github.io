@@ -20,12 +20,12 @@ cropped to fill the frame.
 
 Add 3–5 photos to this folder (numbered after the logo/group files, e.g.
 `4_fieldwork.jpg`, `5_lab-bench.jpg`), then list their filenames in
-`_manifest.json`, e.g.:
+`manifest.json`, e.g.:
 
 ```json
 ["4_fieldwork.jpg", "5_lab-bench.jpg", "6_sampling-trip.jpg"]
 ```
 
 The home page cycles through them automatically (fades every few seconds, swipeable
-on touch). Leave `_manifest.json` as `[]` to show the "coming soon" placeholder
+on touch). Leave `manifest.json` as `[]` to show the "coming soon" placeholder
 instead. Order in the array is the order they play.

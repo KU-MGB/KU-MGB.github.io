@@ -189,8 +189,8 @@ const MGB_PROJECTS     = [
 (function () {
   async function loadPeople() {
     try {
-      // Manifest is grouped by category folder: { "2_postdocs": ["asal-forouzandeh", ...], ... }
-      const manifest = await fetch(adjustPath('1_People/_manifest.json')).then(r => r.json());
+      // Manifest is grouped by category folder: { "2_Postdocs": ["asal-forouzandeh", ...], ... }
+      const manifest = await fetch(adjustPath('1_People/manifest.json')).then(r => r.json());
       const groups = await Promise.all(Object.entries(manifest).map(async ([group, ids]) => {
         const members = await Promise.all(ids.map(id =>
           fetch(adjustPath(`1_People/${group}/${id}.json`)).then(r => r.json())
@@ -207,7 +207,7 @@ const MGB_PROJECTS     = [
 
   async function loadBlogs() {
     try {
-      const manifest = await fetch(adjustPath('2_Content/2_Blogs/_manifest.json')).then(r => r.json());
+      const manifest = await fetch(adjustPath('2_Content/2_Blogs/manifest.json')).then(r => r.json());
       const posts = await Promise.all(manifest.map(async slug => {
         const post = await fetch(adjustPath(`2_Content/2_Blogs/${slug}/post.json`)).then(r => r.json());
         return Object.assign({}, post, {
@@ -224,7 +224,7 @@ const MGB_PROJECTS     = [
 
   async function loadLabImages() {
     try {
-      const manifest = await fetch(adjustPath('2_Content/1_Images/_manifest.json')).then(r => r.json());
+      const manifest = await fetch(adjustPath('2_Content/1_Images/manifest.json')).then(r => r.json());
       window.MGB_LAB_IMAGES = manifest.map(f => adjustPath(`2_Content/1_Images/${f}`));
     } catch (e) {
       window.MGB_LAB_IMAGES = [];
@@ -386,13 +386,13 @@ function personAvatarHtml(p) {
 window.renderPeople = function() {
   if (typeof MGB_PEOPLE === 'undefined') return;
   const CATEGORIES = [
-    { id: '1_faculty', label: 'Group Leader' },
-    { id: '2_postdocs', label: 'Postdocs' },
-    { id: '3_phd', label: 'PhD Students' },
-    { id: '4_masters', label: 'MSc Students' },
-    { id: '5_bachelors', label: 'BSc Students' },
-    { id: '6_others', label: 'Others' },
-    { id: '7_alumni', label: 'Alumni' }
+    { id: '1_Faculty', label: 'Group Leader' },
+    { id: '2_Postdocs', label: 'Postdocs' },
+    { id: '3_PhD', label: 'PhD Students' },
+    { id: '4_Masters', label: 'MSc Students' },
+    { id: '5_Bachelors', label: 'BSc Students' },
+    { id: '6_Others', label: 'Others' },
+    { id: '7_Alumni', label: 'Alumni' }
   ];
 
   const container = document.getElementById('people-container');
@@ -667,7 +667,7 @@ window.renderGroupPhoto = function() {
 }
 
 // 16. Home page slideshow — cycles through 3-5 photos listed in
-// 2_Content/1_Images/_manifest.json (falls back to the placeholder if empty).
+// 2_Content/1_Images/manifest.json (falls back to the placeholder if empty).
 window.renderHomeSlideshow = function() {
   const container = document.getElementById('home-slideshow');
   const images = window.MGB_LAB_IMAGES || [];
