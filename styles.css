@@ -502,15 +502,23 @@ a:hover { color: var(--accent-hover); }
 
 /* ---------------------------------------------------------- Publications & News — dense list rows */
 .pub-entry, .news-entry {
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border);
-  position: relative;
+  padding: 16px 12px;
+  margin: 0 -12px;
+  border: 1px solid transparent;
+  border-bottom-color: var(--border);
   border-radius: var(--radius-md);
-  transition: box-shadow var(--t-base);
+  position: relative;
+  transition: background var(--t-base), border-color var(--t-base), box-shadow var(--t-base), transform var(--t-base);
 }
 .pub-entry:first-child, .news-entry:first-child { padding-top: 0; }
-.pub-entry:last-child, .news-entry:last-child { border-bottom: none; }
-.pub-entry:hover, .news-entry:hover { box-shadow: 0 0 0 1px var(--accent) inset; }
+.pub-entry:last-child, .news-entry:last-child { border-bottom-color: transparent; }
+.pub-entry:hover, .news-entry:hover {
+  background: var(--bg-card);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  z-index: 2;
+}
 .pub-entry:hover .pub-title, .news-entry:hover .news-title { color: var(--accent); }
 .pub-title, .news-title { font-size: 15.5px; font-weight: 600; color: var(--fg); line-height: 1.4; }
 .pub-authors { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 2px; }
