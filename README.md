@@ -46,6 +46,6 @@ Then open `http://localhost:8000`.
 
 ## Deploying
 
-`deploy.sh` stages everything, commits with a message you type, and pushes to
-`origin` — that's it, GitHub Pages serves straight from the repo (no build step to
-run first). The site goes live a few minutes after the push.
+`git add`, `git commit`, `git push origin main` — that's it, GitHub Pages serves
+straight from the repo (no build step to run first). The site goes live a few
+minutes after the push.
