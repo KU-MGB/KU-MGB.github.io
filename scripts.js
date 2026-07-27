@@ -5,7 +5,7 @@
 // — edit these arrays directly.
 //
 // People and blog posts are NOT here — they live one-file-per-item in
-// 1_People/ and 2_content/2_blogs/ (see the README.md in each of those folders) so new
+// 1_People/ and 2_Content/2_Blogs/ (see the README.md in each of those folders) so new
 // entries can be added without touching this file.
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -207,12 +207,12 @@ const MGB_PROJECTS     = [
 
   async function loadBlogs() {
     try {
-      const manifest = await fetch(adjustPath('2_content/2_blogs/_manifest.json')).then(r => r.json());
+      const manifest = await fetch(adjustPath('2_Content/2_Blogs/_manifest.json')).then(r => r.json());
       const posts = await Promise.all(manifest.map(async slug => {
-        const post = await fetch(adjustPath(`2_content/2_blogs/${slug}/post.json`)).then(r => r.json());
+        const post = await fetch(adjustPath(`2_Content/2_Blogs/${slug}/post.json`)).then(r => r.json());
         return Object.assign({}, post, {
           id: slug,
-          cover: post.cover ? `2_content/2_blogs/${slug}/${post.cover}` : ''
+          cover: post.cover ? `2_Content/2_Blogs/${slug}/${post.cover}` : ''
         });
       }));
       window.MGB_BLOGS = posts;
@@ -224,8 +224,8 @@ const MGB_PROJECTS     = [
 
   async function loadLabImages() {
     try {
-      const manifest = await fetch(adjustPath('2_content/1_images/1_lab/_manifest.json')).then(r => r.json());
-      window.MGB_LAB_IMAGES = manifest.map(f => adjustPath(`2_content/1_images/1_lab/${f}`));
+      const manifest = await fetch(adjustPath('2_Content/1_Images/_manifest.json')).then(r => r.json());
+      window.MGB_LAB_IMAGES = manifest.map(f => adjustPath(`2_Content/1_Images/${f}`));
     } catch (e) {
       window.MGB_LAB_IMAGES = [];
     }
@@ -643,13 +643,12 @@ window.renderLatestNewsCallout = function() {
   `;
 }
 
-// 15. Group photo (People page) — tries a few common filenames so it works
-// whatever the file is actually called, e.g. group.jpg or group-photo.jpeg.
+// 15. Group photo (People page) — tries a few common extensions so it works
+// whatever format the file is, e.g. 3_group.jpg or 3_group.webp.
 window.renderGroupPhoto = function() {
   const container = document.getElementById('group-photo-container');
   if (!container) return;
-  const candidates = ['group.jpg', 'group.jpeg', 'group.png', 'group.webp',
-    'group-photo.jpg', 'group-photo.jpeg', 'group-photo.png', 'group-photo.webp'];
+  const candidates = ['3_group.jpg', '3_group.jpeg', '3_group.png', '3_group.webp'];
 
   function tryNext(i) {
     if (i >= candidates.length) return;
@@ -662,13 +661,13 @@ window.renderGroupPhoto = function() {
       container.appendChild(img);
     };
     img.onerror = () => tryNext(i + 1);
-    img.src = adjustPath(`2_content/1_images/1_lab/${candidates[i]}`);
+    img.src = adjustPath(`2_Content/1_Images/${candidates[i]}`);
   }
   tryNext(0);
 }
 
 // 16. Home page slideshow — cycles through 3-5 photos listed in
-// 2_content/1_images/1_lab/_manifest.json (falls back to the placeholder if empty).
+// 2_Content/1_Images/_manifest.json (falls back to the placeholder if empty).
 window.renderHomeSlideshow = function() {
   const container = document.getElementById('home-slideshow');
   const images = window.MGB_LAB_IMAGES || [];
