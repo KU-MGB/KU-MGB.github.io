@@ -513,7 +513,6 @@ a:hover { color: var(--accent-hover); }
   position: relative;
   transition: border-color var(--t-base);
 }
-.pub-entry:first-child, .news-entry:first-child { padding-top: 0; }
 .pub-entry:last-child, .news-entry:last-child { border-bottom-color: transparent; }
 .pub-entry:hover, .news-entry:hover {
   border-color: var(--accent);
