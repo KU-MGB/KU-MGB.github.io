@@ -505,9 +505,13 @@ a:hover { color: var(--accent-hover); }
   padding: 16px 0;
   border-bottom: 1px solid var(--border);
   position: relative;
+  border-radius: var(--radius-md);
+  transition: box-shadow var(--t-base);
 }
 .pub-entry:first-child, .news-entry:first-child { padding-top: 0; }
 .pub-entry:last-child, .news-entry:last-child { border-bottom: none; }
+.pub-entry:hover, .news-entry:hover { box-shadow: 0 0 0 1px var(--accent) inset; }
+.pub-entry:hover .pub-title, .news-entry:hover .news-title { color: var(--accent); }
 .pub-title, .news-title { font-size: 15.5px; font-weight: 600; color: var(--fg); line-height: 1.4; }
 .pub-authors { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 2px; }
 .pub-venue, .news-date { font-size: 12px; color: var(--faint); }
