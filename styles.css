@@ -724,6 +724,11 @@ footer .logo-lockup { height: 38px; }
   z-index: 2147483647;
 }
 [data-tip]:hover::after { opacity: 1; }
+[data-tip].tip-visible::after { opacity: 1; }
+@media (hover: none) {
+  /* Touch devices: only show via the long-press JS below, never on a plain tap */
+  [data-tip]:hover::after { opacity: 0; }
+}
 .nav-utils [data-tip]::after {
   bottom: auto; left: auto; top: 50%; right: 100%;
   transform: translateY(-50%) translateX(-8px);

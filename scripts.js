@@ -301,6 +301,34 @@ function initNavbar() {
   }
 }
 
+// 2b. Touch tooltips — only reveal on long-press (~500ms), not a plain tap,
+// so tapping a nav icon just triggers its action instead of flashing a label.
+function initTooltipLongPress() {
+  let pressTimer = null;
+  let longPressed = false;
+  document.querySelectorAll('[data-tip]').forEach(el => {
+    el.addEventListener('touchstart', () => {
+      longPressed = false;
+      pressTimer = setTimeout(() => {
+        longPressed = true;
+        el.classList.add('tip-visible');
+      }, 500);
+    }, { passive: true });
+    el.addEventListener('touchmove', () => clearTimeout(pressTimer));
+    el.addEventListener('touchend', (e) => {
+      clearTimeout(pressTimer);
+      if (longPressed) {
+        e.preventDefault();
+        setTimeout(() => el.classList.remove('tip-visible'), 1200);
+      }
+    });
+    el.addEventListener('touchcancel', () => {
+      clearTimeout(pressTimer);
+      el.classList.remove('tip-visible');
+    });
+  });
+}
+
 // 3. Scroll Reveal
 window.initScrollReveal = function() {
   const observer = new IntersectionObserver((entries) => {
@@ -777,6 +805,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNavbar();
   initScrollReveal();
+  initTooltipLongPress();
 });
 
 
