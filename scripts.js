@@ -797,13 +797,21 @@ window.initJoinForm = function() {
     e.preventDefault();
     btn.disabled = true;
     btn.innerText = 'Submitting...';
-    setTimeout(() => {
+    try {
+      await fetch(form.action, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
       form.style.display = 'none';
-      if(statusEl) {
+      if (statusEl) {
         statusEl.innerHTML = '<h3 style="color:var(--emerald); margin-bottom:16px;">Application Received</h3><p style="color:var(--muted)">Thank you for your interest. We will review your profile and get back to you shortly.</p>';
         statusEl.style.display = 'block';
       }
-    }, 1500);
+    } catch (err) {
+      btn.disabled = false;
+      btn.innerText = 'Submit Application';
+      if (statusEl) {
+        statusEl.innerHTML = '<p style="color:#c0392b">Something went wrong sending your application. Please try again, or email us directly.</p>';
+        statusEl.style.display = 'block';
+      }
+    }
   });
 }
 
