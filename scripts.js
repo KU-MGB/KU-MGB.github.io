@@ -5,7 +5,7 @@
 // — edit these arrays directly.
 //
 // People and blog posts are NOT here — they live one-file-per-item in
-// 1_People/ and 3_blogs/ (see the README.md in each of those folders) so new
+// 1_People/ and 2_content/2_blogs/ (see the README.md in each of those folders) so new
 // entries can be added without touching this file.
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -207,12 +207,12 @@ const MGB_PROJECTS     = [
 
   async function loadBlogs() {
     try {
-      const manifest = await fetch(adjustPath('3_blogs/_manifest.json')).then(r => r.json());
+      const manifest = await fetch(adjustPath('2_content/2_blogs/_manifest.json')).then(r => r.json());
       const posts = await Promise.all(manifest.map(async slug => {
-        const post = await fetch(adjustPath(`3_blogs/${slug}/post.json`)).then(r => r.json());
+        const post = await fetch(adjustPath(`2_content/2_blogs/${slug}/post.json`)).then(r => r.json());
         return Object.assign({}, post, {
           id: slug,
-          cover: post.cover ? `3_blogs/${slug}/${post.cover}` : ''
+          cover: post.cover ? `2_content/2_blogs/${slug}/${post.cover}` : ''
         });
       }));
       window.MGB_BLOGS = posts;
@@ -224,8 +224,8 @@ const MGB_PROJECTS     = [
 
   async function loadLabImages() {
     try {
-      const manifest = await fetch(adjustPath('2_images/1_lab/_manifest.json')).then(r => r.json());
-      window.MGB_LAB_IMAGES = manifest.map(f => adjustPath(`2_images/1_lab/${f}`));
+      const manifest = await fetch(adjustPath('2_content/1_images/1_lab/_manifest.json')).then(r => r.json());
+      window.MGB_LAB_IMAGES = manifest.map(f => adjustPath(`2_content/1_images/1_lab/${f}`));
     } catch (e) {
       window.MGB_LAB_IMAGES = [];
     }
@@ -662,13 +662,13 @@ window.renderGroupPhoto = function() {
       container.appendChild(img);
     };
     img.onerror = () => tryNext(i + 1);
-    img.src = adjustPath(`2_images/1_lab/${candidates[i]}`);
+    img.src = adjustPath(`2_content/1_images/1_lab/${candidates[i]}`);
   }
   tryNext(0);
 }
 
 // 16. Home page slideshow — cycles through 3-5 photos listed in
-// 2_images/1_lab/_manifest.json (falls back to the placeholder if empty).
+// 2_content/1_images/1_lab/_manifest.json (falls back to the placeholder if empty).
 window.renderHomeSlideshow = function() {
   const container = document.getElementById('home-slideshow');
   const images = window.MGB_LAB_IMAGES || [];

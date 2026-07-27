@@ -25,14 +25,14 @@ just adding a file — nothing to compile.
 | Folder | Contents |
 |---|---|
 | `1_People/` | One subfolder per category (`1_faculty/`, `2_postdocs/`, …), each holding that group's `<id>.json` + photo side by side. See its `README.md`. |
-| `2_images/` | `1_lab/` (group photo + home page slideshow — see its `README.md`), `2_logo/` (site logo). |
-| `3_blogs/` | One subfolder per blog post (`post.json` + optional cover image). See its `README.md`. |
+| `2_content/1_images/` | `1_lab/` (group photo + home page slideshow — see its `README.md`), `2_logo/` (site logo). |
+| `2_content/2_blogs/` | One subfolder per blog post (`post.json` + optional cover image). See its `README.md`. |
 
 ## Adding content
 
 - **A person** → `1_People/README.md`
-- **A blog post** → `3_blogs/README.md`
-- **Lab / group photos** → `2_images/1_lab/README.md`
+- **A blog post** → `2_content/2_blogs/README.md`
+- **Lab / group photos** → `2_content/1_images/1_lab/README.md`
 - **Publications, news, projects, research pillars, facts** → edit the arrays directly
   at the top of `scripts.js`.
 
