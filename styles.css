@@ -403,6 +403,10 @@ a:hover { color: var(--accent-hover); }
   color: #fff;
   border-color: var(--accent);
 }
+.profile-card:hover .profile-photo, .profile-card:hover .profile-initials {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
 .profile-header {
   display: flex;
   align-items: center;
@@ -424,6 +428,7 @@ a:hover { color: var(--accent-hover); }
   flex-shrink: 0;
   border: 2px solid var(--bg);
   box-shadow: 0 0 0 1px var(--border);
+  transition: border-color var(--t-base), box-shadow var(--t-base);
 }
 .profile-initials {
   width: 68px;
@@ -434,6 +439,9 @@ a:hover { color: var(--accent-hover); }
   justify-content: center;
   font-family: var(--serif);
   font-weight: 700;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--border);
+  transition: border-color var(--t-base), box-shadow var(--t-base);
   font-size: 22px;
   color: #fff;
   flex-shrink: 0;
