@@ -351,7 +351,7 @@ a:hover { color: var(--accent-hover); }
   object-fit: cover;
   display: block;
 }
-.photo-frame img.slide-fade, .photo-frame video.slide-fade {
+.photo-frame img.slide-fade, .photo-frame video.slide-fade, .photo-frame div.slide-fade {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -360,8 +360,10 @@ a:hover { color: var(--accent-hover); }
   opacity: 0;
   transition: opacity 1.2s ease;
 }
-.photo-frame img.slide-fade.active, .photo-frame video.slide-fade.active { opacity: 1; }
-.photo-frame img.slide-fade, .photo-frame video.slide-fade { touch-action: pan-y; user-select: none; -webkit-user-drag: none; }
+.photo-frame img.slide-fade.active, .photo-frame video.slide-fade.active, .photo-frame div.slide-fade.active { opacity: 1; }
+.photo-frame img.slide-fade, .photo-frame video.slide-fade, .photo-frame div.slide-fade { touch-action: pan-y; user-select: none; -webkit-user-drag: none; }
+.slide-combo { display: flex; }
+.slide-combo img, .slide-combo video { width: 50%; height: 100%; object-fit: cover; display: block; }
 .slide-dots { position: absolute; left: 0; right: 0; bottom: 14px; z-index: 2; display: flex; justify-content: center; gap: 10px; }
 .slide-dot {
   width: 34px;

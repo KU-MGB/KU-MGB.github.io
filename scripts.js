@@ -697,16 +697,20 @@ window.renderHomeSlideshow = function() {
   const images = window.MGB_LAB_IMAGES || [];
   if (!container || images.length === 0) return;
   container.classList.remove('photo-placeholder');
-  container.innerHTML = images.slice(0, 5).map((src, i) => {
-    const isVideo = /\.(mp4|webm)$/i.test(src);
+  const posterFor = (src) => src.replace(/\.(mp4|webm)$/i, '-poster.jpg');
+  const mediaTag = (src, label) => /\.(mp4|webm)$/i.test(src)
+    ? `<video src='${src}' poster='${posterFor(src)}' autoplay muted loop playsinline aria-label='${label}'></video>`
+    : `<img src='${src}' alt='${label}'>`;
+
+  container.innerHTML = images.slice(0, 5).map((entry, i) => {
     const cls = `slide-fade${i === 0 ? ' active' : ''}`;
-    if (isVideo) {
-      const poster = src.replace(/\.(mp4|webm)$/i, '-poster.jpg');
-      return `<video src='${src}' poster='${poster}' class='${cls}' autoplay muted loop playsinline aria-label='MGB Lab video ${i + 1}'></video>`;
+    const parts = entry.split('+');
+    if (parts.length > 1) {
+      return `<div class='${cls} slide-combo'>${parts.map((src, j) => mediaTag(src, `MGB Lab video ${i + 1}.${j + 1}`)).join('')}</div>`;
     }
-    return `<img src='${src}' class='${cls}' alt='MGB Lab photo ${i + 1}'>`;
+    return mediaTag(entry, `MGB Lab photo ${i + 1}`).replace(/(<img|<video)/, `$1 class='${cls}'`);
   }).join('');
-  const imgs = container.querySelectorAll('.slide-fade');
+  const imgs = container.querySelectorAll(':scope > .slide-fade');
   if (imgs.length <= 1) return;
 
   let cur = 0;
@@ -718,7 +722,8 @@ window.renderHomeSlideshow = function() {
     dot.type = 'button';
     dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
-    const thumbSrc = slide.tagName === 'VIDEO' ? slide.getAttribute('poster') : slide.getAttribute('src');
+    const media = slide.classList.contains('slide-combo') ? slide.querySelector('img, video') : slide;
+    const thumbSrc = media.tagName === 'VIDEO' ? media.getAttribute('poster') : media.getAttribute('src');
     dot.innerHTML = `<img src='${thumbSrc}' alt=''>`;
     dots.appendChild(dot);
   });
@@ -734,7 +739,7 @@ window.renderHomeSlideshow = function() {
   };
   const startAutoplay = () => {
     clearInterval(timer);
-    timer = setInterval(() => goTo(cur + 1), 4000);
+    timer = setInterval(() => goTo(cur + 1), 8000);
   };
   startAutoplay();
 
