@@ -697,22 +697,29 @@ window.renderHomeSlideshow = function() {
   const images = window.MGB_LAB_IMAGES || [];
   if (!container || images.length === 0) return;
   container.classList.remove('photo-placeholder');
-  container.innerHTML = images.slice(0, 5).map((src, i) =>
-    `<img src='${src}' class='slide-fade${i === 0 ? ' active' : ''}' alt='MGB Lab photo ${i + 1}'>`
-  ).join('');
-  const imgs = container.querySelectorAll('img');
+  container.innerHTML = images.slice(0, 5).map((src, i) => {
+    const isVideo = /\.(mp4|webm)$/i.test(src);
+    const cls = `slide-fade${i === 0 ? ' active' : ''}`;
+    if (isVideo) {
+      const poster = src.replace(/\.(mp4|webm)$/i, '-poster.jpg');
+      return `<video src='${src}' poster='${poster}' class='${cls}' autoplay muted loop playsinline aria-label='MGB Lab video ${i + 1}'></video>`;
+    }
+    return `<img src='${src}' class='${cls}' alt='MGB Lab photo ${i + 1}'>`;
+  }).join('');
+  const imgs = container.querySelectorAll('.slide-fade');
   if (imgs.length <= 1) return;
 
   let cur = 0;
   let timer = null;
   const dots = document.createElement('div');
   dots.className = 'slide-dots';
-  imgs.forEach((img, i) => {
+  imgs.forEach((slide, i) => {
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
-    dot.innerHTML = `<img src='${img.getAttribute('src')}' alt=''>`;
+    const thumbSrc = slide.tagName === 'VIDEO' ? slide.getAttribute('poster') : slide.getAttribute('src');
+    dot.innerHTML = `<img src='${thumbSrc}' alt=''>`;
     dots.appendChild(dot);
   });
   container.appendChild(dots);
