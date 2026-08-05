@@ -707,25 +707,23 @@ window.renderHomeSlideshow = function() {
   let timer = null;
   const dots = document.createElement('div');
   dots.className = 'slide-dots';
-  imgs.forEach((_, i) => {
+  imgs.forEach((img, i) => {
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
+    dot.innerHTML = `<img src='${img.getAttribute('src')}' alt=''>`;
     dots.appendChild(dot);
   });
   container.appendChild(dots);
   const dotEls = dots.querySelectorAll('.slide-dot');
-  const orbitEls = document.querySelectorAll('.photo-orbit-circle');
 
   const goTo = (i) => {
     imgs[cur].classList.remove('active');
     dotEls[cur].classList.remove('active');
-    if (orbitEls[cur]) orbitEls[cur].classList.remove('active');
     cur = (i + imgs.length) % imgs.length;
     imgs[cur].classList.add('active');
     dotEls[cur].classList.add('active');
-    if (orbitEls[cur]) orbitEls[cur].classList.add('active');
   };
   const startAutoplay = () => {
     clearInterval(timer);
@@ -734,7 +732,6 @@ window.renderHomeSlideshow = function() {
   startAutoplay();
 
   dotEls.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); startAutoplay(); }));
-  orbitEls.forEach((circle, i) => circle.addEventListener('click', () => { goTo(i); startAutoplay(); }));
 
   let touchStartX = 0, touchStartY = 0, swiping = false;
   container.addEventListener('touchstart', (e) => {
