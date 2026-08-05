@@ -432,17 +432,27 @@ window.renderPeople = function() {
   const container = document.getElementById('people-container');
   if (!container) return;
 
+  // One icon per link type, always shown; missing links render as a dummy (visible, inert) icon.
+  function personLinkHtml(href, tip, iconClass) {
+    if (href) return `<a href='${href}' target='_blank' rel='noopener' class='icon-link' data-tip='${tip}' aria-label='${tip}'><i class='${iconClass}'></i></a>`;
+    return `<span class='icon-link icon-link-dummy' data-tip='${tip} not available' aria-label='${tip} not available'><i class='${iconClass}'></i></span>`;
+  }
+  function personLinksHtml(p) {
+    return `<div class='profile-links'>
+      ${personLinkHtml(p.email ? 'mailto:' + p.email : '', 'Email', 'fas fa-envelope')}
+      ${personLinkHtml(p.orcid ? 'https://orcid.org/' + p.orcid : '', 'ORCID', 'fab fa-orcid')}
+      ${personLinkHtml(p.website || '', 'Website', 'fas fa-globe')}
+      ${personLinkHtml(p.linkedin || '', 'LinkedIn', 'fab fa-linkedin')}
+    </div>`;
+  }
+
   CATEGORIES.forEach(cat => {
     const members = MGB_PEOPLE.filter(p => p.role_group === cat.id);
     if (members.length === 0) return;
 
     const gridModifier = members.length === 1 ? ' people-grid-solo' : members.length === 2 ? ' people-grid-duo' : '';
-    const section = document.createElement('div');
-    section.className = 'people-section';
-    section.innerHTML = `
-      <h3 class='section-label' style="margin-bottom: 14px;">${cat.label}</h3>
-      <div class='people-grid${gridModifier}'>
-        ${members.map(p => `
+    const isAlumni = cat.id === '7_Alumni';
+    const cardsHtml = members.map(p => `
           <div class='profile-card' data-reveal>
             <div class='profile-header'>
               <div class='profile-header-left'>
@@ -452,18 +462,39 @@ window.renderPeople = function() {
                   <div class='profile-title'>${p.role || ''}</div>
                 </div>
               </div>
-              ${(p.email || p.orcid || p.website) ? `<div class='profile-links'>
-                ${p.email ? `<a href='mailto:${p.email}' class='icon-link' data-tip='Email' aria-label='Email'><i class='fas fa-envelope'></i></a>` : ''}
-                ${p.orcid ? `<a href='https://orcid.org/${p.orcid}' target='_blank' class='icon-link' data-tip='ORCID' aria-label='ORCID'><i class='fab fa-orcid'></i></a>` : ''}
-                ${p.website ? `<a href='${p.website}' target='_blank' class='icon-link' data-tip='Website' aria-label='Website'><i class='fas fa-globe'></i></a>` : ''}
-              </div>` : ''}
+              ${personLinksHtml(p)}
             </div>
             ${p.bio ? `<p class='profile-bio'>${bioExcerpt(p.bio)}</p>` : ''}
             ${p.tags ? `<div class='profile-chips'>${p.tags.slice(0, 3).map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
           </div>
-        `).join('')}
-      </div>
-    `;
+        `).join('');
+
+    const section = document.createElement('div');
+    section.className = 'people-section';
+    if (isAlumni) {
+      section.innerHTML = `
+        <button type='button' class='alumni-toggle' aria-expanded='false'>
+          <h3 class='section-label' style="margin-bottom:0;">${cat.label} (${members.length})</h3>
+          <i class='fas fa-chevron-down alumni-toggle-icon' aria-hidden='true'></i>
+        </button>
+        <div class='people-grid${gridModifier} alumni-grid'>
+          ${cardsHtml}
+        </div>
+      `;
+      const toggle = section.querySelector('.alumni-toggle');
+      const grid = section.querySelector('.alumni-grid');
+      toggle.addEventListener('click', () => {
+        const open = grid.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+    } else {
+      section.innerHTML = `
+        <h3 class='section-label' style="margin-bottom: 14px;">${cat.label}</h3>
+        <div class='people-grid${gridModifier}'>
+          ${cardsHtml}
+        </div>
+      `;
+    }
     container.appendChild(section);
   });
   if (window.initScrollReveal) window.initScrollReveal();
@@ -824,22 +855,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ==========================================
-// PAGE ROUTER — each nav link shows only its own section.
-// The logo always returns to #home; there is no separate Home nav link.
+// SINGLE-PAGE SCROLL — all sections live on one continuous page.
+// #blog-post is the one exception: an overlay reached via a blog card.
+// Nav links smooth-scroll to their section; a scroll-spy keeps the
+// matching nav link highlighted as the user scrolls.
 // ==========================================
 function handleRouting() {
   const hash = window.location.hash || '#home';
+  const key = hash.substring(1);
   document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
-  const target = document.getElementById('page-' + hash.substring(1)) || document.getElementById('page-home');
-  target.classList.add('active');
-
-  document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === hash);
-  });
-  window.scrollTo({ top: 0, behavior: 'instant' });
+  if (key === 'blog-post') {
+    const target = document.getElementById('page-blog-post');
+    if (target) target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    return;
+  }
+  const target = document.getElementById('page-' + key);
+  if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+  else window.scrollTo({ top: 0, behavior: 'instant' });
 }
 window.addEventListener('hashchange', handleRouting);
-document.addEventListener('DOMContentLoaded', handleRouting);
+document.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+  if (hash && hash !== '#home') setTimeout(handleRouting, 400);
+  else handleRouting();
+});
+
+function initSectionNav() {
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const hash = a.getAttribute('href');
+    const key = hash.substring(1);
+    if (key === 'blog-post' || !key) return;
+    const target = document.getElementById('page-' + key);
+    if (!target) return;
+    e.preventDefault();
+    history.pushState(null, '', hash);
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
+  });
+
+  const sections = ['home', 'projects', 'people', 'publications', 'blogs-news', 'join']
+    .map(k => document.getElementById('page-' + k)).filter(Boolean);
+  if (!sections.length || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const hash = '#' + entry.target.id.replace('page-', '');
+      document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+}
+document.addEventListener('DOMContentLoaded', initSectionNav);
 
 
 // ==========================================
