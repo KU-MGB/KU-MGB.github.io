@@ -486,19 +486,24 @@ window.renderBlogs = function() {
   grid.className = 'blog-grid';
 
   MGB_BLOGS.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).forEach(b => {
-    const el = document.createElement('a');
-    el.href = `?id=${b.id}#blog-post`;
+    const href = `?id=${b.id}#blog-post`;
+    const el = document.createElement('div');
     el.className = 'blog-card';
     el.setAttribute('data-reveal', '');
     el.innerHTML = `
-      <div class='blog-cover'>
-        ${b.cover ? `<img src='${adjustPath(b.cover)}' alt='cover'>` : ''}
-      </div>
-      <div class='blog-body'>
-        <div class='blog-date'>${b.date || ''} • ${b.category || ''}</div>
-        <h3 class='blog-title'>${b.title || ''}</h3>
-        <p class='blog-desc line-clamp-3'>${b.description || ''}</p>
-        <div class='text-link' style="margin-top:auto;">Read more &rarr;</div>
+      <a href='${href}' class='blog-card-link'>
+        <div class='blog-cover'>
+          ${b.cover ? `<img src='${adjustPath(b.cover)}' alt='cover'>` : ''}
+        </div>
+        <div class='blog-body'>
+          <div class='blog-date'>${b.date || ''} • ${b.category || ''}</div>
+          <h3 class='blog-title'>${b.title || ''}</h3>
+          <p class='blog-desc line-clamp-3'>${b.description || ''}</p>
+        </div>
+      </a>
+      <div class='blog-footer'>
+        <a href='${href}' class='text-link'>Read more &rarr;</a>
+        <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='text-link blog-author-link'>Shaban Ahmad</a>
       </div>
     `;
     grid.appendChild(el);
