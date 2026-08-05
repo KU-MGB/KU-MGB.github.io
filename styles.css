@@ -467,8 +467,8 @@ a:hover { color: var(--accent-hover); }
 }
 .alumni-toggle-icon { color: var(--muted); font-size: 12px; transition: transform var(--t-base); }
 .alumni-toggle[aria-expanded="true"] .alumni-toggle-icon { transform: rotate(180deg); }
-.alumni-grid { display: none; }
-.alumni-grid.open { display: grid; }
+.people-grid.alumni-grid { display: none; }
+.people-grid.alumni-grid.open { display: grid; }
 .people-grid {
   display: grid;
   grid-template-columns: 1fr;
