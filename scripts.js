@@ -62,36 +62,7 @@ const MGB_PUBLICATIONS = [
     "pdf": "https://example.com/paper3.pdf"
   }
 ];
-const MGB_FACTS        = [
-  {
-    "stat": "130 kcal/mol",
-    "label": "C–F bond strength",
-    "detail": "The strongest single bond in organic chemistry — roughly 30% stronger than C–H."
-  },
-  {
-    "stat": "1.35 Å",
-    "label": "C–F bond length",
-    "detail": "The shortest carbon bond found in nature, which is part of why it resists attack."
-  },
-  {
-    "stat": "<1%",
-    "label": "Microbes ever cultured",
-    "detail": "Fewer than 1% of environmental microorganisms grow under standard lab conditions — most PFAS-active enzymes are still undiscovered."
-  },
-  {
-    "stat": "3.2M",
-    "label": "Sequences mined",
-    "detail": "Environmental protein sequences screened in our most recent metagenomic dataset."
-  }
-];
 const MGB_NEWS         = [
-  {
-    "title": "MGB Lab Awarded €2M ERC Consolidator Grant",
-    "date": "2025-05-15",
-    "category": "Grant",
-    "description": "Tue Nielsen receives ERC funding to expand research on enzymatic defluorination of recalcitrant PFAS.",
-    "content": "The grant will support three new postdocs and two PhD students over the next five years."
-  },
   {
     "title": "New paper out in Nature Microbiology",
     "date": "2025-02-28",
@@ -677,35 +648,6 @@ window.renderNews = function() {
     container.appendChild(el);
   });
   if (window.initScrollReveal) window.initScrollReveal();
-}
-
-// 12. Curiosity Facts Renderer — compact stat strip (used in the home banner)
-window.renderFacts = function() {
-  if (typeof MGB_FACTS === 'undefined') return;
-  const container = document.getElementById('facts-container');
-  if (!container) return;
-
-  container.innerHTML = MGB_FACTS.map(f => `
-    <div class='stat-item' data-tip="${f.detail}">
-      <div class='stat-value'>${f.stat}</div>
-      <div class='stat-label'>${f.label}</div>
-    </div>
-  `).join('');
-}
-
-// 14. Latest news callout (home banner)
-window.renderLatestNewsCallout = function() {
-  if (typeof MGB_NEWS === 'undefined') return;
-  const container = document.getElementById('latest-news-callout');
-  if (!container) return;
-  const latest = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1))[0];
-  if (!latest) return;
-  container.innerHTML = `
-    <div class='callout'>
-      <div class='callout-title'>${latest.title}</div>
-      <p>${latest.description || ''}</p>
-    </div>
-  `;
 }
 
 // 15. Group photo (People page) — tries a few common extensions so it works
