@@ -668,11 +668,11 @@ window.renderNews = function() {
 }
 
 // 15. Group photo (People page) — tries a few common extensions so it works
-// whatever format the file is, e.g. 3_group.jpg or 3_group.webp.
+// whatever format the file is, e.g. 3_People.jpg or 3_People.webp.
 window.renderGroupPhoto = function() {
   const container = document.getElementById('group-photo-container');
   if (!container) return;
-  const candidates = ['3_group.jpg', '3_group.jpeg', '3_group.png', '3_group.webp'];
+  const candidates = ['3_People.jpg', '3_People.jpeg', '3_People.png', '3_People.webp'];
 
   function tryNext(i) {
     if (i >= candidates.length) return;
