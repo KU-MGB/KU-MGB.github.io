@@ -486,26 +486,38 @@ window.renderBlogs = function() {
   grid.className = 'blog-grid';
 
   MGB_BLOGS.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).forEach(b => {
-    const href = `?id=${b.id}#blog-post`;
     const el = document.createElement('div');
     el.className = 'blog-card';
     el.setAttribute('data-reveal', '');
     el.innerHTML = `
-      <a href='${href}' class='blog-card-link'>
-        <div class='blog-cover'>
-          ${b.cover ? `<img src='${adjustPath(b.cover)}' alt='cover'>` : ''}
+      <div class='blog-cover'>
+        ${b.cover ? `<img src='${adjustPath(b.cover)}' alt='cover'>` : ''}
+      </div>
+      <div class='blog-body'>
+        <div class='blog-meta-row'>
+          <span class='blog-date'>${b.date || ''} • ${b.category || ''}</span>
+          <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad</a>
         </div>
-        <div class='blog-body'>
-          <div class='blog-date'>${b.date || ''} • ${b.category || ''}</div>
-          <h3 class='blog-title'>${b.title || ''}</h3>
-          <p class='blog-desc line-clamp-3'>${b.description || ''}</p>
-        </div>
-      </a>
-      <div class='blog-footer'>
-        <a href='${href}' class='text-link'>Read more &rarr;</a>
-        <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='text-link blog-author-link'>Shaban Ahmad</a>
+        <h3 class='blog-title'>${b.title || ''}</h3>
+        <p class='blog-desc line-clamp-3'>${b.description || ''}</p>
+        <button type='button' class='text-link blog-toggle' aria-expanded='false'>Read more &rarr;</button>
+        <div class='blog-expand'>${simpleMarkdown(b.body || '')}</div>
       </div>
     `;
+    const toggleBtn = el.querySelector('.blog-toggle');
+    const expandEl = el.querySelector('.blog-expand');
+    function toggle() {
+      const open = expandEl.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', String(open));
+      toggleBtn.innerHTML = open ? 'Show less &uarr;' : 'Read more &rarr;';
+      if (!open) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    toggleBtn.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+    el.querySelector('.blog-author-link').addEventListener('click', (e) => e.stopPropagation());
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('.blog-author-link') || e.target.closest('.blog-toggle')) return;
+      toggle();
+    });
     grid.appendChild(el);
   });
   container.appendChild(grid);
