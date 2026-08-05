@@ -196,7 +196,9 @@ const MGB_PROJECTS     = [
   async function loadLabImages() {
     try {
       const manifest = await fetch(adjustPath('2_Content/1_Images/manifest.json')).then(r => r.json());
-      window.MGB_LAB_IMAGES = manifest.map(f => adjustPath(`2_Content/1_Images/${f}`));
+      window.MGB_LAB_IMAGES = manifest.map(entry =>
+        entry.split('+').map(f => adjustPath(`2_Content/1_Images/${f}`)).join('+')
+      );
     } catch (e) {
       window.MGB_LAB_IMAGES = [];
     }
