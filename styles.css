@@ -738,5 +738,6 @@ footer .logo-lockup { height: 38px; }
 
 /* Page router — one section visible at a time */
 .page-view { display: block; scroll-margin-top: 104px; }
+.page-view + .page-view { border-top: 1px solid var(--border); }
 #page-blog-post { display: none; }
 #page-blog-post.active { display: block; }
