@@ -128,27 +128,24 @@ const MGB_REACTION     = [
 const MGB_PROJECTS     = [
   {
     "id": "Mapping the PFAS interactome using photocatalytic proximity labelling",
-    "tier": "Tier 1 — Enzyme Screening",
     "title": "Mapping the PFAS interactome using photocatalytic proximity labelling",
     "status": "Active",
-    "description": "Fluoroacetate dehalogenase (FAcD) screening against the PFAS-27 priority compound panel — structure prediction, phylogenetic analysis, and MD/QM-MM mechanistic study.",
-    "tags": ["FAcDs", "PFAS", "QM/MM"]
+    "description": "Proximity labelling using a photocatalyst to explore PFAS-protein interactions. The project is supported by the Novo Nordisk Foundation.",
+    "tags": ["PFAS", "Novo Nordisk Foundation", "]
   },
   {
-    "id": "hads-pfas27",
-    "tier": "Tier 1 — Enzyme Screening",
-    "title": "HADs × PFAS-27 Defluorination",
+    "id": "Sapere Aude",
+    "title": "Sapere Aude: Solving microbial degradation of PFAS",
     "status": "Active",
-    "description": "Haloacid dehalogenase (HAD) screening against PFAS-27 — sequence clustering, Boltz-2 structure production, and experimental validation.",
-    "tags": ["HADs", "PFAS-27", "Boltz-2"]
+    "description": ".",
+    "tags": ["PFAS", "Catalytic enzymes", "Synthetic biology"]
   },
   {
-    "id": "whole-proteome-tfa",
-    "tier": "Tier 2 — Proteome-Wide Discovery",
-    "title": "Whole-Proteome TFA Defluorination",
-    "status": "Active",
-    "description": "Proteome-wide screening for enzymes active against trifluoroacetic acid (TFA), built on the lab's EVA production pipeline.",
-    "tags": ["TFA", "Proteome-wide", "EVA Pipeline"]
+    "id": "DFF Project1",
+    "title": "Genetics of PFOS biodegradation",
+    "status": "Finished in 2026",
+    "description": "",
+    "tags": ["PFAS", "High-throughput screening", "Genomics"]
   }
 ];
 // ═══════════════════════════════════════════════════════════════════════════
