@@ -129,7 +129,7 @@ const MGB_PROJECTS     = [
   {
     "id": "Mapping the PFAS interactome using photocatalytic proximity labelling",
     "tier": "Tier 1 — Enzyme Screening",
-    "title": "FAcDs × PFAS-27 Defluorination",
+    "title": "Mapping the PFAS interactome using photocatalytic proximity labelling",
     "status": "Active",
     "description": "Fluoroacetate dehalogenase (FAcD) screening against the PFAS-27 priority compound panel — structure prediction, phylogenetic analysis, and MD/QM-MM mechanistic study.",
     "tags": ["FAcDs", "PFAS", "QM/MM"]
