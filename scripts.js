@@ -129,6 +129,7 @@ const MGB_PROJECTS     = [
   {
     "id": "Mapping the PFAS interactome using photocatalytic proximity labelling",
     "title": "Mapping the PFAS interactome using photocatalytic proximity labelling",
+    "tier": "Active",
     "status": "Active",
     "description": "Proximity labelling using a photocatalyst to explore PFAS-protein interactions. The project is supported by the Novo Nordisk Foundation.",
     "tags": ["PFAS", "Novo Nordisk Foundation", "]
@@ -136,6 +137,7 @@ const MGB_PROJECTS     = [
   {
     "id": "Sapere Aude",
     "title": "Sapere Aude: Solving microbial degradation of PFAS",
+    "tier": "Active",
     "status": "Active",
     "description": ".",
     "tags": ["PFAS", "Catalytic enzymes", "Synthetic biology"]
@@ -143,6 +145,7 @@ const MGB_PROJECTS     = [
   {
     "id": "DFF Project1",
     "title": "Genetics of PFOS biodegradation",
+    "tier": "Active",
     "status": "Finished in 2026",
     "description": "",
     "tags": ["PFAS", "High-throughput screening", "Genomics"]
