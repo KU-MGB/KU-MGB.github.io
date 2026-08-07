@@ -432,7 +432,7 @@ window.renderPeople = function() {
 
     const gridModifier = members.length === 1 ? ' people-grid-solo' : members.length === 2 ? ' people-grid-duo' : '';
     const isAlumni = cat.id === '7_Alumni';
-    const BIO_LIMIT = 150;
+    const BIO_LIMIT = 300;
     const cardsHtml = members.map(p => {
       const fullBio = p.bio ? bioExcerpt(p.bio) : '';
       const isLong = fullBio.length > BIO_LIMIT;
@@ -450,9 +450,8 @@ window.renderPeople = function() {
               ${personLinksHtml(p)}
             </div>
             ${fullBio ? `
-            <p class='profile-bio profile-bio-short'>${shortBio}</p>
-            ${isLong ? `<p class='profile-bio profile-bio-full'>${fullBio}</p>
-            <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}` : ''}
+            <p class='profile-bio profile-bio-short'>${shortBio}${isLong ? ` <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}</p>
+            ${isLong ? `<p class='profile-bio profile-bio-full'>${fullBio} <button type='button' class='text-link profile-bio-toggle' aria-expanded='true'>Show less &uarr;</button></p>` : ''}` : ''}
             ${p.tags ? `<div class='profile-chips'>${p.tags.slice(0, 3).map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
           </div>
         `;
@@ -484,15 +483,15 @@ window.renderPeople = function() {
         </div>
       `;
     }
-    section.querySelectorAll('.profile-bio-toggle').forEach(btn => {
-      const card = btn.closest('.profile-card');
+    section.querySelectorAll('.profile-card').forEach(card => {
       const short = card.querySelector('.profile-bio-short');
       const full = card.querySelector('.profile-bio-full');
-      btn.addEventListener('click', () => {
-        const open = full.classList.toggle('open');
-        short.classList.toggle('hidden', open);
-        btn.setAttribute('aria-expanded', String(open));
-        btn.innerHTML = open ? 'Show less &uarr;' : 'Read more &rarr;';
+      if (!full) return;
+      card.querySelectorAll('.profile-bio-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const open = full.classList.toggle('open');
+          short.classList.toggle('hidden', open);
+        });
       });
     });
     container.appendChild(section);

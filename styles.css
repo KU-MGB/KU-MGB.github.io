@@ -460,7 +460,7 @@ a:hover { color: var(--accent-hover); }
 .profile-bio-full { display: none; }
 .profile-bio-full.open { display: block; }
 .profile-bio-short.hidden { display: none; }
-.profile-bio-toggle { font-size: 12px; display: inline-block; margin-top: -4px; margin-bottom: 10px; background: none; border: none; padding: 0; cursor: pointer; font-family: var(--sans); }
+.profile-bio-toggle { font-size: 12px; display: inline; background: none; border: none; padding: 0; cursor: pointer; font-family: var(--sans); white-space: nowrap; }
 .profile-chips { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-start; margin-bottom: 12px; }
 .profile-links {
   display: flex;
@@ -493,9 +493,11 @@ a:hover { color: var(--accent-hover); }
 .people-section > .section-label, .alumni-toggle .section-label {
   text-align: center;
   display: block;
-  width: 100%;
-  padding: 4px 0;
-  border-radius: var(--radius-md);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
   transition: background var(--t-fast), color var(--t-fast);
 }
 .people-section:has(.profile-card:hover) .section-label {
@@ -503,9 +505,10 @@ a:hover { color: var(--accent-hover); }
   color: #fff;
 }
 .alumni-toggle {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   background: none;
   border: none;
@@ -514,6 +517,7 @@ a:hover { color: var(--accent-hover); }
   margin-bottom: 14px;
   border-bottom: 1px solid var(--border);
 }
+.alumni-toggle-icon { position: absolute; right: 0; }
 .alumni-toggle-icon { color: var(--muted); font-size: 12px; transition: transform var(--t-base); }
 .alumni-toggle[aria-expanded="true"] .alumni-toggle-icon { transform: rotate(180deg); }
 .people-grid.alumni-grid { display: none; }
