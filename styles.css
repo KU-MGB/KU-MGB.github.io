@@ -16,6 +16,7 @@
   --muted: #5c5c5c;
   --faint: #8a8a8a;
   --border: #e2e2e2;
+  --divider: rgba(15, 118, 110, 0.28);
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -48,6 +49,7 @@
   --muted: #b5b0a5;
   --faint: #7d796f;
   --border: #3a382f;
+  --divider: rgba(61, 186, 168, 0.3);
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
@@ -782,6 +784,6 @@ footer .logo-lockup { height: 38px; }
 
 /* Page router — one section visible at a time */
 .page-view { display: block; scroll-margin-top: 104px; }
-.page-view + .page-view > .page-section:first-child { border-top: 1px solid var(--border); }
+.page-view + .page-view > .page-section:first-child { border-top: 2px solid var(--divider); }
 #page-blog-post { display: none; }
 #page-blog-post.active { display: block; }
