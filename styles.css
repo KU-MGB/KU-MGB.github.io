@@ -366,6 +366,11 @@ a:hover { color: var(--accent-hover); }
 @media (min-width: 900px) { .home-slideshow, .group-photo { height: 460px; } }
 @media (min-width: 1400px) { .home-slideshow, .group-photo { height: 500px; } }
 @media (min-width: 1600px) { .home-slideshow, .group-photo { height: 540px; } }
+.group-photo { height: 360px; }
+@media (min-width: 640px) { .group-photo { height: 460px; } }
+@media (min-width: 900px) { .group-photo { height: 560px; } }
+@media (min-width: 1400px) { .group-photo { height: 620px; } }
+@media (min-width: 1600px) { .group-photo { height: 680px; } }
 .home-banner .chip-container { margin-bottom: 16px; justify-content: center; }
 
 .photo-frame {
