@@ -412,7 +412,6 @@ a:hover { color: var(--accent-hover); }
   border-color: var(--cat-accent, var(--accent));
 }
 .profile-card:hover .profile-photo, .profile-card:hover .profile-initials {
-  border-color: var(--cat-accent, var(--accent));
   box-shadow: 0 0 0 1px var(--cat-accent, var(--accent));
 }
 .profile-header {
