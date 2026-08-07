@@ -254,7 +254,7 @@ a:hover { color: var(--accent-hover); }
     position: absolute;
     top: 1.5rem;
     bottom: 1.5rem;
-    width: 0.6px;
+    width: 0.8px;
     z-index: 1;
     pointer-events: none;
     background-size: 100% 200%;
@@ -262,11 +262,11 @@ a:hover { color: var(--accent-hover); }
   }
   .footer-inner::before, .footer-inner::after { top: 0.5rem; bottom: 0.5rem; }
   .page-section::before, .footer-inner::before, .home-banner::before {
-    left: -0.3px;
+    left: -0.4px;
     background: linear-gradient(to bottom, var(--v-sep-color) 0%, var(--v-sep-glow) 50%, var(--v-sep-color) 100%);
   }
   .page-section::after, .footer-inner::after, .home-banner::after {
-    right: -0.3px;
+    right: -0.4px;
     background: linear-gradient(to bottom, var(--v-sep-color) 0%, var(--v-sep-glow) 50%, var(--v-sep-color) 100%);
   }
 }
