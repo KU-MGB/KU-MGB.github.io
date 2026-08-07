@@ -103,12 +103,11 @@ a:hover { color: var(--accent-hover); }
   top: 0;
   width: 100%;
   z-index: 100;
-  background: #ffffff;
-  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.94);
   height: 84px;
   transition: box-shadow var(--t-base), background var(--t-base), height var(--t-base);
 }
-.dark #navbar { background: #1c1b18; }
+.dark #navbar { background: rgba(28, 27, 24, 0.94); }
 #navbar.scrolled { box-shadow: var(--shadow-sm); }
 @media (min-width: 640px) { #navbar { height: 88px; } }
 @media (min-width: 900px) { #navbar { height: 96px; } }
