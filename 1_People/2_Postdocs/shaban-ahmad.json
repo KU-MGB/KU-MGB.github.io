@@ -7,11 +7,11 @@
   "website": "https://shabanahmad.github.io/",
   "linkedin": "https://www.linkedin.com/in/drshabanahmad/",
   "tags": [
-    "Bioinformatics",
+    "Explainable AI",
     "PFAS",
-    "Metagenomics",
-    "Machine Learning"
+    "Enzyme Discovery",
+    "Molecular Dynamics"
   ],
-  "bio": "Shaban is a postdoctoral researcher (PhD, Artificial Intelligence in Biology; MSc Bioinformatics) working on AI-driven discovery of PFAS-degrading enzymes. His PFAS-Flow project mines fluoroacetate and haloacid dehalogenases from environmental sequence data and studies C–F bond cleavage mechanisms with QM/MM, feeding directly into the lab's FAcDs and HADs screening work. He also works more broadly on explainable AI methods for computational drug discovery and genomics.",
+  "bio": "Shaban is a postdoctoral researcher (PhD in AI in Biology; MSc in Bioinformatics) working on AI-driven discovery of PFAS-degrading enzymes. His research focuses on developing automated, fully reproducible defluorination pipelines, including DefluorX, HADefluorX, and other computational frameworks, to identify and prioritize variants of FAcDs, HADs, and related enzyme families. These pipelines integrate AI-driven modelling with in-depth physics-aware validation, incorporating WaterMap, molecular dynamics (MD) simulations, QM/MM calculations, and other advanced computational approaches to directly support the lab's FAcD and HAD enzyme screening efforts.\n\nShaban brings extensive expertise in artificial intelligence, with a strong background in explainable AI for the biological sciences, including drug design, genomics, and other omics applications. He also has experience in grant writing and is currently developing the leadership and research management skills required for a future independent group leader.",
   "avatar": "shaban-ahmad.webp"
 }
