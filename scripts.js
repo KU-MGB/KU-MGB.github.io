@@ -132,7 +132,7 @@ const MGB_PROJECTS     = [
     "tier": "Active",
     "status": "Active",
     "description": "Proximity labelling using a photocatalyst to explore PFAS-protein interactions. The project is supported by the Novo Nordisk Foundation.",
-    "tags": ["PFAS", "Novo Nordisk Foundation", "]
+    "tags": ["PFAS", "Novo Nordisk Foundation"]
   },
   {
     "id": "Sapere Aude",
