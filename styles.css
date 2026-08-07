@@ -484,6 +484,7 @@ a:hover { color: var(--accent-hover); }
 .icon-link-dummy i { color: var(--faint) !important; }
 
 .people-section { margin-bottom: 32px; }
+.people-section > .section-label, .alumni-toggle .section-label { text-align: center; display: block; width: 100%; }
 .alumni-toggle {
   display: flex;
   align-items: center;
