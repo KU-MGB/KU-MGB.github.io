@@ -29,7 +29,7 @@
         <a href="#projects">Projects</a>
         <a href="#people">People</a>
         <a href="#publications">Publications</a>
-        <a href="#blogs-news">Blogs/News</a>
+        <a href="#blogs-news">Blogs</a>
       </div>
       <div class="nav-utils">
         <button class="nav-icon-btn" onclick="openSearchModal()" data-tip="Search" aria-label="Search">
@@ -54,7 +54,7 @@
     <a href="#projects">Projects</a>
     <a href="#people">People</a>
     <a href="#publications">Publications</a>
-    <a href="#blogs-news">Blogs/News</a>
+    <a href="#blogs-news">Blogs</a>
     <button type="button" onclick="openJoinModal()" style="color:var(--accent)">Join Us &rarr;</button>
   </div>
 
@@ -70,7 +70,7 @@
         <span class="srch-pill" data-section="projects">Projects</span>
         <span class="srch-pill" data-section="people">People</span>
         <span class="srch-pill" data-section="publications">Publications</span>
-        <span class="srch-pill" data-section="blogs-news">Blogs/News</span>
+        <span class="srch-pill" data-section="blogs-news">Blogs</span>
       </div>
       <div class="srch-body" id="srch-body"></div>
       <div class="srch-footer">
@@ -196,8 +196,16 @@
   <!-- PROJECTS -->
   <div id="page-projects" class="page-view">
     <section class="page-section" data-reveal>
-      <h2 class="section-title" style="margin-bottom:16px;">Projects</h2>
-      <div id="projects-container"></div>
+      <div class="projects-news-grid">
+        <div>
+          <h2 class="section-title" style="margin-bottom:16px;">Projects</h2>
+          <div id="projects-container"></div>
+        </div>
+        <div>
+          <h2 class="section-title" style="margin-bottom:16px;">News</h2>
+          <div id="news-container"></div>
+        </div>
+      </div>
     </section>
   </div>
 
@@ -221,15 +229,11 @@
     </section>
   </div>
 
-  <!-- BLOGS / NEWS -->
+  <!-- BLOGS -->
   <div id="page-blogs-news" class="page-view">
     <section class="page-section" data-reveal>
       <h2 class="section-title" style="margin-bottom:16px;">Blogs</h2>
       <div id="blogs-container"></div>
-    </section>
-    <section class="page-section" data-reveal>
-      <h2 class="section-title" style="margin-bottom:16px;">News</h2>
-      <div id="news-container" style="max-width:720px;"></div>
     </section>
   </div>
 

@@ -608,6 +608,11 @@ a:hover { color: var(--accent-hover); }
 }
 .tier-block { margin-bottom: 24px; }
 
+.projects-news-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
+@media (min-width: 900px) {
+  .projects-news-grid { grid-template-columns: 1.6fr 1fr; }
+}
+
 /* ---------------------------------------------------------- Publications & News — dense list rows */
 .pub-entry, .news-entry {
   padding: 16px 12px;
