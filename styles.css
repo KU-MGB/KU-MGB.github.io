@@ -24,7 +24,7 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
 
-  --container-max: 1080px;
+  --container-max: 1040px;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
@@ -40,10 +40,10 @@
 }
 
 @media (min-width: 1400px) {
-  :root { --container-max: 1220px; }
+  :root { --container-max: 1180px; }
 }
 @media (min-width: 1600px) {
-  :root { --container-max: 1350px; }
+  :root { --container-max: 1300px; }
 }
 
 .dark {
