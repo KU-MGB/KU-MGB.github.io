@@ -41,7 +41,7 @@
         <button class="nav-icon-btn" id="theme-toggle" onclick="toggleTheme()" data-tip="Toggle Theme" aria-label="Toggle Theme">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path id="theme-icon-path" stroke-linecap="round" stroke-linejoin="round" d=""></path></svg>
         </button>
-        <a href="#join" class="join-btn">Join Us</a>
+        <button type="button" class="join-btn" onclick="openJoinModal()">Join Us</button>
         <button id="hamburger" data-tip="Menu" aria-label="Menu">
           <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
@@ -55,7 +55,7 @@
     <a href="#people">People</a>
     <a href="#publications">Publications</a>
     <a href="#blogs-news">Blogs/News</a>
-    <a href="#join" style="color:var(--accent)">Join Us &rarr;</a>
+    <button type="button" onclick="openJoinModal()" style="color:var(--accent)">Join Us &rarr;</button>
   </div>
 
   <!-- Command Palette Search -->
@@ -79,6 +79,42 @@
         <span class="srch-hint"><span class="srch-key">Esc</span> Close</span>
         <span class="srch-hint" style="margin-left:auto"><span class="srch-key">Ctrl K</span> Toggle</span>
       </div>
+    </div>
+  </div>
+
+  <!-- Join Us Modal -->
+  <div id="join-overlay" class="join-overlay" role="dialog" aria-modal="true" aria-label="Join Us">
+    <div class="join-modal" role="document">
+      <button type="button" class="join-modal-close" onclick="closeJoinModal()" aria-label="Close">&times;</button>
+      <h2 class="section-title" style="margin-bottom:16px;">Join Us</h2>
+      <p class="section-desc" style="margin-bottom:24px;">We're always looking for passionate, motivated people who want to join our mission: discovering enzymes that can break down stubborn pollutants.</p>
+      <form id="join-form" action="https://docs.google.com/forms/d/e/1FAIpQLSefO5_mx0BQGi7PKl6FLA1A45f_YptwJ6Lp79k_s_e_gSsuYA/formResponse" method="POST" target="_blank" style="display:flex; flex-direction:column; gap:16px;">
+        <div><label class="form-label">Full Name *</label><input type="text" name="entry.2005620554" class="form-input" required placeholder="Enter your full name"></div>
+        <div><label class="form-label">Email Address *</label><input type="email" name="entry.1045781291" class="form-input" required placeholder="Enter your email address"></div>
+        <div>
+          <label class="form-label">Position of Interest *</label>
+          <select name="entry.1065046570" class="form-select" required>
+            <option value="">Select a position...</option>
+            <option value="BSc Student">BSc Student</option>
+            <option value="MSc Student">MSc Student</option>
+            <option value="PhD Scholar">PhD Scholar</option>
+            <option value="Postdoc">Postdoc</option>
+            <option value="Visiting/Exchange">Visiting/Exchange</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">CV / Resume Link *</label>
+          <input type="url" name="entry.827071692" class="form-input" required placeholder="Link to your CV (Google Drive, Dropbox, etc.)">
+          <p style="font-size:11px; color:var(--muted); margin-top:6px;">Please provide a viewable link to your CV since direct file uploads require Google login.</p>
+        </div>
+        <div>
+          <label class="form-label">Statement of Interest</label>
+          <textarea name="entry.1166974658" class="form-input" rows="5" placeholder="Briefly describe your background and why you want to join the MGB Lab..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="justify-content:center; width:100%; margin-top:8px;">Submit Application</button>
+      </form>
+      <div id="join-status" style="display:none;"></div>
     </div>
   </div>
 
@@ -201,80 +237,6 @@
   <div id="page-blog-post" class="page-view">
     <section class="page-section" style="padding-top:116px;">
       <div id="blog-post-container"></div>
-    </section>
-  </div>
-
-  <!-- JOIN -->
-  <div id="page-join" class="page-view">
-    <section class="page-section" data-reveal>
-      <h2 class="section-title" style="margin-bottom:16px;">Join Us</h2>
-      <div class="join-grid">
-        <div class="join-info">
-          <p class="section-desc" style="margin-bottom: 28px;">We are always looking for motivated students and postdocs to help uncover enzymes that break down persistent pollutants.</p>
-          <div class="join-opp">
-            <div class="join-opp-icon"><div class="join-opp-dot"></div></div>
-            <div>
-              <h3 style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:4px;">BSc / MSc Projects</h3>
-              <p style="font-size:13.5px; color:var(--muted); line-height:1.6;">We offer highly supervised projects in bioinformatics, metagenomics, and enzyme assays.</p>
-            </div>
-          </div>
-          <div class="join-opp">
-            <div class="join-opp-icon"><div class="join-opp-dot"></div></div>
-            <div>
-              <h3 style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:4px;">PhD / Postdocs</h3>
-              <p style="font-size:13.5px; color:var(--muted); line-height:1.6;">Funded positions will be announced via KU portals, but we also welcome candidates bringing their own fellowships.</p>
-            </div>
-          </div>
-          <div class="join-opp">
-            <div class="join-opp-icon"><div class="join-opp-dot"></div></div>
-            <div>
-              <h3 style="font-size:16px; font-weight:700; color:var(--fg); margin-bottom:4px;">Research Areas</h3>
-              <p style="font-size:13.5px; color:var(--muted); line-height:1.6;">PFAS defluorination, metagenomics, enzyme engineering, and environmental biotechnology — see the Research and Projects sections for what we're actively working on.</p>
-            </div>
-          </div>
-
-          <div style="margin-top:36px; padding-top:28px; border-top:1px solid var(--border);">
-            <h3 style="font-family:var(--serif); font-size:17px; margin-bottom:16px;">What you'll gain</h3>
-            <ul style="list-style:none; display:flex; flex-direction:column; gap:12px;">
-              <li style="display:flex; gap:10px; font-size:13.5px; color:var(--muted); line-height:1.6;"><i class="fas fa-check" style="color:var(--accent); margin-top:3px; flex-shrink:0;"></i>Work across our actual pipeline — metagenomic sequencing, dehalogenase screening, AlphaFold/Boltz-2 modelling, fluoride-release assays</li>
-              <li style="display:flex; gap:10px; font-size:13.5px; color:var(--muted); line-height:1.6;"><i class="fas fa-check" style="color:var(--accent); margin-top:3px; flex-shrink:0;"></i>Direct supervision from Tue and the postdoc team</li>
-              <li style="display:flex; gap:10px; font-size:13.5px; color:var(--muted); line-height:1.6;"><i class="fas fa-check" style="color:var(--accent); margin-top:3px; flex-shrink:0;"></i>Named on the paper if your work contributes to it</li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div class="join-form-wrap">
-            <h2 style="font-size:22px; margin-bottom:20px;">Direct Application</h2>
-            <form id="join-form" action="https://docs.google.com/forms/d/e/1FAIpQLSefO5_mx0BQGi7PKl6FLA1A45f_YptwJ6Lp79k_s_e_gSsuYA/formResponse" method="POST" target="_blank" style="display:flex; flex-direction:column; gap:16px;">
-              <div><label class="form-label">Full Name *</label><input type="text" name="entry.2005620554" class="form-input" required placeholder="Enter your full name"></div>
-              <div><label class="form-label">Email Address *</label><input type="email" name="entry.1045781291" class="form-input" required placeholder="Enter your email address"></div>
-              <div>
-                <label class="form-label">Position of Interest *</label>
-                <select name="entry.1065046570" class="form-select" required>
-                  <option value="">Select a position...</option>
-                  <option value="BSc Student">BSc Student</option>
-                  <option value="MSc Student">MSc Student</option>
-                  <option value="PhD Scholar">PhD Scholar</option>
-                  <option value="Postdoc">Postdoc</option>
-                  <option value="Visiting/Exchange">Visiting/Exchange</option>
-                  <option value="Others">Others</option>
-                </select>
-              </div>
-              <div>
-                <label class="form-label">CV / Resume Link *</label>
-                <input type="url" name="entry.827071692" class="form-input" required placeholder="Link to your CV (Google Drive, Dropbox, etc.)">
-                <p style="font-size:11px; color:var(--muted); margin-top:6px;">Please provide a viewable link to your CV since direct file uploads require Google login.</p>
-              </div>
-              <div>
-                <label class="form-label">Statement of Interest</label>
-                <textarea name="entry.1166974658" class="form-input" rows="5" placeholder="Briefly describe your background and why you want to join the MGB Lab..."></textarea>
-              </div>
-              <button type="submit" class="btn-primary" style="justify-content:center; width:100%; margin-top:8px;">Submit Application</button>
-            </form>
-            <div id="join-status" style="display:none;"></div>
-          </div>
-        </div>
-      </div>
     </section>
   </div>
 

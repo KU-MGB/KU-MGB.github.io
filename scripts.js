@@ -266,7 +266,7 @@ function initNavbar() {
       mobileMenu.classList.toggle('open');
       mobileToggle.classList.toggle('open');
     });
-    const links = mobileMenu.querySelectorAll('a');
+    const links = mobileMenu.querySelectorAll('a, button');
     links.forEach(l => l.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
       mobileToggle.classList.remove('open');
@@ -844,6 +844,26 @@ window.initJoinForm = function() {
   });
 }
 
+// 13b. Join Modal
+window.openJoinModal = function() {
+  const o = document.getElementById('join-overlay');
+  if (!o) return;
+  o.classList.add('join-open');
+  document.body.style.overflow = 'hidden';
+};
+window.closeJoinModal = function() {
+  const o = document.getElementById('join-overlay');
+  if (!o) return;
+  o.classList.remove('join-open');
+  document.body.style.overflow = '';
+};
+document.addEventListener('DOMContentLoaded', () => {
+  const o = document.getElementById('join-overlay');
+  if (!o) return;
+  o.addEventListener('click', e => { if (e.target === o) closeJoinModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && o.classList.contains('join-open')) closeJoinModal(); });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initNavbar();
@@ -894,7 +914,7 @@ function initSectionNav() {
     document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
   });
 
-  const sections = ['home', 'projects', 'people', 'publications', 'blogs-news', 'join']
+  const sections = ['home', 'projects', 'people', 'publications', 'blogs-news']
     .map(k => document.getElementById('page-' + k)).filter(Boolean);
   if (!sections.length || !('IntersectionObserver' in window)) return;
   const observer = new IntersectionObserver((entries) => {
