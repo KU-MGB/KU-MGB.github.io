@@ -392,20 +392,26 @@ a:hover { color: var(--accent-hover); }
   padding: 20px;
   transition: box-shadow var(--t-base), border-color var(--t-base), transform var(--t-base);
 }
+.profile-card.cat-postdocs { --cat-accent: #2563eb; }
+.profile-card.cat-phd { --cat-accent: #7c3aed; }
+.profile-card.cat-masters { --cat-accent: #d97706; }
+.profile-card.cat-bachelors { --cat-accent: #db2777; }
+.profile-card.cat-others { --cat-accent: #475569; }
+.profile-card.cat-alumni { --cat-accent: #78716c; }
 .profile-card:hover {
   box-shadow: var(--shadow-md);
-  border-color: var(--accent);
+  border-color: var(--cat-accent, var(--accent));
   transform: translateY(-3px);
 }
-.profile-card:hover .profile-name { color: var(--accent); }
+.profile-card:hover .profile-name { color: var(--cat-accent, var(--accent)); }
 .profile-card:hover .profile-chips .chip {
-  background: var(--accent);
+  background: var(--cat-accent, var(--accent));
   color: #fff;
-  border-color: var(--accent);
+  border-color: var(--cat-accent, var(--accent));
 }
 .profile-card:hover .profile-photo, .profile-card:hover .profile-initials {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent);
+  border-color: var(--cat-accent, var(--accent));
+  box-shadow: 0 0 0 1px var(--cat-accent, var(--accent));
 }
 .profile-header {
   display: flex;
@@ -448,7 +454,7 @@ a:hover { color: var(--accent-hover); }
 }
 .profile-name { font-family: var(--serif); font-size: 16px; font-weight: 700; margin-bottom: 2px; text-align: left; }
 .profile-title { font-size: 11px; color: var(--muted); text-align: left; }
-.profile-bio { font-size: 13px; color: var(--muted); text-align: left; margin-bottom: 10px; }
+.profile-bio { font-size: 13px; color: var(--muted); text-align: justify; margin-bottom: 10px; }
 .profile-chips { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-start; margin-bottom: 12px; }
 .profile-links {
   display: flex;

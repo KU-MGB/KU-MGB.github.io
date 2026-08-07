@@ -393,13 +393,13 @@ function personAvatarHtml(p) {
 window.renderPeople = function() {
   if (typeof MGB_PEOPLE === 'undefined') return;
   const CATEGORIES = [
-    { id: '1_Faculty', label: 'Group Leader' },
-    { id: '2_Postdocs', label: 'Postdocs' },
-    { id: '3_PhD', label: 'PhD Students' },
-    { id: '4_Masters', label: 'MSc Students' },
-    { id: '5_Bachelors', label: 'BSc Students' },
-    { id: '6_Others', label: 'Others' },
-    { id: '7_Alumni', label: 'Alumni' }
+    { id: '1_Faculty', label: 'Group Leader', cls: 'cat-faculty' },
+    { id: '2_Postdocs', label: 'Postdocs', cls: 'cat-postdocs' },
+    { id: '3_PhD', label: 'PhD Students', cls: 'cat-phd' },
+    { id: '4_Masters', label: 'MSc Students', cls: 'cat-masters' },
+    { id: '5_Bachelors', label: 'BSc Students', cls: 'cat-bachelors' },
+    { id: '6_Others', label: 'Others', cls: 'cat-others' },
+    { id: '7_Alumni', label: 'Alumni', cls: 'cat-alumni' }
   ];
 
   const container = document.getElementById('people-container');
@@ -426,7 +426,7 @@ window.renderPeople = function() {
     const gridModifier = members.length === 1 ? ' people-grid-solo' : members.length === 2 ? ' people-grid-duo' : '';
     const isAlumni = cat.id === '7_Alumni';
     const cardsHtml = members.map(p => `
-          <div class='profile-card' data-reveal>
+          <div class='profile-card ${cat.cls}' data-reveal>
             <div class='profile-header'>
               <div class='profile-header-left'>
                 ${personAvatarHtml(p)}
