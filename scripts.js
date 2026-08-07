@@ -673,24 +673,33 @@ window.renderProjects = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 11. News Renderer
+// 11. News Renderer — a boxy auto-scrolling ticker; the item list is duplicated
+// once so the looping translateY(-50%) animation wraps seamlessly.
 window.renderNews = function() {
   if (typeof MGB_NEWS === 'undefined') return;
   const container = document.getElementById('news-container');
   if (!container) return;
+  const sorted = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+  if (sorted.length === 0) return;
 
-  MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).forEach(n => {
-    const el = document.createElement('div');
-    el.className = 'news-entry';
-    el.setAttribute('data-reveal', '');
-    el.innerHTML = `
+  const entryHtml = n => `
+    <div class='news-entry'>
       <div class='news-meta'><span class='badge'>${n.category || ''}</span><span class='news-date'>${n.date || ''}</span></div>
       <h3 class='news-title'>${n.title}</h3>
       <p style='color:var(--muted); font-size:13.5px; margin-top:4px;'>${n.description || ''}</p>
-    `;
-    container.appendChild(el);
-  });
-  if (window.initScrollReveal) window.initScrollReveal();
+    </div>
+  `;
+
+  const box = document.createElement('div');
+  box.className = 'news-ticker';
+  const track = document.createElement('div');
+  track.className = 'news-ticker-track';
+  track.innerHTML = `
+    <div class='news-ticker-set'>${sorted.map(entryHtml).join('')}</div>
+    <div class='news-ticker-set news-ticker-clone' aria-hidden='true'>${sorted.map(entryHtml).join('')}</div>
+  `;
+  box.appendChild(track);
+  container.appendChild(box);
 }
 
 // 15. Group photo (People page) — tries a few common extensions so it works
@@ -1028,6 +1037,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const root = document.querySelector(sec.sel);
       if (!root) return;
       root.querySelectorAll(CARD_SEL).forEach(card => {
+        if (card.closest('.news-ticker-clone')) return;
         const titleEl = card.querySelector('h3, h4');
         const title = (titleEl ? titleEl.textContent : card.textContent).trim().slice(0, 100);
         if (!title || title.length < 2) return;
