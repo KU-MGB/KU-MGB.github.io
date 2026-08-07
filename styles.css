@@ -39,6 +39,13 @@
   --t-base: 220ms ease;
 }
 
+@media (min-width: 1400px) {
+  :root { --container-max: 1180px; }
+}
+@media (min-width: 1700px) {
+  :root { --container-max: 1280px; }
+}
+
 .dark {
   --accent: #3dbaa8;
   --accent-hover: #5dd4c2;
