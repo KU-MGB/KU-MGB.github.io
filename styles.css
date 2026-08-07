@@ -364,11 +364,11 @@ a:hover { color: var(--accent-hover); }
 }
 .home-banner h1 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 12px; max-width: none; text-align: center; }
 .home-banner .section-desc { font-size: 16px; margin-bottom: 16px; max-width: 800px; margin-left: auto; margin-right: auto; text-align: center; }
-.home-slideshow { height: 300px; }
-@media (min-width: 640px) { .home-slideshow { height: 380px; } }
-@media (min-width: 900px) { .home-slideshow { height: 460px; } }
-@media (min-width: 1400px) { .home-slideshow { height: 540px; } }
-@media (min-width: 1700px) { .home-slideshow { height: 600px; } }
+.home-slideshow, .group-photo { height: 300px; }
+@media (min-width: 640px) { .home-slideshow, .group-photo { height: 380px; } }
+@media (min-width: 900px) { .home-slideshow, .group-photo { height: 460px; } }
+@media (min-width: 1400px) { .home-slideshow, .group-photo { height: 540px; } }
+@media (min-width: 1700px) { .home-slideshow, .group-photo { height: 600px; } }
 .home-banner .chip-container { margin-bottom: 16px; justify-content: center; }
 
 .photo-frame {
