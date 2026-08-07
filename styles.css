@@ -639,7 +639,7 @@ a:hover { color: var(--accent-hover); }
   position: relative;
   transition: border-color var(--t-base);
 }
-.pub-entry:last-child, .news-entry:last-child { border-bottom-color: transparent; }
+.pub-entry:last-child { border-bottom-color: transparent; }
 .pub-entry:hover, .news-entry:hover {
   border-color: var(--accent);
 }
@@ -659,7 +659,6 @@ a:hover { color: var(--accent-hover); }
   background: var(--bg-card);
   box-shadow: var(--shadow-sm);
 }
-.news-entry:last-child { border-bottom: 1px solid var(--border); margin-bottom: 0; }
 .news-entry:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 
 /* ---------------------------------------------------------- Blog */
