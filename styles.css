@@ -459,7 +459,7 @@ a:hover { color: var(--accent-hover); }
 .profile-bio-full { display: none; }
 .profile-bio-full.open { display: block; }
 .profile-bio-short.hidden { display: none; }
-.profile-bio-toggle { font-size: 12px; display: inline; background: none; border: none; padding: 0; cursor: pointer; font-family: var(--sans); white-space: nowrap; }
+.profile-bio-toggle { font-size: 12px; float: right; margin-left: 8px; background: none; border: none; padding: 0; cursor: pointer; font-family: var(--sans); white-space: nowrap; }
 .profile-chips { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-start; margin-bottom: 12px; }
 .profile-links {
   display: flex;
