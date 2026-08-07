@@ -60,6 +60,40 @@ const MGB_PUBLICATIONS = [
     ],
     "doi": "10.1016/j.jbc.2024.102345",
     "pdf": "https://example.com/paper3.pdf"
+  },
+  {
+    "title": "Machine learning-guided discovery of PFAS-active haloacid dehalogenases",
+    "year": 2023,
+    "venue": "PLOS Computational Biology",
+    "authors": [
+      "Shaban Ahmad",
+      "Asal Forouzandeh",
+      "Tue Kjærgaard Nielsen"
+    ],
+    "tags": [
+      "Machine Learning",
+      "HADs",
+      "PFAS"
+    ],
+    "doi": "10.1371/journal.pcbi.1011234",
+    "pdf": "https://example.com/paper4.pdf"
+  },
+  {
+    "title": "Fluoride-release kinetics reveal rate-limiting steps in microbial PFAS defluorination",
+    "year": 2023,
+    "venue": "Environmental Science & Technology",
+    "authors": [
+      "Asal Forouzandeh",
+      "James Wilson",
+      "Tue Kjærgaard Nielsen"
+    ],
+    "tags": [
+      "Kinetics",
+      "PFAS",
+      "Environmental Chemistry"
+    ],
+    "doi": "10.1021/acs.est.3c04567",
+    "pdf": "https://example.com/paper5.pdf"
   }
 ];
 const MGB_NEWS         = [
@@ -604,6 +638,31 @@ window.renderPublications = function() {
     container.appendChild(el);
   });
   if (window.initScrollReveal) window.initScrollReveal();
+  initPubScrollMore();
+}
+
+// 8b. Publications "scroll more" button — mirrors the mouse-wheel scroll,
+// jumping one batch at a time and looping back to the top at the bottom.
+function initPubScrollMore() {
+  const list = document.getElementById('publications-container');
+  const btn = document.getElementById('pub-scroll-more');
+  if (!list || !btn) return;
+
+  function updateVisibility() {
+    btn.style.display = list.scrollHeight > list.clientHeight + 8 ? 'flex' : 'none';
+  }
+  updateVisibility();
+  window.addEventListener('resize', updateVisibility);
+  list.addEventListener('scroll', updateVisibility);
+
+  if (btn.dataset.wired) return;
+  btn.dataset.wired = 'true';
+  btn.addEventListener('click', () => {
+    const scrollAmount = Math.max(220, Math.round(list.clientHeight * 0.85));
+    const nearBottom = list.scrollTop + list.clientHeight >= list.scrollHeight - 20;
+    if (nearBottom) list.scrollTo({ top: 0, behavior: 'smooth' });
+    else list.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+  });
 }
 
 // 9. Research Pillars Renderer ("How MGB Works")

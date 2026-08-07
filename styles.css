@@ -310,6 +310,7 @@ a:hover { color: var(--accent-hover); }
   background: var(--accent-light);
   color: var(--accent);
   border: 1px solid var(--accent);
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
 }
 .chip.chip-muted { background: var(--bg-alt); color: var(--muted); border-color: var(--border); }
 .chip-container { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -381,6 +382,7 @@ a:hover { color: var(--accent-hover); }
 @media (min-width: 1400px) { .group-photo { height: 620px; } }
 @media (min-width: 1600px) { .group-photo { height: 680px; } }
 .home-banner .chip-container { margin-bottom: 16px; justify-content: center; }
+.home-banner .chip-container .chip:hover { background: var(--accent); color: #fff; }
 
 .photo-frame {
   position: relative;
@@ -644,12 +646,42 @@ a:hover { color: var(--accent-hover); }
   border-color: var(--accent);
 }
 .pub-entry:hover .pub-title, .news-entry:hover .news-title { color: var(--accent); }
+.pub-entry:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
 .pub-title, .news-title { font-size: 15.5px; font-weight: 600; color: var(--fg); line-height: 1.4; }
 .pub-authors { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 2px; }
 .news-date { font-size: 12px; color: var(--faint); }
 .pub-meta, .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
 .pub-doi { font-family: var(--mono); }
 .pub-doi:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+
+.pub-panel { position: relative; }
+.pub-panel .scrollable-list {
+  max-height: 620px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+}
+.scroll-more-btn {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--t-fast), background var(--t-fast);
+  z-index: 5;
+}
+.scroll-more-btn:hover { background: var(--accent-hover); transform: translateX(-50%) translateY(3px) scale(1.08); }
 
 .news-entry {
   margin: 0 0 14px 0;
