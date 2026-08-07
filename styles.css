@@ -394,12 +394,12 @@ a:hover { color: var(--accent-hover); }
   padding: 20px;
   transition: box-shadow var(--t-base), border-color var(--t-base), transform var(--t-base);
 }
-.profile-card.cat-postdocs { --cat-accent: #2563eb; }
-.profile-card.cat-phd { --cat-accent: #7c3aed; }
-.profile-card.cat-masters { --cat-accent: #d97706; }
-.profile-card.cat-bachelors { --cat-accent: #db2777; }
-.profile-card.cat-others { --cat-accent: #475569; }
-.profile-card.cat-alumni { --cat-accent: #78716c; }
+.cat-postdocs { --cat-accent: #2563eb; }
+.cat-phd { --cat-accent: #7c3aed; }
+.cat-masters { --cat-accent: #d97706; }
+.cat-bachelors { --cat-accent: #db2777; }
+.cat-others { --cat-accent: #475569; }
+.cat-alumni { --cat-accent: #78716c; }
 .profile-card:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--cat-accent, var(--accent));
@@ -457,6 +457,10 @@ a:hover { color: var(--accent-hover); }
 .profile-name { font-family: var(--serif); font-size: 16px; font-weight: 700; margin-bottom: 2px; text-align: left; }
 .profile-title { font-size: 11px; color: var(--muted); text-align: left; }
 .profile-bio { font-size: 13px; color: var(--muted); text-align: justify; margin-bottom: 10px; }
+.profile-bio-full { display: none; }
+.profile-bio-full.open { display: block; }
+.profile-bio-short.hidden { display: none; }
+.profile-bio-toggle { font-size: 12px; display: inline-block; margin-top: -4px; margin-bottom: 10px; background: none; border: none; padding: 0; cursor: pointer; font-family: var(--sans); }
 .profile-chips { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-start; margin-bottom: 12px; }
 .profile-links {
   display: flex;
@@ -486,7 +490,18 @@ a:hover { color: var(--accent-hover); }
 .icon-link-dummy i { color: var(--faint) !important; }
 
 .people-section { margin-bottom: 32px; }
-.people-section > .section-label, .alumni-toggle .section-label { text-align: center; display: block; width: 100%; }
+.people-section > .section-label, .alumni-toggle .section-label {
+  text-align: center;
+  display: block;
+  width: 100%;
+  padding: 4px 0;
+  border-radius: var(--radius-md);
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.people-section:has(.profile-card:hover) .section-label {
+  background: var(--cat-accent, var(--accent));
+  color: #fff;
+}
 .alumni-toggle {
   display: flex;
   align-items: center;
@@ -554,10 +569,10 @@ a:hover { color: var(--accent-hover); }
 .pub-entry:hover .pub-title, .news-entry:hover .news-title { color: var(--accent); }
 .pub-title, .news-title { font-size: 15.5px; font-weight: 600; color: var(--fg); line-height: 1.4; }
 .pub-authors { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 2px; }
-.pub-venue, .news-date { font-size: 12px; color: var(--faint); }
+.news-date { font-size: 12px; color: var(--faint); }
 .pub-meta, .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
-.pub-doi { font-size: 12px; color: var(--accent); font-family: var(--mono); }
-.pub-doi:hover { color: var(--accent-hover); text-decoration: underline; }
+.pub-doi { font-family: var(--mono); }
+.pub-doi:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
 /* ---------------------------------------------------------- Blog */
 .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: start; }

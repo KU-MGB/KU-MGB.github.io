@@ -374,6 +374,13 @@ function bioExcerpt(text) {
     .trim();
 }
 
+function truncateBio(text, limit) {
+  if (text.length <= limit) return text;
+  const cut = text.slice(0, limit);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 0 ? cut.slice(0, lastSpace) : cut) + '…';
+}
+
 // Avatar helper — real photo, or a coloured initials circle as fallback
 const AVATAR_PALETTE = ['#0f766e', '#059669', '#2563eb', '#7c3aed', '#dc2626', '#d97706'];
 function avatarColor(name) {
@@ -425,7 +432,12 @@ window.renderPeople = function() {
 
     const gridModifier = members.length === 1 ? ' people-grid-solo' : members.length === 2 ? ' people-grid-duo' : '';
     const isAlumni = cat.id === '7_Alumni';
-    const cardsHtml = members.map(p => `
+    const BIO_LIMIT = 150;
+    const cardsHtml = members.map(p => {
+      const fullBio = p.bio ? bioExcerpt(p.bio) : '';
+      const isLong = fullBio.length > BIO_LIMIT;
+      const shortBio = isLong ? truncateBio(fullBio, BIO_LIMIT) : fullBio;
+      return `
           <div class='profile-card ${cat.cls}' data-reveal>
             <div class='profile-header'>
               <div class='profile-header-left'>
@@ -437,13 +449,17 @@ window.renderPeople = function() {
               </div>
               ${personLinksHtml(p)}
             </div>
-            ${p.bio ? `<p class='profile-bio'>${bioExcerpt(p.bio)}</p>` : ''}
+            ${fullBio ? `
+            <p class='profile-bio profile-bio-short'>${shortBio}</p>
+            ${isLong ? `<p class='profile-bio profile-bio-full'>${fullBio}</p>
+            <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}` : ''}
             ${p.tags ? `<div class='profile-chips'>${p.tags.slice(0, 3).map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
           </div>
-        `).join('');
+        `;
+    }).join('');
 
     const section = document.createElement('div');
-    section.className = 'people-section';
+    section.className = `people-section ${cat.cls}`;
     if (isAlumni) {
       section.innerHTML = `
         <button type='button' class='alumni-toggle' aria-expanded='false'>
@@ -468,6 +484,17 @@ window.renderPeople = function() {
         </div>
       `;
     }
+    section.querySelectorAll('.profile-bio-toggle').forEach(btn => {
+      const card = btn.closest('.profile-card');
+      const short = card.querySelector('.profile-bio-short');
+      const full = card.querySelector('.profile-bio-full');
+      btn.addEventListener('click', () => {
+        const open = full.classList.toggle('open');
+        short.classList.toggle('hidden', open);
+        btn.setAttribute('aria-expanded', String(open));
+        btn.innerHTML = open ? 'Show less &uarr;' : 'Read more &rarr;';
+      });
+    });
     container.appendChild(section);
   });
   if (window.initScrollReveal) window.initScrollReveal();
@@ -568,8 +595,8 @@ window.renderPublications = function() {
     el.innerHTML = `
       <div class='pub-meta'>
         <span class='badge'>${pub.year}</span>
-        ${pub.venue ? `<span class='pub-venue'>${pub.venue}</span>` : ''}
-        ${pub.doi ? `<a href='https://doi.org/${pub.doi}' target='_blank' rel='noopener' class='pub-doi'>https://doi.org/${pub.doi}</a>` : ''}
+        ${pub.venue ? `<span class='badge badge-fg pub-venue'>${pub.venue}</span>` : ''}
+        ${pub.doi ? `<a href='https://doi.org/${pub.doi}' target='_blank' rel='noopener' class='badge badge-fg pub-doi'>https://doi.org/${pub.doi}</a>` : ''}
       </div>
       <h3 class='pub-title'>${pub.title}</h3>
       ${pub.authors ? `<p class='pub-authors'>${pub.authors.join(', ')}</p>` : ''}
