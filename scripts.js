@@ -569,13 +569,11 @@ window.renderPublications = function() {
       <div class='pub-meta'>
         <span class='badge'>${pub.year}</span>
         ${pub.venue ? `<span class='pub-venue'>${pub.venue}</span>` : ''}
+        ${pub.doi ? `<a href='https://doi.org/${pub.doi}' target='_blank' rel='noopener' class='pub-doi'>https://doi.org/${pub.doi}</a>` : ''}
       </div>
       <h3 class='pub-title'>${pub.title}</h3>
       ${pub.authors ? `<p class='pub-authors'>${pub.authors.join(', ')}</p>` : ''}
       ${pub.tags ? `<div class='chip-container' style="margin-top:8px;">${pub.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
-      <div class='pub-actions'>
-        ${pub.doi ? `<a href='https://doi.org/${pub.doi}' target='_blank' class='text-link'>DOI &rarr;</a>` : ''}
-      </div>
     `;
     container.appendChild(el);
   });
