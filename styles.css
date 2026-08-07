@@ -17,6 +17,8 @@
   --faint: #8a8a8a;
   --border: #e2e2e2;
   --divider: rgba(15, 118, 110, 0.28);
+  --v-sep-color: rgba(15, 118, 110, 0.08);
+  --v-sep-glow: rgba(15, 118, 110, 0.35);
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -50,6 +52,8 @@
   --faint: #7d796f;
   --border: #3a382f;
   --divider: rgba(61, 186, 168, 0.3);
+  --v-sep-color: rgba(61, 186, 168, 0.1);
+  --v-sep-glow: rgba(61, 186, 168, 0.45);
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
@@ -239,6 +243,33 @@ a:hover { color: var(--accent-hover); }
 
 /* ---------------------------------------------------------- Layout & type */
 .page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 104px; }
+@keyframes flowVerticalLine {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 200%; }
+}
+@media (min-width: 1200px) {
+  .page-section, .footer-inner { position: relative; }
+  .page-section::before, .page-section::after, .footer-inner::before, .footer-inner::after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 2px;
+    z-index: 1;
+    pointer-events: none;
+    background-size: 100% 200%;
+    animation: flowVerticalLine 24s linear infinite;
+  }
+  .footer-inner::before, .footer-inner::after { top: 0.5rem; bottom: 0.5rem; }
+  .page-section::before, .footer-inner::before {
+    left: -1px;
+    background: linear-gradient(to bottom, var(--v-sep-color) 0%, var(--v-sep-glow) 50%, var(--v-sep-color) 100%);
+  }
+  .page-section::after, .footer-inner::after {
+    right: -1px;
+    background: linear-gradient(to bottom, var(--v-sep-color) 0%, var(--v-sep-glow) 50%, var(--v-sep-color) 100%);
+  }
+}
 .section-label {
   font-family: var(--mono);
   font-size: 11px;
