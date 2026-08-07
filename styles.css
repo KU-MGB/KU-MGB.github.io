@@ -248,8 +248,8 @@ a:hover { color: var(--accent-hover); }
   100% { background-position: 0 200%; }
 }
 @media (min-width: 1200px) {
-  .page-section, .footer-inner { position: relative; }
-  .page-section::before, .page-section::after, .footer-inner::before, .footer-inner::after {
+  .page-section, .footer-inner, .home-banner { position: relative; }
+  .page-section::before, .page-section::after, .footer-inner::before, .footer-inner::after, .home-banner::before, .home-banner::after {
     content: '';
     position: absolute;
     top: 1.5rem;
@@ -261,11 +261,11 @@ a:hover { color: var(--accent-hover); }
     animation: flowVerticalLine 24s linear infinite;
   }
   .footer-inner::before, .footer-inner::after { top: 0.5rem; bottom: 0.5rem; }
-  .page-section::before, .footer-inner::before {
+  .page-section::before, .footer-inner::before, .home-banner::before {
     left: -1px;
     background: linear-gradient(to bottom, var(--v-sep-color) 0%, var(--v-sep-glow) 50%, var(--v-sep-color) 100%);
   }
-  .page-section::after, .footer-inner::after {
+  .page-section::after, .footer-inner::after, .home-banner::after {
     right: -1px;
     background: linear-gradient(to bottom, var(--v-sep-color) 0%, var(--v-sep-glow) 50%, var(--v-sep-color) 100%);
   }
