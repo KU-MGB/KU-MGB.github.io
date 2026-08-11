@@ -591,8 +591,8 @@ a:hover { color: var(--accent-hover); }
 @media (min-width: 761px) {
   .people-grid { grid-template-columns: repeat(3, 1fr); }
   .people-grid.people-grid-duo { grid-template-columns: repeat(2, 1fr); }
-  .people-grid.people-grid-solo { grid-template-columns: 1fr; }
-  .people-section.cat-faculty .people-grid.people-grid-solo { max-width: 520px; margin: 0 auto; }
+  .people-grid.people-grid-solo { grid-template-columns: 1fr; max-width: 520px; }
+  .people-section.cat-faculty .people-grid.people-grid-solo { margin: 0 auto; }
 }
 
 /* ---------------------------------------------------------- Academic cards (Research / Projects) */
