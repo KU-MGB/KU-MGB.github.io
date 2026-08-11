@@ -198,10 +198,12 @@ const MGB_PROJECTS     = [
       const manifest = await fetch(adjustPath('1_People/manifest.json')).then(r => r.json());
       const groups = await Promise.all(Object.entries(manifest).map(async ([group, ids]) => {
         const members = await Promise.all(ids.map(id =>
-          fetch(adjustPath(`1_People/${group}/${id}.json`)).then(r => r.json())
+          fetch(adjustPath(`1_People/${group}/${id}.json`))
+            .then(r => r.ok ? r.json() : Promise.reject(new Error(`${r.status} for ${group}/${id}.json`)))
             .then(p => Object.assign({}, p, { role_group: group }))
+            .catch(e => { console.error('Failed to load person:', group, id, e); return null; })
         ));
-        return members;
+        return members.filter(Boolean);
       }));
       window.MGB_PEOPLE = groups.flat();
     } catch (e) {
