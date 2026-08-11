@@ -2,16 +2,16 @@
   "id": "benedetta-togni",
   "name": "Benedetta Togni",
   "role": "MSc Student",
-  "email": "bene@plen.ku.dk",
-  "orcid": "0000-0003-1234-5678",
+  "email": "benedetta.togni@gmail.com",
+  "orcid": "",
   "website": "",
-  "linkedin": "https://www.linkedin.com/in/benedetta-togni-892257258/?locale=en",
+  "linkedin": "https://www.linkedin.com/in/benedetta-togni-892257258?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
   "tags": [
-    "Structural Biology",
-    "Crystallography",
-    "Enzyme Design",
+    "Metagenomics",
+    "Machine Learning",
+    "HADs",
     "PFAS"
   ],
-  "bio": "Benedetta investigates the 3D architecture of dehalogenase active sites using X-ray crystallography and cryo-EM. Her structural insights guide the rational design of enzymes with improved substrate specificity for long-chain PFAS.",
+  "bio": "Benedetta Togni is a Master's student in Bioinformatics for Computational Genomics at Politecnico di Milano and Università degli Studi di Milano. Her research focuses on the computational discovery and characterization of novel enzymes for environmental applications, with particular interest in the biodegradation and bioremediation of persistent pollutants. Her current thesis project involves metagenomic screening for the identification and prioritization of novel Haloacid Dehalogenase (HAD) candidates potentially capable of C–F bond cleavage, combining protein–ligand modeling, molecular dynamics, QM/MM simulations, and machine learning approaches to investigate enzyme function and defluorination capability. Her research interests include the application of machine learning and deep learning, structural bioinformatics, and computational chemistry to enzyme discovery and engineering, with a particular focus on developing computational approaches for environmentally relevant biocatalysis and pollutant degradation.",
   "avatar": "benedetta-togni.webp"
 }
