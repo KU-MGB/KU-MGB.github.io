@@ -437,7 +437,7 @@ window.renderPeople = function() {
   if (typeof MGB_PEOPLE === 'undefined') return;
   const CATEGORIES = [
     { id: '1_Faculty', label: 'Group Leader', cls: 'cat-faculty' },
-    { id: '2_Postdocs', label: 'Postdocs', cls: 'cat-postdocs' },
+    { id: '2_Postdocs', label: 'Postdoctoral Researchers', cls: 'cat-postdocs' },
     { id: '3_PhD', label: 'PhD Students', cls: 'cat-phd' },
     { id: '4_Masters', label: 'MSc Students', cls: 'cat-masters' },
     { id: '5_Bachelors', label: 'BSc Students', cls: 'cat-bachelors' },
