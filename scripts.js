@@ -316,16 +316,16 @@ const MGB_PROJECTS     = [
     "title": "Sapere Aude: Solving microbial degradation of PFAS",
     "tier": "Active",
     "status": "Active",
-    "description": ".",
-    "tags": ["PFAS", "Catalytic enzymes", "Synthetic biology"]
+    "description": "PFAS resist breakdown because their carbon-fluorine bonds are so stable, and the fluoride released when bacteria do break them down is toxic to the bacteria themselves. This DFF Research Leader project searches for new PFAS-degrading bacteria and enzymes using machine learning and microbial community characterisation, and investigates how to make bacteria tolerant enough to fluoride to survive the job.",
+    "tags": ["PFAS", "Machine Learning", "Fluoride Tolerance"]
   },
   {
     "id": "DFF Project1",
     "title": "Genetics of PFOS biodegradation",
     "tier": "Active",
     "status": "Finished in 2026",
-    "description": "",
-    "tags": ["PFAS", "High-throughput screening", "Genomics"]
+    "description": "PFAS is no use to bacteria as an energy source, which is part of why it has no natural enemies among microorganisms. This project investigates the genetics behind that absence of natural degradation pathways. Funded by Danmarks Frie Forskningsfond.",
+    "tags": ["PFAS", "Genetics", "Danmarks Frie Forskningsfond"]
   }
 ];
 // ═══════════════════════════════════════════════════════════════════════════
