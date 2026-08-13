@@ -531,7 +531,14 @@ window.renderPeople = function() {
     if (href) return `<a href='${href}' target='_blank' rel='noopener' class='icon-link' data-tip='${tip}' aria-label='${tip}'><i class='${iconClass}'></i></a>`;
     return `<span class='icon-link icon-link-dummy' data-tip='${tip} not available' aria-label='${tip} not available'><i class='${iconClass}'></i></span>`;
   }
-  function personLinksHtml(p) {
+  // Group Leader, Postdocs, and PhD Students show all four contact icons
+  // (missing ones as a dimmed placeholder). Every other category shows
+  // LinkedIn only, since that's the one link reliably kept up to date.
+  const FULL_LINKS_CATEGORIES = ['1_Faculty', '2_Postdocs', '3_PhD'];
+  function personLinksHtml(p, fullLinks) {
+    if (!fullLinks) {
+      return `<div class='profile-links'>${personLinkHtml(p.linkedin || '', 'LinkedIn', 'fab fa-linkedin')}</div>`;
+    }
     return `<div class='profile-links'>
       ${personLinkHtml(p.email ? 'mailto:' + p.email : '', 'Email', 'fas fa-envelope')}
       ${personLinkHtml(p.orcid ? 'https://orcid.org/' + p.orcid : '', 'ORCID', 'fab fa-orcid')}
@@ -546,6 +553,7 @@ window.renderPeople = function() {
 
     const gridModifier = members.length === 1 ? ' people-grid-solo' : members.length === 2 ? ' people-grid-duo' : '';
     const isAlumni = cat.id === '7_Alumni';
+    const fullLinks = FULL_LINKS_CATEGORIES.includes(cat.id);
     const BIO_LIMIT = 300;
     const cardsHtml = members.map(p => {
       const fullBio = p.bio ? bioExcerpt(p.bio) : '';
@@ -561,7 +569,7 @@ window.renderPeople = function() {
                   <div class='profile-title'>${p.role || ''}</div>
                 </div>
               </div>
-              ${personLinksHtml(p)}
+              ${personLinksHtml(p, fullLinks)}
             </div>
             ${fullBio ? `
             <p class='profile-bio profile-bio-short'>${shortBio}${isLong ? ` <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}</p>
