@@ -423,8 +423,15 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 128px 24px 32px;
+  padding: 84px 24px 32px;
 }
+/* Top padding matches the fixed navbar's own height exactly, at each
+   breakpoint, with no added breathing room, so the photo sits right below
+   it. Going any smaller would tuck the photo behind the navbar, since the
+   navbar is position:fixed and not part of the document flow. */
+@media (max-width: 399px) { .home-banner { padding-top: 76px; } }
+@media (min-width: 640px) { .home-banner { padding-top: 88px; } }
+@media (min-width: 900px) { .home-banner { padding-top: 96px; } }
 /* The research pillar boxes sit in a .page-section right after the hero.
    Its own top padding would double up with the hero's bottom padding
    above, so pull it in tight here. */
