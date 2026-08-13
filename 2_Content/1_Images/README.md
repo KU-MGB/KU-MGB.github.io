@@ -4,8 +4,7 @@ Flat folder, numbered files (`1_`, `2_`, `3_`, …) — no subfolders. Current l
 
 | File | Purpose |
 |---|---|
-| `1_logo-lockup.svg` | Navbar + footer logo. |
-| `2_logo.png` | Favicon / apple-touch-icon. |
+| `logo.png` | Navbar logo, footer logo, favicon, and apple-touch-icon. |
 | `3_group.*` | Group photo (People page) — see below. |
 | `4_`, `5_`, `6_`… | Home page slideshow — see below. |
 

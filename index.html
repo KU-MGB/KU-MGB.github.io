@@ -1,6 +1,36 @@
 <!DOCTYPE html>
+<!--
+  INDEX.HTML
+
+  The one page of the MGB Lab website. There is no routing between
+  separate files: every page (Home, Projects, People, Publications,
+  Blogs) is a <div class="page-view"> sitting in this same file, and
+  scripts.js shows or hides them as the visitor scrolls or clicks a
+  nav link. The one exception is a single blog post, which opens as
+  its own view when a blog card is clicked.
+
+  Layout of this file, top to bottom:
+    1. <head>: page metadata, fonts, icon font, and the stylesheet
+    2. Navbar (top bar shown on every page)
+    3. Mobile menu (the panel the hamburger button opens)
+    4. Command palette search popup
+    5. Join Us popup (holds the application form)
+    6. <main>: the page-view sections (Home, Projects, People,
+       Publications, Blogs, Blog Post)
+    7. Footer
+    8. Script tags: the main app script, then the Google Translate
+       widget, then the back-to-top button
+
+  Most of the actual content (research pillars, projects, people,
+  publications, news, blog posts) is not written directly into this
+  file. It lives in scripts.js or in 1_People/ and 2_Content/2_Blogs/,
+  and gets rendered into the empty container <div>s below once the
+  page loads.
+-->
 <html lang="en">
 <head>
+  <!-- Page metadata: character set, mobile scaling, and the description
+       and title used by search engines and link previews (Open Graph tags) -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="MGB Lab at the University of Copenhagen. We combine environmental DNA sequencing, bioinformatics, and biochemistry to discover how microbes evolve to break down persistent pollutants like PFAS.">
@@ -8,18 +38,34 @@
   <meta property="og:description" content="Discover how microbes evolve to break down persistent pollutants.">
   <meta property="og:type" content="website">
   <title>MGB Lab | Microbial Genomics & Biodegradation</title>
+
+  <!-- Browser tab icon and the icon shown when the site is saved to a phone's home screen -->
   <link rel="icon" type="image/png" href="2_Content/1_Images/logo.png">
   <link rel="apple-touch-icon" href="2_Content/1_Images/logo.png">
+
+  <!-- Google Fonts: DM Sans (body text), Source Serif 4 (headings), JetBrains Mono (labels/code) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;0,8..60,800;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome, for every icon used across the site. Loaded with
+       preload + onload so it does not block the page from rendering. -->
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Thin bar across the very top of the page that fills in as the visitor scrolls down -->
   <div id="scroll-progress" style="position:fixed; top:0; left:0; height:2px; background:var(--accent); z-index:9999; width:0%; transition:width 0.1s;"></div>
-  <!-- Navbar -->
+
+  <!-- ============================================================
+       NAVBAR
+       Fixed bar shown on every page: logo, page links, and the
+       search, language, theme, and Join Us buttons. Below 900px
+       width the page links and Join Us button are hidden and the
+       hamburger button (right) opens the mobile menu instead.
+       ============================================================ -->
   <nav id="navbar">
     <div class="nav-inner">
       <a href="#home" class="logo">
@@ -49,7 +95,8 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
+  <!-- Mobile menu: the panel that slides out from the navbar when the
+       hamburger button is tapped. Only shown below 900px width. -->
   <div id="mobile-menu">
     <a href="#projects">Projects</a>
     <a href="#people">People</a>
@@ -58,7 +105,14 @@
     <button type="button" onclick="openJoinModal()" style="color:var(--accent)">Join Us &rarr;</button>
   </div>
 
-  <!-- Command Palette Search -->
+  <!-- ============================================================
+       COMMAND PALETTE SEARCH
+       Popup opened by the search icon or Ctrl/Cmd+K. Hidden by
+       default (srch-overlay class in styles.css); scripts.js adds
+       the srch-open class to show it, builds the search index from
+       the page content the first time it opens, and fills
+       #srch-body with matching results as the visitor types.
+       ============================================================ -->
   <div id="srch-overlay" class="srch-overlay" role="dialog" aria-modal="true" aria-label="Search">
     <div class="srch-box" role="document">
       <div class="srch-header">
@@ -82,7 +136,14 @@
     </div>
   </div>
 
-  <!-- Join Us Modal -->
+  <!-- ============================================================
+       JOIN US POPUP
+       Opened by the "Join Us" button in the navbar or mobile menu.
+       Holds a short intro and the application form, which submits
+       straight to a Google Form (the entry.XXXXXXX names below are
+       that form's field IDs) so submissions land in the lab's
+       existing Google Sheet without a backend of our own.
+       ============================================================ -->
   <div id="join-overlay" class="join-overlay" role="dialog" aria-modal="true" aria-label="Join Us">
     <div class="join-modal" role="document">
       <button type="button" class="join-modal-close" onclick="closeJoinModal()" aria-label="Close">&times;</button>
@@ -118,9 +179,16 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       MAIN CONTENT
+       One <div class="page-view"> per page. scripts.js shows only
+       one at a time and smooth-scrolls between them as the visitor
+       clicks a nav link, following the single-page-scroll pattern
+       described at the top of this file.
+       ============================================================ -->
   <main class="site-main">
 
-  <!-- HOME -->
+  <!-- HOME: hero heading, photo slideshow, and the research pillar cards -->
   <div id="page-home" class="page-view active">
     <div class="home-banner" data-reveal>
       <div id="home-slideshow" class="photo-frame photo-placeholder home-slideshow" style="margin: 20px 0;">
@@ -137,63 +205,11 @@
       </div>
     </div>
     <section class="page-section" data-reveal>
-      <p class="section-desc">Discovering and engineering the enzymes of tomorrow.</p>
       <div id="research-themes-container"></div>
-    </section>
-    <section class="page-section" data-reveal>
-      <p class="section-desc">How a dehalogenase actually breaks the C&ndash;F bond, step by step, inside the active site.</p>
-      <div class="card-academic" style="margin-bottom:24px; overflow-x:auto;">
-        <svg viewBox="0 0 820 260" width="100%" height="auto" style="min-width:640px; display:block;" role="img" aria-label="Diagram of the FAcD dehalogenation mechanism: substrate enters the active site, Asp10 attacks the C-F bond via SN2, fluoride is released, and a water molecule regenerates the enzyme.">
-          <defs>
-            <marker id="rxArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L6,3 L0,6 Z" fill="#5c5850"/>
-            </marker>
-          </defs>
-          <path d="M 20 40 Q 10 130 40 220 L 260 220 Q 300 130 260 40 Z" fill="none" stroke="#0f766e" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
-          <text x="140" y="24" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#0f766e" letter-spacing="1">ACTIVE SITE</text>
-          <g stroke="#2c2a25" stroke-width="3" fill="none" stroke-linecap="round">
-            <path d="M 55 130 L 90 110 L 125 130 L 160 110 L 195 130"/>
-          </g>
-          <g fill="#dc2626" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700">
-            <circle cx="90" cy="110" r="3" fill="#dc2626"/>
-            <text x="90" y="98" text-anchor="middle">F</text>
-            <circle cx="160" cy="110" r="3" fill="#dc2626"/>
-            <text x="160" y="98" text-anchor="middle">F</text>
-          </g>
-          <circle cx="195" cy="130" r="5" fill="#2c2a25"/>
-          <circle cx="235" cy="150" r="14" fill="#0f766e"/>
-          <text x="235" y="154" text-anchor="middle" fill="#fff" font-family="'DM Sans', sans-serif" font-size="10" font-weight="700">O&#8315;</text>
-          <text x="235" y="182" text-anchor="middle" fill="#5c5850" font-family="'DM Sans', sans-serif" font-size="11" font-weight="600">Asp10</text>
-          <line x1="195" y1="130" x2="222" y2="145" stroke="#0f766e" stroke-width="1.5" stroke-dasharray="3 3"/>
-          <text x="205" y="120" font-family="'DM Sans', sans-serif" font-size="10" fill="#5c5850">~3.2 &#197;</text>
-          <text x="55" y="205" font-family="'DM Sans', sans-serif" font-size="10" fill="#8a857c">Arg41 / Trp179 cradle</text>
-          <path d="M 320 130 L 400 130" stroke="#5c5850" stroke-width="2" marker-end="url(#rxArrow)"/>
-          <text x="360" y="115" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#5c5850" letter-spacing="0.5">SN2 ATTACK</text>
-          <g stroke="#2c2a25" stroke-width="3" fill="none" stroke-linecap="round">
-            <path d="M 470 130 L 505 110 L 540 130 L 575 110"/>
-          </g>
-          <g fill="#dc2626" font-family="'DM Sans', sans-serif" font-size="13" font-weight="700">
-            <circle cx="505" cy="110" r="3" fill="#dc2626"/>
-            <text x="505" y="98" text-anchor="middle">F</text>
-          </g>
-          <circle cx="575" cy="110" r="5" fill="#2c2a25"/>
-          <line x1="575" y1="110" x2="600" y2="128" stroke="#2c2a25" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="612" cy="136" r="14" fill="#059669"/>
-          <text x="612" y="140" text-anchor="middle" fill="#fff" font-family="'DM Sans', sans-serif" font-size="10" font-weight="700">O</text>
-          <text x="612" y="168" text-anchor="middle" fill="#5c5850" font-family="'DM Sans', sans-serif" font-size="11" font-weight="600">Asp10-ester</text>
-          <circle cx="470" cy="60" r="12" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="2 2"/>
-          <text x="470" y="64" text-anchor="middle" fill="#dc2626" font-family="'DM Sans', sans-serif" font-size="11" font-weight="700">F&#8315;</text>
-          <path d="M 450 90 Q 460 75 468 65" stroke="#dc2626" stroke-width="1.2" fill="none" marker-end="url(#rxArrow)" opacity="0.6"/>
-          <path d="M 680 150 Q 730 150 730 195 Q 730 230 665 225" stroke="#5c5850" stroke-width="1.5" fill="none" marker-end="url(#rxArrow)" stroke-dasharray="3 3"/>
-          <text x="700" y="140" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" fill="#5c5850">H&#8322;O</text>
-          <text x="695" y="245" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="10" font-weight="600" fill="#5c5850">Asp10 regenerated</text>
-        </svg>
-      </div>
-      <div id="reaction-container"></div>
     </section>
   </div>
 
-  <!-- PROJECTS -->
+  <!-- PROJECTS: current projects on the left, news ticker on the right (900px and wider) -->
   <div id="page-projects" class="page-view">
     <section class="page-section" data-reveal>
       <div class="projects-news-grid">
@@ -209,7 +225,7 @@
     </section>
   </div>
 
-  <!-- PEOPLE -->
+  <!-- PEOPLE: group photo, then everyone grouped by role (Group Leader, Postdocs, PhD, and so on) -->
   <div id="page-people" class="page-view">
     <section class="page-section" data-reveal>
       <h2 class="section-title" style="margin-bottom:16px;">People</h2>
@@ -221,7 +237,8 @@
     </section>
   </div>
 
-  <!-- PUBLICATIONS -->
+  <!-- PUBLICATIONS: a scrollable list, with a "scroll for more" button that
+       jumps forward one screen at a time and loops back to the top -->
   <div id="page-publications" class="page-view">
     <section class="page-section" data-reveal>
       <h2 class="section-title" style="margin-bottom:16px;">Publications</h2>
@@ -232,7 +249,7 @@
     </section>
   </div>
 
-  <!-- BLOGS -->
+  <!-- BLOGS: preview cards; clicking one opens the Blog Post view below -->
   <div id="page-blogs-news" class="page-view">
     <section class="page-section" data-reveal>
       <h2 class="section-title" style="margin-bottom:16px;">Blogs</h2>
@@ -240,7 +257,11 @@
     </section>
   </div>
 
-  <!-- BLOG POST (reached via a blog card, ?id=<slug>#blog-post) -->
+  <!-- BLOG POST: hidden by default (see #page-blog-post rules in styles.css).
+       Reached by clicking a blog card, which sets the URL to
+       ?id=<slug>#blog-post; scripts.js reads that slug and renders the
+       matching post here. This is the one page that works like a normal
+       link instead of a scroll-to section. -->
   <div id="page-blog-post" class="page-view">
     <section class="page-section" style="padding-top:116px;">
       <div id="blog-post-container"></div>
@@ -249,7 +270,11 @@
 
   </main>
 
-  <!-- Footer -->
+  <!-- ============================================================
+       FOOTER
+       Logo, GitHub link, and the copyright line, shown at the
+       bottom of every page.
+       ============================================================ -->
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
@@ -264,7 +289,16 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- ============================================================
+       SCRIPTS
+       scripts.js holds all the page content and behaviour. Once it
+       has loaded, this block calls each render function to fill in
+       the empty container <div>s above. The renderers for static
+       content (research, projects, publications, news) run right
+       away; the ones that depend on data fetched from JSON files
+       (people, blogs, group photo, slideshow) wait for
+       window.MGB_DATA_READY first.
+       ============================================================ -->
   <script src="scripts.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -285,6 +319,7 @@
     });
   </script>
 
+  <!-- Google Translate widget, used by the EN/DA language button in the navbar -->
   <div id="google_translate_element" style="display:none;"></div>
   <script type="text/javascript">
     function googleTranslateElementInit() {
@@ -293,6 +328,8 @@
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+<!-- Back to top button: fixed to the bottom right of the screen, its ring
+     fills in as the page scrolls, same as the thin bar at the very top -->
 <button type="button" id="scroll-to-top" class="back-to-top" aria-label="Back to top" data-tip="Back to Top">
   <svg class="progress-ring" viewBox="0 0 50 50">
     <circle class="progress-ring__background" stroke-width="3" fill="transparent" r="22" cx="25" cy="25"/>

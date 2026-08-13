@@ -1,13 +1,38 @@
 // ═══════════════════════════════════════════════════════════════════════════
-// MGB Lab site — one script file: content data, the data loader, and the app.
+// SCRIPTS.JS
 //
-// STATIC CONTENT below (publications, news, research, projects, reaction, facts)
-// — edit these arrays directly.
+// This one file holds almost everything for the MGB Lab website: the
+// content that doesn't live in its own JSON file, the code that loads
+// the content that does, and the app itself (theme, navigation, search,
+// and one render function per page section).
 //
-// People and blog posts are NOT here — they live one-file-per-item in
-// 1_People/ and 2_Content/2_Blogs/ (see the README.md in each of those folders) so new
-// entries can be added without touching this file.
+// The file has three parts, in order:
+//
+//   PART 1: STATIC CONTENT (below)
+//   Publications, news, research pillars, projects, and the reaction
+//   pipeline data. To add or edit one of these, just edit the array
+//   directly. People and blog posts are handled differently: each
+//   person and each blog post is its own JSON file, kept in
+//   1_People/ and 2_Content/2_Blogs/ (see the README.md in each of
+//   those folders), so new entries can be added without touching
+//   this file at all.
+//
+//   PART 2: DATA LOADER
+//   Fetches people, blog posts, and lab photos from their per-file
+//   folders when the page loads.
+//
+//   PART 3: APP
+//   Theme, navbar, search, page routing, and one render function per
+//   page section. Numbered comments below (1, 2, 3, ...) mark each
+//   piece in the order it appears in the file; a letter suffix like
+//   2b marks a smaller piece that belongs with the section before it.
 // ═══════════════════════════════════════════════════════════════════════════
+
+// ----------------------------------------------------------------
+// PART 1: STATIC CONTENT
+// ----------------------------------------------------------------
+
+// Publications list, newest first. Shown on the Publications page.
 
 const MGB_PUBLICATIONS = [
   {
@@ -96,6 +121,7 @@ const MGB_PUBLICATIONS = [
     "pdf": "https://example.com/paper5.pdf"
   }
 ];
+// News items, newest first. Shown as the auto-scrolling ticker next to Projects.
 const MGB_NEWS         = [
   {
     "title": "New paper out in Nature Microbiology",
@@ -112,6 +138,7 @@ const MGB_NEWS         = [
     "content": "Her presentation highlighted the novel structural motifs necessary for binding long-chain PFAS."
   }
 ];
+// The four research pillar cards on the Home page ("01" through "04").
 const MGB_RESEARCH     = [
   {
     "id": "sequencing",
@@ -142,6 +169,11 @@ const MGB_RESEARCH     = [
     "icon": "FlaskConical"
   }
 ];
+// The three-phase reaction pipeline cards (Pre-organisation, C-F Bond
+// Breakage, Enzyme Regeneration). Not shown on the page right now: the
+// section that used to display these was removed from index.html, so
+// renderReaction() below has nothing to render into and quietly does
+// nothing. Kept here in case that section comes back.
 const MGB_REACTION     = [
   {
     "phase": "Phase 1",
@@ -159,6 +191,7 @@ const MGB_REACTION     = [
     "description": "A catalytic water molecule is activated by the Asp180 base (abstracting H⁺). The hydroxyl attacks the ester, releasing the defluorinated product and restoring Asp10."
   }
 ];
+// Current and past projects, grouped by "tier" (Active, Finished, etc.) on the Projects page.
 const MGB_PROJECTS     = [
   {
     "id": "Mapping the PFAS interactome using photocatalytic proximity labelling",
@@ -186,15 +219,22 @@ const MGB_PROJECTS     = [
   }
 ];
 // ═══════════════════════════════════════════════════════════════════════════
-// DATA LOADER — fetches people, blogs, and lab photos from their per-file
-// folders at page load. Exposes window.MGB_DATA_READY (a promise) so render
-// functions below can wait for the data before running.
+// PART 2: DATA LOADER
+//
+// Fetches people, blog posts, and lab photos from their per-file folders
+// when the page loads, and sets window.MGB_DATA_READY (a promise) so the
+// render functions in Part 3 can wait until the data has arrived.
 // ═══════════════════════════════════════════════════════════════════════════
 
 (function () {
+  // Step 1: load every person listed in 1_People/manifest.json.
+  // The manifest groups people by category folder, for example:
+  //   { "2_Postdocs": ["asal-forouzandeh", ...], "3_PhD": [...], ... }
+  // One bad or missing person file should not blank the whole People
+  // page, so a failed fetch for one person is logged and skipped
+  // (see the .catch below) instead of failing the whole group.
   async function loadPeople() {
     try {
-      // Manifest is grouped by category folder: { "2_Postdocs": ["asal-forouzandeh", ...], ... }
       const manifest = await fetch(adjustPath('1_People/manifest.json')).then(r => r.json());
       const groups = await Promise.all(Object.entries(manifest).map(async ([group, ids]) => {
         const members = await Promise.all(ids.map(id =>
@@ -212,6 +252,8 @@ const MGB_PROJECTS     = [
     }
   }
 
+  // Step 2: load every blog post listed in 2_Content/2_Blogs/manifest.json,
+  // the same one-file-per-item pattern as people above.
   async function loadBlogs() {
     try {
       const manifest = await fetch(adjustPath('2_Content/2_Blogs/manifest.json')).then(r => r.json());
@@ -229,6 +271,10 @@ const MGB_PROJECTS     = [
     }
   }
 
+  // Step 3: load the list of lab photo filenames for the home page
+  // slideshow. An entry with a "+" in it (e.g. "a.jpg+b.jpg") means two
+  // photos shown side by side as one slide; that gets split back apart
+  // by renderHomeSlideshow() further down.
   async function loadLabImages() {
     try {
       const manifest = await fetch(adjustPath('2_Content/1_Images/manifest.json')).then(r => r.json());
@@ -240,11 +286,41 @@ const MGB_PROJECTS     = [
     }
   }
 
+  // Run all three loaders at once; window.MGB_DATA_READY resolves once
+  // every one of them has finished (successfully or not).
   window.MGB_DATA_READY = Promise.all([loadPeople(), loadBlogs(), loadLabImages()]);
 })();
 
 // ═══════════════════════════════════════════════════════════════════════════
-// APP — theme, nav, search, router, and all section renderers
+// PART 3: APP
+//
+// Theme, navbar, search, page routing, and one render function per page
+// section. Sections are numbered in the order they appear below; a
+// letter suffix (2b, 8b, 9b, 14b) marks a smaller piece that belongs
+// with the numbered section right before it.
+//
+//    1  Theme (dark/light)
+//    2  Navbar and mobile menu
+//    2b   Touch tooltips
+//    3  Scroll reveal (fade-in as elements enter the screen)
+//    4  Simple Markdown (for blog post bodies)
+//    5  People renderer
+//    6  Blogs renderer (preview list)
+//    7  Blog post renderer (single post view)
+//    8  Publications renderer
+//    8b   Publications "scroll more" button
+//    9  Research pillars renderer
+//    9b   Reaction pipeline renderer
+//   10  Projects renderer
+//   11  News renderer (ticker)
+//   12  Group photo (People page)
+//   13  Home page slideshow
+//   14  Join Us form
+//   14b   Join Us popup (open/close)
+//   15  Single-page scroll routing
+//   16  Language switcher
+//   17  Small UX touches (footer year, back-to-top button)
+//   18  Command palette search (Ctrl/Cmd+K)
 // ═══════════════════════════════════════════════════════════════════════════
 
 function adjustPath(p) {
@@ -254,7 +330,7 @@ function adjustPath(p) {
   return isRoot ? p : '../' + p;
 }
 
-// 1. Theme (dark/light) — light is default
+// 1. Theme (dark/light). Light is the default.
 function initTheme() {
   const saved = localStorage.getItem('mgb-theme') || 'light';
   if (saved === 'dark') {
@@ -284,7 +360,7 @@ function updateThemeIcon() {
 }
 window.toggleTheme = toggleTheme;
 
-// 2. Navbar & Mobile Menu
+// 2. Navbar and mobile menu
 function initNavbar() {
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -316,7 +392,7 @@ function initNavbar() {
   }
 }
 
-// 2b. Touch tooltips — only reveal on long-press (~500ms), not a plain tap,
+// 2b. Touch tooltips. Only reveal on a long press (about 500ms), not a plain tap,
 // so tapping a nav icon just triggers its action instead of flashing a label.
 function initTooltipLongPress() {
   let pressTimer = null;
@@ -344,7 +420,7 @@ function initTooltipLongPress() {
   });
 }
 
-// 3. Scroll Reveal
+// 3. Scroll reveal (fades elements in as they enter the screen)
 window.initScrollReveal = function() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -362,7 +438,7 @@ window.initScrollReveal = function() {
   });
 }
 
-// 4. Simple Markdown
+// 4. Simple Markdown (turns basic markdown into HTML for blog post bodies)
 function simpleMarkdown(text) {
   if (!text) return '';
   text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -417,7 +493,8 @@ function truncateBio(text, limit) {
   return (lastSpace > 0 ? cut.slice(0, lastSpace) : cut) + '…';
 }
 
-// Avatar helper — real photo, or a coloured initials circle as fallback
+// Avatar helper: shows the person's real photo if they have one, otherwise
+// falls back to a circle with their initials in a colour picked from their name.
 const AVATAR_PALETTE = ['#0f766e', '#059669', '#2563eb', '#7c3aed', '#dc2626', '#d97706'];
 function avatarColor(name) {
   let h = 0;
@@ -432,7 +509,8 @@ function personAvatarHtml(p) {
   return `<div class='profile-initials' style='background:${avatarColor(p.name || '')}'>${initials}</div>`;
 }
 
-// 5. People Renderer
+// 5. People renderer: builds the People page, one card per person,
+// grouped into the categories listed below.
 window.renderPeople = function() {
   if (typeof MGB_PEOPLE === 'undefined') return;
   const CATEGORIES = [
@@ -535,7 +613,7 @@ window.renderPeople = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 6. Blogs Renderer (preview list)
+// 6. Blogs renderer (the preview card list on the Blogs page)
 window.renderBlogs = function() {
   if (typeof MGB_BLOGS === 'undefined') return;
   const container = document.getElementById('blogs-container');
@@ -588,7 +666,7 @@ window.renderBlogs = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 7. Blog Post Renderer — reads ?id=<slug> from the URL (hash is #blog-post)
+// 7. Blog post renderer. Reads ?id=<slug> from the URL (the hash is #blog-post)
 window.renderBlogPost = function() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
@@ -617,7 +695,7 @@ window.renderBlogPost = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 8. Publications Renderer
+// 8. Publications renderer
 window.renderPublications = function() {
   if (typeof MGB_PUBLICATIONS === 'undefined') return;
   const container = document.getElementById('publications-container');
@@ -643,7 +721,7 @@ window.renderPublications = function() {
   initPubScrollMore();
 }
 
-// 8b. Publications "scroll more" button — mirrors the mouse-wheel scroll,
+// 8b. Publications "scroll more" button. Does the same thing as scrolling with the mouse wheel,
 // jumping one batch at a time and looping back to the top at the bottom.
 function initPubScrollMore() {
   const list = document.getElementById('publications-container');
@@ -667,7 +745,7 @@ function initPubScrollMore() {
   });
 }
 
-// 9. Research Pillars Renderer ("How MGB Works")
+// 9. Research pillars renderer (the "01" to "04" cards on the Home page)
 window.renderResearch = function() {
   if (typeof MGB_RESEARCH === 'undefined') return;
   const container = document.getElementById('research-themes-container');
@@ -686,7 +764,7 @@ window.renderResearch = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 9b. Reaction Pipeline Renderer ("Molecular Dehalogenation")
+// 9b. Reaction pipeline renderer. Not currently used (see the note above MGB_REACTION).
 window.renderReaction = function() {
   if (typeof MGB_REACTION === 'undefined') return;
   const container = document.getElementById('reaction-container');
@@ -705,7 +783,7 @@ window.renderReaction = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 10. Projects Renderer (Tier / category grid)
+// 10. Projects renderer (grouped into tiers, such as Active and Finished)
 window.renderProjects = function() {
   if (typeof MGB_PROJECTS === 'undefined') return;
   const container = document.getElementById('projects-container');
@@ -734,7 +812,7 @@ window.renderProjects = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 11. News Renderer — a boxy auto-scrolling ticker; the item list is duplicated
+// 11. News renderer: a boxy auto-scrolling ticker. The item list is duplicated
 // once so the looping translateY(-50%) animation wraps seamlessly.
 window.renderNews = function() {
   if (typeof MGB_NEWS === 'undefined') return;
@@ -763,7 +841,7 @@ window.renderNews = function() {
   container.appendChild(box);
 }
 
-// 15. Group photo (People page) — tries a few common extensions so it works
+// 12. Group photo (People page). Tries a few common file extensions so it works
 // whatever format the file is, e.g. 3_People.jpg or 3_People.webp.
 window.renderGroupPhoto = function() {
   const container = document.getElementById('group-photo-container');
@@ -786,7 +864,7 @@ window.renderGroupPhoto = function() {
   tryNext(0);
 }
 
-// 16. Home page slideshow — cycles through 3-5 photos listed in
+// 13. Home page slideshow. Cycles through the photos listed in
 // 2_Content/1_Images/manifest.json (falls back to the placeholder if empty).
 window.renderHomeSlideshow = function() {
   const container = document.getElementById('home-slideshow');
@@ -885,7 +963,7 @@ window.renderHomeSlideshow = function() {
   });
 }
 
-// 13. Join Form
+// 14. Join Us form
 window.initJoinForm = function() {
   const form = document.getElementById('join-form');
   if (!form) return;
@@ -914,7 +992,7 @@ window.initJoinForm = function() {
   });
 }
 
-// 13b. Join Modal
+// 14b. Join Us popup (open and close)
 window.openJoinModal = function() {
   const o = document.getElementById('join-overlay');
   if (!o) return;
@@ -942,12 +1020,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ==========================================
-// SINGLE-PAGE SCROLL — all sections live on one continuous page.
-// #blog-post is the one exception: an overlay reached via a blog card.
-// Nav links smooth-scroll to their section; a scroll-spy keeps the
-// matching nav link highlighted as the user scrolls.
-// ==========================================
+// ----------------------------------------------------------------
+// 15. Single-page scroll routing
+// All page sections live on one continuous page. #blog-post is the
+// one exception: an overlay reached by clicking a blog card, not a
+// section you scroll to. Nav links smooth-scroll to their section,
+// and a scroll-spy keeps the matching nav link highlighted as the
+// visitor scrolls past each section.
+// ----------------------------------------------------------------
 function handleRouting() {
   const hash = window.location.hash || '#home';
   const key = hash.substring(1);
@@ -999,9 +1079,11 @@ function initSectionNav() {
 document.addEventListener('DOMContentLoaded', initSectionNav);
 
 
-// ==========================================
-// LANGUAGE SWITCHER — a single EN ⇄ DA toggle button
-// ==========================================
+// ----------------------------------------------------------------
+// 16. Language switcher: a single button that toggles the page
+// between English and Danish, using the Google Translate widget
+// loaded at the bottom of index.html.
+// ----------------------------------------------------------------
 const LANGS = [
   { code: 'en', flag: 'gb', label: 'EN' },
   { code: 'da', flag: 'dk', label: 'DA' }
@@ -1032,14 +1114,15 @@ window.changeLanguage = function(code) {
 };
 
 
-// ==========================================
-// UX ENHANCEMENTS
-// ==========================================
+// ----------------------------------------------------------------
+// 17. Small UX touches: the footer copyright year, and the
+// back-to-top button with its circular scroll-progress ring.
+// ----------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('footer-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Back to top — circular scroll-progress ring
+  // Back to top button: the ring around it fills in as the page scrolls
   const backToTop = document.getElementById('scroll-to-top');
   const ptCircle = document.querySelector('.progress-ring__circle');
   let ptCircumference = 0;
@@ -1068,9 +1151,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ==========================================
-// COMMAND-PALETTE SEARCH (Ctrl/Cmd+K)
-// ==========================================
+// ----------------------------------------------------------------
+// 18. Command palette search, opened with the search icon in the
+// navbar or the Ctrl/Cmd+K keyboard shortcut.
+// ----------------------------------------------------------------
 (function () {
   const RECENT_KEY = 'mgb_srch_recent_v1';
   let idx = [], results = [], active = -1, debTimer = null, indexed = false;

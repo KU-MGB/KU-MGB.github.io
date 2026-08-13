@@ -1,6 +1,37 @@
-/* =============================================================
-   Design Tokens — Editorial Academic
-   ============================================================= */
+/* ================================================================
+   STYLES.CSS
+
+   Stylesheet for the MGB Lab website. This is a single continuous
+   scroll page, so the file is ordered to match the page from top
+   to bottom: variables and resets first, then the navbar, shared
+   layout pieces, the home page, people cards, publications and
+   news, the blog, forms and popups, search, the footer, and a
+   few small utilities at the end.
+
+   Sections in this file, in order:
+     1. Design tokens (colours, spacing, fonts, light/dark theme)
+     2. Base reset and global element styles
+     3. Navbar (top bar, logo, links, icon buttons, mobile menu)
+     4. Shared layout pieces (page sections, chips, badges, buttons)
+     5. Home page hero (heading, photo slideshow)
+     6. Profile cards (People page)
+     7. Academic cards (Research, Projects, News)
+     8. Publications and news list rows
+     9. Blog (card list and full post view)
+    10. Forms and the Join Us popup
+    11. Command palette search popup
+    12. Language switcher
+    13. Footer
+    14. Tooltips and page routing
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   1. DESIGN TOKENS
+   All colours, spacing, and font choices live here as CSS
+   variables, so the rest of the file never hardcodes a colour.
+   The .dark class on <body> overrides the theme variables for
+   dark mode; everything else stays the same.
+   ---------------------------------------------------------------- */
 :root {
   --accent: #0f766e;
   --accent-hover: #0d5f59;
@@ -67,9 +98,14 @@
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-/* Kept for older markup still referencing these names */
+/* Old variable names kept as aliases, in case older markup still uses them */
 :root { --cyan: var(--accent); --glass-bg: var(--bg-card); --glass-border: var(--border); --card-shadow: var(--shadow-md); }
 
+/* ----------------------------------------------------------------
+   2. BASE RESET AND GLOBAL ELEMENT STYLES
+   Browser default spacing removed, then the basic look of the
+   page (body font, headings, links, scrollbar, text selection).
+   ---------------------------------------------------------------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -100,11 +136,17 @@ a:hover { color: var(--accent-hover); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* Legacy helper classes still referenced in markup */
+/* Old helper classes kept in case older markup still uses them */
 .glass-panel { background: var(--bg-card); border: 1px solid var(--border); transition: border-color var(--t-base), box-shadow var(--t-base); }
 .super-card-hover:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 
-/* ---------------------------------------------------------- Navbar */
+/* ----------------------------------------------------------------
+   3. NAVBAR
+   The fixed bar at the top of every page: logo on the left, page
+   links in the middle, and search/language/theme/join buttons on
+   the right. Below 900px width the page links and join button are
+   replaced by a hamburger button that opens the mobile menu.
+   ---------------------------------------------------------------- */
 #navbar {
   position: fixed;
   top: 0;
@@ -205,7 +247,8 @@ a:hover { color: var(--accent-hover); }
 }
 .join-btn:hover { background: var(--accent-hover); color: #fff; }
 
-/* Mobile Menu — compact side panel, app-style, not a full-page takeover */
+/* Mobile menu: a small side panel that drops down from the navbar,
+   used instead of the page links and join button under 900px width. */
 #mobile-menu {
   display: none;
   position: fixed;
@@ -256,8 +299,17 @@ a:hover { color: var(--accent-hover); }
   .nav-utils { gap: 2px; }
 }
 
-/* ---------------------------------------------------------- Layout & type */
+/* ----------------------------------------------------------------
+   4. SHARED LAYOUT PIECES
+   Building blocks reused across every page: the max-width wrapper
+   each section sits in, the thin animated line down each side of
+   the page on wide screens, section titles and labels, chips,
+   badges, buttons, and small helpers like scroll-reveal.
+   ---------------------------------------------------------------- */
 .page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 104px; }
+
+/* Vertical separator lines down the left and right edge of each
+   section, visible on screens 1200px and wider. Purely decorative. */
 @keyframes flowVerticalLine {
   0% { background-position: 0 0; }
   100% { background-position: 0 200%; }
@@ -363,12 +415,20 @@ a:hover { color: var(--accent-hover); }
 .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-/* ---------------------------------------------------------- Home banner */
+/* ----------------------------------------------------------------
+   5. HOME PAGE HERO
+   The top section of the home page: the photo slideshow, the main
+   heading, the short description, and the topic chips underneath.
+   ---------------------------------------------------------------- */
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 128px 24px 32px;
 }
+/* The research pillar boxes sit in a .page-section right after the hero.
+   Its own top padding would double up with the hero's bottom padding
+   above, so pull it in tight here. */
+.home-banner + .page-section { padding-top: 4px; }
 .home-banner h1 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 12px; max-width: none; text-align: center; }
 .home-banner .section-desc { font-size: 16px; margin-bottom: 16px; max-width: 800px; margin-left: auto; margin-right: auto; text-align: center; }
 .home-slideshow, .group-photo { height: 300px; }
@@ -440,7 +500,13 @@ a:hover { color: var(--accent-hover); }
   .slide-dot { width: 26px; height: 26px; }
 }
 
-/* ---------------------------------------------------------- Profile card (People + PI spotlight) */
+/* ----------------------------------------------------------------
+   6. PROFILE CARDS (People page)
+   One card per person, grouped by category (Group Leader,
+   Postdoctoral Researchers, PhD Students, and so on). Each
+   category gets its own accent colour, used for the hover border,
+   the name, chips, and the heading pill above the group.
+   ---------------------------------------------------------------- */
 .profile-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -449,6 +515,7 @@ a:hover { color: var(--accent-hover); }
   padding: 20px;
   transition: box-shadow var(--t-base), border-color var(--t-base), transform var(--t-base);
 }
+/* One accent colour per category, used by the hover rules below via var(--cat-accent) */
 .cat-postdocs { --cat-accent: #2563eb; }
 .cat-phd { --cat-accent: #7c3aed; }
 .cat-masters { --cat-accent: #d97706; }
@@ -510,10 +577,11 @@ a:hover { color: var(--accent-hover); }
 }
 .profile-name { font-family: var(--serif); font-size: 16px; font-weight: 700; margin-bottom: 2px; text-align: left; }
 .profile-title { font-size: 11px; color: var(--muted); text-align: left; }
-.profile-bio { font-size: 13px; color: var(--muted); text-align: left; margin-bottom: 10px; }
+/* Bio text is always justified, even on the centred Group Leader card,
+   so name and title can be centred while the paragraph itself stays readable. */
+.profile-bio { font-size: 13px; color: var(--muted); text-align: justify; margin-bottom: 10px; }
 .profile-card.cat-faculty .profile-name,
-.profile-card.cat-faculty .profile-title,
-.profile-card.cat-faculty .profile-bio { text-align: center; }
+.profile-card.cat-faculty .profile-title { text-align: center; }
 .profile-card.cat-faculty .profile-chips { justify-content: center; }
 .profile-bio-full { display: none; }
 .profile-bio-full.open { display: block; }
@@ -547,6 +615,9 @@ a:hover { color: var(--accent-hover); }
 .icon-link-dummy:hover { background: none; }
 .icon-link-dummy i { color: var(--faint) !important; }
 
+/* Category groups and the grid of cards inside each one. A group with
+   only one person (the Group Leader, or a category pruned down to one
+   real person) gets the people-grid-solo layout instead of a full grid. */
 .people-section { margin-bottom: 32px; }
 .people-section > .section-label, .alumni-toggle .section-label {
   text-align: center;
@@ -595,7 +666,12 @@ a:hover { color: var(--accent-hover); }
   .people-section.cat-faculty .people-grid.people-grid-solo { margin: 0 auto; }
 }
 
-/* ---------------------------------------------------------- Academic cards (Research / Projects) */
+/* ----------------------------------------------------------------
+   7. ACADEMIC CARDS (Research, Projects, News)
+   The shared card style used for research pillar cards and project
+   cards, plus the two-column layout that puts the news ticker next
+   to the projects list.
+   ---------------------------------------------------------------- */
 .card-academic {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -615,12 +691,17 @@ a:hover { color: var(--accent-hover); }
 }
 .tier-block { margin-bottom: 24px; }
 
+/* Projects on the left, news on the right, side by side from 900px up */
 .projects-news-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
 @media (min-width: 900px) {
   .projects-news-grid { grid-template-columns: 1.6fr 1fr; }
   .news-col { border-left: 1px solid var(--border); padding-left: 32px; }
 }
 
+/* News ticker: a fixed-height box that auto-scrolls through the news
+   cards and loops seamlessly. The item list is duplicated once in the
+   markup so the loop point is invisible; the mask fades the top and
+   bottom edges so items don't appear to cut off abruptly. */
 .news-ticker {
   position: relative;
   height: 400px;
@@ -636,7 +717,11 @@ a:hover { color: var(--accent-hover); }
   to { transform: translateY(-50%); }
 }
 
-/* ---------------------------------------------------------- Publications & News — dense list rows */
+/* ----------------------------------------------------------------
+   8. PUBLICATIONS AND NEWS LIST ROWS
+   Publications render as compact list rows; news renders as its
+   own boxy card style further down. Shared hover styling for both.
+   ---------------------------------------------------------------- */
 .pub-entry, .news-entry {
   padding: 16px 12px;
   margin: 0 -12px;
@@ -659,6 +744,9 @@ a:hover { color: var(--accent-hover); }
 .pub-doi { font-family: var(--mono); }
 .pub-doi:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
+/* Publications list scrolls inside a fixed-height panel; the round
+   button below it jumps forward one screen at a time, and loops back
+   to the top once the list is scrolled to the bottom. */
 .pub-panel { position: relative; }
 .pub-panel .scrollable-list {
   max-height: 620px;
@@ -698,7 +786,11 @@ a:hover { color: var(--accent-hover); }
 }
 .news-entry:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 
-/* ---------------------------------------------------------- Blog */
+/* ----------------------------------------------------------------
+   9. BLOG
+   The blog list (small preview cards) and the full blog post view,
+   which is reached by clicking a card and replaces the page content.
+   ---------------------------------------------------------------- */
 .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: start; }
 .blog-card {
   border-radius: var(--radius-lg);
@@ -746,7 +838,13 @@ a:hover { color: var(--accent-hover); }
 .blog-post-body strong { color: var(--fg); }
 .blog-post-body code { font-family: var(--mono); background: var(--accent-light); padding: 2px 6px; border-radius: 4px; color: var(--accent); font-size: 0.88em; }
 
-/* ---------------------------------------------------------- Forms */
+/* ----------------------------------------------------------------
+   10. FORMS AND THE JOIN US POPUP
+   Shared input styling used by the Join Us form, plus the popup
+   (overlay and centred box) that the form sits inside. The popup
+   opens when the "Join Us" button in the navbar or mobile menu
+   is clicked.
+   ---------------------------------------------------------------- */
 .form-label { display: block; font-family: var(--mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 6px; }
 .form-input, .form-select, .form-textarea {
   width: 100%;
@@ -802,7 +900,11 @@ a:hover { color: var(--accent-hover); }
 .join-modal-close:hover { background: var(--bg-alt); color: var(--fg); }
 @media (max-width: 600px) { .join-modal { padding: 24px 20px; } }
 
-/* ---------------------------------------------------------- Command Palette Search */
+/* ----------------------------------------------------------------
+   11. COMMAND PALETTE SEARCH
+   The search popup opened with the search icon or Ctrl/Cmd+K.
+   Same overlay and centred box pattern as the Join Us popup above.
+   ---------------------------------------------------------------- */
 .srch-overlay {
   position: fixed; inset: 0; z-index: 9998;
   display: flex; align-items: flex-start; justify-content: center;
@@ -861,7 +963,13 @@ a:hover { color: var(--accent-hover); }
   .srch-box { width: calc(100vw - 24px); max-height: calc(100vh - 24px - env(safe-area-inset-top)); }
 }
 
-/* ---------------------------------------------------------- Language switcher */
+/* ----------------------------------------------------------------
+   12. LANGUAGE SWITCHER
+   The small flag button in the navbar that toggles the page between
+   English and Danish using Google Translate. The rules below also
+   hide Google's own translate banner and popup, which would
+   otherwise show up uninvited.
+   ---------------------------------------------------------------- */
 .lang-toggle-btn img {
   width: 20px;
   height: 14px;
@@ -870,9 +978,9 @@ a:hover { color: var(--accent-hover); }
   box-shadow: 0 0 0 1px var(--border);
 }
 
-/* Suppress Google Translate's own UI (top banner, tooltip, loading spinner) —
-   Google's script injects these as fixed body children and pushes body down
-   with an inline top offset; neutralise both. */
+/* Google's translate script injects its own banner and tooltip as fixed
+   elements, and pushes the whole page down with an inline top offset.
+   These rules cancel both, so the page layout stays untouched. */
 html { margin-top: 0 !important; }
 body { top: 0 !important; position: static !important; }
 .goog-te-banner-frame,
@@ -881,7 +989,13 @@ body > .skiptranslate {
   display: none !important;
 }
 
-/* ---------------------------------------------------------- Footer */
+/* ----------------------------------------------------------------
+   13. FOOTER
+   The bar at the bottom of every page: logo, GitHub link, and the
+   copyright line. The back-to-top button further down is fixed to
+   the screen, not part of the footer itself, but lives in this
+   section because it is closely related.
+   ---------------------------------------------------------------- */
 footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 32px; padding: 14px 0; }
 footer .logo-lockup { height: 38px; }
 @media (min-width: 640px) { footer .logo-lockup { height: 48px; } }
@@ -893,7 +1007,7 @@ footer .logo-lockup { height: 38px; }
   .footer-brand { justify-content: center; }
 }
 
-/* Back to top — circular scroll-progress ring */
+/* Back to top button: a circular ring that fills in as the page scrolls */
 /* #scroll-to-top (id selector) guards position:fixed against the [data-tip] attribute rule below, which shares .back-to-top's specificity and would otherwise win by source order */
 #scroll-to-top { position: fixed; }
 .back-to-top {
@@ -932,7 +1046,12 @@ footer .logo-lockup { height: 38px; }
 .progress-ring__background { stroke: transparent; }
 .progress-ring__circle { stroke: var(--accent); transition: stroke-dashoffset 0.1s linear; stroke-linecap: round; }
 
-/* Tooltips */
+/* ----------------------------------------------------------------
+   14. TOOLTIPS AND PAGE ROUTING
+   Small text labels that appear on hover for any element with a
+   data-tip attribute, plus the rules that show only one page
+   section at a time.
+   ---------------------------------------------------------------- */
 [data-tip] { position: relative; }
 [data-tip]::after {
   content: attr(data-tip);
@@ -955,7 +1074,7 @@ footer .logo-lockup { height: 38px; }
   transform: translateY(-50%) translateX(-8px);
 }
 
-/* Page router — one section visible at a time */
+/* Page router: only one page-view section is visible at a time */
 .page-view { display: block; scroll-margin-top: 104px; }
 .page-view + .page-view > .page-section:first-child { border-top: 2px solid var(--divider); }
 #page-blog-post { display: none; }
