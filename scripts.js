@@ -731,6 +731,14 @@ window.renderPeople = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
+// Blog folders are named with a leading number for ordering on disk
+// (e.g. "1_cf-bond-explained"), but that number has no place in a link
+// meant for sharing. This strips it, so the shareable URL just reads
+// ?id=cf-bond-explained.
+function publicBlogSlug(id) {
+  return (id || '').replace(/^\d+_/, '');
+}
+
 // 6. Blogs renderer (the preview card list on the Blogs page)
 window.renderBlogs = function() {
   if (typeof MGB_BLOGS === 'undefined') return;
@@ -757,7 +765,7 @@ window.renderBlogs = function() {
         <div class='blog-meta-row'>
           <span class='blog-date'>${b.date || ''} • ${b.category || ''}</span>
           <div style='display:flex; align-items:center; gap:8px;'>
-            <a href='?id=${b.id}#blog-post' class='icon-link blog-permalink' data-tip='Open this post' aria-label='Open this post'><i class='fas fa-link'></i></a>
+            <a href='?id=${publicBlogSlug(b.id)}#blog-post' class='icon-link blog-permalink' data-tip='Open this post' aria-label='Open this post'><i class='fas fa-link'></i></a>
             <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad</a>
           </div>
         </div>
@@ -795,7 +803,7 @@ window.renderBlogPost = function() {
   const container = document.getElementById('blog-post-container');
   if (!container || !id || typeof MGB_BLOGS === 'undefined') return;
 
-  const post = MGB_BLOGS.find(b => b.id === id);
+  const post = MGB_BLOGS.find(b => publicBlogSlug(b.id) === id);
   if (!post) {
     container.innerHTML = '<h2 class="section-title">Post not found</h2>';
     return;
