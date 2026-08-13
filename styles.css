@@ -681,6 +681,7 @@ a:hover { color: var(--accent-hover); }
   transition: box-shadow var(--t-base), border-color var(--t-base);
 }
 .card-academic:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
+.card-academic:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
 .card-academic h3 { font-size: 16px; margin-bottom: 6px; }
 .card-academic p { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
 
@@ -689,8 +690,6 @@ a:hover { color: var(--accent-hover); }
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 14px;
 }
-.tier-block { margin-bottom: 24px; }
-
 /* Projects on the left, news on the right, side by side from 900px up */
 .projects-news-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
 @media (min-width: 900px) {
@@ -783,8 +782,16 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-lg);
   background: var(--bg-card);
   box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
 }
 .news-entry:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+.news-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.news-body { min-width: 0; flex: 1; }
+.news-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
 
 /* ----------------------------------------------------------------
    9. BLOG
@@ -985,7 +992,8 @@ html { margin-top: 0 !important; }
 body { top: 0 !important; position: static !important; }
 .goog-te-banner-frame,
 .goog-te-banner-frame.skiptranslate,
-body > .skiptranslate {
+body > .skiptranslate,
+.goog-te-spinner-pos {
   display: none !important;
 }
 
@@ -1079,3 +1087,7 @@ footer .logo-lockup { height: 38px; }
 .page-view + .page-view > .page-section:first-child { border-top: 2px solid var(--divider); }
 #page-blog-post { display: none; }
 #page-blog-post.active { display: block; }
+/* Opening a single blog post (e.g. from a shared link) hides every other
+   section, so the post reads as its own page instead of sitting buried
+   partway down the full scroll. */
+body.viewing-blog-post .page-view:not(#page-blog-post) { display: none; }

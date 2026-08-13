@@ -36,106 +36,216 @@
 
 const MGB_PUBLICATIONS = [
   {
-    "title": "Enzymatic defluorination of long-chain PFAS by a novel dehalogenase",
+    "title": "Single-strain mobilome sequencing quantifies bacterial genetic response to stress, including activity of IS elements, prophages, RNAs, and REPINs",
     "year": 2025,
-    "venue": "Nature Microbiology",
+    "venue": "Plasmid",
     "authors": [
-      "Shaban Ahmad",
-      "Benedetta Togni",
+      "Tue Kjærgaard Nielsen",
+      "Lars Hestbjerg Hansen"
+    ],
+    "tags": [
+      "Mobilome",
+      "IS Elements",
+      "Nanopore Sequencing"
+    ],
+    "doi": "10.1016/j.plasmid.2025.102759"
+  },
+  {
+    "title": "Mobilization of genes encoding potential PFAS-degradation enzymes and positive selection in cyanobacteria",
+    "year": 2025,
+    "venue": "bioRxiv",
+    "authors": [
+      "Asal Forouzandeh",
+      "Malte Storm Lau Schlosser",
+      "Annaliese Nan Vernon",
       "Tue Kjærgaard Nielsen"
     ],
     "tags": [
       "PFAS",
-      "Enzymes",
-      "Defluorination"
+      "Cyanobacteria",
+      "Mobile Genetic Elements"
     ],
-    "doi": "10.1038/s41564-025-0134-x",
-    "pdf": "https://example.com/paper.pdf"
+    "doi": "10.1101/2025.07.23.666183"
   },
   {
-    "title": "Metagenomic mining of environmental DNA reveals widespread dehalogenase diversity",
-    "year": 2024,
-    "venue": "ISME Journal",
+    "title": "Adaptive sampling with Oxford Nanopore offers a simple way to improve the efficiency of plant metagenomic studies",
+    "year": 2025,
+    "venue": "New Phytologist",
     "authors": [
-      "Sarah Williams",
-      "Jonas Randløv",
-      "Tue Kjærgaard Nielsen"
+      "Joost Theo Petra Verhoeven",
+      "Aditya Sanjay Malwe",
+      "Nathan Roussel",
+      "Ida Broman Nielsen",
+      "Sarah S. T. Mak",
+      "Tue Kjærgaard Nielsen",
+      "Christopher James Barnes"
     ],
     "tags": [
-      "Metagenomics",
-      "Ecology",
-      "Mining"
+      "Adaptive Sampling",
+      "Nanopore Sequencing",
+      "Plant Metagenomics"
     ],
-    "doi": "10.1038/s41396-024-0012-y",
-    "pdf": "https://example.com/paper2.pdf"
+    "doi": "10.1111/nph.70450"
   },
   {
-    "title": "Structural basis for substrate specificity in C-F bond cleaving enzymes",
-    "year": 2024,
-    "venue": "Journal of Biological Chemistry",
+    "title": "The complete genome of 2,6-dichlorobenzamide (BAM) degrader Aminobacter sp. MSH1 suggests a polyploid chromosome, phylogenetic reassignment, and functions of plasmids",
+    "year": 2021,
+    "venue": "Scientific Reports",
     "authors": [
-      "Benedetta Togni",
-      "David Miller",
-      "Tue Kjærgaard Nielsen"
+      "Tue Kjærgaard Nielsen",
+      "Benjamin Horemans",
+      "Cédric Lood",
+      "Jeroen T'Syen",
+      "Vera van Noort",
+      "Rob Lavigne",
+      "Lea Ellegaard-Jensen",
+      "Ole Hylling",
+      "Jens Aamand",
+      "Dirk Springael",
+      "Lars Hestbjerg Hansen"
     ],
     "tags": [
-      "Structural Biology",
-      "Crystallography",
-      "Biochemistry"
+      "Genome Sequencing",
+      "Bioremediation",
+      "Plasmids"
     ],
-    "doi": "10.1016/j.jbc.2024.102345",
-    "pdf": "https://example.com/paper3.pdf"
+    "doi": "10.1038/s41598-021-98184-5"
   },
   {
-    "title": "Machine learning-guided discovery of PFAS-active haloacid dehalogenases",
-    "year": 2023,
-    "venue": "PLOS Computational Biology",
+    "title": "The first characterized phage against a member of the ecologically important sphingomonads reveals high dissimilarity against all other known phages",
+    "year": 2017,
+    "venue": "Scientific Reports",
     "authors": [
-      "Shaban Ahmad",
-      "Asal Forouzandeh",
-      "Tue Kjærgaard Nielsen"
+      "Tue Kjærgaard Nielsen",
+      "Alexander Byth Carstens",
+      "Patrick Browne",
+      "René Lametsch",
+      "Horst Neve",
+      "Witold Kot",
+      "Lars Hestbjerg Hansen"
     ],
     "tags": [
-      "Machine Learning",
-      "HADs",
-      "PFAS"
+      "Bacteriophages",
+      "Sphingomonads",
+      "Comparative Genomics"
     ],
-    "doi": "10.1371/journal.pcbi.1011234",
-    "pdf": "https://example.com/paper4.pdf"
+    "doi": "10.1038/s41598-017-13911-1"
   },
   {
-    "title": "Fluoride-release kinetics reveal rate-limiting steps in microbial PFAS defluorination",
-    "year": 2023,
-    "venue": "Environmental Science & Technology",
+    "title": "Degradation of mecoprop in polluted landfill leachate and waste water in a moving bed biofilm reactor",
+    "year": 2017,
+    "venue": "Water Research",
     "authors": [
-      "Asal Forouzandeh",
-      "James Wilson",
-      "Tue Kjærgaard Nielsen"
+      "Mònica Escolà Casas",
+      "Tue Kjærgaard Nielsen",
+      "Witold Kot",
+      "Lars Hestbjerg Hansen",
+      "Anders Johansen",
+      "Kai Bester"
     ],
     "tags": [
-      "Kinetics",
-      "PFAS",
-      "Environmental Chemistry"
+      "Herbicide Degradation",
+      "Bioreactor",
+      "Water Treatment"
     ],
-    "doi": "10.1021/acs.est.3c04567",
-    "pdf": "https://example.com/paper5.pdf"
+    "doi": "10.1016/j.watres.2017.05.031"
+  },
+  {
+    "title": "Evolution of Sphingomonad Gene Clusters Related to Pesticide Catabolism Revealed by Genome Sequence and Mobilomics of Sphingobium herbicidovorans MH",
+    "year": 2017,
+    "venue": "Genome Biology and Evolution",
+    "authors": [
+      "Tue Kjærgaard Nielsen",
+      "Morten Rasmussen",
+      "Sandrine Demanèche",
+      "Sébastien Cecillon",
+      "Timothy M. Vogel",
+      "Lars Hestbjerg Hansen"
+    ],
+    "tags": [
+      "Mobilomics",
+      "Pesticide Degradation",
+      "Comparative Genomics"
+    ],
+    "doi": "10.1093/gbe/evx185"
+  },
+  {
+    "title": "Establishment of Bacterial Herbicide Degraders in a Rapid Sand Filter for Bioremediation of Phenoxypropionate-Polluted Groundwater",
+    "year": 2016,
+    "venue": "Applied and Environmental Microbiology",
+    "authors": [
+      "Louise Feld",
+      "Tue Kjærgaard Nielsen",
+      "Lars Hestbjerg Hansen",
+      "Jens Aamand",
+      "Christian Nyrop Albers"
+    ],
+    "tags": [
+      "Bioremediation",
+      "Herbicide Degradation",
+      "Groundwater"
+    ],
+    "doi": "10.1128/AEM.02600-15"
+  },
+  {
+    "title": "Gasification biochar has limited effects on functional and structural diversity of soil microbial communities in a temperate agroecosystem",
+    "year": 2016,
+    "venue": "Soil Biology and Biochemistry",
+    "authors": [
+      "Valentina Imparato",
+      "Veronika Hansen",
+      "Susana S. Santos",
+      "Tue Kjærgaard Nielsen",
+      "Laura Giagnoni",
+      "Henrik Hauggaard-Nielsen",
+      "Anders Johansen",
+      "Giancarlo Renella",
+      "Anne Winding"
+    ],
+    "tags": [
+      "Biochar",
+      "Soil Microbiology",
+      "Community Diversity"
+    ],
+    "doi": "10.1016/j.soilbio.2016.05.004"
+  },
+  {
+    "title": "Novel Insight into the Genetic Context of the cadAB Genes from a 4-chloro-2-methylphenoxyacetic Acid-Degrading Sphingomonas",
+    "year": 2013,
+    "venue": "PLoS ONE",
+    "authors": [
+      "Tue Kjærgaard Nielsen",
+      "Zhuofei Xu",
+      "Erkin Gözdereliler",
+      "Jens Aamand",
+      "Lars Hestbjerg Hansen",
+      "Sebastian R. Sørensen"
+    ],
+    "tags": [
+      "Herbicide Degradation",
+      "Gene Context",
+      "Sphingomonas"
+    ],
+    "doi": "10.1371/journal.pone.0083346"
   }
 ];
 // News items, newest first. Shown as the auto-scrolling ticker next to Projects.
 const MGB_NEWS         = [
   {
-    "title": "New paper out in Nature Microbiology",
-    "date": "2025-02-28",
-    "category": "Publication",
-    "description": "Our latest study on enzymatic defluorination of long-chain PFAS is now published.",
-    "content": "Read the full paper to see how we engineered the enzyme for improved activity."
+    "title": "Eva Højgaard Jensen defends her MSc thesis",
+    "date": "2026-07-01",
+    "category": "Graduation",
+    "description": "Eva successfully defended her thesis, \"Nothing is forever: analogue enrichment for microbial degradation of TFA\", supervised by Tue Kjærgaard Nielsen.",
+    "image": "1_People/7_Alumni/eva-hojgaard-jensen.webp",
+    "link": "https://www.linkedin.com/feed/update/urn:li:activity:7475913018447568897/"
   },
   {
-    "title": "Benedetta Togni wins Best Poster at Gordon Research Conference",
-    "date": "2024-11-03",
-    "category": "Award",
-    "description": "Benedetta presented her latest structural work on dehalogenase active sites.",
-    "content": "Her presentation highlighted the novel structural motifs necessary for binding long-chain PFAS."
+    "title": "Jonas Borup Randløv defends his BSc project",
+    "date": "2026-08-11",
+    "category": "Graduation",
+    "description": "Jonas successfully defended his bachelor's project, \"Modelling Prospects of Catabolic Enzymes for Bioremediation of PFAS\", supervised by Tue Kjærgaard Nielsen and Shaban Ahmad. He continues into an MSc in Bioinformatics at UCPH.",
+    "image": "1_People/7_Alumni/jonas-randlov.webp",
+    "link": "https://www.linkedin.com/feed/update/urn:li:activity:7492905416046247936/"
   }
 ];
 // The four research pillar cards on the Home page ("01" through "04").
@@ -646,7 +756,10 @@ window.renderBlogs = function() {
       <div class='blog-body'>
         <div class='blog-meta-row'>
           <span class='blog-date'>${b.date || ''} • ${b.category || ''}</span>
-          <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad</a>
+          <div style='display:flex; align-items:center; gap:8px;'>
+            <a href='?id=${b.id}#blog-post' class='icon-link blog-permalink' data-tip='Open this post' aria-label='Open this post'><i class='fas fa-link'></i></a>
+            <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad</a>
+          </div>
         </div>
         <h3 class='blog-title'>${b.title || ''}</h3>
         <p class='blog-desc line-clamp-3'>${b.description || ''}</p>
@@ -664,8 +777,9 @@ window.renderBlogs = function() {
     }
     toggleBtn.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
     el.querySelector('.blog-author-link').addEventListener('click', (e) => e.stopPropagation());
+    el.querySelector('.blog-permalink').addEventListener('click', (e) => e.stopPropagation());
     el.addEventListener('click', (e) => {
-      if (e.target.closest('.blog-author-link') || e.target.closest('.blog-toggle')) return;
+      if (e.target.closest('.blog-author-link') || e.target.closest('.blog-toggle') || e.target.closest('.blog-permalink')) return;
       toggle();
     });
     grid.appendChild(el);
@@ -791,32 +905,25 @@ window.renderReaction = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 10. Projects renderer (grouped into tiers, such as Active and Finished)
+// 10. Projects renderer. Each card already shows its own status badge
+// (Active, Finished in 2026, etc.), so there's no separate tier heading
+// above the grid, unlike the other card renderers.
 window.renderProjects = function() {
   if (typeof MGB_PROJECTS === 'undefined') return;
   const container = document.getElementById('projects-container');
   if (!container) return;
 
-  const tiers = [...new Set(MGB_PROJECTS.map(p => p.tier || 'Projects'))];
-  tiers.forEach(tier => {
-    const items = MGB_PROJECTS.filter(p => (p.tier || 'Projects') === tier);
-    const wrap = document.createElement('div');
-    wrap.className = 'tier-block';
-    wrap.innerHTML = `
-      <h3 class='section-label' style="margin-bottom:12px;">${tier}</h3>
-      <div class='project-grid'>
-        ${items.map(p => `
-          <div class='card-academic' data-reveal>
-            <span class='badge badge-fg' style='margin-bottom:10px;'>${p.status || ''}</span>
-            <h3>${p.title}</h3>
-            <p>${p.description}</p>
-            ${p.tags ? `<div class='chip-container'>${p.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
-          </div>
-        `).join('')}
-      </div>
-    `;
-    container.appendChild(wrap);
-  });
+  const grid = document.createElement('div');
+  grid.className = 'project-grid';
+  grid.innerHTML = MGB_PROJECTS.map(p => `
+    <div class='card-academic' data-reveal>
+      <span class='badge badge-fg' style='margin-bottom:10px;'>${p.status || ''}</span>
+      <h3>${p.title}</h3>
+      <p>${p.description}</p>
+      ${p.tags ? `<div class='chip-container'>${p.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
+    </div>
+  `).join('');
+  container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
@@ -829,13 +936,20 @@ window.renderNews = function() {
   const sorted = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
   if (sorted.length === 0) return;
 
-  const entryHtml = n => `
-    <div class='news-entry'>
-      <div class='news-meta'><span class='badge'>${n.category || ''}</span><span class='news-date'>${n.date || ''}</span></div>
-      <h3 class='news-title'>${n.title}</h3>
-      <p style='color:var(--muted); font-size:13.5px; margin-top:4px;'>${n.description || ''}</p>
-    </div>
+  const entryHtml = n => {
+    const tag = n.link ? 'a' : 'div';
+    const openAttrs = n.link ? ` href='${n.link}' target='_blank' rel='noopener'` : '';
+    return `
+    <${tag} class='news-entry'${openAttrs}>
+      ${n.image ? `<img src='${adjustPath(n.image)}' alt='' class='news-avatar' loading='lazy'>` : ''}
+      <div class='news-body'>
+        <div class='news-meta'><span class='badge'>${n.category || ''}</span><span class='news-date'>${n.date || ''}</span></div>
+        <h3 class='news-title'>${n.title}</h3>
+        <p class='news-desc'>${n.description || ''}</p>
+      </div>
+    </${tag}>
   `;
+  };
 
   const box = document.createElement('div');
   box.className = 'news-ticker';
@@ -1043,9 +1157,11 @@ function handleRouting() {
   if (key === 'blog-post') {
     const target = document.getElementById('page-blog-post');
     if (target) target.classList.add('active');
+    document.body.classList.add('viewing-blog-post');
     window.scrollTo({ top: 0, behavior: 'instant' });
     return;
   }
+  document.body.classList.remove('viewing-blog-post');
   const target = document.getElementById('page-' + key);
   if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
   else window.scrollTo({ top: 0, behavior: 'instant' });
