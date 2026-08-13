@@ -3,23 +3,23 @@
 One folder per category:
 
 ```
-1_faculty/     Group Leader
-2_postdocs/    Postdocs
-3_phd/         PhD Students
-4_masters/     MSc Students
-5_bachelors/   BSc Students
-6_others/      Others
-7_alumni/      Alumni
+1_Faculty/     Group Leader
+2_Postdocs/    Postdoctoral Researchers
+3_PhD/         PhD Students
+4_Masters/     MSc Students
+5_Bachelors/   BSc Students
+6_Others/      Others
+7_Alumni/      Alumni
 ```
 
 Each person is a `<id>.json` file plus (optionally) their photo, both sitting directly
-in their category folder — e.g. `2_postdocs/asal-forouzandeh.json` and
-`2_postdocs/asal-forouzandeh.webp` sit side by side.
+in their category folder — e.g. `2_Postdocs/asal-forouzandeh.json` and
+`2_Postdocs/asal-forouzandeh.webp` sit side by side.
 
 ## Adding a person
 
 1. Copy `template.json` into the right category folder, rename it to `<id>.json`
-   (e.g. `4_masters/jane-doe.json`).
+   (e.g. `4_Masters/jane-doe.json`).
 2. Fill in the fields:
    - `id` — must match the filename (no `.json`).
    - `email`, `orcid`, `website` — leave as `""` to hide that button on the card. Only

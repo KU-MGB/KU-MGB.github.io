@@ -754,6 +754,7 @@ window.renderBlogs = function() {
   grid.className = 'blog-grid';
 
   MGB_BLOGS.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).forEach(b => {
+    const postUrl = `?id=${publicBlogSlug(b.id)}#blog-post`;
     const el = document.createElement('div');
     el.className = 'blog-card';
     el.setAttribute('data-reveal', '');
@@ -764,31 +765,17 @@ window.renderBlogs = function() {
       <div class='blog-body'>
         <div class='blog-meta-row'>
           <span class='blog-date'>${b.date || ''} • ${b.category || ''}</span>
-          <div style='display:flex; align-items:center; gap:8px;'>
-            <a href='?id=${publicBlogSlug(b.id)}#blog-post' class='icon-link blog-permalink' data-tip='Open this post' aria-label='Open this post'><i class='fas fa-link'></i></a>
-            <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad</a>
-          </div>
+          <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad <i class='fab fa-linkedin' aria-hidden='true'></i></a>
         </div>
-        <h3 class='blog-title'>${b.title || ''}</h3>
+        <a href='${postUrl}' class='blog-title'>${b.title || ''}</a>
         <p class='blog-desc line-clamp-3'>${b.description || ''}</p>
-        <button type='button' class='text-link blog-toggle' aria-expanded='false'>Read more &rarr;</button>
-        <div class='blog-expand'>${simpleMarkdown(b.body || '')}</div>
+        <a href='${postUrl}' class='text-link'>Read more &rarr;</a>
       </div>
     `;
-    const toggleBtn = el.querySelector('.blog-toggle');
-    const expandEl = el.querySelector('.blog-expand');
-    function toggle() {
-      const open = expandEl.classList.toggle('open');
-      toggleBtn.setAttribute('aria-expanded', String(open));
-      toggleBtn.innerHTML = open ? 'Show less &uarr;' : 'Read more &rarr;';
-      if (!open) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-    toggleBtn.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
     el.querySelector('.blog-author-link').addEventListener('click', (e) => e.stopPropagation());
-    el.querySelector('.blog-permalink').addEventListener('click', (e) => e.stopPropagation());
     el.addEventListener('click', (e) => {
-      if (e.target.closest('.blog-author-link') || e.target.closest('.blog-toggle') || e.target.closest('.blog-permalink')) return;
-      toggle();
+      if (e.target.closest('.blog-author-link') || e.target.closest('a')) return;
+      window.location.href = postUrl;
     });
     grid.appendChild(el);
   });
@@ -811,7 +798,7 @@ window.renderBlogPost = function() {
 
   document.title = `${post.title} | MGB Lab`;
   container.innerHTML = `
-    <a href="#blogs-news" class="text-link" style="margin-bottom:24px;">&larr; Back to Blog</a>
+    <a href="#blogs" class="text-link" style="margin-bottom:24px;">&larr; Back to Blog</a>
     <div class="blog-post-header">
       <div class="section-label" style="justify-content:center; display:flex">${post.date || ''} • ${post.category || ''}</div>
       <h1 class="blog-post-title">${post.title || ''}</h1>
@@ -1177,8 +1164,15 @@ function handleRouting() {
 window.addEventListener('hashchange', handleRouting);
 document.addEventListener('DOMContentLoaded', () => {
   const hash = window.location.hash;
-  if (hash && hash !== '#home') setTimeout(handleRouting, 400);
-  else handleRouting();
+  if (hash && hash !== '#home') {
+    // People, blog cards, and photos load asynchronously and can still be
+    // growing the page taller than it was at this first attempt, so a
+    // second pass runs once that data has actually arrived and rendered.
+    setTimeout(handleRouting, 400);
+    window.MGB_DATA_READY.then(() => setTimeout(handleRouting, 50));
+  } else {
+    handleRouting();
+  }
 });
 
 function initSectionNav() {
@@ -1192,11 +1186,16 @@ function initSectionNav() {
     if (!target) return;
     e.preventDefault();
     history.pushState(null, '', hash);
+    // Leaving a single-post view (e.g. the "Back to Blog" link) needs to
+    // clear the state handleRouting() would otherwise clear, since pushState
+    // does not fire hashchange and so never runs handleRouting() itself.
+    document.body.classList.remove('viewing-blog-post');
+    document.getElementById('page-blog-post')?.classList.remove('active');
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
   });
 
-  const sections = ['home', 'projects', 'people', 'publications', 'blogs-news']
+  const sections = ['home', 'projects', 'people', 'publications', 'blogs']
     .map(k => document.getElementById('page-' + k)).filter(Boolean);
   if (!sections.length || !('IntersectionObserver' in window)) return;
   const observer = new IntersectionObserver((entries) => {
@@ -1244,6 +1243,21 @@ window.changeLanguage = function(code) {
     }
   });
 };
+
+// Google's translate script inserts its own loading spinner and banner as
+// fresh elements directly on <body> right when a translation starts, with
+// an inline style that can outrank the CSS rules above. Catching them the
+// moment they're added and force-hiding them from here wins that fight,
+// since this runs after Google's own script sets its style.
+(function () {
+  const hide = (el) => { el.style.setProperty('display', 'none', 'important'); };
+  new MutationObserver((mutations) => {
+    mutations.forEach((m) => m.addedNodes.forEach((node) => {
+      if (node.nodeType !== 1) return;
+      if (node.classList?.contains('skiptranslate') || (node.id && node.id.startsWith('goog-gt'))) hide(node);
+    }));
+  }).observe(document.body, { childList: true });
+})();
 
 
 // ----------------------------------------------------------------
