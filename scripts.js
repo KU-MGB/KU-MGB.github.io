@@ -701,7 +701,7 @@ window.renderPeople = function() {
             ${fullBio ? `
             <p class='profile-bio profile-bio-short'>${shortBio}${isLong ? ` <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}</p>
             ${isLong ? `<p class='profile-bio profile-bio-full'>${fullBio} <button type='button' class='text-link profile-bio-toggle' aria-expanded='true'>Show less &uarr;</button></p>` : ''}` : ''}
-            ${p.tags ? `<div class='profile-chips'>${p.tags.slice(0, 3).map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
+            ${p.tags && p.tags.length ? `<div class='profile-chips'>${p.tags.slice(0, 3).map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
           </div>
         `;
     }).join('');

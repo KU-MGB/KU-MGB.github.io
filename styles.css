@@ -555,6 +555,10 @@ a:hover { color: var(--accent-hover); }
   gap: 10px;
   margin-bottom: 14px;
 }
+/* Alumni cards intentionally carry no bio/tags, so drop the header's
+   trailing margin when it's the only thing in the card (no dangling gap
+   between it and the card's own bottom padding). */
+.profile-card > .profile-header:last-child { margin-bottom: 0; }
 .profile-header-left {
   display: flex;
   align-items: center;
@@ -592,6 +596,13 @@ a:hover { color: var(--accent-hover); }
 /* Bio text is always justified, even on the centred Group Leader card,
    so name and title can be centred while the paragraph itself stays readable. */
 .profile-bio { font-size: 13px; color: var(--muted); text-align: justify; margin-bottom: 10px; }
+/* Alumni cards only ever show a photo, name, role, and LinkedIn link (no
+   bio/tags by design), so they run noticeably smaller than the other
+   category cards instead of reserving the same padding/avatar size for
+   content that's never there. */
+.profile-card.cat-alumni { padding: 14px 16px; }
+.profile-card.cat-alumni .profile-photo,
+.profile-card.cat-alumni .profile-initials { width: 48px; height: 48px; font-size: 16px; }
 .profile-card.cat-faculty .profile-name,
 .profile-card.cat-faculty .profile-title { text-align: center; }
 .profile-card.cat-faculty .profile-chips { justify-content: center; }
