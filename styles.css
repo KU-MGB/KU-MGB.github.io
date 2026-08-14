@@ -460,7 +460,7 @@ a:hover { color: var(--accent-hover); }
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: var(--bg-alt);
+  background: var(--bg);
 }
 .photo-placeholder {
   display: flex;
