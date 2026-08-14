@@ -309,14 +309,14 @@ const MGB_PROJECTS     = [
     "tier": "Active",
     "status": "Active",
     "description": "Proximity labelling using a photocatalyst to explore PFAS-protein interactions. The project is supported by the Novo Nordisk Foundation.",
-    "tags": ["PFAS", "Novo Nordisk Foundation"]
+    "tags": ["PFAS", "Novo Nordisk Foundation", "Proximity Labelling"]
   },
   {
     "id": "Sapere Aude",
     "title": "Sapere Aude: Solving microbial degradation of PFAS",
     "tier": "Active",
     "status": "Active",
-    "description": "PFAS resist breakdown because their carbon-fluorine bonds are so stable, and the fluoride released when bacteria do break them down is toxic to the bacteria themselves. This DFF Research Leader project searches for new PFAS-degrading bacteria and enzymes using machine learning and microbial community characterisation, and investigates how to make bacteria tolerant enough to fluoride to survive the job.",
+    "description": "PFAS resist breakdown partly because the fluoride released as bacteria do break it down is toxic to them. This DFF Research Leader project uses machine learning and microbial community characterisation to find new PFAS-degrading bacteria and enzymes, and to make them fluoride-tolerant enough to survive the job.",
     "tags": ["PFAS", "Machine Learning", "Fluoride Tolerance"]
   },
   {
