@@ -12,6 +12,6 @@
     "HADs",
     "PFAS"
   ],
-  "bio": "Benedetta Togni is a Master's student in Bioinformatics for Computational Genomics at Politecnico di Milano and Università degli Studi di Milano. Her research focuses on the computational discovery and characterization of novel enzymes for environmental applications, with particular interest in the biodegradation and bioremediation of persistent pollutants. Her current thesis project involves metagenomic screening for the identification and prioritization of novel Haloacid Dehalogenase (HAD) candidates potentially capable of C–F bond cleavage, combining protein–ligand modeling, molecular dynamics, QM/MM simulations, and machine learning approaches to investigate enzyme function and defluorination capability. Her research interests include the application of machine learning and deep learning, structural bioinformatics, and computational chemistry to enzyme discovery and engineering, with a particular focus on developing computational approaches for environmentally relevant biocatalysis and pollutant degradation.",
+  "bio": "Benedetta is a Master's student in Bioinformatics for Computational Genomics at Politecnico di Milano, using metagenomic screening and machine learning to find Haloacid Dehalogenase (HAD) enzymes that can break the carbon–fluorine bond.",
   "avatar": "benedetta-togni.webp"
 }

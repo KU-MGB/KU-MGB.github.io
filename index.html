@@ -75,6 +75,7 @@
         <a href="#projects">Projects</a>
         <a href="#people">People</a>
         <a href="#publications">Publications</a>
+        <a href="#tools">Tools</a>
         <a href="#blogs">Blogs</a>
       </div>
       <div class="nav-utils">
@@ -101,6 +102,7 @@
     <a href="#projects">Projects</a>
     <a href="#people">People</a>
     <a href="#publications">Publications</a>
+    <a href="#tools">Tools</a>
     <a href="#blogs">Blogs</a>
     <button type="button" onclick="openJoinModal()" style="color:var(--accent)">Join Us &rarr;</button>
   </div>
@@ -124,6 +126,7 @@
         <span class="srch-pill" data-section="projects">Projects</span>
         <span class="srch-pill" data-section="people">People</span>
         <span class="srch-pill" data-section="publications">Publications</span>
+        <span class="srch-pill" data-section="tools">Tools</span>
         <span class="srch-pill" data-section="blogs">Blogs</span>
       </div>
       <div class="srch-body" id="srch-body"></div>
@@ -249,6 +252,14 @@
     </section>
   </div>
 
+  <!-- TOOLS: in-house computational tools, each card linking to its GitHub repo -->
+  <div id="page-tools" class="page-view">
+    <section class="page-section" data-reveal>
+      <h2 class="section-title" style="margin-bottom:16px;">Tools</h2>
+      <div id="tools-container"></div>
+    </section>
+  </div>
+
   <!-- BLOGS: preview cards; clicking one opens the Blog Post view below -->
   <div id="page-blogs" class="page-view">
     <section class="page-section" data-reveal>
@@ -294,7 +305,7 @@
        scripts.js holds all the page content and behaviour. Once it
        has loaded, this block calls each render function to fill in
        the empty container <div>s above. The renderers for static
-       content (research, projects, publications, news) run right
+       content (research, projects, tools, publications, news) run right
        away; the ones that depend on data fetched from JSON files
        (people, blogs, group photo, slideshow) wait for
        window.MGB_DATA_READY first.
@@ -305,6 +316,7 @@
       if (window.renderResearch) window.renderResearch();
       if (window.renderReaction) window.renderReaction();
       if (window.renderProjects) window.renderProjects();
+      if (window.renderTools) window.renderTools();
       if (window.renderPublications) window.renderPublications();
       if (window.renderNews) window.renderNews();
       if (window.initJoinForm) window.initJoinForm();

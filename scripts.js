@@ -9,8 +9,8 @@
 // The file has three parts, in order:
 //
 //   PART 1: STATIC CONTENT (below)
-//   Publications, news, research pillars, projects, and the reaction
-//   pipeline data. To add or edit one of these, just edit the array
+//   Publications, news, research pillars, projects, in-house tools, and
+//   the reaction pipeline data. To add or edit one of these, just edit the array
 //   directly. People and blog posts are handled differently: each
 //   person and each blog post is its own JSON file, kept in
 //   1_People/ and 2_Content/2_Blogs/ (see the README.md in each of
@@ -301,12 +301,12 @@ const MGB_REACTION     = [
     "description": "A catalytic water molecule is activated by the Asp180 base (abstracting H⁺). The hydroxyl attacks the ester, releasing the defluorinated product and restoring Asp10."
   }
 ];
-// Current and past projects, grouped by "tier" (Active, Finished, etc.) on the Projects page.
+// Current and past projects, shown on the Projects page. renderProjects
+// always sorts Active projects ahead of Finished ones (see its comment).
 const MGB_PROJECTS     = [
   {
     "id": "Mapping the PFAS interactome using photocatalytic proximity labelling",
     "title": "Mapping the PFAS interactome using photocatalytic proximity labelling",
-    "tier": "Active",
     "status": "Active",
     "description": "Proximity labelling using a photocatalyst to explore PFAS-protein interactions. The project is supported by the Novo Nordisk Foundation.",
     "tags": ["PFAS", "Novo Nordisk Foundation", "Proximity Labelling"]
@@ -314,7 +314,6 @@ const MGB_PROJECTS     = [
   {
     "id": "Sapere Aude",
     "title": "Sapere Aude: Solving microbial degradation of PFAS",
-    "tier": "Active",
     "status": "Active",
     "description": "PFAS resist breakdown partly because the fluoride released as bacteria do break it down is toxic to them. This DFF Research Leader project uses machine learning and microbial community characterisation to find new PFAS-degrading bacteria and enzymes, and to make them fluoride-tolerant enough to survive the job.",
     "tags": ["PFAS", "Machine Learning", "Fluoride Tolerance"]
@@ -322,10 +321,28 @@ const MGB_PROJECTS     = [
   {
     "id": "DFF Project1",
     "title": "Genetics of PFOS biodegradation",
-    "tier": "Active",
     "status": "Finished in 2026",
     "description": "PFAS is no use to bacteria as an energy source, which is part of why it has no natural enemies among microorganisms. This project investigates the genetics behind that absence of natural degradation pathways. Funded by Danmarks Frie Forskningsfond.",
     "tags": ["PFAS", "Genetics", "Danmarks Frie Forskningsfond"]
+  }
+];
+// In-house computational tools, shown on the Tools page. Both repos are
+// currently private while under development; the links are kept live so
+// they start working the moment each repo is made public.
+const MGB_TOOLS        = [
+  {
+    "name": "DeFluorX",
+    "description": "An automated, fully reproducible pipeline that identifies and prioritises fluoroacetate dehalogenase (FAcD) variants for PFAS defluorination, combining AI-driven modelling with physics-aware validation via WaterMap, molecular dynamics simulations, and QM/MM calculations.",
+    "link": "https://github.com/KU-MGB/DeFluorX",
+    "status": "Private repository — public release coming soon",
+    "tags": ["PFAS", "Enzyme Discovery", "AI"]
+  },
+  {
+    "name": "HADefluorX",
+    "description": "A companion pipeline covering Haloacid Dehalogenases (HADs), applying the same AI-driven screening and physics-aware validation to identify and prioritise HAD variants capable of cleaving the carbon–fluorine bond.",
+    "link": "https://github.com/KU-MGB/HADefluorX",
+    "status": "Private repository — public release coming soon",
+    "tags": ["PFAS", "HADs", "Molecular Dynamics"]
   }
 ];
 // ═══════════════════════════════════════════════════════════════════════════
@@ -906,16 +923,22 @@ window.renderReaction = function() {
 
 // 10. Projects renderer. Each card already shows its own status badge
 // (Active, Finished in 2026, etc.), so there's no separate tier heading
-// above the grid, unlike the other card renderers.
+// above the grid, unlike the other card renderers. Active projects are
+// always sorted ahead of Finished ones, so the 2-column grid's normal
+// reading order (left to right, top to bottom) shows every Active project
+// before any Finished one.
 window.renderProjects = function() {
   if (typeof MGB_PROJECTS === 'undefined') return;
   const container = document.getElementById('projects-container');
   if (!container) return;
 
+  const isFinishedStatus = p => (p.status || '').toLowerCase().includes('finished');
+  const sorted = MGB_PROJECTS.slice().sort((a, b) => isFinishedStatus(a) - isFinishedStatus(b));
+
   const grid = document.createElement('div');
   grid.className = 'project-grid';
-  grid.innerHTML = MGB_PROJECTS.map(p => {
-    const isFinished = (p.status || '').toLowerCase().includes('finished');
+  grid.innerHTML = sorted.map(p => {
+    const isFinished = isFinishedStatus(p);
     return `
     <div class='card-academic${isFinished ? ' card-project-finished' : ''}' data-reveal>
       <span class='badge badge-fg' style='margin-bottom:10px;'>${p.status || ''}</span>
@@ -925,6 +948,28 @@ window.renderProjects = function() {
     </div>
   `;
   }).join('');
+  container.appendChild(grid);
+  if (window.initScrollReveal) window.initScrollReveal();
+}
+
+// 10b. Tools renderer: each card links straight to the tool's GitHub repo
+// (currently private, so the link 404s for visitors until it's made public).
+window.renderTools = function() {
+  if (typeof MGB_TOOLS === 'undefined') return;
+  const container = document.getElementById('tools-container');
+  if (!container) return;
+
+  const grid = document.createElement('div');
+  grid.className = 'project-grid';
+  grid.innerHTML = MGB_TOOLS.map(t => `
+    <a href='${t.link}' target='_blank' rel='noopener' class='card-academic tool-card' data-reveal>
+      <span class='badge badge-fg' style='margin-bottom:10px;'><i class='fab fa-github' aria-hidden='true'></i> ${t.status || 'On GitHub'}</span>
+      <h3>${t.name}</h3>
+      <p>${t.description}</p>
+      ${t.tags ? `<div class='chip-container'>${t.tags.map(tag => `<span class='chip chip-muted'>${tag}</span>`).join('')}</div>` : ''}
+      <span class='text-link' style='margin-top:10px; display:inline-block;'>View on GitHub &rarr;</span>
+    </a>
+  `).join('');
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
 }
@@ -1237,7 +1282,7 @@ function initSectionNav() {
     document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
   });
 
-  const sections = ['home', 'projects', 'people', 'publications', 'blogs']
+  const sections = ['home', 'projects', 'people', 'publications', 'tools', 'blogs']
     .map(k => document.getElementById('page-' + k)).filter(Boolean);
   if (!sections.length || !('IntersectionObserver' in window)) return;
   const observer = new IntersectionObserver((entries) => {
@@ -1357,6 +1402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'projects', label: 'Projects', icon: 'fas fa-flask', sel: '#projects-container' },
     { id: 'people', label: 'People', icon: 'fas fa-users', sel: '#people-container' },
     { id: 'publications', label: 'Publications', icon: 'fas fa-book-open', sel: '#publications-container' },
+    { id: 'tools', label: 'Tools', icon: 'fas fa-toolbox', sel: '#tools-container' },
     { id: 'blogs', label: 'Blog', icon: 'fas fa-newspaper', sel: '#blogs-container' },
     { id: 'news', label: 'News', icon: 'fas fa-bullhorn', sel: '#news-container' }
   ];

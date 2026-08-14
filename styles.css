@@ -697,28 +697,31 @@ a:hover { color: var(--accent-hover); }
 .card-academic:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
 .card-academic h3 { font-size: 16px; margin-bottom: 6px; }
 .card-academic p { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
+/* Tool cards are whole-card links (to each tool's GitHub repo), unlike the
+   plain divs the other card-academic renderers use. */
+.tool-card { display: block; color: inherit; text-decoration: none; }
+.tool-card:hover h3 { color: var(--accent); }
 /* Finished projects hover in red instead of the usual accent teal, so a
    glance at the hover colour tells active and wrapped-up projects apart. */
 .card-project-finished:hover { border-color: var(--danger); box-shadow: var(--shadow-md); }
 .card-project-finished:hover .chip-container .chip { background: var(--danger); color: #fff; border-color: var(--danger); }
 
-.research-pillars, .tier-grid {
+.research-pillars {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 14px;
 }
-/* Projects grid: fills column-wise (2 rows tall) rather than row-wise, so
-   with 3 projects the first 2 stack in column one and the rest spill into
-   column two, instead of spreading every project across one wide row. */
+/* Projects grid: a fixed 2-column grid, filled in normal reading order
+   (left to right, top to bottom) — since renderProjects always sorts
+   Active projects before Finished ones, that reading order is also what
+   keeps every Active project ahead of every Finished one on screen. */
 .project-grid {
   display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(2, auto);
-  grid-auto-columns: minmax(230px, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
 @media (max-width: 639px) {
-  .project-grid { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; }
+  .project-grid { grid-template-columns: 1fr; }
 }
 /* Projects on the left, news on the right, side by side from 900px up */
 .projects-news-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
