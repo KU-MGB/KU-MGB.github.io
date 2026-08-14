@@ -6,5 +6,12 @@
   "orcid": "0009-0006-0426-7708",
   "website": "https://plen.ku.dk/ansatte/?pure=da/persons/953253",
   "linkedin": "https://www.linkedin.com/in/simone-cusimano-0664ba213/",
+  "tags": [
+    "PFAS",
+    "Synthetic Biology",
+    "Fluoride Tolerance",
+    "Strain Engineering"
+  ],
+  "bio": "Simone Cusimano is a PhD student in the Microbial Genomics & Biodegradation group. His research focuses on developing experimental strategies to overcome fluoride toxicity in order to enable microbial PFAS bioremediation. His project combines molecular biology, synthetic biology, genome sequencing, metabolomics, and soil-based experiments to test how fluoride tolerance can support PFAS-degrading bacteria and microbial communities. In parallel, he works on building synthetic biology tools for PFAS degradation, including conjugative plasmid-based systems and fluoride-release assays to assess the activity of candidate enzymes and engineered strains.\n\nSimone brings a strong background in molecular microbiology and bacterial strain engineering, which he developed during his MSc thesis at DTU Biosustain. There, he contributed to the development of a microbial growth coupled platform for in vivo interrogation of RuBisCO oxygenase activity by designing and assembling modular plasmids, optimizing microplate based growth assays and CO₂ controlled culturing conditions to quantify enzyme activity via growth readouts.",
   "avatar": "simone-cusimano.webp"
 }
