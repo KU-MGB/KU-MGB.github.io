@@ -719,11 +719,15 @@ window.renderPeople = function() {
       const short = card.querySelector('.profile-bio-short');
       const full = card.querySelector('.profile-bio-full');
       if (!full) return;
-      card.querySelectorAll('.profile-bio-toggle').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const open = full.classList.toggle('open');
-          short.classList.toggle('hidden', open);
-        });
+      card.classList.add('profile-card-toggleable');
+      // The Read more/Show less buttons are inside the card, so a click on
+      // either one already bubbles up to this single handler — no separate
+      // per-button listener needed, and that avoids double-toggling.
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a')) return;
+        const open = full.classList.toggle('open');
+        short.classList.toggle('hidden', open);
+        card.querySelectorAll('.profile-bio-toggle').forEach(btn => btn.setAttribute('aria-expanded', String(open)));
       });
     });
     container.appendChild(section);
@@ -910,14 +914,17 @@ window.renderProjects = function() {
 
   const grid = document.createElement('div');
   grid.className = 'project-grid';
-  grid.innerHTML = MGB_PROJECTS.map(p => `
-    <div class='card-academic' data-reveal>
+  grid.innerHTML = MGB_PROJECTS.map(p => {
+    const isFinished = (p.status || '').toLowerCase().includes('finished');
+    return `
+    <div class='card-academic${isFinished ? ' card-project-finished' : ''}' data-reveal>
       <span class='badge badge-fg' style='margin-bottom:10px;'>${p.status || ''}</span>
       <h3>${p.title}</h3>
       <p>${p.description}</p>
       ${p.tags ? `<div class='chip-container'>${p.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
     </div>
-  `).join('');
+  `;
+  }).join('');
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
 }

@@ -39,6 +39,7 @@
   --emerald: #059669;
   --blue: #2563eb;
   --amber: #d97706;
+  --danger: #dc2626;
 
   --bg: #ffffff;
   --bg-alt: #f2f2f2;
@@ -81,6 +82,7 @@
   --accent: #3dbaa8;
   --accent-hover: #5dd4c2;
   --accent-light: rgba(61, 186, 168, 0.1);
+  --danger: #f87171;
 
   --bg: #1c1b18;
   --bg-alt: #242320;
@@ -597,6 +599,7 @@ a:hover { color: var(--accent-hover); }
 .profile-bio-full.open { display: block; }
 .profile-bio-short.hidden { display: none; }
 .profile-bio-toggle { font-size: 12px; float: right; margin-left: 8px; background: none; border: none; padding: 0; cursor: pointer; font-family: var(--sans); white-space: nowrap; }
+.profile-card-toggleable { cursor: pointer; }
 .profile-chips { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-start; margin-bottom: 12px; }
 .profile-links {
   display: flex;
@@ -694,11 +697,28 @@ a:hover { color: var(--accent-hover); }
 .card-academic:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
 .card-academic h3 { font-size: 16px; margin-bottom: 6px; }
 .card-academic p { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
+/* Finished projects hover in red instead of the usual accent teal, so a
+   glance at the hover colour tells active and wrapped-up projects apart. */
+.card-project-finished:hover { border-color: var(--danger); box-shadow: var(--shadow-md); }
+.card-project-finished:hover .chip-container .chip { background: var(--danger); color: #fff; border-color: var(--danger); }
 
-.research-pillars, .project-grid, .tier-grid {
+.research-pillars, .tier-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 14px;
+}
+/* Projects grid: fills column-wise (2 rows tall) rather than row-wise, so
+   with 3 projects the first 2 stack in column one and the rest spill into
+   column two, instead of spreading every project across one wide row. */
+.project-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-columns: minmax(230px, 1fr);
+  gap: 14px;
+}
+@media (max-width: 639px) {
+  .project-grid { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; }
 }
 /* Projects on the left, news on the right, side by side from 900px up */
 .projects-news-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
