@@ -708,23 +708,22 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* News ticker: a fixed-height box that auto-scrolls through the news
-   cards and loops seamlessly. The item list is duplicated once in the
-   markup so the loop point is invisible; the mask fades the top and
-   bottom edges so items don't appear to cut off abruptly. */
+   cards (driven from JS, see initNewsAutoScroll in scripts.js) and loops
+   back to the top. The native scrollbar is hidden so it still looks like
+   a ticker, but a visitor's own wheel/touch scroll pauses the auto-scroll
+   for a few seconds so they can read at their own pace. The mask fades
+   the top and bottom edges so items don't appear to cut off abruptly. */
 .news-ticker {
   position: relative;
-  height: 400px;
-  overflow: hidden;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
   border-radius: var(--radius-lg);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+  scrollbar-width: none;
 }
-.news-ticker-track { animation: newsTickerScroll 24s linear infinite; }
-.news-ticker:hover .news-ticker-track { animation-play-state: paused; }
-@keyframes newsTickerScroll {
-  from { transform: translateY(0); }
-  to { transform: translateY(-50%); }
-}
+.news-ticker::-webkit-scrollbar { display: none; }
 
 /* ----------------------------------------------------------------
    8. PUBLICATIONS AND NEWS LIST ROWS

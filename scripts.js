@@ -922,8 +922,11 @@ window.renderProjects = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 11. News renderer: a boxy auto-scrolling ticker. The item list is duplicated
-// once so the looping translateY(-50%) animation wraps seamlessly.
+// 11. News renderer: a boxy auto-scrolling ticker, same continuous
+// one-after-another rotation as before (item list duplicated once so the
+// loop wraps seamlessly), just driven by real scrollTop instead of a CSS
+// transform — so a visitor's own wheel/touch scroll works natively and
+// pauses the rotation for a few seconds instead of fighting it.
 window.renderNews = function() {
   if (typeof MGB_NEWS === 'undefined') return;
   const container = document.getElementById('news-container');
@@ -946,16 +949,48 @@ window.renderNews = function() {
   `;
   };
 
-  const box = document.createElement('div');
-  box.className = 'news-ticker';
-  const track = document.createElement('div');
-  track.className = 'news-ticker-track';
-  track.innerHTML = `
+  container.classList.add('news-ticker');
+  container.innerHTML = `
     <div class='news-ticker-set'>${sorted.map(entryHtml).join('')}</div>
     <div class='news-ticker-set news-ticker-clone' aria-hidden='true'>${sorted.map(entryHtml).join('')}</div>
   `;
-  box.appendChild(track);
-  container.appendChild(box);
+  if (window.initScrollReveal) window.initScrollReveal();
+  initNewsAutoScroll(container);
+}
+
+// 11b. Drives the News ticker's auto-scroll: nudges scrollTop forward on a
+// timer, and once it passes the first (real) item set, subtracts that same
+// amount back off — since the clone set is an identical copy, that wrap is
+// invisible and the rotation looks continuous, same as the old CSS loop.
+// Hovering, or touching/wheel-scrolling it, pauses the rotation for a few
+// seconds so a visitor can read at their own pace instead of fighting it.
+function initNewsAutoScroll(box) {
+  if (box.dataset.autoscrollWired) return;
+  box.dataset.autoscrollWired = 'true';
+
+  const STEP = 0.5;
+  const TICK_MS = 30;
+  const RESUME_DELAY = 2500;
+  let paused = false;
+  let resumeTimer = null;
+
+  setInterval(() => {
+    if (paused) return;
+    const half = box.scrollHeight / 2;
+    if (half <= box.clientHeight) return;
+    box.scrollTop += STEP;
+    if (box.scrollTop >= half) box.scrollTop -= half;
+  }, TICK_MS);
+
+  function pauseAwhile() {
+    paused = true;
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { paused = false; }, RESUME_DELAY);
+  }
+  box.addEventListener('wheel', pauseAwhile, { passive: true });
+  box.addEventListener('touchstart', pauseAwhile, { passive: true });
+  box.addEventListener('mouseenter', () => { paused = true; });
+  box.addEventListener('mouseleave', () => { clearTimeout(resumeTimer); paused = false; });
 }
 
 // 12. Group photo (People page). Tries a few common file extensions so it works
