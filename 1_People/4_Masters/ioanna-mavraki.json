@@ -6,7 +6,7 @@
   "orcid": "",
   "website": "",
   "linkedin": "https://www.linkedin.com/in/ioanna-stavroula-mavraki-4311741b8/",
-  "tags": [],
-  "bio": "",
+  "tags": ["PFAS", "Algal Microbiome", "Nanopore Sequencing"],
+  "bio": "Ioanna is an MSc student in Environmental Science (Chemistry, Toxicology and Health) working on a project that investigates whether the cultivated red alga Pyropia yezoensis (nori) accumulates the PFAS compound PFOA, where it localises in algal tissue, and whether toxicity is mediated by damage to the microbial community the host depends on. She is currently establishing the groundwork for holobiont analysis: characterising the nori-associated microbiome by Oxford Nanopore sequencing, using adaptive sampling against the published host genome to deplete nori reads and enrich the low-biomass microbial fraction, alongside cultivation on seawater agar and fluorescence microscopy to localise associated microbes. Next steps extend this to dose-response toxicity (PAM Fv/Fm), LC-MS/MS quantification of internalised PFOA, and confocal microscopy of fluorescently conjugated PFOA.",
   "avatar": "ioanna-mavraki.webp"
 }

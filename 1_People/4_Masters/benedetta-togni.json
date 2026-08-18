@@ -12,6 +12,6 @@
     "HADs",
     "PFAS"
   ],
-  "bio": "Benedetta is a Master's student in Bioinformatics for Computational Genomics at Politecnico di Milano, using metagenomic screening and machine learning to find Haloacid Dehalogenase (HAD) enzymes that can break the carbon–fluorine bond.",
+  "bio": "Benedetta is a Master's student in Bioinformatics for Computational Genomics at Politecnico di Milano and Università degli Studi di Milano. Her thesis uses metagenomic screening to identify and prioritise novel Haloacid Dehalogenase (HAD) candidates capable of breaking the carbon–fluorine bond, combining protein-ligand modelling, molecular dynamics, QM/MM simulations, and machine learning to investigate enzyme function and defluorination capability.",
   "avatar": "benedetta-togni.webp"
 }
