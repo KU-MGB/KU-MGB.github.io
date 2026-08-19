@@ -6,7 +6,7 @@
   "orcid": "",
   "website": "",
   "linkedin": "https://www.linkedin.com/in/panagiotis-praftsas-89bb96117/",
-  "tags": [],
-  "bio": "",
+  "tags": ["PFAS", "Biofilms", "Nanopore Sequencing"],
+  "bio": "Panagiotis is an MSc student in Environmental Science (Chemistry, Toxicology and Health) at the University of Copenhagen, working on environmental microbiology, PFAS, and microbial biofilms. His project isolates strains from a TFA-degrading microbial community, verifying purity by Nanopore sequencing, and examines biofilm phenotypes via crystal violet assays and microscopy, laying groundwork for a thesis on how PFAS-site bacteria respond to exposure.",
   "avatar": "panagiotis-praftsas.webp"
 }
