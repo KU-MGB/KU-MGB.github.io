@@ -6,7 +6,7 @@
   "orcid": "",
   "website": "",
   "linkedin": "https://www.linkedin.com/in/agis-papadopoulos-b14269288/",
-  "tags": [],
-  "bio": "",
+  "tags": ["PFAS", "Mobile Genetic Elements", "Bacteriophages"],
+  "bio": "Agisilaos is an MSc student in Environmental Science (Chemistry, Toxicology and Health) investigating how PFAS affect mobile genetic elements and microbial evolution. His project examines whether PFAS interfere with plasmid conjugation and bacteriophage infectivity, using mating and phage infectivity assays. This lays groundwork for his thesis on PFAS-MGE interactions and mobilome changes, using Illumina and Nanopore sequencing, bioinformatics, and proteomics.",
   "avatar": "agis-papadopoulos.webp"
 }
