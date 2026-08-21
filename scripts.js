@@ -248,32 +248,28 @@ const MGB_NEWS         = [
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7492905416046247936/"
   }
 ];
-// The four research pillar cards on the Home page ("01" through "04").
+// The four "What We Do" pillar cards on the Home page.
 const MGB_RESEARCH     = [
   {
     "id": "sequencing",
-    "step": "01",
     "title": "Sequencing",
     "description": "Metagenomic sequencing captures environmental DNA directly from contaminated soils, sediments, and groundwater — no culturing required.",
     "icon": "Dna"
   },
   {
     "id": "bioinformatics",
-    "step": "02",
     "title": "AI & Bioinformatics",
     "description": "HMM searches, structural homology, and machine learning classifiers mine millions of sequences for dehalogenase signatures.",
     "icon": "Cpu"
   },
   {
     "id": "structural",
-    "step": "03",
     "title": "Structural Modelling",
     "description": "AlphaFold and Boltz-2 predict active-site geometry, ranking candidates by their likelihood of cleaving the C–F bond.",
     "icon": "Atom"
   },
   {
     "id": "experimental",
-    "step": "04",
     "title": "Experimental Validation",
     "description": "Fluoride-release assays and steady-state kinetics confirm which computational leads are genuinely active enzymes.",
     "icon": "FlaskConical"
@@ -345,6 +341,61 @@ const MGB_TOOLS        = [
     "tags": ["PFAS", "HADs", "Molecular Dynamics"]
   }
 ];
+// One-sentence definitions shown in a popover when a visitor clicks a tag
+// chip anywhere on the site (People, Projects, Tools, Publications, and the
+// home hero chips). Only chips whose text matches a key here become
+// clickable — see markGlossaryChips() and the click handler further down.
+// DRAFT: general reference definitions, not yet reviewed for accuracy.
+const MGB_GLOSSARY      = {
+  "AI": "Artificial intelligence: computational methods, including machine learning, that identify patterns in biological data too complex for manual analysis.",
+  "Adaptive Sampling": "A Nanopore sequencing feature that selectively rejects or enriches DNA molecules in real time based on their match to a reference sequence.",
+  "Algal Microbiome": "The community of bacteria, fungi, and other microbes living in and on an algal host, often influencing its health and stress tolerance.",
+  "Bacteriophages": "Viruses that infect and replicate within bacteria, frequently used as tools to study bacterial genetics and horizontal gene transfer.",
+  "Biochar": "A carbon-rich material produced by heating organic matter without oxygen, used to improve soil and adsorb environmental contaminants.",
+  "Biofilms": "Structured communities of microorganisms attached to a surface and encased in a self-produced extracellular matrix.",
+  "Bioreactor": "A vessel used to grow microorganisms or cells under controlled conditions for research or industrial-scale processes.",
+  "Bioremediation": "The use of living organisms, typically microbes, to degrade or remove pollutants from contaminated soil or water.",
+  "Community Diversity": "A measure of how many different species or taxa are present in a microbial community, and how evenly they are represented.",
+  "Comparative Genomics": "The analysis of genome sequences across species or strains to identify shared and distinguishing genetic features.",
+  "Cyanobacteria": "Photosynthetic bacteria, some capable of nitrogen fixation, found across aquatic and terrestrial environments.",
+  "Danmarks Frie Forskningsfond": "The Danish Independent Research Fund, a national body funding investigator-driven research across all academic disciplines.",
+  "Environmental Biotech": "Biotechnology applied to environmental problems, such as pollutant degradation, waste treatment, and ecosystem monitoring.",
+  "Environmental Microbiology": "The study of microorganisms in natural environments and their roles in ecological and biogeochemical processes.",
+  "Enzyme Discovery": "The process of identifying and characterising new enzymes, often by screening genomic or environmental sequence data.",
+  "Enzyme Engineering": "The deliberate modification of an enzyme's structure to improve or alter its catalytic activity, stability, or specificity.",
+  "Epigenetics": "Heritable changes in gene activity, such as DNA methylation, that do not involve changes to the underlying DNA sequence.",
+  "Explainable AI": "AI methods designed so their predictions can be interpreted and understood, rather than functioning as an opaque black box.",
+  "Fluoride Tolerance": "The ability of an organism or enzyme to function normally in the presence of fluoride, relevant to PFAS-degrading systems that release it.",
+  "Gene Context": "The genes and genetic elements surrounding a gene of interest on a chromosome or mobile element, informing its likely function or origin.",
+  "Genetics": "The study of genes, heredity, and genetic variation in living organisms.",
+  "Genome Sequencing": "Determining the complete DNA sequence of an organism's genome.",
+  "Groundwater": "Water held underground in soil and rock, a common route of PFAS contamination and a key drinking-water source.",
+  "HADs": "Haloacid dehalogenases, an enzyme superfamily capable of cleaving carbon–halogen bonds, including some carbon–fluorine bonds.",
+  "Herbicide Degradation": "The microbial or enzymatic breakdown of herbicide compounds into less harmful products.",
+  "IS Elements": "Insertion sequences, small mobile genetic elements that can move within or between genomes, often disrupting or regulating nearby genes.",
+  "Machine Learning": "Computational methods that learn patterns from data to make predictions, without being explicitly programmed for each task.",
+  "Metagenomics": "The study of genetic material recovered directly from environmental samples, without the need to culture individual organisms.",
+  "Microbial Evolution": "The study of how microbial populations and genomes change over time under selective pressures.",
+  "Mobile Genetic Elements": "DNA sequences, such as plasmids, transposons, and phages, capable of moving within or between genomes.",
+  "Mobilome": "The complete set of mobile genetic elements within a genome or microbial community.",
+  "Mobilomics": "The large-scale study of mobile genetic elements and their role in genome and community-level evolution.",
+  "Molecular Dynamics": "A computational simulation method that models the physical movement of atoms and molecules over time.",
+  "Nanopore Sequencing": "A DNA/RNA sequencing method that reads a molecule's sequence as it passes through a nanoscale pore, in real time.",
+  "Novo Nordisk Foundation": "A Danish foundation funding research in the life sciences, including biotechnology and sustainability.",
+  "PFAS": "Per- and polyfluoroalkyl substances, a large class of synthetic, highly persistent 'forever chemicals' resistant to natural degradation.",
+  "PFAS Defluorination": "The removal of fluorine atoms from a PFAS molecule, the key step in breaking down these otherwise persistent compounds.",
+  "PFAS Degradation": "The breakdown of PFAS molecules into smaller, less persistent, or non-fluorinated products.",
+  "Pesticide Degradation": "The microbial or enzymatic breakdown of pesticide compounds in the environment.",
+  "Plant Metagenomics": "Metagenomic analysis of the microbial communities associated with plant tissues, roots, or surfaces.",
+  "Plasmids": "Small, circular DNA molecules that replicate independently of the chromosome and often carry genes for antibiotic resistance or metabolism.",
+  "Proximity Labelling": "A technique that tags proteins physically near a protein of interest, used to map protein interactions or binding partners.",
+  "Soil Microbiology": "The study of microorganisms living in soil and their roles in nutrient cycling, plant health, and contaminant breakdown.",
+  "Sphingomonads": "A group of bacteria in the genus Sphingomonas and related genera, known for degrading diverse aromatic and persistent pollutants.",
+  "Sphingomonas": "A genus of bacteria found in soil and water, notable for its metabolic versatility in degrading environmental pollutants.",
+  "Strain Engineering": "The genetic modification of a microbial strain to introduce or enhance a desired trait, such as pollutant degradation.",
+  "Synthetic Biology": "An engineering-based approach to biology that designs and builds new biological parts, systems, or organisms.",
+  "Water Treatment": "Processes that remove contaminants from water to make it safe for drinking, discharge, or reuse."
+};
 // ═══════════════════════════════════════════════════════════════════════════
 // PART 2: DATA LOADER
 //
@@ -547,6 +598,72 @@ function initTooltipLongPress() {
   });
 }
 
+// 2c. Tag glossary popovers. Any chip whose text matches a key in
+// MGB_GLOSSARY (People, Projects, Tools, Publications, and the home hero
+// chips all share the same .chip markup) becomes clickable, opening a small
+// popover with a one-sentence definition. Called after every render that
+// produces chips — see the renderX functions further down.
+window.markGlossaryChips = function() {
+  if (typeof MGB_GLOSSARY === 'undefined') return;
+  document.querySelectorAll('.chip').forEach(el => {
+    if (el.classList.contains('chip-glossary')) return;
+    const term = el.textContent.trim();
+    if (!MGB_GLOSSARY[term]) return;
+    el.classList.add('chip-glossary');
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-haspopup', 'true');
+  });
+};
+
+function initGlossaryPopover() {
+  const pop = document.createElement('div');
+  pop.id = 'glossary-popover';
+  pop.className = 'glossary-popover';
+  pop.setAttribute('role', 'tooltip');
+  document.body.appendChild(pop);
+
+  const hide = () => { pop.classList.remove('open'); pop.style.left = ''; pop.style.top = ''; };
+
+  const show = (chip) => {
+    const term = chip.textContent.trim();
+    const def = MGB_GLOSSARY[term];
+    if (!def) return;
+    pop.innerHTML = `<strong>${term}</strong><p>${def}</p>`;
+    pop.classList.add('open');
+    const chipRect = chip.getBoundingClientRect();
+    const popRect = pop.getBoundingClientRect();
+    let left = chipRect.left + chipRect.width / 2 - popRect.width / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - popRect.width - 8));
+    let top = chipRect.bottom + 8;
+    if (top + popRect.height > window.innerHeight - 8) top = chipRect.top - popRect.height - 8;
+    pop.style.left = `${left}px`;
+    pop.style.top = `${top}px`;
+  };
+
+  document.addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip-glossary');
+    if (chip) {
+      // Chips can sit inside a card-wide link (Tools) or a card-wide bio
+      // toggle (People) — stop those from also firing on this click.
+      e.preventDefault();
+      e.stopPropagation();
+      show(chip);
+      return;
+    }
+    if (!e.target.closest('#glossary-popover')) hide();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { hide(); return; }
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('chip-glossary')) {
+      e.preventDefault();
+      show(e.target);
+    }
+  });
+  window.addEventListener('scroll', hide, { passive: true, capture: true });
+  window.addEventListener('resize', hide);
+}
+
 // 3. Scroll reveal (fades elements in as they enter the screen)
 window.initScrollReveal = function() {
   const observer = new IntersectionObserver((entries) => {
@@ -741,7 +858,7 @@ window.renderPeople = function() {
       // either one already bubbles up to this single handler — no separate
       // per-button listener needed, and that avoids double-toggling.
       card.addEventListener('click', (e) => {
-        if (e.target.closest('a')) return;
+        if (e.target.closest('a') || e.target.closest('.chip-glossary')) return;
         const open = full.classList.toggle('open');
         short.classList.toggle('hidden', open);
         card.querySelectorAll('.profile-bio-toggle').forEach(btn => btn.setAttribute('aria-expanded', String(open)));
@@ -750,6 +867,7 @@ window.renderPeople = function() {
     container.appendChild(section);
   });
   if (window.initScrollReveal) window.initScrollReveal();
+  if (window.markGlossaryChips) window.markGlossaryChips();
 }
 
 // Blog folders are named with a leading number for ordering on disk
@@ -856,6 +974,7 @@ window.renderPublications = function() {
     container.appendChild(el);
   });
   if (window.initScrollReveal) window.initScrollReveal();
+  if (window.markGlossaryChips) window.markGlossaryChips();
   initPubScrollMore();
 }
 
@@ -883,7 +1002,7 @@ function initPubScrollMore() {
   });
 }
 
-// 9. Research pillars renderer (the "01" to "04" cards on the Home page)
+// 9. Research pillars renderer (the "What We Do" cards on the Home page)
 window.renderResearch = function() {
   if (typeof MGB_RESEARCH === 'undefined') return;
   const container = document.getElementById('research-themes-container');
@@ -893,7 +1012,6 @@ window.renderResearch = function() {
   grid.className = 'research-pillars';
   grid.innerHTML = MGB_RESEARCH.map(r => `
     <div class='card-academic' data-reveal>
-      <span class='badge' style='margin-bottom:10px;'>${r.step || ''}</span>
       <h3>${r.title}</h3>
       <p>${r.description}</p>
     </div>
@@ -950,6 +1068,7 @@ window.renderProjects = function() {
   }).join('');
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
+  if (window.markGlossaryChips) window.markGlossaryChips();
 }
 
 // 10b. Tools renderer: each card links straight to the tool's GitHub repo
@@ -972,6 +1091,7 @@ window.renderTools = function() {
   `).join('');
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
+  if (window.markGlossaryChips) window.markGlossaryChips();
 }
 
 // 11. News renderer: a boxy auto-scrolling ticker, same continuous
@@ -1080,6 +1200,12 @@ window.renderHomeSlideshow = function() {
     ? `<video src='${src}' poster='${posterFor(src)}' autoplay muted loop playsinline aria-label='${label}'></video>`
     : `<img src='${src}' alt='${label}'>`;
 
+  const SLIDE_MS = 8000;
+  // GIFs animate on a loop of their own, independent of the slideshow timer, so a
+  // slide holding one gets extra time here to let that loop finish before advancing.
+  const GIF_SLIDE_MS = 12500;
+  const durations = images.slice(0, 5).map(entry => entry.split('+').some(src => /\.gif$/i.test(src)) ? GIF_SLIDE_MS : SLIDE_MS);
+
   container.innerHTML = images.slice(0, 5).map((entry, i) => {
     const cls = `slide-fade${i === 0 ? ' active' : ''}`;
     const parts = entry.split('+');
@@ -1116,8 +1242,8 @@ window.renderHomeSlideshow = function() {
     dotEls[cur].classList.add('active');
   };
   const startAutoplay = () => {
-    clearInterval(timer);
-    timer = setInterval(() => goTo(cur + 1), 8000);
+    clearTimeout(timer);
+    timer = setTimeout(() => { goTo(cur + 1); startAutoplay(); }, durations[cur]);
   };
   startAutoplay();
 
@@ -1221,6 +1347,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initScrollReveal();
   initTooltipLongPress();
+  initGlossaryPopover();
+  markGlossaryChips();
 });
 
 

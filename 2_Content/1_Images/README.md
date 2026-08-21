@@ -4,7 +4,9 @@ Flat folder, no subfolders. Current layout:
 
 | File | Purpose |
 |---|---|
-| `logo.png` | Navbar logo, footer logo, favicon, and apple-touch-icon. |
+| `5_MGB_Lab_Fevicon.svg` | Browser tab favicon. |
+| `6_MGB_Lab_Logo.svg` | Navbar logo and footer logo. |
+| `logo.png` | Apple-touch-icon (home screen icon on iOS — needs a raster image, so it keeps using this instead of the SVG logo). |
 | `3_People.*` | Group photo (People page) — see below. |
 | Anything listed in `manifest.json` | Home page slideshow — see below. |
 

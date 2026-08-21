@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 50 500 500" role="img" aria-label="mgb lab logo">
+  <g>
+    <circle cx="245" cy="300" r="228" fill="#14584A"/>
+    <path d="M 245 168 C 312 162, 352 216, 344 278 C 338 326, 356 372, 318 412 C 280 452, 196 448, 165 392 C 140 346, 170 314, 158 262 C 147 214, 180 174, 245 168 Z" fill="none" stroke="#93D6C0" stroke-width="34"
+          stroke-linejoin="round"/>
+  </g>
+</svg>

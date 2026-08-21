@@ -1,0 +1,12 @@
+{
+  "id": "zijun-tang",
+  "name": "Zijun Tang",
+  "role": "MSc Student",
+  "email": "",
+  "orcid": "",
+  "website": "",
+  "linkedin": "",
+  "tags": ["PFAS", "Epigenetics", "Nanopore Sequencing"],
+  "bio": "Zijun is an MSc student in Biology at the University of Copenhagen, investigating how PFAS exposure affects bacterial epigenetic regulation. His project uses Escherichia coli as a model system to examine PFAS-induced changes in DNA methylation via Oxford Nanopore sequencing, alongside phenotypic assessment of bacterial growth under PFAS exposure. He aims to understand how these epigenetic responses may contribute to bacterial adaptation to PFAS-induced stress.",
+  "avatar": "zijun-tang.webp"
+}

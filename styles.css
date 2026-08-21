@@ -151,18 +151,26 @@ a:hover { color: var(--accent-hover); }
    ---------------------------------------------------------------- */
 #navbar {
   position: fixed;
-  top: 0;
-  width: 100%;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1180px, calc(100% - 24px));
   z-index: 100;
-  background: rgba(255, 255, 255, 0.94);
-  height: 84px;
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 0.5px solid rgba(255, 255, 255, 0.82);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+  height: 72px;
   transition: box-shadow var(--t-base), background var(--t-base), height var(--t-base);
 }
-.dark #navbar { background: rgba(28, 27, 24, 0.94); }
-#navbar.scrolled { box-shadow: var(--shadow-sm); }
-@media (min-width: 640px) { #navbar { height: 88px; } }
-@media (min-width: 900px) { #navbar { height: 96px; } }
-@media (max-width: 399px) { #navbar { height: 76px; } }
+.dark #navbar { background: rgba(28, 27, 24, 0.82); border-color: rgba(28, 27, 24, 0.82); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+#navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
+.dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
+@media (min-width: 640px) { #navbar { height: 76px; } }
+@media (min-width: 900px) { #navbar { height: 84px; } }
+@media (max-width: 399px) { #navbar { height: 64px; } }
 
 .nav-inner {
   max-width: var(--container-max);
@@ -177,27 +185,39 @@ a:hover { color: var(--accent-hover); }
 @media (min-width: 640px) { .nav-inner { padding: 0 24px; gap: 24px; } }
 @media (max-width: 399px) { .nav-inner { padding: 0 12px; gap: 10px; } }
 .logo { display: flex; align-items: center; height: 100%; flex-shrink: 0; min-width: 0; text-decoration: none; }
-.logo-lockup { height: 58px; width: auto; max-width: 100%; display: block; }
-@media (min-width: 640px) { .logo-lockup { height: 64px; } }
-@media (min-width: 900px) { .logo-lockup { height: 76px; } }
-@media (max-width: 399px) { .logo-lockup { height: 40px; } }
+.logo-lockup { height: 100%; width: auto; max-width: 100%; display: block; }
 .logo-text { font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: 0; }
 .word-microbial { color: var(--emerald); }
 .word-genomics { color: var(--amber); }
 .word-amp { color: var(--muted); }
 .word-bio { color: var(--blue); }
 
-.nav-links { display: flex; gap: 14px; font-family: var(--sans); }
+.nav-links { display: flex; gap: 18px; font-family: var(--sans); }
 .nav-links a {
   color: var(--muted);
-  font-size: 14.5px;
-  font-weight: 500;
-  padding: 7px 12px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 7px 10px;
   border-radius: var(--radius-sm);
+  position: relative;
   transition: color var(--t-fast), background-color var(--t-fast);
 }
-.nav-links a:hover { color: var(--accent); background: var(--accent-light); }
-.nav-links a.active { color: var(--accent); background: var(--accent-light); }
+@media (min-width: 900px) { .nav-links a { font-size: 16px; } }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  transition: width var(--t-fast);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--accent); background: var(--accent-light); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
 .nav-utils { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
 @media (min-width: 640px) { .nav-utils { gap: 6px; } }
@@ -228,10 +248,9 @@ a:hover { color: var(--accent-hover); }
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  transition: transform var(--t-base), color var(--t-fast);
+  transition: color var(--t-fast);
 }
 #hamburger:hover { color: var(--accent); }
-#hamburger.open { transform: rotate(90deg); }
 
 .join-btn {
   padding: 7px 16px;
@@ -254,7 +273,7 @@ a:hover { color: var(--accent-hover); }
 #mobile-menu {
   display: none;
   position: fixed;
-  top: 84px;
+  top: 80px;
   right: -100%;
   bottom: auto;
   width: 220px;
@@ -294,8 +313,8 @@ a:hover { color: var(--accent-hover); }
   .nav-links { display: none; }
   #hamburger { display: flex; }
 }
-@media (min-width: 640px) { #mobile-menu { top: 88px; } }
-@media (max-width: 399px) { #mobile-menu { top: 76px; } }
+@media (min-width: 640px) { #mobile-menu { top: 84px; } }
+@media (max-width: 399px) { #mobile-menu { top: 72px; } }
 @media (max-width: 480px) {
   .join-btn { display: none; }
   .nav-utils { gap: 2px; }
@@ -308,7 +327,7 @@ a:hover { color: var(--accent-hover); }
    the page on wide screens, section titles and labels, chips,
    badges, buttons, and small helpers like scroll-reveal.
    ---------------------------------------------------------------- */
-.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 104px; }
+.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 100px; }
 
 /* Vertical separator lines down the left and right edge of each
    section, visible on screens 1200px and wider. Purely decorative. */
@@ -369,6 +388,30 @@ a:hover { color: var(--accent-hover); }
 .chip.chip-muted { background: var(--bg-alt); color: var(--muted); border-color: var(--border); }
 .chip-container { display: flex; flex-wrap: wrap; gap: 6px; }
 
+/* Tags with a matching entry in MGB_GLOSSARY (see markGlossaryChips() in
+   scripts.js) get a dotted underline and a pointer cursor to signal they're
+   clickable, opening the definition popover below. */
+.chip-glossary { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 2px; }
+.chip-glossary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* The tag-definition popover, appended once to <body> and positioned in JS
+   next to whichever chip was clicked. */
+.glossary-popover {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  max-width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 12px 14px;
+  font-family: var(--sans);
+}
+.glossary-popover.open { display: block; }
+.glossary-popover strong { display: block; margin-bottom: 4px; font-size: 13px; color: var(--accent); }
+.glossary-popover p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--fg); }
+
 .badge {
   display: inline-block;
   font-family: var(--sans);
@@ -425,15 +468,15 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 84px 24px 32px;
+  padding: 80px 24px 32px;
 }
 /* Top padding matches the fixed navbar's own height exactly, at each
    breakpoint, with no added breathing room, so the photo sits right below
    it. Going any smaller would tuck the photo behind the navbar, since the
    navbar is position:fixed and not part of the document flow. */
-@media (max-width: 399px) { .home-banner { padding-top: 76px; } }
-@media (min-width: 640px) { .home-banner { padding-top: 88px; } }
-@media (min-width: 900px) { .home-banner { padding-top: 96px; } }
+@media (max-width: 399px) { .home-banner { padding-top: 72px; } }
+@media (min-width: 640px) { .home-banner { padding-top: 84px; } }
+@media (min-width: 900px) { .home-banner { padding-top: 92px; } }
 /* The research pillar boxes sit in a .page-section right after the hero.
    Its own top padding would double up with the hero's bottom padding
    above, so pull it in tight here. */
@@ -1118,7 +1161,7 @@ footer .logo-lockup { height: 38px; }
 }
 
 /* Page router: only one page-view section is visible at a time */
-.page-view { display: block; scroll-margin-top: 104px; }
+.page-view { display: block; scroll-margin-top: 100px; }
 .page-view + .page-view > .page-section:first-child { border-top: 2px solid var(--divider); }
 #page-blog-post { display: none; }
 #page-blog-post.active { display: block; }
