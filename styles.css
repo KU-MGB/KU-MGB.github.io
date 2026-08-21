@@ -160,17 +160,17 @@ a:hover { color: var(--accent-hover); }
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
   border: 0.5px solid rgba(255, 255, 255, 0.82);
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
-  height: 60px;
+  height: 48px;
   transition: box-shadow var(--t-base), background var(--t-base), height var(--t-base);
 }
 .dark #navbar { background: rgba(28, 27, 24, 0.82); border-color: rgba(28, 27, 24, 0.82); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
-@media (min-width: 640px) { #navbar { height: 64px; } }
-@media (min-width: 900px) { #navbar { height: 70px; } }
-@media (max-width: 399px) { #navbar { height: 46px; } }
+@media (min-width: 640px) { #navbar { height: 52px; } }
+@media (min-width: 900px) { #navbar { height: 58px; } }
+@media (max-width: 399px) { #navbar { height: 36px; } }
 
 .nav-inner {
   max-width: var(--container-max);
@@ -273,7 +273,7 @@ a:hover { color: var(--accent-hover); }
 #mobile-menu {
   display: none;
   position: fixed;
-  top: 68px;
+  top: 56px;
   right: -100%;
   bottom: auto;
   width: 220px;
@@ -313,8 +313,8 @@ a:hover { color: var(--accent-hover); }
   .nav-links { display: none; }
   #hamburger { display: flex; }
 }
-@media (min-width: 640px) { #mobile-menu { top: 72px; } }
-@media (max-width: 399px) { #mobile-menu { top: 54px; } }
+@media (min-width: 640px) { #mobile-menu { top: 60px; } }
+@media (max-width: 399px) { #mobile-menu { top: 44px; } }
 @media (max-width: 480px) {
   .join-btn { display: none; }
   .nav-utils { gap: 2px; }
@@ -327,7 +327,7 @@ a:hover { color: var(--accent-hover); }
    the page on wide screens, section titles and labels, chips,
    badges, buttons, and small helpers like scroll-reveal.
    ---------------------------------------------------------------- */
-.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 90px; }
+.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 78px; }
 
 /* Vertical separator lines down the left and right edge of each
    section, visible on screens 1200px and wider. Purely decorative. */
@@ -468,15 +468,15 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 68px 24px 32px;
+  padding: 56px 24px 32px;
 }
 /* Top padding matches the fixed navbar's own height exactly, at each
    breakpoint, with no added breathing room, so the photo sits right below
    it. Going any smaller would tuck the photo behind the navbar, since the
    navbar is position:fixed and not part of the document flow. */
-@media (max-width: 399px) { .home-banner { padding-top: 54px; } }
-@media (min-width: 640px) { .home-banner { padding-top: 72px; } }
-@media (min-width: 900px) { .home-banner { padding-top: 78px; } }
+@media (max-width: 399px) { .home-banner { padding-top: 44px; } }
+@media (min-width: 640px) { .home-banner { padding-top: 60px; } }
+@media (min-width: 900px) { .home-banner { padding-top: 66px; } }
 /* The research pillar boxes sit in a .page-section right after the hero.
    Its own top padding would double up with the hero's bottom padding
    above, so pull it in tight here. */
@@ -1161,7 +1161,7 @@ footer .logo-lockup { height: 38px; }
 }
 
 /* Page router: only one page-view section is visible at a time */
-.page-view { display: block; scroll-margin-top: 90px; }
+.page-view { display: block; scroll-margin-top: 78px; }
 .page-view + .page-view > .page-section:first-child { border-top: 2px solid var(--divider); }
 #page-blog-post { display: none; }
 #page-blog-post.active { display: block; }
