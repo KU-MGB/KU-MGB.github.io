@@ -144,13 +144,15 @@ a:hover { color: var(--accent-hover); }
 
 /* ----------------------------------------------------------------
    3. NAVBAR
-   The fixed bar at the top of every page: logo on the left, page
-   links in the middle, and search/language/theme/join buttons on
-   the right. Below 900px width the page links and join button are
+   A sticky pill at the top of every page (position:sticky, not fixed,
+   so it doesn't jump on mobile when the browser's address bar
+   collapses/expands during scroll): logo, page links, and
+   search/language/theme/join buttons, all grouped together and
+   centred. Below 900px width the page links and join button are
    replaced by a hamburger button that opens the mobile menu.
    ---------------------------------------------------------------- */
 #navbar {
-  position: fixed;
+  position: sticky;
   top: 8px;
   left: 0;
   right: 0;
@@ -485,15 +487,12 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 56px 24px 32px;
+  padding: 20px 24px 32px;
 }
-/* Top padding matches the fixed navbar's own height exactly, at each
-   breakpoint, with no added breathing room, so the photo sits right below
-   it. Going any smaller would tuck the photo behind the navbar, since the
-   navbar is position:fixed and not part of the document flow. */
-@media (max-width: 399px) { .home-banner { padding-top: 44px; } }
-@media (min-width: 640px) { .home-banner { padding-top: 60px; } }
-@media (min-width: 900px) { .home-banner { padding-top: 66px; } }
+/* The navbar is position:sticky, not fixed, so it occupies its own space in
+   the document flow above this banner — this top padding is just ordinary
+   breathing room between the two, not a manual offset to compensate for an
+   out-of-flow bar. */
 /* The research pillar boxes sit in a .page-section right after the hero.
    Its own top padding would double up with the hero's bottom padding
    above, so pull it in tight here. */
