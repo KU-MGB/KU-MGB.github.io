@@ -18,8 +18,7 @@
     6. <main>: the page-view sections (Home, Projects, People,
        Publications, Blogs, Blog Post)
     7. Footer
-    8. Script tags: the main app script, then the Google Translate
-       widget, then the back-to-top button
+    8. Script tags: the main app script, then the back-to-top button
 
   Most of the actual content (research pillars, projects, people,
   publications, news, blog posts) is not written directly into this
@@ -43,10 +42,10 @@
   <link rel="icon" type="image/svg+xml" href="2_Content/1_Images/1_MGB_Lab_Fevicon.svg">
   <link rel="apple-touch-icon" href="2_Content/1_Images/apple-touch-icon.png">
 
-  <!-- Google Fonts: DM Sans (body text), Source Serif 4 (headings), JetBrains Mono (labels/code) -->
+  <!-- Google Fonts: Roboto (body text), Playfair Display (headings), JetBrains Mono (labels/code) — matches the Portfolio site's type system -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;0,8..60,800;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Playfair+Display:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Font Awesome, for every icon used across the site. Loaded with
        preload + onload so it does not block the page from rendering. -->
@@ -62,7 +61,7 @@
   <!-- ============================================================
        NAVBAR
        Fixed bar shown on every page: logo, page links, and the
-       search, language, theme, and Join Us buttons. Below 900px
+       search, theme, and Join Us buttons. Below 900px
        width the page links and Join Us button are hidden and the
        hamburger button (right) opens the mobile menu instead.
        ============================================================ -->
@@ -81,9 +80,6 @@
       <div class="nav-utils">
         <button class="nav-icon-btn" onclick="openSearchModal()" data-tip="Search" aria-label="Search">
           <i class="fas fa-search" aria-hidden="true"></i>
-        </button>
-        <button class="nav-icon-btn lang-toggle-btn notranslate" onclick="toggleLanguage()" data-lang="en" aria-label="Switch Language" data-tip="Switch to Danish">
-          <img src="https://flagcdn.com/w40/gb.png" alt="EN" width="20" height="14">
         </button>
         <button class="nav-icon-btn" id="theme-toggle" onclick="toggleTheme()" data-tip="Toggle Theme" aria-label="Toggle Theme">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path id="theme-icon-path" stroke-linecap="round" stroke-linejoin="round" d=""></path></svg>
@@ -331,15 +327,6 @@
       });
     });
   </script>
-
-  <!-- Google Translate widget, used by the EN/DA language button in the navbar -->
-  <div id="google_translate_element" style="display:none;"></div>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,da,es,fr,de,hi,zh-CN,ar,ur,ru,ja', autoDisplay: false}, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <!-- Back to top button: fixed to the bottom right of the screen, its ring
      fills in as the page scrolls, same as the thin bar at the very top -->

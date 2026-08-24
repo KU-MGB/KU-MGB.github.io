@@ -63,8 +63,8 @@
   --radius-xl: 16px;
   --radius-full: 9999px;
 
-  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   --t-fast: 150ms ease;
@@ -228,15 +228,14 @@ a:hover { color: var(--accent-hover); }
 .nav-links a {
   color: var(--fg);
   text-transform: uppercase;
-  font-size: 15px;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  padding: 7px 10px;
+  padding: 5px 8px;
   border-radius: var(--radius-sm);
   position: relative;
   transition: color var(--t-fast), background-color var(--t-fast);
 }
-@media (min-width: 900px) { .nav-links a { font-size: 16px; } }
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -1116,33 +1115,6 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 600px) {
   .srch-overlay { padding-top: calc(56px + env(safe-area-inset-top)); }
   .srch-box { width: calc(100vw - 24px); max-height: calc(100vh - 24px - env(safe-area-inset-top)); }
-}
-
-/* ----------------------------------------------------------------
-   12. LANGUAGE SWITCHER
-   The small flag button in the navbar that toggles the page between
-   English and Danish using Google Translate. The rules below also
-   hide Google's own translate banner and popup, which would
-   otherwise show up uninvited.
-   ---------------------------------------------------------------- */
-.lang-toggle-btn img {
-  width: 20px;
-  height: 14px;
-  object-fit: cover;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px var(--border);
-}
-
-/* Google's translate script injects its own banner and tooltip as fixed
-   elements, and pushes the whole page down with an inline top offset.
-   These rules cancel both, so the page layout stays untouched. */
-html { margin-top: 0 !important; }
-body { top: 0 !important; position: static !important; }
-.goog-te-banner-frame,
-.goog-te-banner-frame.skiptranslate,
-body > .skiptranslate,
-.goog-te-spinner-pos {
-  display: none !important;
 }
 
 /* ----------------------------------------------------------------

@@ -1503,40 +1503,6 @@ function initSectionNav() {
 document.addEventListener('DOMContentLoaded', initSectionNav);
 
 
-// ----------------------------------------------------------------
-// 16. Language switcher: a single button that toggles the page
-// between English and Danish, using the Google Translate widget
-// loaded at the bottom of index.html.
-// ----------------------------------------------------------------
-const LANGS = [
-  { code: 'en', flag: 'gb', label: 'EN' },
-  { code: 'da', flag: 'dk', label: 'DA' }
-];
-
-window.toggleLanguage = function() {
-  const current = document.querySelectorAll('.lang-toggle-btn')[0]?.dataset.lang || 'en';
-  const next = current === 'en' ? LANGS[1] : LANGS[0];
-  changeLanguage(next.code);
-};
-
-window.changeLanguage = function(code) {
-  const s = document.querySelector('.goog-te-combo');
-  if (s) {
-    s.value = code;
-    s.dispatchEvent(new Event('change'));
-  }
-  const l = LANGS.find(x => x.code === code) || LANGS[0];
-  document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
-    btn.dataset.lang = l.code;
-    btn.setAttribute('data-tip', l.code === 'en' ? 'Switch to Danish' : 'Switch to English');
-    const img = btn.querySelector('img');
-    if (img) {
-      img.src = `https://flagcdn.com/w40/${l.flag}.png`;
-      img.alt = l.label;
-    }
-  });
-};
-
 // Google's translate script inserts its own loading spinner and banner as
 // fresh elements directly on <body> right when a translation starts, with
 // an inline style that can outrank the CSS rules above. Catching them the
