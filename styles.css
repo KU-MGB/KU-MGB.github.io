@@ -139,8 +139,8 @@ a:hover { color: var(--accent-hover); }
 ::selection { background: var(--accent); color: #fff; }
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-alt); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-hover); }
 
 /* Old helper classes kept in case older markup still uses them */
 .glass-panel { background: var(--bg-card); border: 1px solid var(--border); transition: border-color var(--t-base), box-shadow var(--t-base); }
@@ -185,10 +185,11 @@ a:hover { color: var(--accent-hover); }
   border-radius: inherit;
   z-index: -1;
   background: rgba(255, 255, 255, 0.68);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   transform: translateZ(0);
   will-change: transform;
+  contain: paint;
 }
 .dark #navbar { border-color: rgba(28, 27, 24, 0.68); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
 .dark #navbar::before { background: rgba(28, 27, 24, 0.68); }
@@ -342,10 +343,11 @@ a:hover { color: var(--accent-hover); }
   border-radius: inherit;
   z-index: -1;
   background: rgba(255, 255, 255, 0.68);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   transform: translateZ(0);
   will-change: transform;
+  contain: paint;
 }
 .dark #mobile-menu { border-color: rgba(28, 27, 24, 0.68); }
 .dark #mobile-menu::before { background: rgba(28, 27, 24, 0.68); }
