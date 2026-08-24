@@ -2,8 +2,8 @@
   "title": "Your post title",
   "date": "2026-01-01",
   "category": "Science",
-  "tags": ["Keyword One", "Keyword Two"],
+  "tags": ["Keyword One", "Keyword Two", "Keyword Three"],
   "description": "One or two sentences summarising the post — shown on the blog list card.",
   "cover": "cover.svg",
-  "body": "Write the post body here using Markdown.\n\n## A heading\n\nA paragraph. **Bold** and *italic* both work.\n\n- A bullet\n- Another bullet"
+  "body": "Write the post body here using Markdown.\n\n## A heading\n\n### A smaller heading\n\nA paragraph. **Bold**, *italic*, and `code` all work.\n\n- A bullet\n- Another bullet\n\nA second paragraph, separated from the one above by a blank line."
 }

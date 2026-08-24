@@ -156,7 +156,7 @@ a:hover { color: var(--accent-hover); }
    ---------------------------------------------------------------- */
 #navbar {
   position: fixed;
-  top: 8px;
+  top: 12px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -167,7 +167,7 @@ a:hover { color: var(--accent-hover); }
   border: 0.5px solid rgba(255, 255, 255, 0.68);
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
-  height: 42px;
+  height: 48px;
   transform: translateZ(0);
   will-change: transform;
   transition: box-shadow var(--t-base), border-color var(--t-base), height var(--t-base);
@@ -195,10 +195,10 @@ a:hover { color: var(--accent-hover); }
 .dark #navbar::before { background: rgba(28, 27, 24, 0.68); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
-/* Two sizes only, matching the Portfolio site's own header structure: one
-   height for every width below 900px, a taller one at 900px and up — not
-   the finer shrinking cascade this used to have across 399/640/900px. */
-@media (min-width: 900px) { #navbar { height: 46px; } }
+/* Matches the Portfolio site's header exactly: 48px by default (there's no
+   separate desktop size — this applies everywhere above 900px too), 50px
+   below 900px — mobile is very slightly taller here, not shorter. */
+@media (max-width: 900px) { #navbar { height: 50px; } }
 
 .nav-inner {
   max-width: var(--container-max);
@@ -313,7 +313,7 @@ a:hover { color: var(--accent-hover); }
 #mobile-menu {
   display: none;
   position: fixed;
-  top: 50px;
+  top: 62px;
   left: 50%;
   bottom: auto;
   width: 220px;
@@ -392,7 +392,7 @@ a:hover { color: var(--accent-hover); }
    the page on wide screens, section titles and labels, chips,
    badges, buttons, and small helpers like scroll-reveal.
    ---------------------------------------------------------------- */
-.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 66px; }
+.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 70px; }
 
 /* Vertical separator lines down the left and right edge of each
    section, visible on screens 1200px and wider. Purely decorative. */
@@ -533,9 +533,8 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 29px 24px 32px;
+  padding: 37px 24px 32px;
 }
-@media (min-width: 900px) { .home-banner { padding-top: 31px; } }
 /* The navbar is position:fixed, so it reserves no space in the document
    flow — this top padding is set to roughly (navbar's top offset + half its
    own height), so the hero photo begins right at the navbar's vertical
@@ -1153,7 +1152,7 @@ body > .skiptranslate,
    the screen, not part of the footer itself, but lives in this
    section because it is closely related.
    ---------------------------------------------------------------- */
-footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 32px; padding: 2px 0; }
+footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 32px; padding: 8px 0; }
 footer .logo-lockup { height: 24px; }
 @media (min-width: 640px) { footer .logo-lockup { height: 30px; } }
 .footer-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 32px; }
@@ -1232,7 +1231,7 @@ footer .logo-lockup { height: 24px; }
 }
 
 /* Page router: only one page-view section is visible at a time */
-.page-view { display: block; scroll-margin-top: 66px; }
+.page-view { display: block; scroll-margin-top: 70px; }
 .page-view + .page-view:not(#page-blog-post) > .page-section:first-child { border-top: 2px solid var(--divider); }
 #page-blog-post { display: none; }
 #page-blog-post.active { display: block; }
@@ -1245,5 +1244,4 @@ body.viewing-blog-post .page-view:not(#page-blog-post) { display: none; }
    because it's scrolled INTO view — this needs its own explicit top
    padding to clear the fixed navbar, or its content (the "Back to Blog"
    row) renders underneath the bar. */
-#page-blog-post > .page-section { padding-top: 60px; }
-@media (min-width: 900px) { #page-blog-post > .page-section { padding-top: 64px; } }
+#page-blog-post > .page-section { padding-top: 66px; }

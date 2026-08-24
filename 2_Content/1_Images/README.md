@@ -4,15 +4,15 @@ Flat folder, no subfolders. Current layout:
 
 | File | Purpose |
 |---|---|
-| `5_MGB_Lab_Fevicon.svg` | Browser tab favicon. |
-| `6_MGB_Lab_Logo.svg` | Navbar logo and footer logo. |
-| `logo.png` | Apple-touch-icon (home screen icon on iOS — needs a raster image, so it keeps using this instead of the SVG logo). |
-| `3_People.*` | Group photo (People page) — see below. |
+| `0_People.*` | Group photo (People page) — see below. |
+| `1_MGB_Lab_Fevicon.svg` | Browser tab favicon. |
+| `2_MGB_Lab_Logo.svg` | Navbar logo and footer logo. |
+| `apple-touch-icon.png` | Home screen icon on iOS — needs a raster image, so it's a separate PNG rather than reusing the SVG logo. |
 | Anything listed in `manifest.json` | Home page slideshow — see below. |
 
 ## Group photo (People page)
 
-Save it in this folder as `3_People.jpg` (or `.jpeg`/`.png`/`.webp` — any of those
+Save it in this folder as `0_People.jpg` (or `.jpeg`/`.png`/`.webp` — any of those
 extensions work). It appears automatically at the top of the People page, replacing
 the "coming soon" placeholder. Any normal photo size/orientation works — it's
 cropped to fill the frame.

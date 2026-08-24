@@ -354,11 +354,16 @@ const MGB_GLOSSARY      = {
   "Biochar": "A carbon-rich material produced by heating organic matter without oxygen, used to improve soil and adsorb environmental contaminants.",
   "Biofilms": "Structured communities of microorganisms attached to a surface and encased in a self-produced extracellular matrix.",
   "Bioreactor": "A vessel used to grow microorganisms or cells under controlled conditions for research or industrial-scale processes.",
+  "Bioinformatics": "The use of computational tools and methods to analyse and interpret large-scale biological data, such as DNA and protein sequences.",
   "Bioremediation": "The use of living organisms, typically microbes, to degrade or remove pollutants from contaminated soil or water.",
+  "C-F Bond": "The carbon–fluorine bond — at roughly 130 kcal/mol, the strongest single bond in organic chemistry, and the reason PFAS resist natural breakdown.",
+  "Chemistry": "The scientific study of matter, its properties, and the reactions it undergoes at the molecular and atomic level.",
   "Community Diversity": "A measure of how many different species or taxa are present in a microbial community, and how evenly they are represented.",
   "Comparative Genomics": "The analysis of genome sequences across species or strains to identify shared and distinguishing genetic features.",
   "Cyanobacteria": "Photosynthetic bacteria, some capable of nitrogen fixation, found across aquatic and terrestrial environments.",
   "Danmarks Frie Forskningsfond": "The Danish Independent Research Fund, a national body funding investigator-driven research across all academic disciplines.",
+  "Dark Matter": "In microbiology, the vast majority of environmental microbial species that have never been grown in culture and remain largely uncharacterised.",
+  "Dehalogenases": "Enzymes that remove halogen atoms (such as fluorine, chlorine, or bromine) from organic compounds, breaking otherwise stable carbon–halogen bonds.",
   "Environmental Biotech": "Biotechnology applied to environmental problems, such as pollutant degradation, waste treatment, and ecosystem monitoring.",
   "Environmental Microbiology": "The study of microorganisms in natural environments and their roles in ecological and biogeochemical processes.",
   "Enzyme Discovery": "The process of identifying and characterising new enzymes, often by screening genomic or environmental sequence data.",
@@ -366,6 +371,7 @@ const MGB_GLOSSARY      = {
   "Epigenetics": "Heritable changes in gene activity, such as DNA methylation, that do not involve changes to the underlying DNA sequence.",
   "Explainable AI": "AI methods designed so their predictions can be interpreted and understood, rather than functioning as an opaque black box.",
   "Fluoride Tolerance": "The ability of an organism or enzyme to function normally in the presence of fluoride, relevant to PFAS-degrading systems that release it.",
+  "Forever Chemicals": "A common name for PFAS, reflecting how resistant they are to natural environmental breakdown.",
   "Gene Context": "The genes and genetic elements surrounding a gene of interest on a chromosome or mobile element, informing its likely function or origin.",
   "Genetics": "The study of genes, heredity, and genetic variation in living organisms.",
   "Genome Sequencing": "Determining the complete DNA sequence of an organism's genome.",
@@ -954,18 +960,20 @@ window.renderBlogs = function() {
         </div>
         <a href='${postUrl}' class='blog-title'>${b.title || ''}</a>
         <p class='blog-desc line-clamp-3'>${b.description || ''}</p>
+        ${b.tags && b.tags.length ? `<div class='chip-container'>${b.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
         <a href='${postUrl}' class='text-link'>Read more &rarr;</a>
       </div>
     `;
     el.querySelector('.blog-author-link').addEventListener('click', (e) => e.stopPropagation());
     el.addEventListener('click', (e) => {
-      if (e.target.closest('.blog-author-link') || e.target.closest('a')) return;
+      if (e.target.closest('.blog-author-link') || e.target.closest('a') || e.target.closest('.chip-glossary')) return;
       window.location.href = postUrl;
     });
     grid.appendChild(el);
   });
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
+  if (window.markGlossaryChips) window.markGlossaryChips();
 }
 
 // 7. Blog post renderer. Reads ?id=<slug> from the URL (the hash is #blog-post)
@@ -990,6 +998,7 @@ window.renderBlogPost = function() {
     </div>
     <div class="blog-post-header">
       <h1 class="blog-post-title">${post.title || ''}</h1>
+      ${post.tags && post.tags.length ? `<div class='chip-container' style="justify-content:center;">${post.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
     </div>
     ${post.cover ? `<img src="${adjustPath(post.cover)}" class="blog-post-cover" alt="Cover image">` : ''}
     <div class="blog-post-body">
@@ -997,6 +1006,7 @@ window.renderBlogPost = function() {
     </div>
   `;
   if (window.initScrollReveal) window.initScrollReveal();
+  if (window.markGlossaryChips) window.markGlossaryChips();
 }
 
 // 8. Publications renderer
@@ -1214,11 +1224,11 @@ function initNewsAutoScroll(box) {
 }
 
 // 12. Group photo (People page). Tries a few common file extensions so it works
-// whatever format the file is, e.g. 3_People.jpg or 3_People.webp.
+// whatever format the file is, e.g. 0_People.jpg or 0_People.webp.
 window.renderGroupPhoto = function() {
   const container = document.getElementById('group-photo-container');
   if (!container) return;
-  const candidates = ['3_People.jpg', '3_People.jpeg', '3_People.png', '3_People.webp'];
+  const candidates = ['0_People.jpg', '0_People.jpeg', '0_People.png', '0_People.webp'];
 
   function tryNext(i) {
     if (i >= candidates.length) return;
