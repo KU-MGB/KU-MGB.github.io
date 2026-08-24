@@ -20,9 +20,8 @@
      9. Blog (card list and full post view)
     10. Forms and the Join Us popup
     11. Command palette search popup
-    12. Language switcher
-    13. Footer
-    14. Tooltips and page routing
+    12. Footer
+    13. Tooltips and page routing
    ================================================================ */
 
 /* ----------------------------------------------------------------
@@ -110,9 +109,9 @@
    ---------------------------------------------------------------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* overflow-x lives on body, not html — matching the Portfolio site's own
-   convention, and avoiding an implicit overflow-y:auto some browsers apply
-   to an element with overflow-x set but overflow-y left unset. */
+/* overflow-x lives on body, not html — avoids an implicit overflow-y:auto
+   some browsers apply to an element with overflow-x set but overflow-y
+   left unset. */
 html { scroll-behavior: smooth; }
 
 body {
@@ -142,15 +141,10 @@ a:hover { color: var(--accent-hover); }
 ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-hover); }
 
-/* Old helper classes kept in case older markup still uses them */
-.glass-panel { background: var(--bg-card); border: 1px solid var(--border); transition: border-color var(--t-base), box-shadow var(--t-base); }
-.super-card-hover:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
-
 /* ----------------------------------------------------------------
    3. NAVBAR
-   A floating pill fixed to the top of every page (position:fixed, matching
-   the Portfolio site's own header): logo, page links, and
-   search/language/theme/join buttons, all grouped together and
+   A floating pill fixed to the top of every page (position:fixed): logo,
+   page links, and search/theme/join buttons, all grouped together and
    centred. Below 900px width the page links and join button are
    replaced by a hamburger button that opens the mobile menu.
    ---------------------------------------------------------------- */
@@ -195,9 +189,9 @@ a:hover { color: var(--accent-hover); }
 .dark #navbar::before { background: rgba(28, 27, 24, 0.68); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
-/* Matches the Portfolio site's header exactly: 42px by default (there's no
-   separate desktop size — this applies everywhere above 900px too), 44px
-   below 900px — mobile is very slightly taller here, not shorter. */
+/* 42px by default (there's no separate desktop size — this applies
+   everywhere above 900px too), 44px below 900px — mobile is very
+   slightly taller here, not shorter. */
 @media (max-width: 900px) { #navbar { height: 44px; } }
 
 .nav-inner {
@@ -1125,7 +1119,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* ----------------------------------------------------------------
-   13. FOOTER
+   12. FOOTER
    The bar at the bottom of every page: logo, GitHub link, and the
    copyright line. The back-to-top button further down is fixed to
    the screen, not part of the footer itself, but lives in this
@@ -1182,7 +1176,7 @@ footer .logo-lockup { height: 24px; }
 .progress-ring__circle { stroke: var(--accent); transition: stroke-dashoffset 0.1s linear; stroke-linecap: round; }
 
 /* ----------------------------------------------------------------
-   14. TOOLTIPS AND PAGE ROUTING
+   13. TOOLTIPS AND PAGE ROUTING
    Small text labels that appear on hover for any element with a
    data-tip attribute, plus the rules that show only one page
    section at a time.

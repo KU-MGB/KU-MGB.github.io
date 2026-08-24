@@ -9,9 +9,9 @@
 // The file has three parts, in order:
 //
 //   PART 1: STATIC CONTENT (below)
-//   Publications, news, research pillars, projects, in-house tools, and
-//   the reaction pipeline data. To add or edit one of these, just edit the array
-//   directly. People and blog posts are handled differently: each
+//   Publications, news, research pillars, projects, and in-house tools.
+//   To add or edit one of these, just edit the array directly. People
+//   and blog posts are handled differently: each
 //   person and each blog post is its own JSON file, kept in
 //   1_People/ and 2_Content/2_Blogs/ (see the README.md in each of
 //   those folders), so new entries can be added without touching
@@ -275,28 +275,6 @@ const MGB_RESEARCH     = [
     "icon": "FlaskConical"
   }
 ];
-// The three-phase reaction pipeline cards (Pre-organisation, C-F Bond
-// Breakage, Enzyme Regeneration). Not shown on the page right now: the
-// section that used to display these was removed from index.html, so
-// renderReaction() below has nothing to render into and quietly does
-// nothing. Kept here in case that section comes back.
-const MGB_REACTION     = [
-  {
-    "phase": "Phase 1",
-    "title": "Pre-organisation",
-    "description": "The PFAS molecule enters the dehalogenase active site, positioning the target carbon near the Asp10 nucleophile oxygen (~3.2 Å) in a collinear backside-attack geometry."
-  },
-  {
-    "phase": "Phase 2",
-    "title": "C–F Bond Breakage",
-    "description": "The negatively charged Asp10 nucleophile attacks the α-carbon, displacing the fluoride leaving group. The Arg41/Trp179 cradle stabilises the transition state."
-  },
-  {
-    "phase": "Phase 3",
-    "title": "Enzyme Regeneration",
-    "description": "A catalytic water molecule is activated by the Asp180 base (abstracting H⁺). The hydroxyl attacks the ester, releasing the defluorinated product and restoring Asp10."
-  }
-];
 // Current and past projects, shown on the Projects page. renderProjects
 // always sorts Active projects ahead of Finished ones (see its comment).
 const MGB_PROJECTS     = [
@@ -345,7 +323,6 @@ const MGB_TOOLS        = [
 // chip anywhere on the site (People, Projects, Tools, Publications, and the
 // home hero chips). Only chips whose text matches a key here become
 // clickable — see markGlossaryChips() and the click handler further down.
-// DRAFT: general reference definitions, not yet reviewed for accuracy.
 const MGB_GLOSSARY      = {
   "AI": "Artificial intelligence: computational methods, including machine learning, that identify patterns in biological data too complex for manual analysis.",
   "Adaptive Sampling": "A Nanopore sequencing feature that selectively rejects or enriches DNA molecules in real time based on their match to a reference sequence.",
@@ -480,8 +457,8 @@ const MGB_GLOSSARY      = {
 //
 // Theme, navbar, search, page routing, and one render function per page
 // section. Sections are numbered in the order they appear below; a
-// letter suffix (2b, 8b, 9b, 14b) marks a smaller piece that belongs
-// with the numbered section right before it.
+// letter suffix (2b, 8b, 14b) marks a smaller piece that belongs with
+// the numbered section right before it.
 //
 //    1  Theme (dark/light)
 //    2  Navbar and mobile menu
@@ -494,7 +471,6 @@ const MGB_GLOSSARY      = {
 //    8  Publications renderer
 //    8b   Publications "scroll more" button
 //    9  Research pillars renderer
-//    9b   Reaction pipeline renderer
 //   10  Projects renderer
 //   11  News renderer (ticker)
 //   12  Group photo (People page)
@@ -502,9 +478,8 @@ const MGB_GLOSSARY      = {
 //   14  Join Us form
 //   14b   Join Us popup (open/close)
 //   15  Single-page scroll routing
-//   16  Language switcher
-//   17  Small UX touches (footer year, back-to-top button)
-//   18  Command palette search (Ctrl/Cmd+K)
+//   16  Small UX touches (footer year, back-to-top button)
+//   17  Command palette search (Ctrl/Cmd+K)
 // ═══════════════════════════════════════════════════════════════════════════
 
 function adjustPath(p) {
@@ -660,14 +635,7 @@ function initGlossaryPopover() {
     openChip = chip;
     pop.innerHTML = `<strong>${term}</strong><p>${def}</p>`;
     pop.classList.add('open');
-    const chipRect = chip.getBoundingClientRect();
-    const popRect = pop.getBoundingClientRect();
-    let left = chipRect.left + chipRect.width / 2 - popRect.width / 2;
-    left = Math.max(8, Math.min(left, window.innerWidth - popRect.width - 8));
-    let top = chipRect.bottom + 8;
-    if (top + popRect.height > window.innerHeight - 8) top = chipRect.top - popRect.height - 8;
-    pop.style.left = `${left}px`;
-    pop.style.top = `${top}px`;
+    reposition();
   }
 
   document.addEventListener('click', (e) => {
@@ -1070,25 +1038,6 @@ window.renderResearch = function() {
   grid.className = 'research-pillars';
   grid.innerHTML = MGB_RESEARCH.map(r => `
     <div class='card-academic' data-reveal>
-      <h3>${r.title}</h3>
-      <p>${r.description}</p>
-    </div>
-  `).join('');
-  container.appendChild(grid);
-  if (window.initScrollReveal) window.initScrollReveal();
-}
-
-// 9b. Reaction pipeline renderer. Not currently used (see the note above MGB_REACTION).
-window.renderReaction = function() {
-  if (typeof MGB_REACTION === 'undefined') return;
-  const container = document.getElementById('reaction-container');
-  if (!container) return;
-
-  const grid = document.createElement('div');
-  grid.className = 'research-pillars';
-  grid.innerHTML = MGB_REACTION.map(r => `
-    <div class='card-academic' data-reveal>
-      <span class='badge badge-fg' style='margin-bottom:10px;'>${r.phase}</span>
       <h3>${r.title}</h3>
       <p>${r.description}</p>
     </div>
@@ -1503,24 +1452,8 @@ function initSectionNav() {
 document.addEventListener('DOMContentLoaded', initSectionNav);
 
 
-// Google's translate script inserts its own loading spinner and banner as
-// fresh elements directly on <body> right when a translation starts, with
-// an inline style that can outrank the CSS rules above. Catching them the
-// moment they're added and force-hiding them from here wins that fight,
-// since this runs after Google's own script sets its style.
-(function () {
-  const hide = (el) => { el.style.setProperty('display', 'none', 'important'); };
-  new MutationObserver((mutations) => {
-    mutations.forEach((m) => m.addedNodes.forEach((node) => {
-      if (node.nodeType !== 1) return;
-      if (node.classList?.contains('skiptranslate') || (node.id && node.id.startsWith('goog-gt'))) hide(node);
-    }));
-  }).observe(document.body, { childList: true });
-})();
-
-
 // ----------------------------------------------------------------
-// 17. Small UX touches: the footer copyright year, and the
+// 16. Small UX touches: the footer copyright year, and the
 // back-to-top button with its circular scroll-progress ring.
 // ----------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
@@ -1557,7 +1490,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ----------------------------------------------------------------
-// 18. Command palette search, opened with the search icon in the
+// 17. Command palette search, opened with the search icon in the
 // navbar or the Ctrl/Cmd+K keyboard shortcut.
 // ----------------------------------------------------------------
 (function () {
@@ -1570,7 +1503,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const SECTIONS = [
     { id: 'research', label: 'Research', icon: 'fas fa-dna', sel: '#research-themes-container' },
-    { id: 'reaction', label: 'Reaction Pipeline', icon: 'fas fa-atom', sel: '#reaction-container' },
     { id: 'projects', label: 'Projects', icon: 'fas fa-flask', sel: '#projects-container' },
     { id: 'people', label: 'People', icon: 'fas fa-users', sel: '#people-container' },
     { id: 'publications', label: 'Publications', icon: 'fas fa-book-open', sel: '#publications-container' },
