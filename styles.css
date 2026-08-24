@@ -499,12 +499,15 @@ a:hover { color: var(--accent-hover); }
    ---------------------------------------------------------------- */
 .home-banner {
   max-width: var(--container-max);
-  margin: 0 auto;
+  margin: -15px auto 0;
   padding: 0 24px 32px;
 }
-/* No top padding: the hero photo sits flush against the sticky navbar above
-   it, with the navbar's own translucency/blur reading as if it floats on
-   top of the image rather than leaving a gap. */
+/* Pulled up by roughly half the navbar's own height (see the #navbar height
+   values above) so the sticky, translucent navbar overlaps the top of the
+   hero photo instead of just sitting flush above it with a hard edge. */
+@media (min-width: 640px) { .home-banner { margin-top: -16px; } }
+@media (min-width: 900px) { .home-banner { margin-top: -18px; } }
+@media (max-width: 399px) { .home-banner { margin-top: -11px; } }
 /* The research pillar boxes sit in a .page-section right after the hero.
    Its own top padding would double up with the hero's bottom padding
    above, so pull it in tight here. */
