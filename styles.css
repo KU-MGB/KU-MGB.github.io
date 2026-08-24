@@ -156,7 +156,7 @@ a:hover { color: var(--accent-hover); }
    ---------------------------------------------------------------- */
 #navbar {
   position: fixed;
-  top: 18px;
+  top: 12px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -313,7 +313,7 @@ a:hover { color: var(--accent-hover); }
 #mobile-menu {
   display: none;
   position: fixed;
-  top: 62px;
+  top: 56px;
   left: 50%;
   bottom: auto;
   width: 220px;
@@ -533,7 +533,7 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 39px 24px 32px;
+  padding: 33px 24px 32px;
 }
 /* The navbar is position:fixed, so it reserves no space in the document
    flow — this top padding is set to roughly (navbar's top offset + half its
