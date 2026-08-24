@@ -167,7 +167,7 @@ a:hover { color: var(--accent-hover); }
   border: 0.5px solid rgba(255, 255, 255, 0.68);
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
-  height: 48px;
+  height: 42px;
   transform: translateZ(0);
   will-change: transform;
   transition: box-shadow var(--t-base), border-color var(--t-base), height var(--t-base);
@@ -195,10 +195,10 @@ a:hover { color: var(--accent-hover); }
 .dark #navbar::before { background: rgba(28, 27, 24, 0.68); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
-/* Matches the Portfolio site's header exactly: 48px by default (there's no
-   separate desktop size — this applies everywhere above 900px too), 50px
+/* Matches the Portfolio site's header exactly: 42px by default (there's no
+   separate desktop size — this applies everywhere above 900px too), 44px
    below 900px — mobile is very slightly taller here, not shorter. */
-@media (max-width: 900px) { #navbar { height: 50px; } }
+@media (max-width: 900px) { #navbar { height: 44px; } }
 
 .nav-inner {
   max-width: var(--container-max);
@@ -313,7 +313,7 @@ a:hover { color: var(--accent-hover); }
 #mobile-menu {
   display: none;
   position: fixed;
-  top: 68px;
+  top: 62px;
   left: 50%;
   bottom: auto;
   width: 220px;
@@ -533,7 +533,7 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 43px 24px 32px;
+  padding: 39px 24px 32px;
 }
 /* The navbar is position:fixed, so it reserves no space in the document
    flow — this top padding is set to roughly (navbar's top offset + half its
