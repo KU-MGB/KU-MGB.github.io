@@ -156,7 +156,7 @@ a:hover { color: var(--accent-hover); }
    ---------------------------------------------------------------- */
 #navbar {
   position: fixed;
-  top: 12px;
+  top: 18px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -313,7 +313,7 @@ a:hover { color: var(--accent-hover); }
 #mobile-menu {
   display: none;
   position: fixed;
-  top: 62px;
+  top: 68px;
   left: 50%;
   bottom: auto;
   width: 220px;
@@ -392,7 +392,7 @@ a:hover { color: var(--accent-hover); }
    the page on wide screens, section titles and labels, chips,
    badges, buttons, and small helpers like scroll-reveal.
    ---------------------------------------------------------------- */
-.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 70px; }
+.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 76px; }
 
 /* Vertical separator lines down the left and right edge of each
    section, visible on screens 1200px and wider. Purely decorative. */
@@ -533,7 +533,7 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 37px 24px 32px;
+  padding: 43px 24px 32px;
 }
 /* The navbar is position:fixed, so it reserves no space in the document
    flow — this top padding is set to roughly (navbar's top offset + half its
@@ -1231,7 +1231,7 @@ footer .logo-lockup { height: 24px; }
 }
 
 /* Page router: only one page-view section is visible at a time */
-.page-view { display: block; scroll-margin-top: 70px; }
+.page-view { display: block; scroll-margin-top: 76px; }
 .page-view + .page-view:not(#page-blog-post) > .page-section:first-child { border-top: 2px solid var(--divider); }
 #page-blog-post { display: none; }
 #page-blog-post.active { display: block; }
@@ -1244,4 +1244,4 @@ body.viewing-blog-post .page-view:not(#page-blog-post) { display: none; }
    because it's scrolled INTO view — this needs its own explicit top
    padding to clear the fixed navbar, or its content (the "Back to Blog"
    row) renders underneath the bar. */
-#page-blog-post > .page-section { padding-top: 66px; }
+#page-blog-post > .page-section { padding-top: 72px; }
