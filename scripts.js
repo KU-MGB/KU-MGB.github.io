@@ -623,12 +623,35 @@ function initGlossaryPopover() {
   pop.setAttribute('role', 'tooltip');
   document.body.appendChild(pop);
 
-  const hide = () => { pop.classList.remove('open'); pop.style.left = ''; pop.style.top = ''; };
+  // Mirrors the [data-tip] icon tooltips: shows on hover or click/tap, and
+  // closes the instant the pointer leaves both the chip and the popover
+  // itself (see the mouseout/mouseleave handlers below).
+  let openChip = null;
 
-  const show = (chip) => {
+  function hide() {
+    openChip = null;
+    pop.classList.remove('open');
+    pop.style.left = '';
+    pop.style.top = '';
+  }
+
+  function reposition() {
+    if (!openChip || !openChip.isConnected) { hide(); return; }
+    const chipRect = openChip.getBoundingClientRect();
+    const popRect = pop.getBoundingClientRect();
+    let left = chipRect.left + chipRect.width / 2 - popRect.width / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - popRect.width - 8));
+    let top = chipRect.bottom + 8;
+    if (top + popRect.height > window.innerHeight - 8) top = chipRect.top - popRect.height - 8;
+    pop.style.left = `${left}px`;
+    pop.style.top = `${top}px`;
+  }
+
+  function show(chip) {
     const term = chip.textContent.trim();
     const def = MGB_GLOSSARY[term];
     if (!def) return;
+    openChip = chip;
     pop.innerHTML = `<strong>${term}</strong><p>${def}</p>`;
     pop.classList.add('open');
     const chipRect = chip.getBoundingClientRect();
@@ -639,7 +662,7 @@ function initGlossaryPopover() {
     if (top + popRect.height > window.innerHeight - 8) top = chipRect.top - popRect.height - 8;
     pop.style.left = `${left}px`;
     pop.style.top = `${top}px`;
-  };
+  }
 
   document.addEventListener('click', (e) => {
     const chip = e.target.closest('.chip-glossary');
@@ -660,8 +683,31 @@ function initGlossaryPopover() {
       show(e.target);
     }
   });
-  window.addEventListener('scroll', hide, { passive: true, capture: true });
-  window.addEventListener('resize', hide);
+  window.addEventListener('scroll', reposition, { passive: true, capture: true });
+  window.addEventListener('resize', reposition);
+
+  // Hover: chips are re-rendered by several renderX functions, so this is
+  // delegated on document rather than bound per-chip. mouseover/mouseout
+  // bubble (unlike mouseenter/mouseleave), which is what makes delegation
+  // possible here. Closes the instant the pointer leaves both the chip and
+  // the popover — relatedTarget is checked so moving directly from one to
+  // the other doesn't flicker shut in between.
+  document.addEventListener('mouseover', (e) => {
+    const chip = e.target.closest('.chip-glossary');
+    if (chip) show(chip);
+  });
+  document.addEventListener('mouseout', (e) => {
+    const chip = e.target.closest('.chip-glossary');
+    if (!chip) return;
+    const to = e.relatedTarget;
+    if (to && to.closest && (to.closest('.chip-glossary') === chip || to.closest('#glossary-popover'))) return;
+    hide();
+  });
+  pop.addEventListener('mouseleave', (e) => {
+    const to = e.relatedTarget;
+    if (to && to.closest && to.closest('.chip-glossary') === openChip) return;
+    hide();
+  });
 }
 
 // 3. Scroll reveal (fades elements in as they enter the screen)
@@ -937,11 +983,13 @@ window.renderBlogPost = function() {
 
   document.title = `${post.title} | MGB Lab`;
   container.innerHTML = `
-    <a href="#blogs" class="text-link" style="margin-bottom:24px;">&larr; Back to Blog</a>
+    <div class="blog-post-topbar">
+      <a href="#blogs" class="text-link">&larr; Back to Blog</a>
+      <div class="section-label">${post.date || ''} • ${post.category || ''}</div>
+      <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad <i class='fab fa-linkedin' aria-hidden='true'></i></a>
+    </div>
     <div class="blog-post-header">
-      <div class="section-label" style="justify-content:center; display:flex">${post.date || ''} • ${post.category || ''}</div>
       <h1 class="blog-post-title">${post.title || ''}</h1>
-      <p style="color:var(--muted); font-weight:500;">By ${post.author || 'MGB Lab'}</p>
     </div>
     ${post.cover ? `<img src="${adjustPath(post.cover)}" class="blog-post-cover" alt="Cover image">` : ''}
     <div class="blog-post-body">
@@ -1369,6 +1417,11 @@ function handleRouting() {
     if (target) target.classList.add('active');
     document.body.classList.add('viewing-blog-post');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    // Every other section is hidden while viewing a single post, so the
+    // scroll-spy IntersectionObserver below has nothing to react to — set
+    // the nav highlight to Blogs explicitly instead of leaving whatever
+    // section happened to be active before landing here.
+    document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#blogs'));
     return;
   }
   document.body.classList.remove('viewing-blog-post');
@@ -1421,6 +1474,21 @@ function initSectionNav() {
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach(s => observer.observe(s));
+
+  // The rootMargin band above sits roughly mid-viewport, so a short final
+  // section (e.g. Tools, with only a couple of cards) can end the page
+  // before that band ever reaches it — the last section the band actually
+  // crossed (e.g. Publications) stays highlighted forever. Force the very
+  // last section active once the page is scrolled to (or past) its own
+  // bottom, overriding the observer.
+  const lastSection = sections[sections.length - 1];
+  window.addEventListener('scroll', () => {
+    if (document.body.classList.contains('viewing-blog-post')) return;
+    const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    if (!atBottom) return;
+    const hash = '#' + lastSection.id.replace('page-', '');
+    document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
+  }, { passive: true });
 }
 document.addEventListener('DOMContentLoaded', initSectionNav);
 

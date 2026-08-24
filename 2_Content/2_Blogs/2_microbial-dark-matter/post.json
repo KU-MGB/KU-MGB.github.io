@@ -1,7 +1,6 @@
 {
   "title": "Mining the microbial dark matter: how we find dehalogenases",
   "date": "2025-04-22",
-  "author": "MGB Lab",
   "category": "Methods",
   "tags": ["Metagenomics", "Bioinformatics", "Dehalogenases", "Dark Matter"],
   "description": "More than 99% of microbial species have never been grown in a laboratory. This post describes how metagenomic sequencing lets us access their genetic repertoire — and why this matters for PFAS biodegradation research.",

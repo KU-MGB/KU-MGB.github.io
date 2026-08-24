@@ -160,34 +160,34 @@ a:hover { color: var(--accent-hover); }
   width: fit-content;
   max-width: calc(100% - 24px);
   z-index: 100;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.68);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
-  border: 0.5px solid rgba(255, 255, 255, 0.82);
-  border-radius: 10px;
+  border: 0.5px solid rgba(255, 255, 255, 0.68);
+  border-radius: 8px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
-  height: 48px;
+  height: 30px;
   transition: box-shadow var(--t-base), background var(--t-base), height var(--t-base);
 }
-.dark #navbar { background: rgba(28, 27, 24, 0.82); border-color: rgba(28, 27, 24, 0.82); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+.dark #navbar { background: rgba(28, 27, 24, 0.68); border-color: rgba(28, 27, 24, 0.68); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
-@media (min-width: 640px) { #navbar { height: 52px; } }
-@media (min-width: 900px) { #navbar { height: 58px; } }
-@media (max-width: 399px) { #navbar { height: 36px; } }
+@media (min-width: 640px) { #navbar { height: 32px; } }
+@media (min-width: 900px) { #navbar { height: 36px; } }
+@media (max-width: 399px) { #navbar { height: 22px; } }
 
 .nav-inner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 6px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
 }
-@media (min-width: 640px) { .nav-inner { padding: 0 14px; gap: 24px; } }
-@media (max-width: 399px) { .nav-inner { padding: 0 8px; gap: 10px; } }
+@media (min-width: 640px) { .nav-inner { padding: 0 8px; gap: 24px; } }
+@media (max-width: 399px) { .nav-inner { padding: 0 4px; gap: 10px; } }
 .logo { display: flex; align-items: center; height: 100%; flex-shrink: 0; min-width: 0; text-decoration: none; }
 .logo-lockup { height: 100%; width: auto; max-width: 100%; display: block; }
 .logo-text { font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: 0; }
@@ -200,13 +200,9 @@ a:hover { color: var(--accent-hover); }
   display: flex;
   gap: 6px;
   font-family: var(--sans);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  padding: 4px;
 }
 .nav-links a {
-  color: var(--muted);
-  text-transform: uppercase;
+  color: var(--fg);
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -239,14 +235,15 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-full);
   padding: 2px;
 }
-@media (min-width: 640px) { .nav-utils { gap: 6px; padding: 4px; } }
+@media (min-width: 640px) { .nav-utils { gap: 6px; padding: 3px; } }
+@media (max-width: 399px) { .nav-utils { padding: 1px; } }
 .nav-icon-btn {
   background: none;
   border: none;
   color: var(--muted);
   cursor: pointer;
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   border-radius: var(--radius-full);
   border: 1px solid transparent;
   transition: all var(--t-fast);
@@ -255,28 +252,33 @@ a:hover { color: var(--accent-hover); }
   justify-content: center;
 }
 .nav-icon-btn:hover { color: var(--accent); border-color: var(--border); background: var(--accent-light); }
-.nav-icon-btn i { font-size: 14px; }
+.nav-icon-btn i { font-size: 10px; }
 #hamburger {
   display: none;
   background: none;
   border: none;
   color: var(--fg);
   cursor: pointer;
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 12px;
   transition: color var(--t-fast);
 }
 #hamburger:hover { color: var(--accent); }
+@media (max-width: 399px) {
+  .nav-icon-btn, #hamburger { width: 18px; height: 18px; }
+  .nav-icon-btn i { font-size: 9px; }
+  #hamburger { font-size: 11px; }
+}
 
 .join-btn {
-  padding: 7px 16px;
+  padding: 4px 14px;
   border-radius: var(--radius-full);
   background: var(--accent);
   color: #fff;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -292,24 +294,35 @@ a:hover { color: var(--accent-hover); }
 #mobile-menu {
   display: none;
   position: fixed;
-  top: 56px;
-  right: -100%;
+  top: 38px;
+  left: 50%;
   bottom: auto;
   width: 220px;
   max-width: 80vw;
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.68);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   z-index: 99;
   flex-direction: column;
   padding: 0;
-  border: 1px solid var(--border);
-  border-top: none;
-  border-right: none;
-  border-radius: 0 0 0 var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 14px;
   box-shadow: var(--shadow-lg);
-  transition: right var(--t-base);
+  overflow: hidden;
+  transform-origin: top center;
+  transform: translateX(-50%) translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform var(--t-base), opacity var(--t-base), visibility 0s linear var(--t-base);
 }
+.dark #mobile-menu { background: rgba(28, 27, 24, 0.68); border-color: rgba(28, 27, 24, 0.68); }
 @media (max-width: 900px) { #mobile-menu { display: flex; } }
-#mobile-menu.open { right: 0; }
+#mobile-menu.open {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition: transform var(--t-base), opacity var(--t-base);
+}
 #mobile-menu a, #mobile-menu button {
   display: block;
   width: 100%;
@@ -332,8 +345,8 @@ a:hover { color: var(--accent-hover); }
   .nav-links { display: none; }
   #hamburger { display: flex; }
 }
-@media (min-width: 640px) { #mobile-menu { top: 60px; } }
-@media (max-width: 399px) { #mobile-menu { top: 44px; } }
+@media (min-width: 640px) { #mobile-menu { top: 40px; } }
+@media (max-width: 399px) { #mobile-menu { top: 30px; } }
 @media (max-width: 480px) {
   .join-btn { display: none; }
   .nav-utils { gap: 2px; }
@@ -346,7 +359,7 @@ a:hover { color: var(--accent-hover); }
    the page on wide screens, section titles and labels, chips,
    badges, buttons, and small helpers like scroll-reveal.
    ---------------------------------------------------------------- */
-.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 78px; }
+.page-section { max-width: var(--container-max); margin: 0 auto; padding: 36px 24px; scroll-margin-top: 60px; }
 
 /* Vertical separator lines down the left and right edge of each
    section, visible on screens 1200px and wider. Purely decorative. */
@@ -487,12 +500,11 @@ a:hover { color: var(--accent-hover); }
 .home-banner {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 20px 24px 32px;
+  padding: 0 24px 32px;
 }
-/* The navbar is position:sticky, not fixed, so it occupies its own space in
-   the document flow above this banner — this top padding is just ordinary
-   breathing room between the two, not a manual offset to compensate for an
-   out-of-flow bar. */
+/* No top padding: the hero photo sits flush against the sticky navbar above
+   it, with the navbar's own translucency/blur reading as if it floats on
+   top of the image rather than leaving a gap. */
 /* The research pillar boxes sit in a .page-section right after the hero.
    Its own top padding would double up with the hero's bottom padding
    above, so pull it in tight here. */
@@ -927,10 +939,17 @@ a:hover { color: var(--accent-hover); }
 .blog-author-link:hover { color: var(--accent); }
 .blog-author-link .fa-linkedin { font-size: 13px; color: #0a66c2; }
 
+.blog-post-topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin-bottom: 24px; }
+.blog-post-topbar > :first-child { justify-self: start; }
+.blog-post-topbar > :last-child { justify-self: end; }
+@media (max-width: 640px) {
+  .blog-post-topbar { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 10px; }
+  .blog-post-topbar > :first-child, .blog-post-topbar > :last-child { justify-self: center; }
+}
 .blog-post-cover { width: 100%; max-height: 320px; object-fit: cover; border-radius: var(--radius-lg); margin-bottom: 28px; }
 .blog-post-header { text-align: center; max-width: 720px; margin: 0 auto 28px; }
 .blog-post-title { font-size: clamp(26px, 4vw, 38px); margin-bottom: 12px; }
-.blog-post-body { max-width: 680px; margin: 0 auto; font-size: 16px; line-height: 1.8; }
+.blog-post-body { max-width: 680px; margin: 0 auto; font-size: 16px; line-height: 1.8; text-align: justify; }
 .blog-post-body h2 { font-size: 22px; margin-top: 32px; margin-bottom: 10px; }
 .blog-post-body h3 { font-size: 18px; margin-top: 24px; margin-bottom: 8px; }
 .blog-post-body p { color: var(--muted); margin-bottom: 16px; }
@@ -1098,9 +1117,9 @@ body > .skiptranslate,
    the screen, not part of the footer itself, but lives in this
    section because it is closely related.
    ---------------------------------------------------------------- */
-footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 32px; padding: 14px 0; }
-footer .logo-lockup { height: 38px; }
-@media (min-width: 640px) { footer .logo-lockup { height: 48px; } }
+footer { border-top: 1px solid var(--border); background: var(--bg-alt); margin-top: 32px; padding: 2px 0; }
+footer .logo-lockup { height: 24px; }
+@media (min-width: 640px) { footer .logo-lockup { height: 30px; } }
 .footer-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 32px; }
 .footer-brand { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .footer-inner p { font-size: 11px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.04em; }
@@ -1177,8 +1196,8 @@ footer .logo-lockup { height: 38px; }
 }
 
 /* Page router: only one page-view section is visible at a time */
-.page-view { display: block; scroll-margin-top: 78px; }
-.page-view + .page-view > .page-section:first-child { border-top: 2px solid var(--divider); }
+.page-view { display: block; scroll-margin-top: 60px; }
+.page-view + .page-view:not(#page-blog-post) > .page-section:first-child { border-top: 2px solid var(--divider); }
 #page-blog-post { display: none; }
 #page-blog-post.active { display: block; }
 /* Opening a single blog post (e.g. from a shared link) hides every other
