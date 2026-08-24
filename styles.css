@@ -163,16 +163,33 @@ a:hover { color: var(--accent-hover); }
   width: fit-content;
   max-width: calc(100% - 24px);
   z-index: 100;
-  background: rgba(255, 255, 255, 0.68);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  background: transparent;
   border: 0.5px solid rgba(255, 255, 255, 0.68);
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
   height: 42px;
-  transition: box-shadow var(--t-base), background var(--t-base), height var(--t-base);
+  transition: box-shadow var(--t-base), border-color var(--t-base), height var(--t-base);
 }
-.dark #navbar { background: rgba(28, 27, 24, 0.68); border-color: rgba(28, 27, 24, 0.68); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+/* The frost lives on this pseudo, not on #navbar itself. backdrop-filter
+   directly on a position:fixed element is a known mobile-browser
+   compositing bug — Safari/Chrome mobile can stop repainting a fixed +
+   backdrop-filter element during scroll, making it appear to not be fixed
+   at all. translateZ(0) + will-change force a dedicated GPU layer for the
+   pseudo so it keeps repainting correctly while scrolling. */
+#navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.68);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  transform: translateZ(0);
+  will-change: transform;
+}
+.dark #navbar { border-color: rgba(28, 27, 24, 0.68); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+.dark #navbar::before { background: rgba(28, 27, 24, 0.68); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
 /* Two sizes only, matching the Portfolio site's own header structure: one
@@ -298,9 +315,7 @@ a:hover { color: var(--accent-hover); }
   bottom: auto;
   width: 220px;
   max-width: 80vw;
-  background: rgba(255, 255, 255, 0.68);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  background: transparent;
   z-index: 99;
   flex-direction: column;
   padding: 0;
@@ -314,7 +329,23 @@ a:hover { color: var(--accent-hover); }
   visibility: hidden;
   transition: transform var(--t-base), opacity var(--t-base), visibility 0s linear var(--t-base);
 }
-.dark #mobile-menu { background: rgba(28, 27, 24, 0.68); border-color: rgba(28, 27, 24, 0.68); }
+/* Same reasoning as #navbar::before — frost lives on a pseudo, not on the
+   fixed element itself, with a forced GPU layer so it keeps repainting
+   correctly on mobile while the menu is open and the page scrolls. */
+#mobile-menu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.68);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  transform: translateZ(0);
+  will-change: transform;
+}
+.dark #mobile-menu { border-color: rgba(28, 27, 24, 0.68); }
+.dark #mobile-menu::before { background: rgba(28, 27, 24, 0.68); }
 @media (max-width: 900px) { #mobile-menu { display: flex; } }
 #mobile-menu.open {
   transform: translateX(-50%) translateY(0);
