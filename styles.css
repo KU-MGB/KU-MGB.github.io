@@ -168,6 +168,8 @@ a:hover { color: var(--accent-hover); }
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
   height: 42px;
+  transform: translateZ(0);
+  will-change: transform;
   transition: box-shadow var(--t-base), border-color var(--t-base), height var(--t-base);
 }
 /* The frost lives on this pseudo, not on #navbar itself. backdrop-filter
@@ -325,6 +327,7 @@ a:hover { color: var(--accent-hover); }
   overflow: hidden;
   transform-origin: top center;
   transform: translateX(-50%) translateY(-10px);
+  will-change: transform;
   opacity: 0;
   visibility: hidden;
   transition: transform var(--t-base), opacity var(--t-base), visibility 0s linear var(--t-base);
