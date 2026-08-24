@@ -1238,3 +1238,10 @@ footer .logo-lockup { height: 24px; }
    section, so the post reads as its own page instead of sitting buried
    partway down the full scroll. */
 body.viewing-blog-post .page-view:not(#page-blog-post) { display: none; }
+/* handleRouting() scrolls straight to the very top of the document for this
+   page, so — unlike every other section, which relies on scroll-margin-top
+   because it's scrolled INTO view — this needs its own explicit top
+   padding to clear the fixed navbar, or its content (the "Back to Blog"
+   row) renders underneath the bar. */
+#page-blog-post > .page-section { padding-top: 60px; }
+@media (min-width: 900px) { #page-blog-post > .page-section { padding-top: 64px; } }
