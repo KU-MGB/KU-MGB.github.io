@@ -110,10 +110,9 @@
    ---------------------------------------------------------------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* overflow-x lives on body, not html: many mobile browsers (iOS Safari
-   among them) silently force overflow-y to auto on an element whose
-   overflow-x is set but overflow-y isn't, and doing that on html itself
-   breaks position:sticky for every descendant, including the navbar. */
+/* overflow-x lives on body, not html — matching the Portfolio site's own
+   convention, and avoiding an implicit overflow-y:auto some browsers apply
+   to an element with overflow-x set but overflow-y left unset. */
 html { scroll-behavior: smooth; }
 
 body {
@@ -149,15 +148,14 @@ a:hover { color: var(--accent-hover); }
 
 /* ----------------------------------------------------------------
    3. NAVBAR
-   A sticky pill at the top of every page (position:sticky, not fixed,
-   so it doesn't jump on mobile when the browser's address bar
-   collapses/expands during scroll): logo, page links, and
+   A floating pill fixed to the top of every page (position:fixed, matching
+   the Portfolio site's own header): logo, page links, and
    search/language/theme/join buttons, all grouped together and
    centred. Below 900px width the page links and join button are
    replaced by a hamburger button that opens the mobile menu.
    ---------------------------------------------------------------- */
 #navbar {
-  position: sticky;
+  position: fixed;
   top: 8px;
   left: 0;
   right: 0;
@@ -171,20 +169,16 @@ a:hover { color: var(--accent-hover); }
   border: 0.5px solid rgba(255, 255, 255, 0.68);
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
-  height: 38px;
+  height: 42px;
   transition: box-shadow var(--t-base), background var(--t-base), height var(--t-base);
 }
 .dark #navbar { background: rgba(28, 27, 24, 0.68); border-color: rgba(28, 27, 24, 0.68); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
-/* Portfolio's own header uses one flat 56px at every width, but that number
-   assumes its logo/name is hidden past 900px — KU-MGB's logo stays visible
-   everywhere, so a flat Portfolio-sized bar reads oversized on desktop.
-   Scaling modestly instead, in the same spirit but proportioned for a
-   header that's never just a bare nav-links row. */
-@media (min-width: 640px) { #navbar { height: 42px; } }
+/* Two sizes only, matching the Portfolio site's own header structure: one
+   height for every width below 900px, a taller one at 900px and up — not
+   the finer shrinking cascade this used to have across 399/640/900px. */
 @media (min-width: 900px) { #navbar { height: 46px; } }
-@media (max-width: 399px) { #navbar { height: 26px; } }
 
 .nav-inner {
   max-width: var(--container-max);
@@ -244,10 +238,9 @@ a:hover { color: var(--accent-hover); }
   flex-shrink: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
-  padding: 3px;
+  padding: 4px;
 }
-@media (min-width: 640px) { .nav-utils { gap: 6px; padding: 4px; } }
-@media (max-width: 399px) { .nav-utils { padding: 1px; } }
+@media (min-width: 900px) { .nav-utils { gap: 6px; padding: 5px; } }
 .nav-icon-btn {
   background: none;
   border: none;
@@ -278,11 +271,6 @@ a:hover { color: var(--accent-hover); }
   transition: color var(--t-fast);
 }
 #hamburger:hover { color: var(--accent); }
-@media (max-width: 399px) {
-  .nav-icon-btn, #hamburger { width: 22px; height: 22px; }
-  .nav-icon-btn i { font-size: 10px; }
-  #hamburger { font-size: 12px; }
-}
 
 .join-btn {
   padding: 7px 16px;
@@ -305,7 +293,7 @@ a:hover { color: var(--accent-hover); }
 #mobile-menu {
   display: none;
   position: fixed;
-  top: 46px;
+  top: 50px;
   left: 50%;
   bottom: auto;
   width: 220px;
@@ -328,8 +316,6 @@ a:hover { color: var(--accent-hover); }
 }
 .dark #mobile-menu { background: rgba(28, 27, 24, 0.68); border-color: rgba(28, 27, 24, 0.68); }
 @media (max-width: 900px) { #mobile-menu { display: flex; } }
-@media (min-width: 640px) { #mobile-menu { top: 50px; } }
-@media (max-width: 399px) { #mobile-menu { top: 34px; } }
 #mobile-menu.open {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
@@ -510,15 +496,15 @@ a:hover { color: var(--accent-hover); }
    ---------------------------------------------------------------- */
 .home-banner {
   max-width: var(--container-max);
-  margin: -19px auto 0;
-  padding: 0 24px 32px;
+  margin: 0 auto;
+  padding: 29px 24px 32px;
 }
-@media (min-width: 640px) { .home-banner { margin-top: -21px; } }
-@media (min-width: 900px) { .home-banner { margin-top: -23px; } }
-@media (max-width: 399px) { .home-banner { margin-top: -13px; } }
-/* Pulled up by roughly half the navbar's own height (see the #navbar height
-   above) so the sticky, translucent navbar overlaps the top of the hero
-   photo instead of just sitting flush above it with a hard edge. */
+@media (min-width: 900px) { .home-banner { padding-top: 31px; } }
+/* The navbar is position:fixed, so it reserves no space in the document
+   flow — this top padding is set to roughly (navbar's top offset + half its
+   own height), so the hero photo begins right at the navbar's vertical
+   midpoint: the top half of the bar sits over blank page, the bottom half
+   overlaps the photo. */
 /* The research pillar boxes sit in a .page-section right after the hero.
    Its own top padding would double up with the hero's bottom padding
    above, so pull it in tight here. */
