@@ -164,7 +164,7 @@ a:hover { color: var(--accent-hover); }
   max-width: calc(100% - 24px);
   z-index: 100;
   background: transparent;
-  border: 0.5px solid rgba(255, 255, 255, 0.68);
+  border: 0.5px solid rgba(15, 118, 110, 0.45);
   border-radius: 10px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
   height: 42px;
@@ -191,7 +191,7 @@ a:hover { color: var(--accent-hover); }
   will-change: transform;
   contain: paint;
 }
-.dark #navbar { border-color: rgba(28, 27, 24, 0.68); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+.dark #navbar { border-color: rgba(61, 186, 168, 0.45); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
 .dark #navbar::before { background: rgba(28, 27, 24, 0.68); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
@@ -259,7 +259,7 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-full);
   padding: 4px;
 }
-@media (min-width: 900px) { .nav-utils { gap: 6px; padding: 5px; } }
+@media (min-width: 900px) { .nav-utils { gap: 2px; padding: 3px; } }
 .nav-icon-btn {
   background: none;
   border: none;
@@ -276,6 +276,10 @@ a:hover { color: var(--accent-hover); }
 }
 .nav-icon-btn:hover { color: var(--accent); border-color: var(--border); background: var(--accent-light); }
 .nav-icon-btn i { font-size: 13px; }
+@media (min-width: 900px) {
+  .nav-icon-btn { width: 26px; height: 26px; }
+  .nav-icon-btn i { font-size: 11px; }
+}
 #hamburger {
   display: none;
   background: var(--accent);
@@ -307,6 +311,7 @@ a:hover { color: var(--accent-hover); }
   transition: background var(--t-fast);
 }
 .join-btn:hover { background: var(--accent-hover); color: #fff; }
+@media (min-width: 900px) { .join-btn { padding: 5px 12px; font-size: 11px; } }
 
 /* Mobile menu: a small side panel that drops down from the navbar,
    used instead of the page links and join button under 900px width. */
