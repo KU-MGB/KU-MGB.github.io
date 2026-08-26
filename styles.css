@@ -313,9 +313,19 @@ a:hover { color: var(--accent-hover); }
   display: none;
   position: fixed;
   top: 56px;
-  left: 50%;
+  /* right is set from JS (positionMobileMenu in scripts.js) to align with
+     the hamburger button's own right edge - the navbar is a centred,
+     content-width pill, not edge-anchored, so a fixed CSS offset can't
+     track its right edge across screen widths. This is just the value
+     before that first runs. */
+  right: 12px;
   bottom: auto;
-  width: 220px;
+  /* fit-content doesn't size correctly here since the links below are
+     width:100% (percentage widths are excluded from shrink-to-fit sizing,
+     so the browser can't use them to size this box), hence a fixed width
+     tuned to the actual widest label ("Publications", ~84px text + 36px
+     padding) instead. */
+  width: 140px;
   max-width: 80vw;
   background: transparent;
   z-index: 99;
@@ -325,8 +335,8 @@ a:hover { color: var(--accent-hover); }
   border-radius: 14px;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  transform-origin: top center;
-  transform: translateX(-50%) translateY(-10px);
+  transform-origin: top right;
+  transform: translateY(-10px);
   will-change: transform;
   opacity: 0;
   visibility: hidden;
@@ -352,7 +362,7 @@ a:hover { color: var(--accent-hover); }
 .dark #mobile-menu::before { background: rgba(28, 27, 24, 0.68); }
 @media (max-width: 900px) { #mobile-menu { display: flex; } }
 #mobile-menu.open {
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
   opacity: 1;
   visibility: visible;
   transition: transform var(--t-base), opacity var(--t-base);
@@ -605,7 +615,7 @@ a:hover { color: var(--accent-hover); }
   height: 34px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   cursor: pointer;
   padding: 0;
   background: rgba(255, 255, 255, 0.2);
@@ -613,7 +623,7 @@ a:hover { color: var(--accent-hover); }
   transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
 }
 .slide-dot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.slide-dot.active { border-color: var(--accent); transform: scale(1.18); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3); }
+.slide-dot.active { border-color: var(--accent); transform: scale(1.18); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); }
 @media (max-width: 399px) {
   .slide-dot { width: 26px; height: 26px; }
 }
@@ -677,10 +687,12 @@ a:hover { color: var(--accent-hover); }
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  border: 2px solid var(--bg);
   box-shadow: 0 0 0 1px var(--border);
-  transition: border-color var(--t-base), box-shadow var(--t-base);
+  transition: box-shadow var(--t-base);
 }
+/* Grey ring in light mode (var(--border) above), white in dark - a plain
+   grey reads too close to invisible against the dark card background. */
+.dark .profile-photo, .dark .profile-initials { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.7); }
 .profile-initials {
   width: 68px;
   height: 68px;
@@ -690,9 +702,8 @@ a:hover { color: var(--accent-hover); }
   justify-content: center;
   font-family: var(--serif);
   font-weight: 700;
-  border: 2px solid var(--bg);
   box-shadow: 0 0 0 1px var(--border);
-  transition: border-color var(--t-base), box-shadow var(--t-base);
+  transition: box-shadow var(--t-base);
   font-size: 22px;
   color: #fff;
   flex-shrink: 0;

@@ -541,9 +541,24 @@ function initNavbar() {
   const mobileToggle = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileToggle && mobileMenu) {
+    // The navbar is a centred, content-width pill rather than one anchored
+    // to the viewport edge, so the hamburger's on-screen position shifts
+    // with the pill's own width - align the menu to the button's actual
+    // right edge instead of a fixed CSS offset.
+    function positionMobileMenu() {
+      const rect = mobileToggle.getBoundingClientRect();
+      // document.documentElement.clientWidth, not window.innerWidth - the
+      // latter includes the scrollbar track, which getBoundingClientRect()
+      // (and CSS "right") does not, throwing the alignment off by its width.
+      mobileMenu.style.right = `${document.documentElement.clientWidth - rect.right}px`;
+    }
     mobileToggle.addEventListener('click', () => {
+      positionMobileMenu();
       mobileMenu.classList.toggle('open');
       mobileToggle.classList.toggle('open');
+    });
+    window.addEventListener('resize', () => {
+      if (mobileMenu.classList.contains('open')) positionMobileMenu();
     });
     const links = mobileMenu.querySelectorAll('a, button');
     links.forEach(l => l.addEventListener('click', () => {
