@@ -109,7 +109,7 @@
    ---------------------------------------------------------------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* overflow-x lives on body, not html — avoids an implicit overflow-y:auto
+/* overflow-x lives on body, not html: avoids an implicit overflow-y:auto
    some browsers apply to an element with overflow-x set but overflow-y
    left unset. */
 html { scroll-behavior: smooth; }
@@ -168,7 +168,7 @@ a:hover { color: var(--accent-hover); }
 }
 /* The frost lives on this pseudo, not on #navbar itself. backdrop-filter
    directly on a position:fixed element is a known mobile-browser
-   compositing bug — Safari/Chrome mobile can stop repainting a fixed +
+   compositing bug: Safari/Chrome mobile can stop repainting a fixed +
    backdrop-filter element during scroll, making it appear to not be fixed
    at all. translateZ(0) + will-change force a dedicated GPU layer for the
    pseudo so it keeps repainting correctly while scrolling. */
@@ -189,8 +189,8 @@ a:hover { color: var(--accent-hover); }
 .dark #navbar::before { background: rgba(28, 27, 24, 0.55); }
 #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .dark #navbar.scrolled { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55); }
-/* 42px by default (there's no separate desktop size — this applies
-   everywhere above 900px too), 44px below 900px — mobile is very
+/* 42px by default (there's no separate desktop size, this applies
+   everywhere above 900px too), 44px below 900px. Mobile is very
    slightly taller here, not shorter. */
 @media (max-width: 900px) { #navbar { height: 44px; } }
 
@@ -332,7 +332,7 @@ a:hover { color: var(--accent-hover); }
   visibility: hidden;
   transition: transform var(--t-base), opacity var(--t-base), visibility 0s linear var(--t-base);
 }
-/* Same reasoning as #navbar::before — frost lives on a pseudo, not on the
+/* Same reasoning as #navbar::before: frost lives on a pseudo, not on the
    fixed element itself, with a forced GPU layer so it keeps repainting
    correctly on mobile while the menu is open and the page scrolls. */
 #mobile-menu::before {
@@ -536,7 +536,7 @@ a:hover { color: var(--accent-hover); }
   padding: 33px 24px 32px;
 }
 /* The navbar is position:fixed, so it reserves no space in the document
-   flow — this top padding is set to roughly (navbar's top offset + half its
+   flow. This top padding is set to roughly (navbar's top offset + half its
    own height), so the hero photo begins right at the navbar's vertical
    midpoint: the top half of the bar sits over blank page, the bottom half
    overlaps the photo. */
@@ -829,7 +829,7 @@ a:hover { color: var(--accent-hover); }
   gap: 14px;
 }
 /* Projects grid: a fixed 2-column grid, filled in normal reading order
-   (left to right, top to bottom) — since renderProjects always sorts
+   (left to right, top to bottom), since renderProjects always sorts
    Active projects before Finished ones, that reading order is also what
    keeps every Active project ahead of every Finished one on screen. */
 .project-grid {
@@ -1213,8 +1213,8 @@ footer .logo-lockup { height: 24px; }
    partway down the full scroll. */
 body.viewing-blog-post .page-view:not(#page-blog-post) { display: none; }
 /* handleRouting() scrolls straight to the very top of the document for this
-   page, so — unlike every other section, which relies on scroll-margin-top
-   because it's scrolled INTO view — this needs its own explicit top
+   page. Unlike every other section, which relies on scroll-margin-top
+   because it's scrolled INTO view, this needs its own explicit top
    padding to clear the fixed navbar, or its content (the "Back to Blog"
    row) renders underneath the bar. */
 #page-blog-post > .page-section { padding-top: 72px; }

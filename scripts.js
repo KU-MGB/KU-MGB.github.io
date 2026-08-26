@@ -253,7 +253,7 @@ const MGB_RESEARCH     = [
   {
     "id": "sequencing",
     "title": "Sequencing",
-    "description": "Metagenomic sequencing captures environmental DNA directly from contaminated soils, sediments, and groundwater — no culturing required.",
+    "description": "Metagenomic sequencing captures environmental DNA directly from contaminated soils, sediments, and groundwater, no culturing required.",
     "icon": "Dna"
   },
   {
@@ -308,21 +308,28 @@ const MGB_TOOLS        = [
     "name": "DeFluorX",
     "description": "An automated, fully reproducible pipeline that identifies and prioritises fluoroacetate dehalogenase (FAcD) variants for PFAS defluorination, combining AI-driven modelling with physics-aware validation via WaterMap, molecular dynamics simulations, and QM/MM calculations.",
     "link": "https://github.com/KU-MGB/DeFluorX",
-    "status": "Private repository — public release coming soon",
+    "status": "Private repository (public release coming soon)",
     "tags": ["PFAS", "Enzyme Discovery", "AI"]
   },
   {
     "name": "HADefluorX",
     "description": "A companion pipeline covering Haloacid Dehalogenases (HADs), applying the same AI-driven screening and physics-aware validation to identify and prioritise HAD variants capable of cleaving the carbon–fluorine bond.",
     "link": "https://github.com/KU-MGB/HADefluorX",
-    "status": "Private repository — public release coming soon",
+    "status": "Private repository (public release coming soon)",
     "tags": ["PFAS", "HADs", "Molecular Dynamics"]
+  },
+  {
+    "name": "GenDeFluorX",
+    "description": "A third pipeline in the same family, screening 10 in-house-sequenced bacterial whole genomes against trifluoroacetate (TFA) to pinpoint the enzyme responsible for its defluorination, a capability already confirmed by lab data.",
+    "link": "https://github.com/KU-MGB/GenDeFluorX",
+    "status": "Private repository (public release coming soon)",
+    "tags": ["TFA", "Genomics", "AI"]
   }
 ];
 // One-sentence definitions shown in a popover when a visitor clicks a tag
 // chip anywhere on the site (People, Projects, Tools, Publications, and the
 // home hero chips). Only chips whose text matches a key here become
-// clickable — see markGlossaryChips() and the click handler further down.
+// clickable; see markGlossaryChips() and the click handler further down.
 const MGB_GLOSSARY      = {
   "AI": "Artificial intelligence: computational methods, including machine learning, that identify patterns in biological data too complex for manual analysis.",
   "Adaptive Sampling": "A Nanopore sequencing feature that selectively rejects or enriches DNA molecules in real time based on their match to a reference sequence.",
@@ -333,7 +340,7 @@ const MGB_GLOSSARY      = {
   "Bioreactor": "A vessel used to grow microorganisms or cells under controlled conditions for research or industrial-scale processes.",
   "Bioinformatics": "The use of computational tools and methods to analyse and interpret large-scale biological data, such as DNA and protein sequences.",
   "Bioremediation": "The use of living organisms, typically microbes, to degrade or remove pollutants from contaminated soil or water.",
-  "C-F Bond": "The carbon–fluorine bond — at roughly 130 kcal/mol, the strongest single bond in organic chemistry, and the reason PFAS resist natural breakdown.",
+  "C-F Bond": "The carbon–fluorine bond: at roughly 130 kcal/mol, the strongest single bond in organic chemistry, and the reason PFAS resist natural breakdown.",
   "Chemistry": "The scientific study of matter, its properties, and the reactions it undergoes at the molecular and atomic level.",
   "Community Diversity": "A measure of how many different species or taxa are present in a microbial community, and how evenly they are represented.",
   "Comparative Genomics": "The analysis of genome sequences across species or strains to identify shared and distinguishing genetic features.",
@@ -377,6 +384,7 @@ const MGB_GLOSSARY      = {
   "Sphingomonas": "A genus of bacteria found in soil and water, notable for its metabolic versatility in degrading environmental pollutants.",
   "Strain Engineering": "The genetic modification of a microbial strain to introduce or enhance a desired trait, such as pollutant degradation.",
   "Synthetic Biology": "An engineering-based approach to biology that designs and builds new biological parts, systems, or organisms.",
+  "TFA": "Trifluoroacetate (or trifluoroacetic acid), the shortest-chain PFAS and a common breakdown product of larger PFAS compounds, itself persistent and difficult to degrade further.",
   "Water Treatment": "Processes that remove contaminants from water to make it safe for drinking, discharge, or reuse."
 };
 // ═══════════════════════════════════════════════════════════════════════════
@@ -583,7 +591,7 @@ function initTooltipLongPress() {
 // MGB_GLOSSARY (People, Projects, Tools, Publications, and the home hero
 // chips all share the same .chip markup) becomes clickable, opening a small
 // popover with a one-sentence definition. Called after every render that
-// produces chips — see the renderX functions further down.
+// produces chips; see the renderX functions further down.
 window.markGlossaryChips = function() {
   if (typeof MGB_GLOSSARY === 'undefined') return;
   document.querySelectorAll('.chip').forEach(el => {
@@ -642,7 +650,7 @@ function initGlossaryPopover() {
     const chip = e.target.closest('.chip-glossary');
     if (chip) {
       // Chips can sit inside a card-wide link (Tools) or a card-wide bio
-      // toggle (People) — stop those from also firing on this click.
+      // toggle (People); stop those from also firing on this click.
       e.preventDefault();
       e.stopPropagation();
       show(chip);
@@ -664,7 +672,7 @@ function initGlossaryPopover() {
   // delegated on document rather than bound per-chip. mouseover/mouseout
   // bubble (unlike mouseenter/mouseleave), which is what makes delegation
   // possible here. Closes the instant the pointer leaves both the chip and
-  // the popover — relatedTarget is checked so moving directly from one to
+  // the popover; relatedTarget is checked so moving directly from one to
   // the other doesn't flicker shut in between.
   document.addEventListener('mouseover', (e) => {
     const chip = e.target.closest('.chip-glossary');
@@ -875,7 +883,7 @@ window.renderPeople = function() {
       if (!full) return;
       card.classList.add('profile-card-toggleable');
       // The Read more/Show less buttons are inside the card, so a click on
-      // either one already bubbles up to this single handler — no separate
+      // either one already bubbles up to this single handler, no separate
       // per-button listener needed, and that avoids double-toggling.
       card.addEventListener('click', (e) => {
         if (e.target.closest('a') || e.target.closest('.chip-glossary')) return;
@@ -1103,9 +1111,9 @@ window.renderTools = function() {
 
 // 11. News renderer: a boxy auto-scrolling ticker, same continuous
 // one-after-another rotation as before (item list duplicated once so the
-// loop wraps seamlessly), just driven by real scrollTop instead of a CSS
-// transform — so a visitor's own wheel/touch scroll works natively and
-// pauses the rotation for a few seconds instead of fighting it.
+// loop wraps without a visible jump), just driven by real scrollTop
+// instead of a CSS transform, so a visitor's own wheel/touch scroll works
+// natively and pauses the rotation for a few seconds instead of fighting it.
 window.renderNews = function() {
   if (typeof MGB_NEWS === 'undefined') return;
   const container = document.getElementById('news-container');
@@ -1139,7 +1147,7 @@ window.renderNews = function() {
 
 // 11b. Drives the News ticker's auto-scroll: nudges scrollTop forward on a
 // timer, and once it passes the first (real) item set, subtracts that same
-// amount back off — since the clone set is an identical copy, that wrap is
+// amount back off. Since the clone set is an identical copy, that wrap is
 // invisible and the rotation looks continuous, same as the old CSS loop.
 // Hovering, or touching/wheel-scrolling it, pauses the rotation for a few
 // seconds so a visitor can read at their own pace instead of fighting it.
@@ -1377,7 +1385,7 @@ function handleRouting() {
     document.body.classList.add('viewing-blog-post');
     window.scrollTo({ top: 0, behavior: 'instant' });
     // Every other section is hidden while viewing a single post, so the
-    // scroll-spy IntersectionObserver below has nothing to react to — set
+    // scroll-spy IntersectionObserver below has nothing to react to. Set
     // the nav highlight to Blogs explicitly instead of leaving whatever
     // section happened to be active before landing here.
     document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#blogs'));
@@ -1436,7 +1444,7 @@ function initSectionNav() {
 
   // The rootMargin band above sits roughly mid-viewport, so a short final
   // section (e.g. Tools, with only a couple of cards) can end the page
-  // before that band ever reaches it — the last section the band actually
+  // before that band ever reaches it, so the last section the band actually
   // crossed (e.g. Publications) stays highlighted forever. Force the very
   // last section active once the page is scrolled to (or past) its own
   // bottom, overriding the observer.
