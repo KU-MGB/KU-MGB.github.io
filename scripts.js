@@ -477,7 +477,7 @@ const MGB_GLOSSARY      = {
 //    6  Blogs renderer (preview list)
 //    7  Blog post renderer (single post view)
 //    8  Publications renderer
-//    8b   Publications "scroll more" button
+//    8b   Shared "scroll more" button (Publications, Blogs, Tools)
 //    9  Research pillars renderer
 //   10  Projects renderer
 //   11  News renderer (ticker)
@@ -950,6 +950,7 @@ window.renderBlogs = function() {
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
+  initScrollMore('blogs-container', 'blogs-scroll-more');
 }
 
 // 7. Blog post renderer. Reads ?id=<slug> from the URL (the hash is #blog-post)
@@ -1009,14 +1010,17 @@ window.renderPublications = function() {
   });
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
-  initPubScrollMore();
+  initScrollMore('publications-container', 'pub-scroll-more');
 }
 
-// 8b. Publications "scroll more" button. Does the same thing as scrolling with the mouse wheel,
-// jumping one batch at a time and looping back to the top at the bottom.
-function initPubScrollMore() {
-  const list = document.getElementById('publications-container');
-  const btn = document.getElementById('pub-scroll-more');
+// 8b. Shared "scroll more" button behaviour for any fixed-height
+// .scrollable-list panel (Publications, Blogs, Tools): shows the button
+// only once the list's content actually overflows it, jumping forward
+// one screen at a time on click and looping back to the top from the
+// bottom, same as scrolling with the mouse wheel.
+function initScrollMore(listId, btnId) {
+  const list = document.getElementById(listId);
+  const btn = document.getElementById(btnId);
   if (!list || !btn) return;
 
   function updateVisibility() {
@@ -1107,6 +1111,7 @@ window.renderTools = function() {
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
+  initScrollMore('tools-container', 'tools-scroll-more');
 }
 
 // 11. News renderer: a boxy auto-scrolling ticker, same continuous

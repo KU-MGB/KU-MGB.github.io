@@ -855,7 +855,7 @@ a:hover { color: var(--accent-hover); }
    the top and bottom edges so items don't appear to cut off abruptly. */
 .news-ticker {
   position: relative;
-  max-height: 400px;
+  max-height: 260px;
   overflow-y: auto;
   overflow-x: hidden;
   border-radius: var(--radius-lg);
@@ -892,16 +892,27 @@ a:hover { color: var(--accent-hover); }
 .pub-doi { font-family: var(--mono); }
 .pub-doi:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
-/* Publications list scrolls inside a fixed-height panel; the round
-   button below it jumps forward one screen at a time, and loops back
-   to the top once the list is scrolled to the bottom. */
-.pub-panel { position: relative; }
-.pub-panel .scrollable-list {
-  max-height: 620px;
+/* Publications/Blogs/Tools each scroll inside a fixed-height panel once
+   their list grows past a couple of rows; the round button below jumps
+   forward one screen at a time, and loops back to the top from the
+   bottom (see initScrollMore in scripts.js). */
+.pub-panel, .blogs-panel, .tools-panel { position: relative; }
+.pub-panel .scrollable-list, .blogs-panel .scrollable-list, .tools-panel .scrollable-list {
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
   padding-bottom: 8px;
+}
+.pub-panel .scrollable-list { max-height: 620px; }
+.blogs-panel .scrollable-list { max-height: 820px; }
+.tools-panel .scrollable-list { max-height: 580px; }
+/* Below 639px both grids drop to a single column (see .blog-grid and
+   .project-grid), so "2 rows" there means 2 cards, not 4 - cards also run
+   taller at that width since their text wraps more, so this needs its own
+   number rather than reusing the desktop one. */
+@media (max-width: 639px) {
+  .blogs-panel .scrollable-list { max-height: 860px; }
+  .tools-panel .scrollable-list { max-height: 660px; }
 }
 .scroll-more-btn {
   position: absolute;
@@ -947,7 +958,10 @@ a:hover { color: var(--accent-hover); }
    The blog list (small preview cards) and the full blog post view,
    which is reached by clicking a card and replaces the page content.
    ---------------------------------------------------------------- */
-.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: start; }
+.blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 639px) {
+  .blog-grid { grid-template-columns: 1fr; }
+}
 .blog-card {
   border-radius: var(--radius-lg);
   overflow: hidden;
