@@ -208,11 +208,6 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 399px) { .nav-inner { padding: 0 4px; gap: 10px; } }
 .logo { display: flex; align-items: center; height: 100%; flex-shrink: 0; min-width: 0; text-decoration: none; }
 .logo-lockup { height: 100%; width: auto; max-width: 100%; display: block; }
-.logo-text { font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: 0; }
-.word-microbial { color: var(--emerald); }
-.word-genomics { color: var(--amber); }
-.word-amp { color: var(--muted); }
-.word-bio { color: var(--blue); }
 
 .nav-links {
   display: flex;
@@ -444,7 +439,7 @@ a:hover { color: var(--accent-hover); }
   margin-bottom: 8px;
 }
 .section-title { font-size: clamp(24px, 3vw, 32px); margin-bottom: 8px; color: var(--accent); }
-.section-desc { color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 640px; margin-bottom: 20px; }
+.section-desc { color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 640px; margin-bottom: 20px; text-align: justify; }
 
 .chip {
   display: inline-flex;
@@ -708,7 +703,7 @@ a:hover { color: var(--accent-hover); }
   color: #fff;
   flex-shrink: 0;
 }
-.profile-name { font-family: var(--serif); font-size: 16px; font-weight: 700; margin-bottom: 2px; text-align: left; }
+.profile-name { font-family: var(--sans); font-size: 16px; font-weight: 700; margin-bottom: 2px; text-align: left; }
 .profile-title { font-size: 11px; color: var(--muted); text-align: left; }
 /* Bio text is always justified, even on the centred Group Leader card,
    so name and title can be centred while the paragraph itself stays readable. */
@@ -823,8 +818,8 @@ a:hover { color: var(--accent-hover); }
 }
 .card-academic:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
 .card-academic:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
-.card-academic h3 { font-size: 16px; margin-bottom: 6px; }
-.card-academic p { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
+.card-academic h3 { font-family: var(--sans); font-size: 16px; margin-bottom: 6px; }
+.card-academic p { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; text-align: justify; }
 /* Tool cards are whole-card links (to each tool's GitHub repo), unlike the
    plain divs the other card-academic renderers use. */
 .tool-card { display: block; color: inherit; text-decoration: none; }
@@ -896,7 +891,7 @@ a:hover { color: var(--accent-hover); }
 }
 .pub-entry:hover .pub-title, .news-entry:hover .news-title { color: var(--accent); }
 .pub-entry:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
-.pub-title, .news-title { font-size: 15.5px; font-weight: 600; color: var(--fg); line-height: 1.4; }
+.pub-title, .news-title { font-family: var(--sans); font-size: 15.5px; font-weight: 600; color: var(--fg); line-height: 1.4; }
 .pub-authors { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 2px; }
 .news-date { font-size: 12px; color: var(--faint); }
 .pub-meta, .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
@@ -962,7 +957,7 @@ a:hover { color: var(--accent-hover); }
 .news-entry:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 .news-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .news-body { min-width: 0; flex: 1; }
-.news-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+.news-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; text-align: justify; }
 
 /* ----------------------------------------------------------------
    9. BLOG
@@ -992,9 +987,9 @@ a:hover { color: var(--accent-hover); }
 .blog-body > .text-link { margin-top: auto; }
 .blog-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
 .blog-date { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
-.blog-title { display: block; font-family: var(--serif); font-size: 17px; font-weight: 700; line-height: 1.3; margin-bottom: 6px; color: inherit; text-decoration: none; }
+.blog-title { display: block; font-family: var(--sans); font-size: 17px; font-weight: 700; line-height: 1.3; margin-bottom: 6px; color: inherit; text-decoration: none; }
 .blog-card:hover .blog-title { color: var(--accent); }
-.blog-desc { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+.blog-desc { color: var(--muted); font-size: 13px; margin-bottom: 12px; text-align: justify; }
 .blog-author-link { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--muted); flex-shrink: 0; }
 .blog-author-link:hover { color: var(--accent); }
 .blog-author-link .fa-linkedin { font-size: 13px; color: #0a66c2; }
@@ -1006,7 +1001,7 @@ a:hover { color: var(--accent-hover); }
   .blog-post-topbar { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 10px; }
   .blog-post-topbar > :first-child, .blog-post-topbar > :last-child { justify-self: center; }
 }
-.blog-post-cover { width: 100%; max-height: 320px; object-fit: cover; border-radius: var(--radius-lg); margin-bottom: 28px; }
+.blog-post-cover { display: block; width: 100%; max-width: 680px; max-height: 320px; object-fit: cover; border-radius: var(--radius-lg); margin: 0 auto 28px; }
 .blog-post-header { text-align: center; max-width: 720px; margin: 0 auto 28px; }
 .blog-post-title { font-size: clamp(26px, 4vw, 38px); margin-bottom: 12px; }
 .blog-post-body { max-width: 680px; margin: 0 auto; font-size: 16px; line-height: 1.8; text-align: justify; }
