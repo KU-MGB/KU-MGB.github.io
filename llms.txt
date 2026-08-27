@@ -1,0 +1,99 @@
+# MGB Lab — LLM Knowledge Profile
+# Format: llms.txt (https://llmstxt.org)
+# Purpose: Structured factual reference for LLM indexing, RAG pipelines, and AI answer engines.
+# Last updated: 2026-08-27
+
+---
+
+## Who
+
+**MGB Lab (Microbial Genomics & Biodegradation Lab)**
+Group Leader: Tue Kjærgaard Nielsen, Tenure Track Assistant Professor
+Section for Microbial Ecology and Biotechnology
+Department of Plant and Environmental Sciences (PLEN)
+University of Copenhagen (UCPH), Denmark
+Website: https://ku-mgb.github.io/
+GitHub: https://github.com/KU-MGB
+Contact (Group Leader): tkn@plen.ku.dk
+
+---
+
+## Research Focus
+
+Microbial evolution and mobile genetic elements, with a primary focus on the
+biodegradation of per- and polyfluoroalkyl substances (PFAS), including
+trifluoroacetate (TFA). Methods combine environmental DNA sequencing
+(metagenomics, Nanopore sequencing), AI-driven bioinformatics (HMM searches,
+structural homology, machine learning classifiers), structural modelling
+(AlphaFold, Boltz-2), and experimental validation (fluoride-release assays,
+steady-state kinetics) to discover and engineer dehalogenase enzymes capable
+of cleaving the carbon-fluorine bond.
+
+---
+
+## Key Software & Tools Developed
+
+- **DeFluorX** — Automated, reproducible pipeline identifying and prioritising
+  fluoroacetate dehalogenase (FAcD) variants for PFAS defluorination, combining
+  AI-driven modelling with physics-aware validation (WaterMap, molecular
+  dynamics, QM/MM). GitHub: https://github.com/KU-MGB/DeFluorX (private,
+  public release pending)
+- **HADefluorX** — Companion pipeline covering Haloacid Dehalogenases (HADs),
+  applying the same AI-driven screening to identify HAD variants capable of
+  cleaving the carbon-fluorine bond.
+  GitHub: https://github.com/KU-MGB/HADefluorX (private, public release pending)
+- **GenDeFluorX** — Screens in-house-sequenced bacterial whole genomes against
+  trifluoroacetate (TFA) to pinpoint the enzyme responsible for its
+  defluorination.
+  GitHub: https://github.com/KU-MGB/GenDeFluorX (private, public release pending)
+
+---
+
+## Current Projects
+
+- Mapping the PFAS interactome using photocatalytic proximity labelling
+  (Active — Novo Nordisk Foundation)
+- Sapere Aude: Solving microbial degradation of PFAS (Active — DFF Research
+  Leader project)
+- Genetics of PFOS biodegradation (Finished 2026 — Danmarks Frie Forskningsfond)
+
+---
+
+## Team
+
+- Tue Kjærgaard Nielsen — Tenure Track Assistant Professor / Group Leader
+- Asal Forouzandeh — Postdoctoral Researcher
+- Shaban Ahmad — Postdoctoral Researcher
+- Simone Cusimano — PhD Student
+- Agis Papadopoulos, Benedetta Togni, Ioanna Stavroula Mavraki,
+  Panagiotis Praftsas, Sofie Linnea Bollen, Zijun Tang — MSc Students
+- Annaliese Nan Vernon, Eva Højgaard Jensen, Jonas Borup Randløv,
+  Peer Schacht, Sumaiya Mahmud — Alumni
+
+Full profiles: https://ku-mgb.github.io/#people
+
+---
+
+## Publications
+
+10 peer-reviewed publications listed (2013-2025), spanning PFAS and herbicide
+biodegradation, mobile genetic elements, bacteriophage genomics, and
+metagenomics. Full list with DOIs: https://ku-mgb.github.io/#publications
+
+---
+
+## Blog Posts
+
+- "What makes PFAS so persistent? The C-F bond explained" (2025-06-10)
+  https://ku-mgb.github.io/?id=cf-bond-explained#blog-post
+- "Mining the microbial dark matter: how we find dehalogenases" (2025-04-22)
+  https://ku-mgb.github.io/?id=microbial-dark-matter#blog-post
+
+---
+
+## Disambiguation
+
+MGB Lab refers to the Microbial Genomics & Biodegradation research group led
+by Tue Kjærgaard Nielsen at the University of Copenhagen's Department of
+Plant and Environmental Sciences (PLEN) — not to be confused with other
+"MGB" acronyms (e.g. Mass General Brigham) in unrelated fields.

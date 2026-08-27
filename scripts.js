@@ -359,6 +359,7 @@ const MGB_GLOSSARY      = {
   "Gene Context": "The genes and genetic elements surrounding a gene of interest on a chromosome or mobile element, informing its likely function or origin.",
   "Genetics": "The study of genes, heredity, and genetic variation in living organisms.",
   "Genome Sequencing": "Determining the complete DNA sequence of an organism's genome.",
+  "Genomics": "The study of an organism's complete genetic material, including its structure, function, and evolution.",
   "Groundwater": "Water held underground in soil and rock, a common route of PFAS contamination and a key drinking-water source.",
   "HADs": "Haloacid dehalogenases, an enzyme superfamily capable of cleaving carbon–halogen bonds, including some carbon–fluorine bonds.",
   "Herbicide Degradation": "The microbial or enzymatic breakdown of herbicide compounds into less harmful products.",
@@ -495,6 +496,15 @@ function adjustPath(p) {
   if (p.startsWith('http')) return p;
   const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/KU-MGB/') || window.location.pathname.endsWith('/KU-MGB') || window.location.pathname === '/';
   return isRoot ? p : '../' + p;
+}
+
+// Escapes text pulled from the per-file JSON content (people, blogs,
+// publications, projects, tools, news) before it goes into innerHTML -
+// that content is edited directly by lab members, not sanitised on the
+// way in, so a stray < or " (e.g. pasted from a Word doc) should always
+// render as plain text rather than risk broken or injected markup.
+function esc(s) {
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 // 1. Theme (dark/light). Light is the default.
@@ -790,10 +800,10 @@ function avatarColor(name) {
 }
 function personAvatarHtml(p) {
   if (p.avatar) {
-    return `<img src='${adjustPath('1_People/' + p.role_group + '/' + p.avatar)}' alt='${p.name}' class='profile-photo' loading='lazy'>`;
+    return `<img src='${esc(adjustPath('1_People/' + p.role_group + '/' + p.avatar))}' alt='${esc(p.name)}' class='profile-photo' loading='lazy'>`;
   }
   const initials = (p.name || '').split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase();
-  return `<div class='profile-initials' style='background:${avatarColor(p.name || '')}'>${initials}</div>`;
+  return `<div class='profile-initials' style='background:${avatarColor(p.name || '')}'>${esc(initials)}</div>`;
 }
 
 // 5. People renderer: builds the People page, one card per person,
@@ -815,7 +825,7 @@ window.renderPeople = function() {
 
   // One icon per link type, always shown; missing links render as a dummy (visible, inert) icon.
   function personLinkHtml(href, tip, iconClass) {
-    if (href) return `<a href='${href}' target='_blank' rel='noopener' class='icon-link' data-tip='${tip}' aria-label='${tip}'><i class='${iconClass}'></i></a>`;
+    if (href) return `<a href='${esc(href)}' target='_blank' rel='noopener' class='icon-link' data-tip='${tip}' aria-label='${tip}'><i class='${iconClass}'></i></a>`;
     return `<span class='icon-link icon-link-dummy' data-tip='${tip} not available' aria-label='${tip} not available'><i class='${iconClass}'></i></span>`;
   }
   // Group Leader, Postdocs, and PhD Students show all four contact icons
@@ -852,16 +862,16 @@ window.renderPeople = function() {
               <div class='profile-header-left'>
                 ${personAvatarHtml(p)}
                 <div>
-                  <h3 class='profile-name'>${p.name || ''}</h3>
-                  <div class='profile-title'>${p.role || ''}</div>
+                  <h3 class='profile-name'>${esc(p.name)}</h3>
+                  <div class='profile-title'>${esc(p.role)}</div>
                 </div>
               </div>
               ${personLinksHtml(p, fullLinks)}
             </div>
             ${fullBio ? `
-            <p class='profile-bio profile-bio-short'>${shortBio}${isLong ? ` <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}</p>
-            ${isLong ? `<p class='profile-bio profile-bio-full'>${fullBio} <button type='button' class='text-link profile-bio-toggle' aria-expanded='true'>Show less &uarr;</button></p>` : ''}` : ''}
-            ${p.tags && p.tags.length ? `<div class='profile-chips'>${p.tags.slice(0, 3).map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
+            <p class='profile-bio profile-bio-short'>${esc(shortBio)}${isLong ? ` <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}</p>
+            ${isLong ? `<p class='profile-bio profile-bio-full'>${esc(fullBio)} <button type='button' class='text-link profile-bio-toggle' aria-expanded='true'>Show less &uarr;</button></p>` : ''}` : ''}
+            ${p.tags && p.tags.length ? `<div class='profile-chips'>${p.tags.slice(0, 3).map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
           </div>
         `;
     }).join('');
@@ -942,16 +952,16 @@ window.renderBlogs = function() {
     el.setAttribute('data-reveal', '');
     el.innerHTML = `
       <div class='blog-cover'>
-        ${b.cover ? `<img src='${adjustPath(b.cover)}' alt='cover'>` : ''}
+        ${b.cover ? `<img src='${esc(adjustPath(b.cover))}' alt='cover'>` : ''}
       </div>
       <div class='blog-body'>
         <div class='blog-meta-row'>
-          <span class='blog-date'>${b.date || ''} • ${b.category || ''}</span>
+          <span class='blog-date'>${esc(b.date)} • ${esc(b.category)}</span>
           <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad <i class='fab fa-linkedin' aria-hidden='true'></i></a>
         </div>
-        <a href='${postUrl}' class='blog-title'>${b.title || ''}</a>
-        <p class='blog-desc line-clamp-3'>${b.description || ''}</p>
-        ${b.tags && b.tags.length ? `<div class='chip-container'>${b.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
+        <a href='${postUrl}' class='blog-title'>${esc(b.title)}</a>
+        <p class='blog-desc line-clamp-3'>${esc(b.description)}</p>
+        ${b.tags && b.tags.length ? `<div class='chip-container'>${b.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
         <a href='${postUrl}' class='text-link'>Read more &rarr;</a>
       </div>
     `;
@@ -985,14 +995,14 @@ window.renderBlogPost = function() {
   container.innerHTML = `
     <div class="blog-post-topbar">
       <a href="#blogs" class="text-link">&larr; Back to Blog</a>
-      <div class="section-label">${post.date || ''} • ${post.category || ''}</div>
+      <div class="section-label">${esc(post.date)} • ${esc(post.category)}</div>
       <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad <i class='fab fa-linkedin' aria-hidden='true'></i></a>
     </div>
     <div class="blog-post-header">
-      <h1 class="blog-post-title">${post.title || ''}</h1>
-      ${post.tags && post.tags.length ? `<div class='chip-container' style="justify-content:center;">${post.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
+      <h1 class="blog-post-title">${esc(post.title)}</h1>
+      ${post.tags && post.tags.length ? `<div class='chip-container' style="justify-content:center;">${post.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     </div>
-    ${post.cover ? `<img src="${adjustPath(post.cover)}" class="blog-post-cover" alt="Cover image">` : ''}
+    ${post.cover ? `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="Cover image">` : ''}
     <div class="blog-post-body">
       ${simpleMarkdown(post.body || '')}
     </div>
@@ -1013,13 +1023,13 @@ window.renderPublications = function() {
     el.setAttribute('data-reveal', '');
     el.innerHTML = `
       <div class='pub-meta'>
-        <span class='badge'>${pub.year}</span>
-        ${pub.venue ? `<span class='badge badge-fg pub-venue'>${pub.venue}</span>` : ''}
-        ${pub.doi ? `<a href='https://doi.org/${pub.doi}' target='_blank' rel='noopener' class='badge badge-fg pub-doi'>https://doi.org/${pub.doi}</a>` : ''}
+        <span class='badge'>${esc(pub.year)}</span>
+        ${pub.venue ? `<span class='badge badge-fg pub-venue'>${esc(pub.venue)}</span>` : ''}
+        ${pub.doi ? `<a href='https://doi.org/${esc(pub.doi)}' target='_blank' rel='noopener' class='badge badge-fg pub-doi'>https://doi.org/${esc(pub.doi)}</a>` : ''}
       </div>
-      <h3 class='pub-title'>${pub.title}</h3>
-      ${pub.authors ? `<p class='pub-authors'>${pub.authors.join(', ')}</p>` : ''}
-      ${pub.tags ? `<div class='chip-container' style="margin-top:8px;">${pub.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
+      <h3 class='pub-title'>${esc(pub.title)}</h3>
+      ${pub.authors ? `<p class='pub-authors'>${esc(pub.authors.join(', '))}</p>` : ''}
+      ${pub.tags ? `<div class='chip-container' style="margin-top:8px;">${pub.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     `;
     container.appendChild(el);
   });
@@ -1065,8 +1075,8 @@ window.renderResearch = function() {
   grid.className = 'research-pillars';
   grid.innerHTML = MGB_RESEARCH.map(r => `
     <div class='card-academic' data-reveal>
-      <h3>${r.title}</h3>
-      <p>${r.description}</p>
+      <h3>${esc(r.title)}</h3>
+      <p>${esc(r.description)}</p>
     </div>
   `).join('');
   container.appendChild(grid);
@@ -1093,10 +1103,10 @@ window.renderProjects = function() {
     const isFinished = isFinishedStatus(p);
     return `
     <div class='card-academic${isFinished ? ' card-project-finished' : ''}' data-reveal>
-      <span class='badge badge-fg' style='margin-bottom:10px;'>${p.status || ''}</span>
-      <h3>${p.title}</h3>
-      <p>${p.description}</p>
-      ${p.tags ? `<div class='chip-container'>${p.tags.map(t => `<span class='chip chip-muted'>${t}</span>`).join('')}</div>` : ''}
+      <span class='badge badge-fg' style='margin-bottom:10px;'>${esc(p.status)}</span>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.description)}</p>
+      ${p.tags ? `<div class='chip-container'>${p.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     </div>
   `;
   }).join('');
@@ -1115,11 +1125,11 @@ window.renderTools = function() {
   const grid = document.createElement('div');
   grid.className = 'project-grid';
   grid.innerHTML = MGB_TOOLS.map(t => `
-    <a href='${t.link}' target='_blank' rel='noopener' class='card-academic tool-card' data-reveal>
-      <span class='badge badge-fg' style='margin-bottom:10px;'><i class='fab fa-github' aria-hidden='true'></i> ${t.status || 'On GitHub'}</span>
-      <h3>${t.name}</h3>
-      <p>${t.description}</p>
-      ${t.tags ? `<div class='chip-container'>${t.tags.map(tag => `<span class='chip chip-muted'>${tag}</span>`).join('')}</div>` : ''}
+    <a href='${esc(t.link)}' target='_blank' rel='noopener' class='card-academic tool-card' data-reveal>
+      <span class='badge badge-fg' style='margin-bottom:10px;'><i class='fab fa-github' aria-hidden='true'></i> ${esc(t.status || 'On GitHub')}</span>
+      <h3>${esc(t.name)}</h3>
+      <p>${esc(t.description)}</p>
+      ${t.tags ? `<div class='chip-container'>${t.tags.map(tag => `<span class='chip chip-muted'>${esc(tag)}</span>`).join('')}</div>` : ''}
       <span class='text-link' style='margin-top:10px; display:inline-block;'>View on GitHub &rarr;</span>
     </a>
   `).join('');
@@ -1143,14 +1153,14 @@ window.renderNews = function() {
 
   const entryHtml = n => {
     const tag = n.link ? 'a' : 'div';
-    const openAttrs = n.link ? ` href='${n.link}' target='_blank' rel='noopener'` : '';
+    const openAttrs = n.link ? ` href='${esc(n.link)}' target='_blank' rel='noopener'` : '';
     return `
     <${tag} class='news-entry'${openAttrs}>
-      ${n.image ? `<img src='${adjustPath(n.image)}' alt='' class='news-avatar' loading='lazy'>` : ''}
+      ${n.image ? `<img src='${esc(adjustPath(n.image))}' alt='' class='news-avatar' loading='lazy'>` : ''}
       <div class='news-body'>
-        <div class='news-meta'><span class='badge'>${n.category || ''}</span><span class='news-date'>${n.date || ''}</span></div>
-        <h3 class='news-title'>${n.title}</h3>
-        <p class='news-desc'>${n.description || ''}</p>
+        <div class='news-meta'><span class='badge'>${esc(n.category)}</span><span class='news-date'>${esc(n.date)}</span></div>
+        <h3 class='news-title'>${esc(n.title)}</h3>
+        <p class='news-desc'>${esc(n.description)}</p>
       </div>
     </${tag}>
   `;
@@ -1569,7 +1579,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return clone.textContent.replace(/\s+/g, ' ').trim().slice(0, 140);
   }
 
-  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function mark(text, q) {
     if (!q) return esc(text);
     return esc(text).replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>');
