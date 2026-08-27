@@ -13,6 +13,7 @@ Section for Microbial Ecology and Biotechnology
 Department of Plant and Environmental Sciences (PLEN)
 University of Copenhagen (UCPH), Denmark
 Website: https://ku-mgb.github.io/
+Department page: https://plen.ku.dk/english/research/microbial-ecology-and-biotechnology/microbial-genomics-and-biodegradation/
 GitHub: https://github.com/KU-MGB
 Contact (Group Leader): tkn@plen.ku.dk
 
