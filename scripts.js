@@ -1412,6 +1412,10 @@ function handleRouting() {
     return;
   }
   document.body.classList.remove('viewing-blog-post');
+  // A blog post's ?id=<slug> has no meaning outside #blog-post - drop it
+  // rather than let it linger in the address bar once the visitor moves
+  // on to any other section.
+  if (window.location.search) history.replaceState(null, '', window.location.pathname + hash);
   const target = document.getElementById('page-' + key);
   if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
   else window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1440,7 +1444,9 @@ function initSectionNav() {
     const target = document.getElementById('page-' + key);
     if (!target) return;
     e.preventDefault();
-    history.pushState(null, '', hash);
+    // pathname, not just hash - a lingering ?id=<slug> from a blog post has
+    // no meaning once the visitor navigates to any other section.
+    history.pushState(null, '', window.location.pathname + hash);
     // Leaving a single-post view (e.g. the "Back to Blog" link) needs to
     // clear the state handleRouting() would otherwise clear, since pushState
     // does not fire hashchange and so never runs handleRouting() itself.
