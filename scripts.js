@@ -479,6 +479,7 @@ const MGB_GLOSSARY      = {
 //    7  Blog post renderer (single post view)
 //    8  Publications renderer
 //    8b   Shared "scroll more" button (Publications, Blogs, Tools)
+//    8c   Shared list search box (Publications, Blogs)
 //    9  Research pillars renderer
 //   10  Projects renderer
 //   11  News renderer (ticker)
@@ -976,6 +977,7 @@ window.renderBlogs = function() {
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
   initScrollMore('blogs-container', 'blogs-scroll-more');
+  initListSearch('blogs-search-input', 'blogs-search-clear', 'blogs-search-status', 'blogs-container', '.blog-card', 'blogs-quick-filters');
 }
 
 // 7. Blog post renderer. Reads ?id=<slug> from the URL (the hash is #blog-post)
@@ -1036,6 +1038,7 @@ window.renderPublications = function() {
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
   initScrollMore('publications-container', 'pub-scroll-more');
+  initListSearch('pub-search-input', 'pub-search-clear', 'pub-search-status', 'publications-container', '.pub-entry', 'pub-quick-filters');
 }
 
 // 8b. Shared "scroll more" button behaviour for any fixed-height
@@ -1063,6 +1066,57 @@ function initScrollMore(listId, btnId) {
     if (nearBottom) list.scrollTo({ top: 0, behavior: 'smooth' });
     else list.scrollBy({ top: scrollAmount, behavior: 'smooth' });
   });
+}
+
+// 8c. Shared live-filter search box next to a section heading (Publications,
+// Blogs): hides list items that don't match the typed text (the actual
+// cards appear/disappear, same as Portfolio's own search) and shows a
+// small "Found N" line alongside as a secondary readout. The optional
+// keyword chips row (filtersId) fills the search box with that keyword on
+// click and runs the exact same filter - no separate filtering logic.
+// Dispatches a resize event afterwards, which initScrollMore above already
+// listens for, so the scroll-more button re-checks itself against the
+// now-filtered (shorter) content.
+function initListSearch(inputId, clearId, statusId, listId, itemSelector, filtersId) {
+  const input = document.getElementById(inputId);
+  const clearBtn = document.getElementById(clearId);
+  const status = document.getElementById(statusId);
+  const list = document.getElementById(listId);
+  const filters = filtersId ? document.getElementById(filtersId) : null;
+  if (!input || !list || input.dataset.wired) return;
+  input.dataset.wired = 'true';
+
+  function syncChips() {
+    if (!filters) return;
+    const val = input.value.trim().toLowerCase();
+    filters.querySelectorAll('.list-filter-chip').forEach(chip => {
+      chip.classList.toggle('active', chip.dataset.filter.toLowerCase() === val);
+    });
+  }
+
+  function run() {
+    const query = input.value.trim().toLowerCase();
+    if (clearBtn) clearBtn.style.display = query ? 'flex' : 'none';
+    let matches = 0;
+    list.querySelectorAll(itemSelector).forEach(item => {
+      const hit = !query || item.textContent.toLowerCase().includes(query);
+      item.classList.toggle('search-hidden', !hit);
+      if (hit) matches++;
+    });
+    if (status) {
+      status.style.display = query ? 'block' : 'none';
+      status.textContent = query ? `Found ${matches} matching ${matches === 1 ? 'entry' : 'entries'}.` : '';
+    }
+    syncChips();
+    window.dispatchEvent(new Event('resize'));
+  }
+  input.addEventListener('input', run);
+  if (clearBtn) clearBtn.addEventListener('click', () => { input.value = ''; run(); input.focus(); });
+  if (filters) {
+    filters.querySelectorAll('.list-filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => { input.value = chip.dataset.filter; run(); });
+    });
+  }
 }
 
 // 9. Research pillars renderer (the "What We Do" cards on the Home page)

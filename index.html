@@ -244,7 +244,24 @@
        jumps forward one screen at a time and loops back to the top -->
   <div id="page-publications" class="page-view">
     <section class="page-section" data-reveal>
-      <h2 class="section-title" style="margin-bottom:16px;">Publications</h2>
+      <div class="section-header-flex">
+        <h2 class="section-title">Publications</h2>
+        <div class="list-search-box">
+          <i class="fas fa-search list-search-icon" aria-hidden="true"></i>
+          <input type="text" id="pub-search-input" placeholder="Search publications…" aria-label="Search publications">
+          <button type="button" class="list-search-clear" id="pub-search-clear" aria-label="Clear search"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="list-quick-filters" id="pub-quick-filters">
+        <button type="button" class="list-filter-chip active" data-filter="">All</button>
+        <button type="button" class="list-filter-chip" data-filter="PFAS">PFAS</button>
+        <button type="button" class="list-filter-chip" data-filter="Herbicide Degradation">Herbicide Degradation</button>
+        <button type="button" class="list-filter-chip" data-filter="Nanopore Sequencing">Nanopore Sequencing</button>
+        <button type="button" class="list-filter-chip" data-filter="Bioremediation">Bioremediation</button>
+        <button type="button" class="list-filter-chip" data-filter="Comparative Genomics">Comparative Genomics</button>
+        <button type="button" class="list-filter-chip" data-filter="Mobile Genetic Elements">Mobile Genetic Elements</button>
+      </div>
+      <div class="list-search-status" id="pub-search-status"></div>
       <div class="pub-panel">
         <div id="publications-container" class="scrollable-list"></div>
         <button type="button" class="scroll-more-btn" id="pub-scroll-more" aria-label="Scroll for more publications" data-tip="Scroll More"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
@@ -266,7 +283,22 @@
   <!-- BLOGS: preview cards; clicking one opens the Blog Post view below -->
   <div id="page-blogs" class="page-view">
     <section class="page-section" data-reveal>
-      <h2 class="section-title" style="margin-bottom:16px;">Blogs</h2>
+      <div class="section-header-flex">
+        <h2 class="section-title">Blogs</h2>
+        <div class="list-search-box">
+          <i class="fas fa-search list-search-icon" aria-hidden="true"></i>
+          <input type="text" id="blogs-search-input" placeholder="Search blog posts…" aria-label="Search blog posts">
+          <button type="button" class="list-search-clear" id="blogs-search-clear" aria-label="Clear search"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="list-quick-filters" id="blogs-quick-filters">
+        <button type="button" class="list-filter-chip active" data-filter="">All</button>
+        <button type="button" class="list-filter-chip" data-filter="PFAS">PFAS</button>
+        <button type="button" class="list-filter-chip" data-filter="C-F Bond">C-F Bond</button>
+        <button type="button" class="list-filter-chip" data-filter="Metagenomics">Metagenomics</button>
+        <button type="button" class="list-filter-chip" data-filter="Dehalogenases">Dehalogenases</button>
+      </div>
+      <div class="list-search-status" id="blogs-search-status"></div>
       <div class="blogs-panel">
         <div id="blogs-container" class="scrollable-list"></div>
         <button type="button" class="scroll-more-btn" id="blogs-scroll-more" aria-label="Scroll for more blog posts" data-tip="Scroll More"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
