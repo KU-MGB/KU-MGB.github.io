@@ -246,6 +246,14 @@ const MGB_NEWS         = [
     "description": "Jonas successfully defended his bachelor's project, \"Modelling Prospects of Catabolic Enzymes for Bioremediation of PFAS\", supervised by Tue Kjærgaard Nielsen and Shaban Ahmad. He continues into an MSc in Bioinformatics at UCPH.",
     "image": "1_People/7_Alumni/jonas-randlov.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7492905416046247936/"
+  },
+  {
+    "title": "Simone Cusimano joins the lab as a new PhD student",
+    "date": "2026-09-07",
+    "category": "New Member",
+    "description": "Simone joins MGB Lab as a PhD student, working on overcoming fluoride toxicity to enable microbial PFAS bioremediation.",
+    "image": "1_People/3_PhD/simone-cusimano.webp",
+    "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501569083591532544/"
   }
 ];
 // The four "What We Do" pillar cards on the Home page.
@@ -506,6 +514,18 @@ function adjustPath(p) {
 // render as plain text rather than risk broken or injected markup.
 function esc(s) {
   return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// Formats an ISO "YYYY-MM-DD" date (the format stored in post.json and used
+// for sorting) as "10 Jun 2025" for display. Parsed manually rather than via
+// `new Date(iso)`, which interprets a bare date as UTC midnight and can then
+// display as the previous day once shifted into a western timezone.
+function formatDate(iso) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-').map(Number);
+  if (!y || !m || !d) return iso;
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${d} ${months[m - 1]} ${y}`;
 }
 
 // 1. Theme (dark/light). Light is the default.
@@ -957,7 +977,7 @@ window.renderBlogs = function() {
       </div>
       <div class='blog-body'>
         <div class='blog-meta-row'>
-          <span class='blog-date'>${esc(b.date)} • ${esc(b.category)}</span>
+          <span class='blog-date'>${esc(formatDate(b.date))} • ${esc(b.category)}</span>
           <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad <i class='fab fa-linkedin' aria-hidden='true'></i></a>
         </div>
         <a href='${postUrl}' class='blog-title'>${esc(b.title)}</a>
@@ -997,7 +1017,7 @@ window.renderBlogPost = function() {
   container.innerHTML = `
     <div class="blog-post-topbar">
       <a href="#blogs" class="text-link">&larr; Back to Blog</a>
-      <div class="section-label">${esc(post.date)} • ${esc(post.category)}</div>
+      <div class="section-label">${esc(formatDate(post.date))} • ${esc(post.category)}</div>
       <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad <i class='fab fa-linkedin' aria-hidden='true'></i></a>
     </div>
     <div class="blog-post-header">
