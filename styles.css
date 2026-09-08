@@ -956,12 +956,12 @@ a:hover { color: var(--accent-hover); }
 .pub-doi { font-family: var(--mono); }
 .pub-doi:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
-/* Publications/Blogs/Tools each scroll inside a fixed-height panel once
-   their list grows past a couple of rows; the round button below jumps
+/* Publications/Blogs/Tools/Projects each scroll inside a fixed-height panel
+   once their list grows past a row or two; the round button below jumps
    forward one screen at a time, and loops back to the top from the
    bottom (see initScrollMore in scripts.js). */
-.pub-panel, .blogs-panel, .tools-panel { position: relative; }
-.pub-panel .scrollable-list, .blogs-panel .scrollable-list, .tools-panel .scrollable-list {
+.pub-panel, .blogs-panel, .tools-panel, .projects-panel { position: relative; }
+.pub-panel .scrollable-list, .blogs-panel .scrollable-list, .tools-panel .scrollable-list, .projects-panel .scrollable-list {
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -970,6 +970,10 @@ a:hover { color: var(--accent-hover); }
 .pub-panel .scrollable-list { max-height: 620px; }
 .blogs-panel .scrollable-list { max-height: 820px; }
 .tools-panel .scrollable-list { max-height: 580px; }
+/* Projects sits in a narrower column (beside News, see .projects-news-grid),
+   so its cards run taller than Tools' full-width ones - capped to a single
+   row here rather than two. */
+.projects-panel .scrollable-list { max-height: 340px; }
 /* Below 639px both grids drop to a single column (see .blog-grid and
    .project-grid), so "2 rows" there means 2 cards, not 4 - cards also run
    taller at that width since their text wraps more, so this needs its own
@@ -977,6 +981,7 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 639px) {
   .blogs-panel .scrollable-list { max-height: 860px; }
   .tools-panel .scrollable-list { max-height: 660px; }
+  .projects-panel .scrollable-list { max-height: 660px; }
 }
 .scroll-more-btn {
   position: absolute;

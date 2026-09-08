@@ -1187,6 +1187,7 @@ window.renderProjects = function() {
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
+  initScrollMore('projects-container', 'projects-scroll-more');
 }
 
 // 10b. Tools renderer: each card links straight to the tool's GitHub repo
@@ -1630,6 +1631,14 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   const CARD_SEL = '.card-academic,.profile-card,.pub-entry,.blog-card,.news-entry';
 
+  // People and Blogs render asynchronously (they wait on MGB_DATA_READY), so
+  // if the index gets built before that resolves - e.g. a visitor opens
+  // search immediately on page load - those two sections would otherwise be
+  // missing from every search for the rest of the visit. Invalidate the
+  // cached index once when that data actually lands, forcing exactly one
+  // rebuild on next use.
+  if (window.MGB_DATA_READY) window.MGB_DATA_READY.then(() => { indexed = false; });
+
   function buildIndex() {
     if (indexed) return;
     indexed = true;
@@ -1661,13 +1670,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function scoreItem(item, ql) {
     const tl = item.title.toLowerCase();
     const el = (item.excerpt || '').toLowerCase();
+    const sl = (item.section || '').toLowerCase();
     const words = ql.split(/\s+/).filter(w => w.length > 1);
-    if (words.length === 0) return (tl.includes(ql) || el.includes(ql)) ? 10 : 0;
+    if (words.length === 0) return (tl.includes(ql) || el.includes(ql) || sl.includes(ql)) ? 10 : 0;
     let s = 0, matchCount = 0;
     if (tl === ql) s += 100; else if (tl.includes(ql)) s += 50;
     words.forEach(w => {
       if (tl.includes(w)) { s += 20; matchCount++; }
       else if (el.includes(w)) { s += 5; matchCount++; }
+      else if (sl.includes(w)) { s += 3; matchCount++; }
     });
     if (words.length > 1 && matchCount < words.length) return 0;
     return s;
