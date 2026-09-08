@@ -78,7 +78,9 @@
         <a href="#people">People</a>
         <a href="#publications">Publications</a>
         <a href="#tools">Tools</a>
-        <a href="#blogs">Blogs</a>
+        <!-- Blogs temporarily disabled - both posts are AI-generated placeholders,
+             not real content yet. Restore this link once real posts are ready. -->
+        <!-- <a href="#blogs">Blogs</a> -->
       </div>
       <div class="nav-utils">
         <button class="nav-icon-btn" onclick="openSearchModal()" data-tip="Search" aria-label="Search">
@@ -102,7 +104,8 @@
     <a href="#people">People</a>
     <a href="#publications">Publications</a>
     <a href="#tools">Tools</a>
-    <a href="#blogs">Blogs</a>
+    <!-- Blogs temporarily disabled, see the same note in the desktop nav-links above -->
+    <!-- <a href="#blogs">Blogs</a> -->
     <button type="button" onclick="openJoinModal()" style="color:var(--accent)">Join Us &rarr;</button>
   </div>
 
@@ -126,7 +129,8 @@
         <span class="srch-pill" data-section="people">People</span>
         <span class="srch-pill" data-section="publications">Publications</span>
         <span class="srch-pill" data-section="tools">Tools</span>
-        <span class="srch-pill" data-section="blogs">Blogs</span>
+        <!-- Blogs quick-filter pill disabled along with the section, see index.html's nav-links comment -->
+        <!-- <span class="srch-pill" data-section="blogs">Blogs</span> -->
       </div>
       <div class="srch-body" id="srch-body"></div>
       <div class="srch-footer">
@@ -281,7 +285,13 @@
     </section>
   </div>
 
-  <!-- BLOGS: preview cards; clicking one opens the Blog Post view below -->
+  <!-- BLOGS + BLOG POST: temporarily disabled - both existing posts are
+       AI-generated placeholders, not real content yet. Restore by removing
+       this comment wrapper, plus the matching commented-out Blogs links in
+       the nav-links, mobile-menu, and srch-pills above, and the
+       renderBlogs()/renderBlogPost() calls further down this file.
+
+  BLOGS: preview cards; clicking one opens the Blog Post view below
   <div id="page-blogs" class="page-view">
     <section class="page-section" data-reveal>
       <div class="section-header-flex">
@@ -307,16 +317,16 @@
     </section>
   </div>
 
-  <!-- BLOG POST: hidden by default (see #page-blog-post rules in styles.css).
-       Reached by clicking a blog card, which sets the URL to
-       ?id=<slug>#blog-post; scripts.js reads that slug and renders the
-       matching post here. This is the one page that works like a normal
-       link instead of a scroll-to section. -->
+  BLOG POST: reached by clicking a blog card, which sets the URL to
+  ?id=<slug>#blog-post; scripts.js reads that slug and renders the
+  matching post here. This is the one page that works like a normal
+  link instead of a scroll-to section.
   <div id="page-blog-post" class="page-view">
     <section class="page-section">
       <div id="blog-post-container"></div>
     </section>
   </div>
+  -->
 
   </main>
 
@@ -361,8 +371,9 @@
 
       window.MGB_DATA_READY.then(() => {
         if (window.renderPeople) window.renderPeople();
-        if (window.renderBlogs) window.renderBlogs();
-        if (window.renderBlogPost) window.renderBlogPost();
+        // Blogs temporarily disabled, see the comment above #page-blogs
+        // if (window.renderBlogs) window.renderBlogs();
+        // if (window.renderBlogPost) window.renderBlogPost();
         if (window.renderGroupPhoto) window.renderGroupPhoto();
         if (window.renderHomeSlideshow) window.renderHomeSlideshow();
       });

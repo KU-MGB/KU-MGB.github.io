@@ -83,12 +83,15 @@ metagenomics. Full list with DOIs: https://ku-mgb.github.io/#publications
 
 ---
 
-## Blog Posts
-
-- "What makes PFAS so persistent? The C-F bond explained" (2026-08-15)
-  https://ku-mgb.github.io/?id=cf-bond-explained#blog-post
-- "Mining the microbial dark matter: how we find dehalogenases" (2026-07-10)
-  https://ku-mgb.github.io/?id=microbial-dark-matter#blog-post
+# ## Blog Posts (temporarily disabled - both posts are AI-generated
+# placeholders, not real content yet, and the section is unpublished on the
+# live site. Restore by removing the leading "# " from these lines once
+# real posts are ready.)
+#
+# - "What makes PFAS so persistent? The C-F bond explained" (2026-08-15)
+#   https://ku-mgb.github.io/?id=cf-bond-explained#blog-post
+# - "Mining the microbial dark matter: how we find dehalogenases" (2026-07-10)
+#   https://ku-mgb.github.io/?id=microbial-dark-matter#blog-post
 
 ---
 

@@ -1626,7 +1626,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'people', label: 'People', icon: 'fas fa-users', sel: '#people-container' },
     { id: 'publications', label: 'Publications', icon: 'fas fa-book-open', sel: '#publications-container' },
     { id: 'tools', label: 'Tools', icon: 'fas fa-toolbox', sel: '#tools-container' },
-    { id: 'blogs', label: 'Blog', icon: 'fas fa-newspaper', sel: '#blogs-container' },
+    // Blogs temporarily disabled (see the comment above #page-blogs in index.html)
+    // { id: 'blogs', label: 'Blog', icon: 'fas fa-newspaper', sel: '#blogs-container' },
     { id: 'news', label: 'News', icon: 'fas fa-bullhorn', sel: '#news-container' }
   ];
   const CARD_SEL = '.card-academic,.profile-card,.pub-entry,.blog-card,.news-entry';
