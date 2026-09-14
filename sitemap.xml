@@ -30,8 +30,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <!-- Blogs temporarily disabled - both posts are AI-generated placeholders,
-       not real content yet. Restore these entries once real posts are ready.
   <url>
     <loc>https://ku-mgb.github.io/#blogs</loc>
     <lastmod>2026-08-27</lastmod>
@@ -50,5 +48,4 @@
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
-  -->
 </urlset>
