@@ -13,7 +13,7 @@
 //   To add or edit one of these, just edit the array directly. People
 //   and blog posts are handled differently: each
 //   person and each blog post is its own JSON file, kept in
-//   1_People/ and 2_Content/2_Blogs/ (see the README.md in each of
+//   Data/1_People/ and Data/3_Blogs/ (see the README.md in each of
 //   those folders), so new entries can be added without touching
 //   this file at all.
 //
@@ -236,7 +236,7 @@ const MGB_NEWS         = [
     "date": "2026-07-01",
     "category": "Graduation",
     "description": "Eva successfully defended her thesis, \"Nothing is forever: analogue enrichment for microbial degradation of TFA\", supervised by Tue Kjærgaard Nielsen.",
-    "image": "1_People/7_Alumni/eva-hojgaard-jensen.webp",
+    "image": "Data/1_People/7_Alumni/eva-hojgaard-jensen.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7475913018447568897/"
   },
   {
@@ -244,7 +244,7 @@ const MGB_NEWS         = [
     "date": "2026-08-11",
     "category": "Graduation",
     "description": "Jonas successfully defended his bachelor's project, \"Modelling Prospects of Catabolic Enzymes for Bioremediation of PFAS\", supervised by Tue Kjærgaard Nielsen and Shaban Ahmad. He continues into an MSc in Bioinformatics at UCPH.",
-    "image": "1_People/7_Alumni/jonas-randlov.webp",
+    "image": "Data/1_People/7_Alumni/jonas-randlov.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7492905416046247936/"
   },
   {
@@ -252,7 +252,7 @@ const MGB_NEWS         = [
     "date": "2026-09-07",
     "category": "New Member",
     "description": "Simone joins MGB Lab as a PhD student, working on overcoming fluoride toxicity to enable microbial PFAS bioremediation.",
-    "image": "1_People/3_PhD/simone-cusimano.webp",
+    "image": "Data/1_People/3_PhD/simone-cusimano.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501569083591532544/"
   }
 ];
@@ -405,7 +405,7 @@ const MGB_GLOSSARY      = {
 // ═══════════════════════════════════════════════════════════════════════════
 
 (function () {
-  // Step 1: load every person listed in 1_People/manifest.json.
+  // Step 1: load every person listed in Data/1_People/manifest.json.
   // The manifest groups people by category folder, for example:
   //   { "2_Postdocs": ["asal-forouzandeh", ...], "3_PhD": [...], ... }
   // One bad or missing person file should not blank the whole People
@@ -413,10 +413,10 @@ const MGB_GLOSSARY      = {
   // (see the .catch below) instead of failing the whole group.
   async function loadPeople() {
     try {
-      const manifest = await fetch(adjustPath('1_People/manifest.json')).then(r => r.json());
+      const manifest = await fetch(adjustPath('Data/1_People/manifest.json')).then(r => r.json());
       const groups = await Promise.all(Object.entries(manifest).map(async ([group, ids]) => {
         const members = await Promise.all(ids.map(id =>
-          fetch(adjustPath(`1_People/${group}/${id}.json`))
+          fetch(adjustPath(`Data/1_People/${group}/${id}.json`))
             .then(r => r.ok ? r.json() : Promise.reject(new Error(`${r.status} for ${group}/${id}.json`)))
             .then(p => Object.assign({}, p, { role_group: group }))
             .catch(e => { console.error('Failed to load person:', group, id, e); return null; })
@@ -430,16 +430,16 @@ const MGB_GLOSSARY      = {
     }
   }
 
-  // Step 2: load every blog post listed in 2_Content/2_Blogs/manifest.json,
+  // Step 2: load every blog post listed in Data/3_Blogs/manifest.json,
   // the same one-file-per-item pattern as people above.
   async function loadBlogs() {
     try {
-      const manifest = await fetch(adjustPath('2_Content/2_Blogs/manifest.json')).then(r => r.json());
+      const manifest = await fetch(adjustPath('Data/3_Blogs/manifest.json')).then(r => r.json());
       const posts = await Promise.all(manifest.map(async slug => {
-        const post = await fetch(adjustPath(`2_Content/2_Blogs/${slug}/post.json`)).then(r => r.json());
+        const post = await fetch(adjustPath(`Data/3_Blogs/${slug}/post.json`)).then(r => r.json());
         return Object.assign({}, post, {
           id: slug,
-          cover: post.cover ? `2_Content/2_Blogs/${slug}/${post.cover}` : ''
+          cover: post.cover ? `Data/3_Blogs/${slug}/${post.cover}` : ''
         });
       }));
       window.MGB_BLOGS = posts;
@@ -455,9 +455,9 @@ const MGB_GLOSSARY      = {
   // by renderHomeSlideshow() further down.
   async function loadLabImages() {
     try {
-      const manifest = await fetch(adjustPath('2_Content/1_Images/manifest.json')).then(r => r.json());
+      const manifest = await fetch(adjustPath('Data/2_Images/manifest.json')).then(r => r.json());
       window.MGB_LAB_IMAGES = manifest.map(entry =>
-        entry.split('+').map(f => adjustPath(`2_Content/1_Images/${f}`)).join('+')
+        entry.split('+').map(f => adjustPath(`Data/2_Images/${f}`)).join('+')
       );
     } catch (e) {
       window.MGB_LAB_IMAGES = [];
@@ -829,7 +829,7 @@ function avatarColor(name) {
 }
 function personAvatarHtml(p) {
   if (p.avatar) {
-    return `<img src='${esc(adjustPath('1_People/' + p.role_group + '/' + p.avatar))}' alt='${esc(p.name)}' class='profile-photo' loading='lazy'>`;
+    return `<img src='${esc(adjustPath('Data/1_People/' + p.role_group + '/' + p.avatar))}' alt='${esc(p.name)}' class='profile-photo' loading='lazy'>`;
   }
   const initials = (p.name || '').split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase();
   return `<div class='profile-initials' style='background:${avatarColor(p.name || '')}'>${esc(initials)}</div>`;
@@ -986,7 +986,7 @@ window.renderBlogs = function() {
       <div class='blog-body'>
         <div class='blog-meta-row'>
           <span class='blog-date'>${esc(formatDate(b.date))} • ${esc(b.category)}</span>
-          <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad <i class='fab fa-linkedin' aria-hidden='true'></i></a>
+          ${b.author && b.author.name ? `<a href='${esc(b.author.linkedin || '#')}' target='_blank' rel='noopener' class='blog-author-link'>${esc(b.author.name)} <i class='fab fa-linkedin' aria-hidden='true'></i></a>` : ''}
         </div>
         <a href='${postUrl}' class='blog-title'>${esc(b.title)}</a>
         <p class='blog-desc line-clamp-3'>${esc(b.description)}</p>
@@ -994,7 +994,7 @@ window.renderBlogs = function() {
         <a href='${postUrl}' class='text-link'>Read more &rarr;</a>
       </div>
     `;
-    el.querySelector('.blog-author-link').addEventListener('click', (e) => e.stopPropagation());
+    el.querySelector('.blog-author-link')?.addEventListener('click', (e) => e.stopPropagation());
     el.addEventListener('click', (e) => {
       if (e.target.closest('.blog-author-link') || e.target.closest('a') || e.target.closest('.chip-glossary')) return;
       window.location.href = postUrl;
@@ -1026,7 +1026,7 @@ window.renderBlogPost = function() {
     <div class="blog-post-topbar">
       <a href="#blogs" class="text-link">&larr; Back to Blog</a>
       <div class="section-label">${esc(formatDate(post.date))} • ${esc(post.category)}</div>
-      <a href='https://www.linkedin.com/in/drshabanahmad/' target='_blank' rel='noopener' class='blog-author-link'>Shaban Ahmad <i class='fab fa-linkedin' aria-hidden='true'></i></a>
+      ${post.author && post.author.name ? `<a href='${esc(post.author.linkedin || '#')}' target='_blank' rel='noopener' class='blog-author-link'>${esc(post.author.name)} <i class='fab fa-linkedin' aria-hidden='true'></i></a>` : '<span></span>'}
     </div>
     <div class="blog-post-header">
       <h1 class="blog-post-title">${esc(post.title)}</h1>
@@ -1034,7 +1034,7 @@ window.renderBlogPost = function() {
     </div>
     ${post.cover ? `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="Cover image">` : ''}
     <div class="blog-post-body">
-      ${simpleMarkdown(post.body || '', `2_Content/2_Blogs/${post.id}`)}
+      ${simpleMarkdown(post.body || '', `Data/3_Blogs/${post.id}`)}
     </div>
   `;
   if (window.initScrollReveal) window.initScrollReveal();
@@ -1311,13 +1311,13 @@ window.renderGroupPhoto = function() {
       container.appendChild(img);
     };
     img.onerror = () => tryNext(i + 1);
-    img.src = adjustPath(`2_Content/1_Images/${candidates[i]}`);
+    img.src = adjustPath(`Data/2_Images/${candidates[i]}`);
   }
   tryNext(0);
 }
 
 // 13. Home page slideshow. Cycles through the photos listed in
-// 2_Content/1_Images/manifest.json (falls back to the placeholder if empty).
+// Data/2_Images/manifest.json (falls back to the placeholder if empty).
 window.renderHomeSlideshow = function() {
   const container = document.getElementById('home-slideshow');
   const images = window.MGB_LAB_IMAGES || [];

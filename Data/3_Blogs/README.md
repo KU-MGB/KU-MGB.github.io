@@ -12,6 +12,9 @@
      itself. Leave as `[]` to show none.
    - `description`: one or two sentences shown on the blog list card.
    - `cover`: the cover image's filename (see step 3). Leave as `""` for no image.
+   - `author`: `{ "name": "...", "linkedin": "https://www.linkedin.com/in/..." }`,
+     shown next to the date on the card and post, linking out to that profile.
+     Whoever actually wrote the post, not necessarily whoever added the file.
    - `body`: the post text, written in Markdown. Only this subset is supported:
      - `## Heading` and `### Smaller heading`
      - `**bold**`, `*italic*`, and `` `code` ``

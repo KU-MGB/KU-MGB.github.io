@@ -85,12 +85,12 @@ metagenomics. Full list with DOIs: https://ku-mgb.github.io/#publications
 
 ## Blog Posts
 
-- "What makes PFAS so persistent? The C-F bond explained" (2026-08-15)
-  https://ku-mgb.github.io/?id=cf-bond-explained#blog-post
-- "Mining the microbial dark matter: how we find dehalogenases" (2026-07-10)
-  https://ku-mgb.github.io/?id=microbial-dark-matter#blog-post
-- "After the Gold Rush: The Promise of Evolution of PFAS-Eating Bacteria" (2026-09-15)
+- "After the Gold Rush: The Promise of Evolution of PFAS-Eating Bacteria" by Tue
+  Kjaergaard Nielsen (2026-09-15)
   https://ku-mgb.github.io/?id=after-the-gold-rush#blog-post
+# "What makes PFAS so persistent? The C-F bond explained" and "Mining the
+# microbial dark matter" are AI-generated placeholders, temporarily not shown
+# on the site. Restore these lines above once real content replaces them.
 
 ---
 
