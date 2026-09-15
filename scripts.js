@@ -757,12 +757,20 @@ window.initScrollReveal = function() {
 }
 
 // 4. Simple Markdown (turns basic markdown into HTML for blog post bodies)
-function simpleMarkdown(text) {
+function simpleMarkdown(text, imageBase) {
   if (!text) return '';
   text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   text = text.replace(/^### (.*$)/gim, '<h3>$1</h3>');
   text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+
+  // ![alt](filename) - filename is just the image's own name inside the
+  // post's folder (same convention as the cover field), resolved here via
+  // imageBase so authors never have to write the full path.
+  text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, src) => {
+    const resolved = imageBase ? adjustPath(`${imageBase}/${src}`) : src;
+    return `<img src="${esc(resolved)}" alt="${esc(alt)}" class="blog-post-figure" loading="lazy">`;
+  });
 
   text = text.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
   text = text.replace(/\*(.*?)\*/gim, '<em>$1</em>');
@@ -1026,7 +1034,7 @@ window.renderBlogPost = function() {
     </div>
     ${post.cover ? `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="Cover image">` : ''}
     <div class="blog-post-body">
-      ${simpleMarkdown(post.body || '')}
+      ${simpleMarkdown(post.body || '', `2_Content/2_Blogs/${post.id}`)}
     </div>
   `;
   if (window.initScrollReveal) window.initScrollReveal();

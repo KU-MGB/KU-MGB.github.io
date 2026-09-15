@@ -1,7 +1,7 @@
 # MGB Lab — LLM Knowledge Profile
 # Format: llms.txt (https://llmstxt.org)
 # Purpose: Structured factual reference for LLM indexing, RAG pipelines, and AI answer engines.
-# Last updated: 2026-09-07
+# Last updated: 2026-09-15
 
 ---
 
@@ -89,6 +89,8 @@ metagenomics. Full list with DOIs: https://ku-mgb.github.io/#publications
   https://ku-mgb.github.io/?id=cf-bond-explained#blog-post
 - "Mining the microbial dark matter: how we find dehalogenases" (2026-07-10)
   https://ku-mgb.github.io/?id=microbial-dark-matter#blog-post
+- "After the Gold Rush: The Promise of Evolution of PFAS-Eating Bacteria" (2026-09-15)
+  https://ku-mgb.github.io/?id=after-the-gold-rush#blog-post
 
 ---
 

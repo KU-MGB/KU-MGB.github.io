@@ -16,11 +16,16 @@
      - `## Heading` and `### Smaller heading`
      - `**bold**`, `*italic*`, and `` `code` ``
      - `- ` or `* ` for a bullet list
+     - `![Caption](filename)` for a figure inside the post body, on its own
+       line. Same filename convention as `cover`: just the file's own name,
+       sitting next to `post.json` in the same folder. Follow it with a
+       `*Caption text*` line if you want a caption shown underneath.
      - A blank line between lines starts a new paragraph
-     - Numbered lists, links (`[text](url)`), images, and blockquotes are
-       **not** supported, they'll show up as literal text, not render.
+     - Numbered lists, links (`[text](url)`), and blockquotes are **not**
+       supported, they'll show up as literal text, not render.
 3. Add a cover image next to `post.json` (SVG, PNG, JPG, or WebP) and set the
-   `cover` field to its filename.
+   `cover` field to its filename. Add any in-body figures the same way,
+   referenced from `body` as above.
 4. Add the folder name (the full slug, number included) to `manifest.json`
    (the array the site loads; a post not listed here never appears, even with
    `post.json` fully filled in). The array's order doesn't matter for display:
