@@ -1071,11 +1071,23 @@ a:hover { color: var(--accent-hover); }
 .blog-post-body h2 { font-size: 22px; margin-top: 32px; margin-bottom: 10px; }
 .blog-post-body h3 { font-size: 18px; margin-top: 24px; margin-bottom: 8px; }
 .blog-post-body p { color: var(--muted); margin-bottom: 16px; }
-.blog-post-body ul { color: var(--muted); padding-left: 22px; margin-bottom: 16px; }
+.blog-post-body ul, .blog-post-body ol { color: var(--muted); padding-left: 22px; margin-bottom: 16px; }
 .blog-post-body li { margin-bottom: 6px; }
+.blog-post-body ol.blog-post-refs { font-size: 14px; }
+.blog-post-body ol.blog-post-refs li { scroll-margin-top: 90px; }
+.blog-post-body a.citation-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+.blog-post-body a.citation-link:hover { text-decoration: underline; }
 .blog-post-body strong { color: var(--fg); }
 .blog-post-body code { font-family: var(--mono); background: var(--accent-light); padding: 2px 6px; border-radius: 4px; color: var(--accent); font-size: 0.88em; }
 .blog-post-body img.blog-post-figure { display: block; max-width: 100%; height: auto; margin: 20px auto; border-radius: var(--radius-lg); }
+.blog-post-body em { color: var(--muted); }
+.blog-post-table-wrap { overflow-x: auto; margin: 20px 0; border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.blog-post-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
+.blog-post-table th, .blog-post-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.blog-post-table th { background: var(--accent); color: #fff; font-weight: 600; white-space: nowrap; }
+.blog-post-table tbody tr:nth-child(even) { background: var(--accent-light); }
+.blog-post-table tbody tr:last-child td { border-bottom: none; }
+.blog-post-table td strong { color: var(--fg); }
 
 /* ----------------------------------------------------------------
    10. FORMS AND THE JOIN US POPUP

@@ -782,30 +782,75 @@ function simpleMarkdown(text, imageBase) {
     return `<img src="${esc(resolved)}" alt="${esc(alt)}" class="blog-post-figure" loading="lazy">`;
   });
 
+  // [text](url) - an ordinary external link, e.g. a DOI in a references list.
+  // Kept separate from the image regex above (which consumes the leading !
+  // first, so this never double-matches an already-converted image).
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) =>
+    `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`);
+
+  // [1] or [1, 2] - a citation marker, e.g. in a "References" numbered list
+  // below. Links to the matching #ref-N (see the ordered-list handling
+  // further down); on a multi-number citation it jumps to the first one.
+  // Only ever matches bare digits, so it never touches the [text](url) links
+  // already converted above.
+  text = text.replace(/\[(\d+(?:,\s*\d+)*)\]/g, (m, nums) => {
+    const first = nums.split(',')[0].trim();
+    return `<a href="#ref-${first}" class="citation-link" data-ref="${first}">[${nums}]</a>`;
+  });
+
   text = text.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
   text = text.replace(/\*(.*?)\*/gim, '<em>$1</em>');
   text = text.replace(/`(.*?)`/gim, '<code>$1</code>');
 
+  // Markdown tables: a header row, a --- separator row, then any number of
+  // data rows, every line starting and ending with |. Collapsed to a single
+  // line of HTML (no embedded newlines) so the line-based loop below passes
+  // it through whole instead of re-wrapping its rows in <p> tags.
+  text = text.replace(/(^\|.*\|[ \t]*\n)+/gim, block => {
+    const rows = block.trim().split('\n').map(r => r.trim());
+    if (rows.length < 2 || !/^\|?[\s:|-]+\|?$/.test(rows[1])) return block;
+    const splitRow = row => row.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+    const head = splitRow(rows[0]);
+    const body = rows.slice(2).map(splitRow);
+    const thead = `<tr>${head.map(c => `<th>${c}</th>`).join('')}</tr>`;
+    const tbody = body.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('');
+    return `<div class="blog-post-table-wrap"><table class="blog-post-table"><thead>${thead}</thead><tbody>${tbody}</tbody></table></div>\n`;
+  });
+
   let lines = text.split('\n');
   let html = '';
   let inList = false;
+  let inOL = false;
+
+  const closeLists = () => {
+    if (inList) { html += '</ul>\n'; inList = false; }
+    if (inOL) { html += '</ol>\n'; inOL = false; }
+  };
 
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i].trim();
+    // "1. text" - a numbered references list. Each item gets id="ref-N" so a
+    // [N] citation marker (see the citation-link regex above) can jump to it.
+    const olMatch = line.match(/^(\d+)\.\s+(.*)$/);
     if (line.startsWith('- ') || line.startsWith('* ')) {
+      if (inOL) { html += '</ol>\n'; inOL = false; }
       if (!inList) { html += '<ul>\n'; inList = true; }
       html += `<li>${line.substring(2)}</li>\n`;
-    } else if (line.match(/^<(h2|h3)>/)) {
+    } else if (olMatch) {
       if (inList) { html += '</ul>\n'; inList = false; }
+      if (!inOL) { html += '<ol class="blog-post-refs">\n'; inOL = true; }
+      html += `<li id="ref-${olMatch[1]}">${olMatch[2]}</li>\n`;
+    } else if (line.match(/^<(h2|h3|div)/)) {
+      closeLists();
       html += line + '\n';
     } else if (line.length > 0) {
-      if (inList) { html += '</ul>\n'; inList = false; }
+      closeLists();
       html += `<p>${line}</p>\n`;
     } else {
-      if (inList) { html += '</ul>\n'; inList = false; }
+      closeLists();
     }
   }
-  if (inList) html += '</ul>\n';
+  closeLists();
   return html;
 }
 
@@ -1047,6 +1092,16 @@ window.renderBlogPost = function() {
       ${simpleMarkdown(post.body || '', `Data/3_Blogs/${post.id}`)}
     </div>
   `;
+  // Citation markers link to #ref-N, but the site's hash router (see
+  // handleRouting further down) treats any unrecognised hash as a request to
+  // scroll to page top - so these are handled locally instead of letting the
+  // click fall through to a real hash change.
+  container.querySelectorAll('.citation-link').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(`ref-${a.dataset.ref}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
 }

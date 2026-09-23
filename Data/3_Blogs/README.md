@@ -23,9 +23,14 @@
        line. Same filename convention as `cover`: just the file's own name,
        sitting next to `post.json` in the same folder. Follow it with a
        `*Caption text*` line if you want a caption shown underneath.
+     - `[text](url)` for an ordinary external link, e.g. a DOI in a
+       references list. Opens in a new tab.
+     - A markdown table: a header row, a `| --- | --- |` separator row, then
+       any number of `| cell | cell |` data rows.
      - A blank line between lines starts a new paragraph
-     - Numbered lists, links (`[text](url)`), and blockquotes are **not**
-       supported, they'll show up as literal text, not render.
+     - Numbered lists and blockquotes are **not** supported, they'll show up
+       as literal text, not render. Number a references list by hand
+       (`1. `, `2. `, ...); each line becomes its own paragraph.
 3. Add a cover image next to `post.json` (SVG, PNG, JPG, or WebP) and set the
    `cover` field to its filename. Add any in-body figures the same way,
    referenced from `body` as above.
