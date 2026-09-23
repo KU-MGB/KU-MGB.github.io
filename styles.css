@@ -1070,7 +1070,11 @@ a:hover { color: var(--accent-hover); }
   .blog-post-topbar { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 10px; }
   .blog-post-topbar > :first-child, .blog-post-topbar > :last-child { justify-self: center; }
 }
-.blog-post-cover { display: block; width: 100%; max-width: 680px; max-height: 320px; object-fit: cover; border-radius: var(--radius-lg); margin: 0 auto 28px; }
+.blog-post-cover { display: block; width: 100%; max-height: 320px; object-fit: cover; border-radius: var(--radius-lg); }
+/* [data-tip]'s ::after tooltip is generated content, unsupported on replaced
+   elements like <img> in every browser - so the tip lives on this wrapper
+   div instead, sized to match the image it wraps. */
+.blog-post-cover-wrap { display: block; max-width: 680px; margin: 0 auto 28px; }
 .blog-post-header { text-align: center; max-width: 720px; margin: 0 auto 28px; }
 .blog-post-title { font-size: clamp(26px, 4vw, 38px); margin-bottom: 12px; }
 .blog-post-body { max-width: 680px; margin: 0 auto; font-size: 16px; line-height: 1.8; text-align: justify; }

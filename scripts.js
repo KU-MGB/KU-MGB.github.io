@@ -1087,7 +1087,9 @@ window.renderBlogPost = function() {
       <h1 class="blog-post-title">${esc(post.title)}</h1>
       ${post.tags && post.tags.length ? `<div class='chip-container' style="justify-content:center;">${post.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     </div>
-    ${post.cover ? `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="${esc(post.coverAlt || 'Cover image')}"${post.coverAlt ? ` data-tip="${esc(post.coverAlt)}"` : ''}>` : ''}
+    ${post.cover ? (post.coverAlt
+      ? `<div class="blog-post-cover-wrap" data-tip="${esc(post.coverAlt)}"><img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="${esc(post.coverAlt)}"></div>`
+      : `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="Cover image">`) : ''}
     <div class="blog-post-body">
       ${simpleMarkdown(post.body || '', `Data/3_Blogs/${post.id}`)}
     </div>
