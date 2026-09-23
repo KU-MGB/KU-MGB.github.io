@@ -789,13 +789,16 @@ function simpleMarkdown(text, imageBase) {
     `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>`);
 
   // [1] or [1, 2] - a citation marker, e.g. in a "References" numbered list
-  // below. Links to the matching #ref-N (see the ordered-list handling
-  // further down); on a multi-number citation it jumps to the first one.
-  // Only ever matches bare digits, so it never touches the [text](url) links
-  // already converted above.
+  // below. Each number links to its own matching #ref-N (see the
+  // ordered-list handling further down), so a multi-number citation still
+  // lets a reader jump to any one of them, not just the first. Only ever
+  // matches bare digits, so it never touches the [text](url) links already
+  // converted above.
   text = text.replace(/\[(\d+(?:,\s*\d+)*)\]/g, (m, nums) => {
-    const first = nums.split(',')[0].trim();
-    return `<a href="#ref-${first}" class="citation-link" data-ref="${first}">[${nums}]</a>`;
+    const links = nums.split(',').map(n => n.trim())
+      .map(n => `<a href="#ref-${n}" class="citation-link" data-ref="${n}">${n}</a>`)
+      .join(', ');
+    return `[${links}]`;
   });
 
   text = text.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
