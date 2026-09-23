@@ -1,12 +1,12 @@
 {
   "id": "mohammad-shaukat-ali",
   "name": "Mohammad Shaukat Ali",
-  "role": "Visiting PhD Student",
+  "role": "Visiting PhD Researcher",
   "email": "mohammadshaukat.ali@unicampania.it",
   "orcid": "0009-0006-4405-4109",
   "website": "",
   "linkedin": "https://www.linkedin.com/in/mohammad-shaukat-ali-803740144/",
   "tags": ["PFAS", "Structural Modelling", "Molecular Docking", "Molecular Dynamics"],
-  "bio": "Mohammad Shaukat Ali is a visiting PhD student in the Microbial Genomics & Biodegradation group, working on the structural characterisation of bacterial defluorinating enzymes. His research combines homology modelling, binding-site analysis, molecular docking and molecular dynamics simulations to investigate how active-site flexibility and substrate positioning influence carbon–fluorine bond cleavage in FAcD and HAD family candidates. His work supports the group's enzyme screening efforts aimed at understanding and identifying microbial mechanisms for PFAS degradation.\n\nAli is currently undertaking a six-month research exchange in Copenhagen at the Microbial Genomics & Biodegradation group from the University of Campania “Luigi Vanvitelli”, Italy, where he is pursuing his PhD in Bioinformatics. His doctoral research focuses on computational drug discovery and cancer genomics, with particular interests in protein conformational dynamics, allosteric regulation and transcriptomic approaches for identifying DNA damage response vulnerabilities in ALT-positive tumours.",
+  "bio": "Mohammad Shaukat Ali is a visiting PhD Researcher in the MGB group, working on the structural characterisation of bacterial defluorinating enzymes. His research combines homology modelling, binding-site analysis, molecular docking, and molecular dynamics simulations to investigate how active-site flexibility and substrate positioning influence carbon–fluorine bond cleavage in FAcD, HAD, and other catabolic enzymes. His work supports the group’s enzyme screening efforts to understand and identify microbial mechanisms for PFAS degradation.\n\nAli is a PhD Researcher in Bioinformatics at the University of Campania “Luigi Vanvitelli”, Italy. His doctoral research focuses on computational drug discovery and cancer genomics, with particular interests in protein conformational dynamics, allosteric regulation and transcriptomic approaches for identifying DNA damage response vulnerabilities in ALT-positive tumours.",
   "avatar": "mohammad-shaukat-ali.webp"
 }

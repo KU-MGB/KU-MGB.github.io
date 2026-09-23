@@ -256,7 +256,7 @@ const MGB_NEWS         = [
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501569083591532544/"
   },
   {
-    "title": "Mohammad Shaukat Ali joins the lab as a visiting PhD student",
+    "title": "Mohammad Shaukat Ali joins the lab as a visiting PhD researcher",
     "date": "2026-09-23",
     "category": "New Member",
     "description": "Shaukat joins MGB Lab for a six-month research exchange from the University of Campania \"Luigi Vanvitelli\", Italy, working on structural characterisation of bacterial defluorinating enzymes.",
