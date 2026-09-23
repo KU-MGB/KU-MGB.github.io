@@ -254,6 +254,14 @@ const MGB_NEWS         = [
     "description": "Simone joins MGB Lab as a PhD student, working on overcoming fluoride toxicity to enable microbial PFAS bioremediation.",
     "image": "Data/1_People/3_PhD/simone-cusimano.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501569083591532544/"
+  },
+  {
+    "title": "Mohammad Shaukat Ali joins the lab as a visiting PhD student",
+    "date": "2026-09-23",
+    "category": "New Member",
+    "description": "Shaukat joins MGB Lab for a six-month research exchange from the University of Campania \"Luigi Vanvitelli\", Italy, working on structural characterisation of bacterial defluorinating enzymes.",
+    "image": "Data/1_People/3_PhD/mohammad-shaukat-ali.webp",
+    "link": "https://www.linkedin.com/in/mohammad-shaukat-ali-803740144/"
   }
 ];
 // The four "What We Do" pillar cards on the Home page.
@@ -378,6 +386,7 @@ const MGB_GLOSSARY      = {
   "Mobile Genetic Elements": "DNA sequences, such as plasmids, transposons, and phages, capable of moving within or between genomes.",
   "Mobilome": "The complete set of mobile genetic elements within a genome or microbial community.",
   "Mobilomics": "The large-scale study of mobile genetic elements and their role in genome and community-level evolution.",
+  "Molecular Docking": "A computational method that predicts how a small molecule binds to a protein's active site, used to screen candidate substrates or inhibitors.",
   "Molecular Dynamics": "A computational simulation method that models the physical movement of atoms and molecules over time.",
   "Nanopore Sequencing": "A DNA/RNA sequencing method that reads a molecule's sequence as it passes through a nanoscale pore, in real time.",
   "Novo Nordisk Foundation": "A Danish foundation funding research in the life sciences, including biotechnology and sustainability.",
@@ -392,6 +401,7 @@ const MGB_GLOSSARY      = {
   "Sphingomonads": "A group of bacteria in the genus Sphingomonas and related genera, known for degrading diverse aromatic and persistent pollutants.",
   "Sphingomonas": "A genus of bacteria found in soil and water, notable for its metabolic versatility in degrading environmental pollutants.",
   "Strain Engineering": "The genetic modification of a microbial strain to introduce or enhance a desired trait, such as pollutant degradation.",
+  "Structural Modelling": "Computationally predicting a protein's three-dimensional shape from its sequence, used to study active sites and substrate binding.",
   "Synthetic Biology": "An engineering-based approach to biology that designs and builds new biological parts, systems, or organisms.",
   "TFA": "Trifluoroacetate (or trifluoroacetic acid), the shortest-chain PFAS and a common breakdown product of larger PFAS compounds, itself persistent and difficult to degrade further.",
   "Water Treatment": "Processes that remove contaminants from water to make it safe for drinking, discharge, or reuse."
@@ -842,7 +852,7 @@ window.renderPeople = function() {
   const CATEGORIES = [
     { id: '1_Faculty', label: 'Group Leader', cls: 'cat-faculty' },
     { id: '2_Postdocs', label: 'Postdoctoral Researchers', cls: 'cat-postdocs' },
-    { id: '3_PhD', label: 'PhD Students', cls: 'cat-phd' },
+    { id: '3_PhD', label: 'PhD Scholars', cls: 'cat-phd' },
     { id: '4_Masters', label: 'MSc Students', cls: 'cat-masters' },
     { id: '5_Bachelors', label: 'BSc Students', cls: 'cat-bachelors' },
     { id: '6_Others', label: 'Others', cls: 'cat-others' },
@@ -857,7 +867,7 @@ window.renderPeople = function() {
     if (href) return `<a href='${esc(href)}' target='_blank' rel='noopener' class='icon-link' data-tip='${tip}' aria-label='${tip}'><i class='${iconClass}'></i></a>`;
     return `<span class='icon-link icon-link-dummy' data-tip='${tip} not available' aria-label='${tip} not available'><i class='${iconClass}'></i></span>`;
   }
-  // Group Leader, Postdocs, and PhD Students show all four contact icons
+  // Group Leader, Postdocs, and PhD Scholars show all four contact icons
   // (missing ones as a dimmed placeholder). Every other category shows
   // LinkedIn only, since that's the one link reliably kept up to date.
   const FULL_LINKS_CATEGORIES = ['1_Faculty', '2_Postdocs', '3_PhD'];
@@ -880,7 +890,7 @@ window.renderPeople = function() {
     const gridModifier = members.length === 1 ? ' people-grid-solo' : members.length === 2 ? ' people-grid-duo' : '';
     const isAlumni = cat.id === '7_Alumni';
     const fullLinks = FULL_LINKS_CATEGORIES.includes(cat.id);
-    const BIO_LIMIT = 300;
+    const BIO_LIMIT = cat.id === '4_Masters' ? 130 : 300;
     const cardsHtml = members.map(p => {
       const fullBio = p.bio ? bioExcerpt(p.bio) : '';
       const isLong = fullBio.length > BIO_LIMIT;
