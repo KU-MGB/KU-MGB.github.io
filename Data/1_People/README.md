@@ -5,7 +5,7 @@ One folder per category:
 ```
 1_Faculty/     Group Leader
 2_Postdocs/    Postdoctoral Researchers
-3_PhD/         PhD Students
+3_PhD/         PhD Scholars
 4_Masters/     MSc Students
 5_Bachelors/   BSc Students
 6_Others/      Others
@@ -25,7 +25,7 @@ in their category folder, e.g. `2_Postdocs/asal-forouzandeh.json` and
    - `name`, `role`: shown on the card (e.g. `role`: `"PhD Student"`).
    - `email`, `orcid`, `website`, `linkedin`: leave as `""` to hide that button on
      the card. Only filled-in fields show a button. **Group Leader, Postdocs, and
-     PhD Students** show all four (missing ones as a greyed-out placeholder);
+     PhD Scholars** show all four (missing ones as a greyed-out placeholder);
      **every other category** (MSc, BSc, Others, Alumni) shows LinkedIn only, even
      if the others are filled in. That's a deliberate simplification for larger
      groups, not a bug.

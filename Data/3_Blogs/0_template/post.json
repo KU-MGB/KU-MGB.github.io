@@ -6,5 +6,5 @@
   "description": "One or two sentences summarising the post, shown on the blog list card.",
   "cover": "cover.svg",
   "author": { "name": "Your Name", "linkedin": "https://www.linkedin.com/in/your-profile/" },
-  "body": "Write the post body here using Markdown.\n\n## A heading\n\n### A smaller heading\n\nA paragraph. **Bold**, *italic*, and `code` all work.\n\n- A bullet\n- Another bullet\n\n![Caption for the figure](figure.jpg)\n\n*Caption for the figure*\n\nA second paragraph, separated from the one above by a blank line."
+  "body": "Write the post body here using Markdown.\n\n## A heading\n\n### A smaller heading\n\nA paragraph. **Bold**, *italic*, and `code` all work. A claim needing a source [1]. An ordinary [external link](https://example.com).\n\n- A bullet\n- Another bullet\n\n![Caption for the figure](figure.jpg)\n\n*Caption for the figure*\n\nA second paragraph, separated from the one above by a blank line.\n\n| Column | Another column |\n| --- | --- |\n| A table cell | Another cell |\n\n## References\n\n1. Author, A. (2026) Title of the source. *Journal Name* 1, 1-10. doi:[10.0000/example](https://doi.org/10.0000/example)"
 }
