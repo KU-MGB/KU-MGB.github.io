@@ -261,7 +261,7 @@ const MGB_NEWS         = [
     "category": "New Member",
     "description": "Shaukat joins MGB Lab for a six-month research exchange from the University of Campania \"Luigi Vanvitelli\", Italy, working on structural characterisation of bacterial defluorinating enzymes.",
     "image": "Data/1_People/3_PhD/mohammad-shaukat-ali.webp",
-    "link": "https://www.linkedin.com/in/mohammad-shaukat-ali-803740144/"
+    "link": "https://www.linkedin.com/posts/mohammad-shaukat-ali-803740144_pfas-bioinformatics-structuralbiology-ugcPost-7508477058717556736-ILG3/"
   }
 ];
 // The four "What We Do" pillar cards on the Home page.
@@ -1036,7 +1036,7 @@ window.renderBlogs = function() {
     el.setAttribute('data-reveal', '');
     el.innerHTML = `
       <div class='blog-cover'>
-        ${b.cover ? `<img src='${esc(adjustPath(b.cover))}' alt='cover'>` : ''}
+        ${b.cover ? `<img src='${esc(adjustPath(b.cover))}' alt='${esc(b.coverAlt || 'Cover image')}'>` : ''}
       </div>
       <div class='blog-body'>
         <div class='blog-meta-row'>
@@ -1087,7 +1087,7 @@ window.renderBlogPost = function() {
       <h1 class="blog-post-title">${esc(post.title)}</h1>
       ${post.tags && post.tags.length ? `<div class='chip-container' style="justify-content:center;">${post.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     </div>
-    ${post.cover ? `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="Cover image">` : ''}
+    ${post.cover ? `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="${esc(post.coverAlt || 'Cover image')}"${post.coverAlt ? ` data-tip="${esc(post.coverAlt)}"` : ''}>` : ''}
     <div class="blog-post-body">
       ${simpleMarkdown(post.body || '', `Data/3_Blogs/${post.id}`)}
     </div>

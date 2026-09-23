@@ -12,6 +12,10 @@
      itself. Leave as `[]` to show none.
    - `description`: one or two sentences shown on the blog list card.
    - `cover`: the cover image's filename (see step 3). Leave as `""` for no image.
+   - `coverAlt`: optional alt text for the cover image (accessibility/broken-
+     image fallback on the card and the post). On the post itself it also
+     becomes a hover tooltip. Leave unset (or `""`) to fall back to the
+     generic "Cover image" with no tooltip.
    - `author`: `{ "name": "...", "linkedin": "https://www.linkedin.com/in/..." }`,
      shown next to the date on the card and post, linking out to that profile.
      Whoever actually wrote the post, not necessarily whoever added the file.
