@@ -1008,9 +1008,9 @@ window.renderPeople = function() {
 }
 
 // Blog folders are named with a leading number for ordering on disk
-// (e.g. "1_cf-bond-explained"), but that number has no place in a link
+// (e.g. "1_after-the-gold-rush"), but that number has no place in a link
 // meant for sharing. This strips it, so the shareable URL just reads
-// ?id=cf-bond-explained.
+// ?id=after-the-gold-rush.
 function publicBlogSlug(id) {
   return (id || '').replace(/^\d+_/, '');
 }

@@ -90,7 +90,7 @@ metagenomics. Full list with DOIs: https://ku-mgb.github.io/#publications
   https://ku-mgb.github.io/?id=after-the-gold-rush#blog-post
 - "The Wrong Suspect: Why the C-F Bond Isn't to Blame for PFAS" by Shaban Ahmad
   (2026-09-23)
-  https://ku-mgb.github.io/?id=cf-bond-explained#blog-post
+  https://ku-mgb.github.io/?id=cf-bond-wrong-suspect-pfas#blog-post
 
 ---
 
