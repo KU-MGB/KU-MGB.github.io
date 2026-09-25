@@ -1075,7 +1075,11 @@ window.renderBlogPost = function() {
 
   const post = MGB_BLOGS.find(b => publicBlogSlug(b.id) === id);
   if (!post) {
-    container.innerHTML = '<h2 class="section-title">Post not found</h2>';
+    container.innerHTML = `
+      <h2 class="section-title">Post not found</h2>
+      <p class="section-desc">This link may be mistyped, or the post may have moved.</p>
+      <a href="#home" class="text-link">&larr; Back to home</a>
+    `;
     return;
   }
 
