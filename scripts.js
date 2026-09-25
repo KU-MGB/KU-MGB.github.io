@@ -900,7 +900,7 @@ window.renderPeople = function() {
   const CATEGORIES = [
     { id: '1_Faculty', label: 'Group Leader', cls: 'cat-faculty' },
     { id: '2_Postdocs', label: 'Postdoctoral Researchers', cls: 'cat-postdocs' },
-    { id: '3_PhD', label: 'PhD Scholars', cls: 'cat-phd' },
+    { id: '3_PhD', label: 'PhD Researchers', cls: 'cat-phd' },
     { id: '4_Masters', label: 'MSc Students', cls: 'cat-masters' },
     { id: '5_Bachelors', label: 'BSc Students', cls: 'cat-bachelors' },
     { id: '6_Others', label: 'Others', cls: 'cat-others' },
@@ -915,7 +915,7 @@ window.renderPeople = function() {
     if (href) return `<a href='${esc(href)}' target='_blank' rel='noopener' class='icon-link' data-tip='${tip}' aria-label='${tip}'><i class='${iconClass}'></i></a>`;
     return `<span class='icon-link icon-link-dummy' data-tip='${tip} not available' aria-label='${tip} not available'><i class='${iconClass}'></i></span>`;
   }
-  // Group Leader, Postdocs, and PhD Scholars show all four contact icons
+  // Group Leader, Postdocs, and PhD Researchers show all four contact icons
   // (missing ones as a dimmed placeholder). Every other category shows
   // LinkedIn only, since that's the one link reliably kept up to date.
   const FULL_LINKS_CATEGORIES = ['1_Faculty', '2_Postdocs', '3_PhD'];
@@ -1090,9 +1090,18 @@ window.renderBlogPost = function() {
       <h1 class="blog-post-title">${esc(post.title)}</h1>
       ${post.tags && post.tags.length ? `<div class='chip-container' style="justify-content:center;">${post.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     </div>
-    ${post.cover ? (post.coverAlt
-      ? `<div class="blog-post-cover-wrap" data-tip="${esc(post.coverAlt)}"><img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="${esc(post.coverAlt)}"></div>`
-      : `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="Cover image">`) : ''}
+    ${(() => {
+      if (!post.cover) return '';
+      const alt = esc(post.coverAlt || 'Cover image');
+      const img = `<img src="${esc(adjustPath(post.cover))}" class="blog-post-cover" alt="${alt}">`;
+      const tip = post.coverAlt ? ` data-tip="${esc(post.coverAlt)}"` : '';
+      // [data-tip]'s ::after tooltip is generated content, unsupported on
+      // replaced elements like <img> - so it lives on this wrapper, which
+      // doubles as the click-through link when coverLink is set.
+      if (post.coverLink) return `<a href="${esc(post.coverLink)}" target="_blank" rel="noopener" class="blog-post-cover-wrap"${tip}>${img}</a>`;
+      if (post.coverAlt) return `<div class="blog-post-cover-wrap"${tip}>${img}</div>`;
+      return img;
+    })()}
     <div class="blog-post-body">
       ${simpleMarkdown(post.body || '', `Data/3_Blogs/${post.id}`)}
     </div>

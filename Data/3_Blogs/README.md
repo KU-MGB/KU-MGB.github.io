@@ -16,6 +16,9 @@
      image fallback on the card and the post). On the post itself it also
      becomes a hover tooltip. Leave unset (or `""`) to fall back to the
      generic "Cover image" with no tooltip.
+   - `coverLink`: optional URL. On the post itself (not the card), clicking
+     the cover image opens this link in a new tab. Leave unset (or `""`) for
+     a plain, non-clickable image.
    - `author`: `{ "name": "...", "linkedin": "https://www.linkedin.com/in/..." }`,
      shown next to the date on the card and post, linking out to that profile.
      Whoever actually wrote the post, not necessarily whoever added the file.
