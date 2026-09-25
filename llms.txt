@@ -88,9 +88,9 @@ metagenomics. Full list with DOIs: https://ku-mgb.github.io/#publications
 - "After the Gold Rush: The Promise of Evolution of PFAS-Eating Bacteria" by Tue
   Kjaergaard Nielsen (2026-09-15)
   https://ku-mgb.github.io/?id=after-the-gold-rush#blog-post
-- "Beyond Bond Strength: Why PFAS Really Persist" by Shaban Ahmad
+- "Why PFAS Really Persist" by Shaban Ahmad
   (2026-09-25)
-  https://ku-mgb.github.io/?id=cf-bond-wrong-suspect-pfas#blog-post
+  https://ku-mgb.github.io/?id=why-pfas-really-persist#blog-post
 
 ---
 
