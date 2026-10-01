@@ -1070,7 +1070,7 @@ a:hover { color: var(--accent-hover); }
   .blog-post-topbar { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 10px; }
   .blog-post-topbar > :first-child, .blog-post-topbar > :last-child { justify-self: center; }
 }
-.blog-post-cover { display: block; width: 100%; max-height: 320px; object-fit: cover; border-radius: var(--radius-lg); }
+.blog-post-cover { display: block; width: 100%; max-width: 680px; max-height: 320px; margin: 0 auto 28px; object-fit: cover; border-radius: var(--radius-lg); }
 /* [data-tip]'s ::after tooltip is generated content, unsupported on replaced
    elements like <img> in every browser - so the tip lives on this wrapper
    div instead, sized to match the image it wraps. */
