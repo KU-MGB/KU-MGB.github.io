@@ -1076,6 +1076,8 @@ a:hover { color: var(--accent-hover); }
    div instead, sized to match the image it wraps. */
 .blog-post-cover-wrap { display: block; max-width: 680px; margin: 0 auto 28px; }
 .blog-post-header { text-align: center; max-width: 720px; margin: 0 auto 28px; }
+.blog-post-listen { display: flex; justify-content: center; margin: 0 0 24px; }
+.blog-post-listen .btn-outline i { width: 14px; text-align: center; }
 .blog-post-title { font-size: clamp(26px, 4vw, 38px); margin-bottom: 12px; }
 .blog-post-body { max-width: 680px; margin: 0 auto; font-size: 16px; line-height: 1.8; text-align: justify; }
 .blog-post-body h2 { font-family: var(--sans); font-size: 24px; font-weight: 700; color: var(--accent); margin-top: 36px; margin-bottom: 12px; }

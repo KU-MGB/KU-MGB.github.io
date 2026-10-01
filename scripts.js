@@ -1094,6 +1094,11 @@ window.renderBlogPost = function() {
       <h1 class="blog-post-title">${esc(post.title)}</h1>
       ${post.tags && post.tags.length ? `<div class='chip-container' style="justify-content:center;">${post.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     </div>
+    <div class="blog-post-listen">
+      <button type="button" id="blog-listen-btn" class="btn-outline" hidden>
+        <i class="fas fa-volume-up" aria-hidden="true"></i> <span>Listen to this post</span>
+      </button>
+    </div>
     ${(() => {
       if (!post.cover) return '';
       const alt = esc(post.coverAlt || 'Cover image');
@@ -1120,8 +1125,69 @@ window.renderBlogPost = function() {
       document.getElementById(`ref-${a.dataset.ref}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+  initBlogReadAloud(container, post.title);
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
+}
+
+// 7b. "Listen to this post" - reads the post aloud with the browser's own
+// text-to-speech (Web Speech API), so there's no server, API key or audio
+// file to generate/host. Skips the References section (raw DOI links read
+// aloud are unpleasant) and anything inside a table, by only reading
+// headings, paragraphs and list items in document order.
+function initBlogReadAloud(container, title) {
+  const btn = document.getElementById('blog-listen-btn');
+  if (!btn || !('speechSynthesis' in window)) return;
+  btn.hidden = false;
+
+  const label = btn.querySelector('span');
+  const icon = btn.querySelector('i');
+  let utterance = null;
+
+  function setState(state) {
+    if (state === 'playing') { icon.className = 'fas fa-pause'; label.textContent = 'Pause'; }
+    else if (state === 'paused') { icon.className = 'fas fa-play'; label.textContent = 'Resume'; }
+    else { icon.className = 'fas fa-volume-up'; label.textContent = 'Listen to this post'; }
+  }
+
+  function buildText() {
+    const parts = [title];
+    const body = container.querySelector('.blog-post-body');
+    let stopped = false;
+    body?.querySelectorAll('h2, h3, p, li').forEach(el => {
+      if (stopped) return;
+      if (el.tagName === 'H2' && /references/i.test(el.textContent)) { stopped = true; return; }
+      const text = el.textContent.trim();
+      if (text) parts.push(text);
+    });
+    return parts.join('. ');
+  }
+
+  btn.addEventListener('click', () => {
+    if (utterance && speechSynthesis.speaking) {
+      if (speechSynthesis.paused) { speechSynthesis.resume(); setState('playing'); }
+      else { speechSynthesis.pause(); setState('paused'); }
+      return;
+    }
+    utterance = new SpeechSynthesisUtterance(buildText());
+    utterance.lang = 'en-GB';
+    utterance.rate = 0.95;
+    utterance.onend = () => setState('idle');
+    utterance.onerror = () => setState('idle');
+    speechSynthesis.speak(utterance);
+    setState('playing');
+  });
+
+  // Leaving the post view (back to blog list, another section) shouldn't
+  // leave it talking over whatever the visitor looks at next. Wired once
+  // globally, not per-post, since this function reruns on every post visit.
+  if (!window.MGB_READ_ALOUD_NAV_WIRED) {
+    window.MGB_READ_ALOUD_NAV_WIRED = true;
+    window.addEventListener('hashchange', () => { if (window.location.hash !== '#blog-post') speechSynthesis.cancel(); });
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('a[href="#blogs"]') || e.target.closest('a[href="#home"]')) speechSynthesis.cancel();
+    });
+  }
 }
 
 // 8. Publications renderer
