@@ -316,15 +316,15 @@ const MGB_PROJECTS     = [
     "tags": ["PFAS", "Genetics", "Danmarks Frie Forskningsfond"]
   }
 ];
-// In-house computational tools, shown on the Tools page. Both repos are
-// currently private while under development; the links are kept live so
-// they start working the moment each repo is made public.
+// In-house computational tools, shown on the Tools page. HADefluorX and
+// GenDeFluorX are still private while under development; their links are
+// kept live so they start working the moment each repo is made public.
 const MGB_TOOLS        = [
   {
     "name": "DeFluorX",
     "description": "An automated, fully reproducible pipeline that identifies and prioritises fluoroacetate dehalogenase (FAcD) variants for PFAS defluorination, combining AI-driven modelling with physics-aware validation via WaterMap, molecular dynamics simulations, and QM/MM calculations.",
     "link": "https://github.com/KU-MGB/DeFluorX",
-    "status": "Private repository (public release coming soon)",
+    "status": "Public repository",
     "tags": ["PFAS", "Enzyme Discovery", "AI"]
   },
   {

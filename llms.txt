@@ -37,8 +37,7 @@ of cleaving the carbon-fluorine bond.
 - **DeFluorX** — Automated, reproducible pipeline identifying and prioritising
   fluoroacetate dehalogenase (FAcD) variants for PFAS defluorination, combining
   AI-driven modelling with physics-aware validation (WaterMap, molecular
-  dynamics, QM/MM). GitHub: https://github.com/KU-MGB/DeFluorX (private,
-  public release pending)
+  dynamics, QM/MM). GitHub: https://github.com/KU-MGB/DeFluorX
 - **HADefluorX** — Companion pipeline covering Haloacid Dehalogenases (HADs),
   applying the same AI-driven screening to identify HAD variants capable of
   cleaving the carbon-fluorine bond.
