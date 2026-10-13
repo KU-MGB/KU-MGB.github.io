@@ -291,6 +291,14 @@ const MGB_NEWS         = [
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_the-microbial-genomics-and-biodegradation-ugcPost-7510643345937932290-RpH-/"
   },
   {
+    "title": "Shaban Ahmad presents DeFluorX at PLEN Research Day",
+    "date": "2026-10-11",
+    "category": "Talk",
+    "description": "Shaban presented protein-ligand modelling of catalytic enzymes for PFAS degradation using the lab's DeFluorX pipeline at PLEN Research Day, held in the Margrethe Bohr Hall, Niels Bohr Building, University of Copenhagen. A preprint on the work is in preparation.",
+    "image": "Data/1_People/2_Postdocs/shaban-ahmad.webp",
+    "link": "https://www.linkedin.com/posts/drshabanahmad_pfas-bioremediation-proteinligand-ugcPost-7514970895740760064-eN4u/"
+  },
+  {
     "title": "Eva Højgaard Jensen leads new preprint on the first TFA-degrading microbial consortium",
     "date": "2026-10-12",
     "category": "Preprint",
