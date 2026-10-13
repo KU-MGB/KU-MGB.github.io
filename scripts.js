@@ -371,7 +371,7 @@ const MGB_TOOLS        = [
     "zenodo": "https://zenodo.org/doi/10.5281/zenodo.23318610",
     "doiPending": true,
     "status": "Public Repository",
-    "tags": ["PFAS", "Enzyme Discovery", "AI"]
+    "tags": ["PFAS", "Enzyme Discovery", "AI", "Dehalogenases", "Molecular Dynamics"]
   },
   {
     "name": "HADeFluorX",
@@ -381,7 +381,7 @@ const MGB_TOOLS        = [
     "zenodoPending": true,
     "doiPending": true,
     "status": "Public Release Coming Soon",
-    "tags": ["PFAS", "HADs", "Molecular Dynamics"]
+    "tags": ["PFAS", "HADs", "Molecular Dynamics", "AI", "Dehalogenases"]
   },
   {
     "name": "GenDeFluorX",
@@ -391,7 +391,7 @@ const MGB_TOOLS        = [
     "zenodoPending": true,
     "doiPending": true,
     "status": "Public Release Coming Soon",
-    "tags": ["TFA", "Genomics", "AI"]
+    "tags": ["TFA", "Genomics", "AI", "Genome Sequencing", "Dehalogenases"]
   }
 ];
 // One-sentence definitions shown in a popover when a visitor clicks a tag
@@ -1433,11 +1433,13 @@ window.renderTools = function() {
     <div class='card-academic tool-card' data-reveal>
       <div class='tool-card-header'>
         <h3>${esc(t.name)}</h3>
-        <span class='badge badge-fg'><i class='fab fa-github' aria-hidden='true'></i> ${esc(t.status || 'On GitHub')}</span>
+        <div class='tool-card-links'>
+          ${links.join('')}
+          <span class='badge badge-fg'>${esc(t.status || 'On GitHub')}</span>
+        </div>
       </div>
       <p>${esc(t.description)}</p>
       ${t.tags ? `<div class='chip-container'>${t.tags.map(tag => `<span class='chip chip-muted'>${esc(tag)}</span>`).join('')}</div>` : ''}
-      <div class='tool-links'>${links.join('')}</div>
     </div>`;
   }).join('');
   container.appendChild(grid);
