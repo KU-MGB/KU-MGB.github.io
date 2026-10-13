@@ -1343,9 +1343,16 @@ footer .logo-lockup { height: 24px; }
    .tools-panel .scrollable-list's overflow-y:auto for any card in the
    first row (nothing above it to escape into) - popping downward instead
    keeps it inside the card's own box regardless of row. */
+/* This button row sits flush against the right edge of each card (the
+   header row is space-between), so a centred tooltip on the rightmost
+   buttons (Zenodo, DOI) can overflow past .tools-panel .scrollable-list's
+   right edge and get clipped by its overflow-x:hidden - how far depends on
+   which grid column the card lands in, which is why only some tools show
+   it. Anchoring to the icon's right edge and growing leftward keeps the
+   tooltip inside the card regardless of column. */
 .tool-card-links [data-tip]::after {
-  bottom: auto; top: 100%;
-  transform: translateY(6px) translateX(-50%);
+  bottom: auto; top: 100%; left: auto; right: 0;
+  transform: translateY(6px);
 }
 
 /* Page router: only one page-view section is visible at a time. A
