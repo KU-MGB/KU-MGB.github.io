@@ -1,7 +1,7 @@
 # MGB Lab — LLM Knowledge Profile
 # Format: llms.txt (https://llmstxt.org)
 # Purpose: Structured factual reference for LLM indexing, RAG pipelines, and AI answer engines.
-# Last updated: 2026-10-01
+# Last updated: 2026-10-13
 
 ---
 
@@ -65,6 +65,7 @@ of cleaving the carbon-fluorine bond.
 - Asal Forouzandeh — Postdoctoral Researcher
 - Shaban Ahmad — Postdoctoral Researcher
 - Simone Cusimano — PhD Student
+- Mohammad Shaukat Ali — Visiting PhD Researcher
 - Agis Papadopoulos, Ioanna Stavroula Mavraki,
   Panagiotis Praftsas, Sofie Linnea Bollen, Zijun Tang — MSc Students
 - Benedetta Togni, Jonas Borup Randløv, Peer Schacht, Eva Højgaard Jensen,
@@ -76,9 +77,10 @@ Full profiles: https://ku-mgb.github.io/#people
 
 ## Publications
 
-10 peer-reviewed publications listed (2013-2025), spanning PFAS and herbicide
-biodegradation, mobile genetic elements, bacteriophage genomics, and
-metagenomics. Full list with DOIs: https://ku-mgb.github.io/#publications
+11 publications listed (2013-2026): 9 peer-reviewed and 2 bioRxiv preprints,
+spanning PFAS and herbicide biodegradation, mobile genetic elements,
+bacteriophage genomics, and metagenomics. Full list with DOIs:
+https://ku-mgb.github.io/#publications
 
 ---
 
@@ -90,6 +92,19 @@ metagenomics. Full list with DOIs: https://ku-mgb.github.io/#publications
 - "Why PFAS Really Persist" by Shaban Ahmad
   (2026-09-30)
   https://ku-mgb.github.io/?id=why-pfas-really-persist#blog-post
+
+---
+
+## Recent News
+
+- Eva Højgaard Jensen leads a new preprint on the first microbial consortium
+  shown to degrade TFA (2026-10-12)
+- Shaban Ahmad presents DeFluorX's protein-ligand modelling at PLEN Research
+  Day (2026-10-11)
+- MGB Lab presents four talks at the first Environmental Pollutants
+  conference, ENVP (2026-10-06)
+
+Full list: https://ku-mgb.github.io/#news-all
 
 ---
 

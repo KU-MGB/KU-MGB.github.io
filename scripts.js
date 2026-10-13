@@ -288,6 +288,7 @@ const MGB_NEWS         = [
     "date": "2026-10-06",
     "category": "Conference",
     "description": "Eva Højgaard Jensen presented her discovery of TFA-degrading microorganisms, Asal Forouzandeh presented a new evidence hierarchy for PFAS degradation studies, Shaban Ahmad presented a large-scale protein-ligand study of fluoroacetate dehalogenases, and Sofie Linnea Bollen presented her work on cyanobacteria-PFAS interactions.",
+    "image": "Data/2_Images/1_MGB_Lab_Fevicon.svg",
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_the-microbial-genomics-and-biodegradation-ugcPost-7510643345937932290-RpH-/"
   },
   {
