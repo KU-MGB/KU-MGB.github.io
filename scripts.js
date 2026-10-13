@@ -36,6 +36,26 @@
 
 const MGB_PUBLICATIONS = [
   {
+    "title": "TFA-defluorinating microbial consortium achieved with analogue enrichment",
+    "year": 2026,
+    "venue": "bioRxiv",
+    "authors": [
+      "Eva Højgaard Jensen",
+      "Asal Forouzandeh",
+      "Xenia Trier",
+      "Charlotte Held Gotfredsen",
+      "Kasper Enemark-Rasmussen",
+      "Shaban Ahmad",
+      "Tue Kjærgaard Nielsen"
+    ],
+    "tags": [
+      "PFAS",
+      "TFA",
+      "Microbial Consortium"
+    ],
+    "doi": "10.64898/2026.10.12.758446"
+  },
+  {
     "title": "Single-strain mobilome sequencing quantifies bacterial genetic response to stress, including activity of IS elements, prophages, RNAs, and REPINs",
     "year": 2025,
     "venue": "Plasmid",
@@ -262,6 +282,14 @@ const MGB_NEWS         = [
     "description": "Shaukat joins MGB Lab for a six-month research exchange from the University of Campania \"Luigi Vanvitelli\", Italy, working on structural characterisation of bacterial defluorinating enzymes.",
     "image": "Data/1_People/3_PhD/mohammad-shaukat-ali.webp",
     "link": "https://www.linkedin.com/posts/mohammad-shaukat-ali-803740144_pfas-bioinformatics-structuralbiology-ugcPost-7508477058717556736-ILG3/"
+  },
+  {
+    "title": "Eva Højgaard Jensen leads new preprint on the first TFA-degrading microbial consortium",
+    "date": "2026-10-12",
+    "category": "Preprint",
+    "description": "Building on her MSc thesis, Eva and colleagues report a five-member microbial consortium that defluorinates trifluoroacetate (TFA) stepwise to difluoroacetate and then monofluoroacetate, confirmed by ¹⁹F-NMR and a fluoride ion-selective electrode. Genome sequencing identified two candidate dehalogenase enzymes now being validated.",
+    "image": "Data/1_People/7_Alumni/eva-hojgaard-jensen.webp",
+    "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_tfa-pfas-pfas-share-7515628748386328578--aaZ/"
   }
 ];
 // The four "What We Do" pillar cards on the Home page.
