@@ -380,7 +380,7 @@ const MGB_TOOLS        = [
     "public": false,
     "zenodoPending": true,
     "doiPending": true,
-    "status": "Private Repository (Public Release Coming Soon)",
+    "status": "Public Release Coming Soon",
     "tags": ["PFAS", "HADs", "Molecular Dynamics"]
   },
   {
@@ -390,7 +390,7 @@ const MGB_TOOLS        = [
     "public": false,
     "zenodoPending": true,
     "doiPending": true,
-    "status": "Private Repository (Public Release Coming Soon)",
+    "status": "Public Release Coming Soon",
     "tags": ["TFA", "Genomics", "AI"]
   }
 ];
@@ -1415,19 +1415,19 @@ window.renderTools = function() {
   grid.innerHTML = MGB_TOOLS.map(t => {
     const links = [];
     if (t.public) {
-      links.push(`<a href='${esc(t.link)}' target='_blank' rel='noopener' class='tool-link'><i class='fab fa-github' aria-hidden='true'></i> GitHub</a>`);
+      links.push(`<a href='${esc(t.link)}' target='_blank' rel='noopener' class='tool-link' data-tip='GitHub'><i class='fab fa-github' aria-hidden='true'></i></a>`);
     } else {
-      links.push(`<span class='tool-link tool-link-disabled' data-tip='Private Repository'><i class='fab fa-github' aria-hidden='true'></i> GitHub</span>`);
+      links.push(`<span class='tool-link tool-link-disabled' data-tip='Private Repository'><i class='fab fa-github' aria-hidden='true'></i></span>`);
     }
     if (t.zenodo) {
-      links.push(`<a href='${esc(t.zenodo)}' target='_blank' rel='noopener' class='tool-link'><img src='${esc(adjustPath('Data/2_Images/zenodo-badge.svg'))}' alt='' class='tool-link-logo'> Zenodo</a>`);
+      links.push(`<a href='${esc(t.zenodo)}' target='_blank' rel='noopener' class='tool-link' data-tip='Zenodo'><img src='${esc(adjustPath('Data/2_Images/zenodo-badge.svg'))}' alt='Zenodo' class='tool-link-logo tool-link-logo-wide'></a>`);
     } else if (t.zenodoPending) {
-      links.push(`<span class='tool-link tool-link-disabled' data-tip='Zenodo record coming soon'><img src='${esc(adjustPath('Data/2_Images/zenodo-badge.svg'))}' alt='' class='tool-link-logo'> Zenodo</span>`);
+      links.push(`<span class='tool-link tool-link-disabled' data-tip='Zenodo record coming soon'><img src='${esc(adjustPath('Data/2_Images/zenodo-badge.svg'))}' alt='Zenodo' class='tool-link-logo tool-link-logo-wide'></span>`);
     }
     if (t.doi) {
-      links.push(`<a href='https://doi.org/${esc(t.doi)}' target='_blank' rel='noopener' class='tool-link'><img src='${esc(adjustPath('Data/2_Images/doi-badge.png'))}' alt='' class='tool-link-logo tool-link-logo-round'> DOI</a>`);
+      links.push(`<a href='https://doi.org/${esc(t.doi)}' target='_blank' rel='noopener' class='tool-link' data-tip='DOI'><img src='${esc(adjustPath('Data/2_Images/doi-badge.png'))}' alt='DOI' class='tool-link-logo tool-link-logo-round'></a>`);
     } else if (t.doiPending) {
-      links.push(`<span class='tool-link tool-link-disabled' data-tip='DOI coming soon'><img src='${esc(adjustPath('Data/2_Images/doi-badge.png'))}' alt='' class='tool-link-logo tool-link-logo-round'> DOI</span>`);
+      links.push(`<span class='tool-link tool-link-disabled' data-tip='DOI coming soon'><img src='${esc(adjustPath('Data/2_Images/doi-badge.png'))}' alt='DOI' class='tool-link-logo tool-link-logo-round'></span>`);
     }
     return `
     <div class='card-academic tool-card' data-reveal>
@@ -1451,18 +1451,13 @@ window.renderTools = function() {
 // loop wraps without a visible jump), just driven by real scrollTop
 // instead of a CSS transform, so a visitor's own wheel/touch scroll works
 // natively and pauses the rotation for a few seconds instead of fighting it.
-window.renderNews = function() {
-  if (typeof MGB_NEWS === 'undefined') return;
-  const container = document.getElementById('news-container');
-  if (!container) return;
-  const sorted = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
-  if (sorted.length === 0) return;
-
-  const entryHtml = n => {
-    const tag = n.link ? 'a' : 'div';
-    const openAttrs = n.link ? ` href='${esc(n.link)}' target='_blank' rel='noopener'` : '';
-    return `
-    <${tag} class='news-entry'${openAttrs}>
+// newsEntryHtml is shared with renderNewsAll below (the "See all" page),
+// so both render the exact same card markup.
+function newsEntryHtml(n) {
+  const tag = n.link ? 'a' : 'div';
+  const openAttrs = n.link ? ` href='${esc(n.link)}' target='_blank' rel='noopener'` : '';
+  return `
+    <${tag} class='news-entry'${openAttrs} data-reveal>
       ${n.image ? `<img src='${esc(adjustPath(n.image))}' alt='' class='news-avatar' loading='lazy'>` : ''}
       <div class='news-body'>
         <div class='news-meta'><span class='badge'>${esc(n.category)}</span><span class='news-date'>${esc(n.date)}</span></div>
@@ -1471,15 +1466,32 @@ window.renderNews = function() {
       </div>
     </${tag}>
   `;
-  };
+}
+window.renderNews = function() {
+  if (typeof MGB_NEWS === 'undefined') return;
+  const container = document.getElementById('news-container');
+  if (!container) return;
+  const sorted = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+  if (sorted.length === 0) return;
 
   container.classList.add('news-ticker');
   container.innerHTML = `
-    <div class='news-ticker-set'>${sorted.map(entryHtml).join('')}</div>
-    <div class='news-ticker-set news-ticker-clone' aria-hidden='true'>${sorted.map(entryHtml).join('')}</div>
+    <div class='news-ticker-set'>${sorted.map(newsEntryHtml).join('')}</div>
+    <div class='news-ticker-set news-ticker-clone' aria-hidden='true'>${sorted.map(newsEntryHtml).join('')}</div>
   `;
   if (window.initScrollReveal) window.initScrollReveal();
   initNewsAutoScroll(container);
+}
+
+// 11c. News "See all" page: every item, newest first, as a plain vertical
+// list rather than the ticker's auto-scrolling, fixed-height box.
+window.renderNewsAll = function() {
+  if (typeof MGB_NEWS === 'undefined') return;
+  const container = document.getElementById('news-all-container');
+  if (!container) return;
+  const sorted = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+  container.innerHTML = sorted.map(newsEntryHtml).join('');
+  if (window.initScrollReveal) window.initScrollReveal();
 }
 
 // 11b. Drives the News ticker's auto-scroll: nudges scrollTop forward on a
@@ -1706,34 +1718,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ----------------------------------------------------------------
 // 15. Single-page scroll routing
-// All page sections live on one continuous page. #blog-post is the
-// one exception: an overlay reached by clicking a blog card, not a
-// section you scroll to. Nav links smooth-scroll to their section,
-// and a scroll-spy keeps the matching nav link highlighted as the
-// visitor scrolls past each section.
+// All page sections live on one continuous page. A .page-overlay (the
+// single Blog Post view, and the News "See all" list) is the exception:
+// reached by clicking a blog card or the "See all" link, not a section you
+// scroll to. Nav links smooth-scroll to their section, and a scroll-spy
+// keeps the matching nav link highlighted as the visitor scrolls past
+// each section.
 // ----------------------------------------------------------------
+// An overlay key maps to the nav link it should highlight while open,
+// since every other section is hidden and the scroll-spy below has
+// nothing to react to. News "See all" has no nav link of its own, so it
+// highlights Projects (the section its "See all" link lives in).
+const OVERLAY_NAV_HASH = { 'blog-post': '#blogs', 'news-all': '#projects' };
 function handleRouting() {
   const hash = window.location.hash || '#home';
   const key = hash.substring(1);
   document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
-  if (key === 'blog-post') {
-    const target = document.getElementById('page-blog-post');
-    if (target) target.classList.add('active');
-    document.body.classList.add('viewing-blog-post');
+  const target = document.getElementById('page-' + key);
+  if (target && target.classList.contains('page-overlay')) {
+    target.classList.add('active');
+    document.body.classList.add('viewing-overlay');
     window.scrollTo({ top: 0, behavior: 'instant' });
-    // Every other section is hidden while viewing a single post, so the
-    // scroll-spy IntersectionObserver below has nothing to react to. Set
-    // the nav highlight to Blogs explicitly instead of leaving whatever
-    // section happened to be active before landing here.
-    document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#blogs'));
+    const navHash = OVERLAY_NAV_HASH[key];
+    if (navHash) document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === navHash));
     return;
   }
-  document.body.classList.remove('viewing-blog-post');
+  document.body.classList.remove('viewing-overlay');
   // A blog post's ?id=<slug> has no meaning outside #blog-post - drop it
   // rather than let it linger in the address bar once the visitor moves
   // on to any other section.
   if (window.location.search) history.replaceState(null, '', window.location.pathname + hash);
-  const target = document.getElementById('page-' + key);
   if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
   else window.scrollTo({ top: 0, behavior: 'instant' });
 }
@@ -1757,18 +1771,17 @@ function initSectionNav() {
     if (!a) return;
     const hash = a.getAttribute('href');
     const key = hash.substring(1);
-    if (key === 'blog-post' || !key) return;
     const target = document.getElementById('page-' + key);
-    if (!target) return;
+    if (!key || !target || target.classList.contains('page-overlay')) return;
     e.preventDefault();
     // pathname, not just hash - a lingering ?id=<slug> from a blog post has
     // no meaning once the visitor navigates to any other section.
     history.pushState(null, '', window.location.pathname + hash);
-    // Leaving a single-post view (e.g. the "Back to Blog" link) needs to
-    // clear the state handleRouting() would otherwise clear, since pushState
-    // does not fire hashchange and so never runs handleRouting() itself.
-    document.body.classList.remove('viewing-blog-post');
-    document.getElementById('page-blog-post')?.classList.remove('active');
+    // Leaving an overlay (e.g. the "Back to Blog"/"Back to home" link) needs
+    // to clear the state handleRouting() would otherwise clear, since
+    // pushState does not fire hashchange and so never runs handleRouting().
+    document.body.classList.remove('viewing-overlay');
+    document.querySelectorAll('.page-overlay.active').forEach(el => el.classList.remove('active'));
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
   });
@@ -1793,7 +1806,7 @@ function initSectionNav() {
   // bottom, overriding the observer.
   const lastSection = sections[sections.length - 1];
   window.addEventListener('scroll', () => {
-    if (document.body.classList.contains('viewing-blog-post')) return;
+    if (document.body.classList.contains('viewing-overlay')) return;
     const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
     if (!atBottom) return;
     const hash = '#' + lastSection.id.replace('page-', '');

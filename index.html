@@ -222,7 +222,10 @@
           <button type="button" class="scroll-more-btn" id="projects-scroll-more" aria-label="Scroll for more projects" data-tip="Scroll More"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
         </div>
         <div class="news-col">
-          <h2 class="section-title" style="margin-bottom:16px;">News</h2>
+          <div class="section-header-flex" style="margin-bottom:16px;">
+            <h2 class="section-title" style="margin-bottom:0;">News</h2>
+            <a href="#news-all" class="text-link">See all &rarr;</a>
+          </div>
           <div id="news-container"></div>
         </div>
       </div>
@@ -307,14 +310,25 @@
     </section>
   </div>
 
-  <!-- BLOG POST: hidden by default (see #page-blog-post rules in styles.css).
+  <!-- BLOG POST: hidden by default (see .page-overlay rules in styles.css).
        Reached by clicking a blog card, which sets the URL to
        ?id=<slug>#blog-post; scripts.js reads that slug and renders the
-       matching post here. This is the one page that works like a normal
-       link instead of a scroll-to section. -->
-  <div id="page-blog-post" class="page-view">
+       matching post here. An overlay, like NEWS (ALL) below, rather than
+       a scroll-to section. -->
+  <div id="page-blog-post" class="page-view page-overlay">
     <section class="page-section">
       <div id="blog-post-container"></div>
+    </section>
+  </div>
+
+  <!-- NEWS (ALL): hidden by default, reached via the "See all" link next to
+       the News ticker's heading. Lists every news item in full, as a
+       vertical list rather than the auto-scrolling ticker. -->
+  <div id="page-news-all" class="page-view page-overlay">
+    <section class="page-section">
+      <a href="#home" class="text-link">&larr; Back to home</a>
+      <h2 class="section-title" style="margin:16px 0 24px;">News</h2>
+      <div id="news-all-container" class="news-all-list"></div>
     </section>
   </div>
 
@@ -357,6 +371,7 @@
       if (window.renderTools) window.renderTools();
       if (window.renderPublications) window.renderPublications();
       if (window.renderNews) window.renderNews();
+      if (window.renderNewsAll) window.renderNewsAll();
       if (window.initJoinForm) window.initJoinForm();
 
       window.MGB_DATA_READY.then(() => {

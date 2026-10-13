@@ -885,11 +885,16 @@ a:hover { color: var(--accent-hover); }
 .tool-card:hover h3 { color: var(--accent); }
 .tool-card-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
 .tool-card-header h3 { margin-bottom: 0; }
-.tool-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.tool-link { font-size: 13px; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border: 1px solid var(--border); border-radius: var(--radius-md); }
-.tool-link:hover { color: var(--accent-hover); border-color: var(--accent); }
-.tool-link-disabled { color: var(--faint); cursor: not-allowed; }
-.tool-link-logo { height: 14px; width: auto; display: block; }
+.tool-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+/* Icon-only buttons - the logo (GitHub mark, Zenodo badge, DOI badge)
+   speaks for itself, so no text label is needed; data-tip carries the
+   name for anyone hovering or who needs it spelled out. */
+.tool-link { font-size: 19px; color: var(--accent); display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-md); }
+.tool-link:hover { color: var(--accent-hover); }
+.tool-link-disabled { color: var(--faint); cursor: not-allowed; opacity: 0.55; }
+.tool-link-logo { height: 18px; width: auto; display: block; }
+.tool-link-logo-wide { height: 16px; }
+.tool-link-logo-round { height: 20px; }
 /* Finished projects hover in red instead of the usual accent teal, so a
    glance at the hover colour tells active and wrapped-up projects apart. */
 .card-project-finished:hover { border-color: var(--danger); box-shadow: var(--shadow-md); }
@@ -1035,6 +1040,12 @@ a:hover { color: var(--accent-hover); }
 .news-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .news-body { min-width: 0; flex: 1; }
 .news-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; text-align: justify; }
+/* News "See all" page: the same .news-entry cards as the ticker, as a
+   plain vertical list on a readable column width instead of a fixed-height
+   auto-scrolling box. */
+.news-all-list { max-width: 720px; margin: 0 auto; }
+.news-all-list .news-entry { padding: 20px 22px; }
+.news-all-list .news-avatar { width: 56px; height: 56px; }
 
 /* ----------------------------------------------------------------
    9. BLOG
@@ -1322,18 +1333,20 @@ footer .logo-lockup { height: 24px; }
   transform: translateY(-50%) translateX(-8px);
 }
 
-/* Page router: only one page-view section is visible at a time */
+/* Page router: only one page-view section is visible at a time. A
+   .page-overlay (the single Blog Post view, and News "See all") is hidden
+   until explicitly opened, rather than being a section you scroll to. */
 .page-view { display: block; scroll-margin-top: 76px; }
-.page-view + .page-view:not(#page-blog-post) > .page-section:first-child { border-top: 2px solid var(--divider); }
-#page-blog-post { display: none; }
-#page-blog-post.active { display: block; }
-/* Opening a single blog post (e.g. from a shared link) hides every other
-   section, so the post reads as its own page instead of sitting buried
-   partway down the full scroll. */
-body.viewing-blog-post .page-view:not(#page-blog-post) { display: none; }
-/* handleRouting() scrolls straight to the very top of the document for this
-   page. Unlike every other section, which relies on scroll-margin-top
+.page-view + .page-view:not(.page-overlay) > .page-section:first-child { border-top: 2px solid var(--divider); }
+.page-overlay { display: none; }
+.page-overlay.active { display: block; }
+/* Opening an overlay (e.g. from a shared blog-post link, or News "See all")
+   hides every other section, so it reads as its own page instead of
+   sitting buried partway down the full scroll. */
+body.viewing-overlay .page-view:not(.active) { display: none; }
+/* handleRouting() scrolls straight to the very top of the document for an
+   overlay. Unlike every other section, which relies on scroll-margin-top
    because it's scrolled INTO view, this needs its own explicit top
-   padding to clear the fixed navbar, or its content (the "Back to Blog"
-   row) renders underneath the bar. */
-#page-blog-post > .page-section { padding-top: 72px; }
+   padding to clear the fixed navbar, or its content (the "Back" row)
+   renders underneath the bar. */
+.page-overlay > .page-section { padding-top: 72px; }
