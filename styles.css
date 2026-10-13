@@ -1338,6 +1338,15 @@ footer .logo-lockup { height: 24px; }
   bottom: auto; left: auto; top: 50%; right: 100%;
   transform: translateY(-50%) translateX(-8px);
 }
+/* Tool card link buttons sit at the very top of each card, right under
+   the header row. The default upward-popping tooltip gets clipped by
+   .tools-panel .scrollable-list's overflow-y:auto for any card in the
+   first row (nothing above it to escape into) - popping downward instead
+   keeps it inside the card's own box regardless of row. */
+.tool-card-links [data-tip]::after {
+  bottom: auto; top: 100%;
+  transform: translateY(6px) translateX(-50%);
+}
 
 /* Page router: only one page-view section is visible at a time. A
    .page-overlay (the single Blog Post view, and News "See all") is hidden
