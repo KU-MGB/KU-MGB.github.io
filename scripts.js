@@ -1413,12 +1413,14 @@ window.renderTools = function() {
   const grid = document.createElement('div');
   grid.className = 'project-grid';
   grid.innerHTML = MGB_TOOLS.map(t => {
+    // GitHub link and repo-status badge are the same fact (the repo IS
+    // what's public or private), so they render as one combined badge
+    // rather than a separate icon button plus a separate status badge.
+    const statusText = esc(t.status || 'On GitHub');
+    const githubBadge = t.public
+      ? `<a href='${esc(t.link)}' target='_blank' rel='noopener' class='badge badge-fg tool-status-link'><i class='fab fa-github' aria-hidden='true'></i> ${statusText}</a>`
+      : `<span class='badge badge-fg tool-status-link tool-link-disabled' data-tip='Private Repository'><i class='fab fa-github' aria-hidden='true'></i> ${statusText}</span>`;
     const links = [];
-    if (t.public) {
-      links.push(`<a href='${esc(t.link)}' target='_blank' rel='noopener' class='tool-link' data-tip='GitHub'><i class='fab fa-github' aria-hidden='true'></i></a>`);
-    } else {
-      links.push(`<span class='tool-link tool-link-disabled' data-tip='Private Repository'><i class='fab fa-github' aria-hidden='true'></i></span>`);
-    }
     if (t.zenodo) {
       links.push(`<a href='${esc(t.zenodo)}' target='_blank' rel='noopener' class='tool-link' data-tip='Zenodo'><img src='${esc(adjustPath('Data/2_Images/zenodo-badge.svg'))}' alt='Zenodo' class='tool-link-logo tool-link-logo-wide'></a>`);
     } else if (t.zenodoPending) {
@@ -1434,8 +1436,8 @@ window.renderTools = function() {
       <div class='tool-card-header'>
         <h3>${esc(t.name)}</h3>
         <div class='tool-card-links'>
+          ${githubBadge}
           ${links.join('')}
-          <span class='badge badge-fg'>${esc(t.status || 'On GitHub')}</span>
         </div>
       </div>
       <p>${esc(t.description)}</p>

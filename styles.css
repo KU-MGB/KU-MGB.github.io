@@ -886,12 +886,18 @@ a:hover { color: var(--accent-hover); }
 .tool-card-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
 .tool-card-header h3 { margin-bottom: 0; }
 .tool-card-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-/* Icon-only buttons - the logo (GitHub mark, Zenodo badge, DOI badge)
-   speaks for itself, so no text label is needed; data-tip carries the
-   name for anyone hovering or who needs it spelled out. */
+/* The GitHub icon and repo-status text share one badge (the status IS the
+   repo's), with an icon and gap matching the icon-only Zenodo/DOI buttons
+   beside it so all three line up visually. */
+.tool-status-link { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.tool-status-link:hover { border-color: var(--accent); color: var(--accent); }
+/* Icon-only buttons - the logo (Zenodo badge, DOI badge) speaks for
+   itself, so no text label is needed; data-tip carries the name for
+   anyone hovering or who needs it spelled out. */
 .tool-link { font-size: 19px; color: var(--accent); display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-md); }
 .tool-link:hover { color: var(--accent-hover); }
 .tool-link-disabled { color: var(--faint); cursor: not-allowed; opacity: 0.55; }
+.tool-link-disabled:hover { border-color: var(--border); color: var(--faint); }
 .tool-link-logo { height: 18px; width: auto; display: block; }
 .tool-link-logo-wide { height: 16px; }
 .tool-link-logo-round { height: 20px; }
