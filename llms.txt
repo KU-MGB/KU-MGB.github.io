@@ -38,10 +38,10 @@ of cleaving the carbon-fluorine bond.
   fluoroacetate dehalogenase (FAcD) variants for PFAS defluorination, combining
   AI-driven modelling with physics-aware validation (WaterMap, molecular
   dynamics, QM/MM). GitHub: https://github.com/KU-MGB/DeFluorX
-- **HADefluorX** — Companion pipeline covering Haloacid Dehalogenases (HADs),
+- **HADeFluorX** — Companion pipeline covering Haloacid Dehalogenases (HADs),
   applying the same AI-driven screening to identify HAD variants capable of
   cleaving the carbon-fluorine bond.
-  GitHub: https://github.com/KU-MGB/HADefluorX (private, public release pending)
+  GitHub: https://github.com/KU-MGB/HADeFluorX/ (private, public release pending)
 - **GenDeFluorX** — Screens in-house-sequenced bacterial whole genomes against
   trifluoroacetate (TFA) to pinpoint the enzyme responsible for its
   defluorination.

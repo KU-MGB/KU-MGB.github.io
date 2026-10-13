@@ -359,7 +359,7 @@ const MGB_PROJECTS     = [
     "tags": ["PFAS", "Genetics", "Danmarks Frie Forskningsfond"]
   }
 ];
-// In-house computational tools, shown on the Tools page. HADefluorX and
+// In-house computational tools, shown on the Tools page. HADeFluorX and
 // GenDeFluorX are still private while under development; their links are
 // kept live so they start working the moment each repo is made public.
 const MGB_TOOLS        = [
@@ -373,9 +373,9 @@ const MGB_TOOLS        = [
     "tags": ["PFAS", "Enzyme Discovery", "AI"]
   },
   {
-    "name": "HADefluorX",
+    "name": "HADeFluorX",
     "description": "A companion pipeline covering Haloacid Dehalogenases (HADs), applying the same AI-driven screening and physics-aware validation to identify and prioritise HAD variants capable of cleaving the carbon–fluorine bond.",
-    "link": "https://github.com/KU-MGB/HADefluorX",
+    "link": "https://github.com/KU-MGB/HADeFluorX/",
     "status": "Private repository (public release coming soon)",
     "tags": ["PFAS", "HADs", "Molecular Dynamics"]
   },
