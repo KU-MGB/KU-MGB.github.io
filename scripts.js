@@ -579,6 +579,14 @@ function esc(s) {
   return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+// Escapes text for safe HTML output, same as esc(), but also turns any
+// [label](url) markdown link into a real anchor - used for bios, where a
+// person's full text otherwise goes through esc() as plain text with no
+// markdown rendering at all.
+function escWithLinks(s) {
+  return esc(s).replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, url) => `<a href='${url}' target='_blank' rel='noopener'>${label}</a>`);
+}
+
 // Formats an ISO "YYYY-MM-DD" date (the format stored in post.json and used
 // for sorting) as "10 Jun 2025" for display. Parsed manually rather than via
 // `new Date(iso)`, which interprets a bare date as UTC midnight and can then
@@ -1009,8 +1017,8 @@ window.renderPeople = function() {
               ${personLinksHtml(p, fullLinks)}
             </div>
             ${fullBio ? `
-            <p class='profile-bio profile-bio-short'>${esc(shortBio)}${isLong ? ` <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}</p>
-            ${isLong ? `<p class='profile-bio profile-bio-full'>${esc(fullBio)} <button type='button' class='text-link profile-bio-toggle' aria-expanded='true'>Show less &uarr;</button></p>` : ''}` : ''}
+            <p class='profile-bio profile-bio-short'>${escWithLinks(shortBio)}${isLong ? ` <button type='button' class='text-link profile-bio-toggle' aria-expanded='false'>Read more &rarr;</button>` : ''}</p>
+            ${isLong ? `<p class='profile-bio profile-bio-full'>${escWithLinks(fullBio)} <button type='button' class='text-link profile-bio-toggle' aria-expanded='true'>Show less &uarr;</button></p>` : ''}` : ''}
             ${p.tags && p.tags.length ? `<div class='profile-chips'>${p.tags.slice(0, 3).map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
           </div>
         `;
