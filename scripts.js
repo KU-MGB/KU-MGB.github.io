@@ -284,6 +284,13 @@ const MGB_NEWS         = [
     "link": "https://www.linkedin.com/posts/mohammad-shaukat-ali-803740144_pfas-bioinformatics-structuralbiology-ugcPost-7508477058717556736-ILG3/"
   },
   {
+    "title": "MGB Lab presents four talks at the first Environmental Pollutants conference (ENVP)",
+    "date": "2026-10-06",
+    "category": "Conference",
+    "description": "Eva Højgaard Jensen presented her discovery of TFA-degrading microorganisms, Asal Forouzandeh presented a new evidence hierarchy for PFAS degradation studies, Shaban Ahmad presented a large-scale protein-ligand study of fluoroacetate dehalogenases, and Sofie Linnea Bollen presented her work on cyanobacteria-PFAS interactions.",
+    "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_the-microbial-genomics-and-biodegradation-ugcPost-7510643345937932290-RpH-/"
+  },
+  {
     "title": "Eva Højgaard Jensen leads new preprint on the first TFA-degrading microbial consortium",
     "date": "2026-10-12",
     "category": "Preprint",
