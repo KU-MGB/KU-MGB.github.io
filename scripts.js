@@ -410,6 +410,7 @@ const MGB_GLOSSARY      = {
   "IS Elements": "Insertion sequences, small mobile genetic elements that can move within or between genomes, often disrupting or regulating nearby genes.",
   "Machine Learning": "Computational methods that learn patterns from data to make predictions, without being explicitly programmed for each task.",
   "Metagenomics": "The study of genetic material recovered directly from environmental samples, without the need to culture individual organisms.",
+  "Microbial Consortium": "A group of different microbial species growing together, often combining complementary metabolic abilities to carry out a task, such as degradation, that no single species manages alone.",
   "Microbial Evolution": "The study of how microbial populations and genomes change over time under selective pressures.",
   "Mobile Genetic Elements": "DNA sequences, such as plasmids, transposons, and phages, capable of moving within or between genomes.",
   "Mobilome": "The complete set of mobile genetic elements within a genome or microbial community.",
