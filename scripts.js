@@ -367,23 +367,30 @@ const MGB_TOOLS        = [
     "name": "DeFluorX",
     "description": "An automated, fully reproducible pipeline that identifies and prioritises fluoroacetate dehalogenase (FAcD) variants for PFAS defluorination, combining AI-driven modelling with physics-aware validation via WaterMap, molecular dynamics simulations, and QM/MM calculations.",
     "link": "https://github.com/KU-MGB/DeFluorX",
+    "public": true,
     "zenodo": "https://zenodo.org/doi/10.5281/zenodo.23318610",
     "doiPending": true,
-    "status": "Public repository",
+    "status": "Public Repository",
     "tags": ["PFAS", "Enzyme Discovery", "AI"]
   },
   {
     "name": "HADeFluorX",
     "description": "A companion pipeline covering Haloacid Dehalogenases (HADs), applying the same AI-driven screening and physics-aware validation to identify and prioritise HAD variants capable of cleaving the carbon–fluorine bond.",
     "link": "https://github.com/KU-MGB/HADeFluorX/",
-    "status": "Private repository (public release coming soon)",
+    "public": false,
+    "zenodoPending": true,
+    "doiPending": true,
+    "status": "Private Repository (Public Release Coming Soon)",
     "tags": ["PFAS", "HADs", "Molecular Dynamics"]
   },
   {
     "name": "GenDeFluorX",
     "description": "A third pipeline in the same family, screening 10 in-house-sequenced bacterial whole genomes against trifluoroacetate (TFA) to pinpoint the enzyme responsible for its defluorination, a capability already confirmed by lab data.",
     "link": "https://github.com/KU-MGB/GenDeFluorX",
-    "status": "Private repository (public release coming soon)",
+    "public": false,
+    "zenodoPending": true,
+    "doiPending": true,
+    "status": "Private Repository (Public Release Coming Soon)",
     "tags": ["TFA", "Genomics", "AI"]
   }
 ];
@@ -1393,8 +1400,11 @@ window.renderProjects = function() {
   initScrollMore('projects-container', 'projects-scroll-more');
 }
 
-// 10b. Tools renderer: each card links straight to the tool's GitHub repo
-// (currently private, so the link 404s for visitors until it's made public).
+// 10b. Tools renderer: every card shows the same three link buttons
+// (GitHub, Zenodo, DOI). Each renders as a live link once that resource
+// exists, or a disabled, unclickable placeholder until it does - a
+// private repo has no public GitHub link yet, and a tool not yet on
+// Zenodo has no DOI to link either.
 window.renderTools = function() {
   if (typeof MGB_TOOLS === 'undefined') return;
   const container = document.getElementById('tools-container');
@@ -1403,28 +1413,28 @@ window.renderTools = function() {
   const grid = document.createElement('div');
   grid.className = 'project-grid';
   grid.innerHTML = MGB_TOOLS.map(t => {
-    // Tools with only a GitHub link stay a single clickable card, same as
-    // before. A tool also archived on Zenodo (or with a DOI pending) gets
-    // a div card with its own row of separate link buttons instead, since
-    // an <a> can't nest other links.
-    if (!t.zenodo && !t.doi && !t.doiPending) {
-      return `
-    <a href='${esc(t.link)}' target='_blank' rel='noopener' class='card-academic tool-card' data-reveal>
-      <span class='badge badge-fg' style='margin-bottom:10px;'><i class='fab fa-github' aria-hidden='true'></i> ${esc(t.status || 'On GitHub')}</span>
-      <h3>${esc(t.name)}</h3>
-      <p>${esc(t.description)}</p>
-      ${t.tags ? `<div class='chip-container'>${t.tags.map(tag => `<span class='chip chip-muted'>${esc(tag)}</span>`).join('')}</div>` : ''}
-      <span class='text-link' style='margin-top:10px; display:inline-block;'>View on GitHub &rarr;</span>
-    </a>`;
+    const links = [];
+    if (t.public) {
+      links.push(`<a href='${esc(t.link)}' target='_blank' rel='noopener' class='tool-link'><i class='fab fa-github' aria-hidden='true'></i> GitHub</a>`);
+    } else {
+      links.push(`<span class='tool-link tool-link-disabled' data-tip='Private Repository'><i class='fab fa-github' aria-hidden='true'></i> GitHub</span>`);
     }
-    const links = [`<a href='${esc(t.link)}' target='_blank' rel='noopener' class='tool-link'><i class='fab fa-github' aria-hidden='true'></i> GitHub</a>`];
-    if (t.zenodo) links.push(`<a href='${esc(t.zenodo)}' target='_blank' rel='noopener' class='tool-link'><i class='fas fa-box-archive' aria-hidden='true'></i> Zenodo</a>`);
-    if (t.doi) links.push(`<a href='https://doi.org/${esc(t.doi)}' target='_blank' rel='noopener' class='tool-link'><i class='fas fa-fingerprint' aria-hidden='true'></i> DOI</a>`);
-    else if (t.doiPending) links.push(`<span class='tool-link tool-link-disabled' data-tip='DOI coming soon'><i class='fas fa-fingerprint' aria-hidden='true'></i> DOI</span>`);
+    if (t.zenodo) {
+      links.push(`<a href='${esc(t.zenodo)}' target='_blank' rel='noopener' class='tool-link'><img src='${esc(adjustPath('Data/2_Images/zenodo-badge.svg'))}' alt='' class='tool-link-logo'> Zenodo</a>`);
+    } else if (t.zenodoPending) {
+      links.push(`<span class='tool-link tool-link-disabled' data-tip='Zenodo record coming soon'><img src='${esc(adjustPath('Data/2_Images/zenodo-badge.svg'))}' alt='' class='tool-link-logo'> Zenodo</span>`);
+    }
+    if (t.doi) {
+      links.push(`<a href='https://doi.org/${esc(t.doi)}' target='_blank' rel='noopener' class='tool-link'><img src='${esc(adjustPath('Data/2_Images/doi-badge.png'))}' alt='' class='tool-link-logo tool-link-logo-round'> DOI</a>`);
+    } else if (t.doiPending) {
+      links.push(`<span class='tool-link tool-link-disabled' data-tip='DOI coming soon'><img src='${esc(adjustPath('Data/2_Images/doi-badge.png'))}' alt='' class='tool-link-logo tool-link-logo-round'> DOI</span>`);
+    }
     return `
     <div class='card-academic tool-card' data-reveal>
-      <span class='badge badge-fg' style='margin-bottom:10px;'><i class='fab fa-github' aria-hidden='true'></i> ${esc(t.status || 'On GitHub')}</span>
-      <h3>${esc(t.name)}</h3>
+      <div class='tool-card-header'>
+        <h3>${esc(t.name)}</h3>
+        <span class='badge badge-fg'><i class='fab fa-github' aria-hidden='true'></i> ${esc(t.status || 'On GitHub')}</span>
+      </div>
       <p>${esc(t.description)}</p>
       ${t.tags ? `<div class='chip-container'>${t.tags.map(tag => `<span class='chip chip-muted'>${esc(tag)}</span>`).join('')}</div>` : ''}
       <div class='tool-links'>${links.join('')}</div>

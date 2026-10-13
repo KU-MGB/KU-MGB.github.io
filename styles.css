@@ -878,16 +878,18 @@ a:hover { color: var(--accent-hover); }
 .card-academic:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
 .card-academic h3 { font-family: var(--sans); font-size: 16px; margin-bottom: 6px; }
 .card-academic p { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; text-align: justify; }
-/* Tool cards are whole-card links (to each tool's GitHub repo) when that's
-   their only link; a tool also archived on Zenodo (or with a DOI) gets its
-   own row of separate link buttons instead (.tool-links), since an <a>
-   can't nest other links. */
-.tool-card { display: block; color: inherit; text-decoration: none; }
+/* Each tool card has its own row of link buttons (.tool-links) - GitHub,
+   Zenodo, DOI - rather than being a single whole-card link, since a repo,
+   Zenodo record, or DOI can each go live independently of the others. */
+.tool-card { color: inherit; }
 .tool-card:hover h3 { color: var(--accent); }
+.tool-card-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.tool-card-header h3 { margin-bottom: 0; }
 .tool-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .tool-link { font-size: 13px; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border: 1px solid var(--border); border-radius: var(--radius-md); }
 .tool-link:hover { color: var(--accent-hover); border-color: var(--accent); }
 .tool-link-disabled { color: var(--faint); cursor: not-allowed; }
+.tool-link-logo { height: 14px; width: auto; display: block; }
 /* Finished projects hover in red instead of the usual accent teal, so a
    glance at the hover colour tells active and wrapped-up projects apart. */
 .card-project-finished:hover { border-color: var(--danger); box-shadow: var(--shadow-md); }
