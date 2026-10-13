@@ -367,6 +367,8 @@ const MGB_TOOLS        = [
     "name": "DeFluorX",
     "description": "An automated, fully reproducible pipeline that identifies and prioritises fluoroacetate dehalogenase (FAcD) variants for PFAS defluorination, combining AI-driven modelling with physics-aware validation via WaterMap, molecular dynamics simulations, and QM/MM calculations.",
     "link": "https://github.com/KU-MGB/DeFluorX",
+    "zenodo": "https://zenodo.org/doi/10.5281/zenodo.23318610",
+    "doiPending": true,
     "status": "Public repository",
     "tags": ["PFAS", "Enzyme Discovery", "AI"]
   },
@@ -1400,15 +1402,34 @@ window.renderTools = function() {
 
   const grid = document.createElement('div');
   grid.className = 'project-grid';
-  grid.innerHTML = MGB_TOOLS.map(t => `
+  grid.innerHTML = MGB_TOOLS.map(t => {
+    // Tools with only a GitHub link stay a single clickable card, same as
+    // before. A tool also archived on Zenodo (or with a DOI pending) gets
+    // a div card with its own row of separate link buttons instead, since
+    // an <a> can't nest other links.
+    if (!t.zenodo && !t.doi && !t.doiPending) {
+      return `
     <a href='${esc(t.link)}' target='_blank' rel='noopener' class='card-academic tool-card' data-reveal>
       <span class='badge badge-fg' style='margin-bottom:10px;'><i class='fab fa-github' aria-hidden='true'></i> ${esc(t.status || 'On GitHub')}</span>
       <h3>${esc(t.name)}</h3>
       <p>${esc(t.description)}</p>
       ${t.tags ? `<div class='chip-container'>${t.tags.map(tag => `<span class='chip chip-muted'>${esc(tag)}</span>`).join('')}</div>` : ''}
       <span class='text-link' style='margin-top:10px; display:inline-block;'>View on GitHub &rarr;</span>
-    </a>
-  `).join('');
+    </a>`;
+    }
+    const links = [`<a href='${esc(t.link)}' target='_blank' rel='noopener' class='tool-link'><i class='fab fa-github' aria-hidden='true'></i> GitHub</a>`];
+    if (t.zenodo) links.push(`<a href='${esc(t.zenodo)}' target='_blank' rel='noopener' class='tool-link'><i class='fas fa-box-archive' aria-hidden='true'></i> Zenodo</a>`);
+    if (t.doi) links.push(`<a href='https://doi.org/${esc(t.doi)}' target='_blank' rel='noopener' class='tool-link'><i class='fas fa-fingerprint' aria-hidden='true'></i> DOI</a>`);
+    else if (t.doiPending) links.push(`<span class='tool-link tool-link-disabled' data-tip='DOI coming soon'><i class='fas fa-fingerprint' aria-hidden='true'></i> DOI</span>`);
+    return `
+    <div class='card-academic tool-card' data-reveal>
+      <span class='badge badge-fg' style='margin-bottom:10px;'><i class='fab fa-github' aria-hidden='true'></i> ${esc(t.status || 'On GitHub')}</span>
+      <h3>${esc(t.name)}</h3>
+      <p>${esc(t.description)}</p>
+      ${t.tags ? `<div class='chip-container'>${t.tags.map(tag => `<span class='chip chip-muted'>${esc(tag)}</span>`).join('')}</div>` : ''}
+      <div class='tool-links'>${links.join('')}</div>
+    </div>`;
+  }).join('');
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
