@@ -371,7 +371,7 @@ const MGB_TOOLS        = [
     "zenodo": "https://zenodo.org/doi/10.5281/zenodo.23318610",
     "doiPending": true,
     "status": "Public Repository",
-    "tags": ["PFAS", "Enzyme Discovery", "AI", "Dehalogenases", "Molecular Dynamics"]
+    "tags": ["PFAS", "AI", "Dehalogenases", "Molecular Dynamics"]
   },
   {
     "name": "HADeFluorX",
