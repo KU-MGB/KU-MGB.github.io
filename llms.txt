@@ -77,7 +77,7 @@ Full profiles: https://ku-mgb.github.io/#people
 
 ## Publications
 
-11 publications listed (2013-2026): 9 peer-reviewed and 2 bioRxiv preprints,
+12 publications listed (2013-2026): 9 peer-reviewed and 3 bioRxiv preprints,
 spanning PFAS and herbicide biodegradation, mobile genetic elements,
 bacteriophage genomics, and metagenomics. Full list with DOIs:
 https://ku-mgb.github.io/#publications

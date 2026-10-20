@@ -36,6 +36,26 @@
 
 const MGB_PUBLICATIONS = [
   {
+    "title": "Mechanism-guided Discovery of Fluoroacetate Dehalogenase (FAcD) Variants for Enzymatic PFAS Defluorination",
+    "year": 2026,
+    "venue": "bioRxiv",
+    "authors": [
+      "Shaban Ahmad",
+      "Asal Forouzandeh",
+      "Benedetta Togni",
+      "Jonas Borup Randløv",
+      "Michael Ogden",
+      "Tue Kjærgaard Nielsen"
+    ],
+    "tags": [
+      "PFAS",
+      "AI",
+      "Dehalogenases",
+      "Molecular Dynamics"
+    ],
+    "doi": "10.64898/2026.10.11.758284"
+  },
+  {
     "title": "TFA-defluorinating microbial consortium achieved with analogue enrichment",
     "year": 2026,
     "venue": "bioRxiv",
@@ -370,7 +390,7 @@ const MGB_TOOLS        = [
     "link": "https://github.com/KU-MGB/DeFluorX",
     "public": true,
     "zenodo": "https://zenodo.org/doi/10.5281/zenodo.23318610",
-    "doiPending": true,
+    "doi": "10.64898/2026.10.11.758284",
     "status": "Public Repository",
     "tags": ["PFAS", "AI", "Dehalogenases", "Molecular Dynamics"]
   },
