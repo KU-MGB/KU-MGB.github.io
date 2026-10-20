@@ -332,7 +332,8 @@ const MGB_NEWS         = [
     "date": "2026-10-16",
     "category": "Preprint",
     "description": "Shaban and colleagues describe DeFluorX, which co-folds thousands of fluoroacetate dehalogenase variants against PFAS with Boltz-2 and ranks them by defluorination geometry, identifying eight promising candidates confirmed by QM/MM.",
-    "image": "Data/1_People/2_Postdocs/shaban-ahmad.webp"
+    "image": "Data/1_People/2_Postdocs/shaban-ahmad.webp",
+    "link": "https://www.linkedin.com/posts/drshabanahmad_pfas-foreverchemicals-enzymes-share-7518269472038825984-3QNp/"
   }
 ];
 // The four "What We Do" pillar cards on the Home page.
