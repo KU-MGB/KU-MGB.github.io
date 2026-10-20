@@ -326,6 +326,13 @@ const MGB_NEWS         = [
     "description": "Building on her MSc thesis, Eva and colleagues report a five-member microbial consortium that defluorinates trifluoroacetate (TFA) stepwise to difluoroacetate and then monofluoroacetate, confirmed by ¹⁹F-NMR and a fluoride ion-selective electrode. Genome sequencing identified two candidate dehalogenase enzymes now being validated.",
     "image": "Data/1_People/7_Alumni/eva-hojgaard-jensen.webp",
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_tfa-pfas-pfas-share-7515628748386328578--aaZ/"
+  },
+  {
+    "title": "Shaban Ahmad leads new DeFluorX preprint on mechanism-guided PFAS enzyme discovery",
+    "date": "2026-10-16",
+    "category": "Preprint",
+    "description": "Shaban and colleagues describe DeFluorX, which co-folds thousands of fluoroacetate dehalogenase variants against PFAS with Boltz-2 and ranks them by defluorination geometry, identifying eight promising candidates confirmed by QM/MM.",
+    "image": "Data/1_People/2_Postdocs/shaban-ahmad.webp"
   }
 ];
 // The four "What We Do" pillar cards on the Home page.
