@@ -1448,7 +1448,7 @@ window.renderTools = function() {
     const statusText = esc(t.status || 'On GitHub');
     const githubBadge = t.public
       ? `<a href='${esc(t.link)}' target='_blank' rel='noopener' class='badge badge-fg tool-status-link' data-tip='GitHub'><i class='fab fa-github' aria-hidden='true'></i> ${statusText}</a>`
-      : `<span class='badge badge-fg tool-status-link tool-link-disabled' data-tip='GitHub'><i class='fab fa-github' aria-hidden='true'></i> ${statusText}</span>`;
+      : `<span class='badge badge-fg tool-status-link tool-link-disabled' data-tip='GitHub repository coming soon'><i class='fab fa-github' aria-hidden='true'></i> ${statusText}</span>`;
     const links = [];
     if (t.zenodo) {
       links.push(`<a href='${esc(t.zenodo)}' target='_blank' rel='noopener' class='tool-link' data-tip='Zenodo'><img src='${esc(adjustPath('Data/2_Images/zenodo-badge.svg'))}' alt='Zenodo' class='tool-link-logo tool-link-logo-wide'></a>`);
