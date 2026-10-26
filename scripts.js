@@ -336,7 +336,7 @@ const MGB_NEWS         = [
     "link": "https://www.linkedin.com/posts/drshabanahmad_pfas-foreverchemicals-enzymes-share-7518269472038825984-3QNp/"
   },
   {
-    "title": "MGB Lab presents DeFluorX at Ecotoxicomics 2026",
+    "title": "MGB Lab presents DeFluorX at EcotoxicoMic 2026",
     "date": "2026-10-15",
     "category": "Conference",
     "description": "Shaban presented the mechanism-first AI framework behind DeFluorX for discovering PFAS-degrading enzymes in Thessaloniki, Greece, joined by other MGB Lab members attending the conference.",
