@@ -334,6 +334,14 @@ const MGB_NEWS         = [
     "description": "Shaban and colleagues describe DeFluorX, which co-folds thousands of fluoroacetate dehalogenase variants against PFAS with Boltz-2 and ranks them by defluorination geometry, identifying eight promising candidates confirmed by QM/MM.",
     "image": "Data/1_People/2_Postdocs/shaban-ahmad.webp",
     "link": "https://www.linkedin.com/posts/drshabanahmad_pfas-foreverchemicals-enzymes-share-7518269472038825984-3QNp/"
+  },
+  {
+    "title": "MGB Lab presents DeFluorX at Ecotoxicomics 2026",
+    "date": "2026-10-15",
+    "category": "Conference",
+    "description": "Shaban presented the mechanism-first AI framework behind DeFluorX for discovering PFAS-degrading enzymes in Thessaloniki, Greece, joined by other MGB Lab members attending the conference.",
+    "image": "Data/2_Images/1_MGB_Lab_Fevicon.svg",
+    "link": "https://www.linkedin.com/feed/update/urn:li:activity:7520420396823670784/"
   }
 ];
 // The four "What We Do" pillar cards on the Home page.
