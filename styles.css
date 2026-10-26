@@ -552,6 +552,32 @@ a:hover { color: var(--accent-hover); }
   border: 1px solid var(--accent);
 }
 .badge.badge-fg { background: var(--bg-alt); color: var(--fg); border-color: var(--border); }
+/* "New" publication marker: a small pulsing pill ahead of the title, so a
+   recent preprint stands out while scanning the list. Pulse is subtle
+   (opacity only, no motion/flash) and turned off entirely for anyone who
+   has asked their OS to reduce motion. */
+.badge-new {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  margin-right: 2px;
+  border-radius: var(--radius-full);
+  background: var(--danger);
+  color: #fff;
+  vertical-align: middle;
+  animation: badge-new-pulse 2s ease-in-out infinite;
+}
+@keyframes badge-new-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge-new { animation: none; }
+}
 
 .btn-primary, .btn-outline {
   display: inline-flex;

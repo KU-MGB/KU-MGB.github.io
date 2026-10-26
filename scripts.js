@@ -39,6 +39,7 @@ const MGB_PUBLICATIONS = [
     "title": "Mechanism-guided Discovery of Fluoroacetate Dehalogenase (FAcD) Variants for Enzymatic PFAS Defluorination",
     "year": 2026,
     "venue": "bioRxiv",
+    "isNew": true,
     "authors": [
       "Shaban Ahmad",
       "Asal Forouzandeh",
@@ -59,6 +60,7 @@ const MGB_PUBLICATIONS = [
     "title": "TFA-defluorinating microbial consortium achieved with analogue enrichment",
     "year": 2026,
     "venue": "bioRxiv",
+    "isNew": true,
     "authors": [
       "Eva Højgaard Jensen",
       "Asal Forouzandeh",
@@ -1304,7 +1306,7 @@ window.renderPublications = function() {
         ${pub.venue ? `<span class='badge badge-fg pub-venue'>${esc(pub.venue)}</span>` : ''}
         ${pub.doi ? `<a href='https://doi.org/${esc(pub.doi)}' target='_blank' rel='noopener' class='badge badge-fg pub-doi'>https://doi.org/${esc(pub.doi)}</a>` : ''}
       </div>
-      <h3 class='pub-title'>${esc(pub.title)}</h3>
+      <h3 class='pub-title'>${pub.isNew ? `<span class='badge-new' data-tip='Published in the last two weeks'>New</span> ` : ''}${esc(pub.title)}</h3>
       ${pub.authors ? `<p class='pub-authors'>${esc(pub.authors.join(', '))}</p>` : ''}
       ${pub.tags ? `<div class='chip-container' style="margin-top:8px;">${pub.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     `;
@@ -1578,27 +1580,17 @@ function initNewsAutoScroll(box) {
   box.addEventListener('mouseleave', () => { clearTimeout(resumeTimer); paused = false; });
 }
 
-// 12. Group photo (People page). Tries a few common file extensions so it works
-// whatever format the file is, e.g. 0_People.jpg or 0_People.webp.
+// 12. Group photo (People page): a slideshow (same dots/autoplay/swipe as
+// the Home page one, via initSlideshow) cycling through MGB_PEOPLE_PHOTOS.
+const MGB_PEOPLE_PHOTOS = ['0_People.jpeg', '0_People_2.jpg'];
 window.renderGroupPhoto = function() {
   const container = document.getElementById('group-photo-container');
   if (!container) return;
-  const candidates = ['0_People.jpg', '0_People.jpeg', '0_People.png', '0_People.webp'];
-
-  function tryNext(i) {
-    if (i >= candidates.length) return;
-    const img = new Image();
-    img.alt = 'MGB Lab group photo';
-    img.className = 'fill-photo';
-    img.onload = () => {
-      container.classList.remove('photo-placeholder');
-      container.innerHTML = '';
-      container.appendChild(img);
-    };
-    img.onerror = () => tryNext(i + 1);
-    img.src = adjustPath(`Data/2_Images/${candidates[i]}`);
-  }
-  tryNext(0);
+  container.classList.remove('photo-placeholder');
+  container.innerHTML = MGB_PEOPLE_PHOTOS.map((file, i) =>
+    `<img src='${adjustPath(`Data/2_Images/${file}`)}' alt='MGB Lab group photo ${i + 1}' class='slide-fade${i === 0 ? ' active' : ''}'>`
+  ).join('');
+  initSlideshow(container, MGB_PEOPLE_PHOTOS.map(() => 6000));
 }
 
 // 13. Home page slideshow. Cycles through the photos listed in
@@ -1627,6 +1619,15 @@ window.renderHomeSlideshow = function() {
     }
     return mediaTag(entry, `MGB Lab photo ${i + 1}`).replace(/(<img|<video)/, `$1 class='${cls}'`);
   }).join('');
+  initSlideshow(container, durations);
+}
+
+// 13b. Shared slideshow wiring (dots, autoplay, swipe, drag-to-advance) -
+// used by both the Home slideshow above and the People page's group photo
+// below. Expects the container to already hold its slides as direct
+// `.slide-fade` children; `durations` is a per-slide array of ms, indexed
+// the same way as those slides.
+function initSlideshow(container, durations) {
   const imgs = container.querySelectorAll(':scope > .slide-fade');
   if (imgs.length <= 1) return;
 
