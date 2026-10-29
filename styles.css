@@ -1015,16 +1015,16 @@ a:hover { color: var(--accent-hover); }
    forward one screen at a time, and loops back to the top from the
    bottom (see initScrollMore in scripts.js). */
 .pub-panel, .blogs-panel, .tools-panel, .projects-panel { position: relative; }
+/* padding-right keeps every panel's cards/rows a touch narrower than the
+   scrollbar track, so the scrollbar never overlaps their right edge. */
 .pub-panel .scrollable-list, .blogs-panel .scrollable-list, .tools-panel .scrollable-list, .projects-panel .scrollable-list {
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
   padding-bottom: 8px;
+  padding-right: 10px;
 }
-/* Publication boxes are full-width rows (not grid cards like the other
-   panels), so without this they'd butt right up against the scrollbar;
-   this right padding pulls them in a touch narrower. */
-.pub-panel .scrollable-list { max-height: 620px; padding-right: 10px; }
+.pub-panel .scrollable-list { max-height: 620px; }
 .blogs-panel .scrollable-list { max-height: 820px; }
 .tools-panel .scrollable-list { max-height: 580px; }
 /* Projects sits in a narrower column (beside News, see .projects-news-grid),
