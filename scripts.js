@@ -394,7 +394,7 @@ const MGB_PROJECTS     = [
     "id": "DFF Project1",
     "title": "Genetics of PFOS biodegradation",
     "status": "Finished in 2026",
-    "description": "PFAS is no use to bacteria as an energy source, which is part of why it has no natural enemies among microorganisms. This project investigates the genetics behind that absence of natural degradation pathways. Funded by Danmarks Frie Forskningsfond.",
+    "description": "PFAS is no use to bacteria as an energy source, which is part of why it has no natural enemies among microorganisms. This project investigated the genetics behind that absence of natural degradation pathways. Funded by Danmarks Frie Forskningsfond.",
     "tags": ["PFAS", "Genetics", "Danmarks Frie Forskningsfond"]
   }
 ];
