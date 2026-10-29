@@ -1021,7 +1021,10 @@ a:hover { color: var(--accent-hover); }
   scroll-behavior: smooth;
   padding-bottom: 8px;
 }
-.pub-panel .scrollable-list { max-height: 620px; }
+/* Publication boxes are full-width rows (not grid cards like the other
+   panels), so without this they'd butt right up against the scrollbar;
+   this right padding pulls them in a touch narrower. */
+.pub-panel .scrollable-list { max-height: 620px; padding-right: 10px; }
 .blogs-panel .scrollable-list { max-height: 820px; }
 .tools-panel .scrollable-list { max-height: 580px; }
 /* Projects sits in a narrower column (beside News, see .projects-news-grid),
