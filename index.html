@@ -217,7 +217,10 @@
     <section class="page-section" data-reveal>
       <div class="projects-news-grid">
         <div class="projects-panel">
-          <h2 class="section-title" style="margin-bottom:16px;">Projects</h2>
+          <div class="section-header-flex" style="margin-bottom:16px;">
+            <h2 class="section-title" style="margin-bottom:0;">Projects</h2>
+            <a href="#projects-all" class="text-link">See all &rarr;</a>
+          </div>
           <div id="projects-container" class="scrollable-list"></div>
           <button type="button" class="scroll-more-btn" id="projects-scroll-more" aria-label="Scroll for more projects" data-tip="Scroll More"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
         </div>
@@ -332,6 +335,17 @@
     </section>
   </div>
 
+  <!-- PROJECTS (ALL): hidden by default, reached via the "See all" link next
+       to the Projects panel's heading. Lists every project in full, as a
+       grid rather than the panel's scrollable list. -->
+  <div id="page-projects-all" class="page-view page-overlay">
+    <section class="page-section">
+      <a href="#home" class="text-link">&larr; Back to home</a>
+      <h2 class="section-title" style="margin:16px 0 24px;">Projects</h2>
+      <div id="projects-all-container" class="project-grid"></div>
+    </section>
+  </div>
+
   </main>
 
   <!-- ============================================================
@@ -368,6 +382,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       if (window.renderResearch) window.renderResearch();
       if (window.renderProjects) window.renderProjects();
+      if (window.renderProjectsAll) window.renderProjectsAll();
       if (window.renderTools) window.renderTools();
       if (window.renderPublications) window.renderPublications();
       if (window.renderNews) window.renderNews();

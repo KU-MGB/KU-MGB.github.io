@@ -1420,31 +1420,43 @@ window.renderResearch = function() {
 // always sorted ahead of Finished ones, so the 2-column grid's normal
 // reading order (left to right, top to bottom) shows every Active project
 // before any Finished one.
-window.renderProjects = function() {
-  if (typeof MGB_PROJECTS === 'undefined') return;
-  const container = document.getElementById('projects-container');
-  if (!container) return;
-
-  const isFinishedStatus = p => (p.status || '').toLowerCase().includes('finished');
-  const sorted = MGB_PROJECTS.slice().sort((a, b) => isFinishedStatus(a) - isFinishedStatus(b));
-
-  const grid = document.createElement('div');
-  grid.className = 'project-grid';
-  grid.innerHTML = sorted.map(p => {
-    const isFinished = isFinishedStatus(p);
-    return `
-    <div class='card-academic${isFinished ? ' card-project-finished' : ''}' data-reveal>
+// projectEntryHtml is shared with renderProjectsAll below (the "See all"
+// page), so both render the exact same card markup.
+const isFinishedProject = p => (p.status || '').toLowerCase().includes('finished');
+const sortedProjects = () => MGB_PROJECTS.slice().sort((a, b) => isFinishedProject(a) - isFinishedProject(b));
+function projectEntryHtml(p) {
+  return `
+    <div class='card-academic${isFinishedProject(p) ? ' card-project-finished' : ''}' data-reveal>
       <span class='badge badge-fg' style='margin-bottom:10px;'>${esc(p.status)}</span>
       <h3>${esc(p.title)}</h3>
       <p>${esc(p.description)}</p>
       ${p.tags ? `<div class='chip-container'>${p.tags.map(t => `<span class='chip chip-muted'>${esc(t)}</span>`).join('')}</div>` : ''}
     </div>
   `;
-  }).join('');
+}
+window.renderProjects = function() {
+  if (typeof MGB_PROJECTS === 'undefined') return;
+  const container = document.getElementById('projects-container');
+  if (!container) return;
+
+  const grid = document.createElement('div');
+  grid.className = 'project-grid';
+  grid.innerHTML = sortedProjects().map(projectEntryHtml).join('');
   container.appendChild(grid);
   if (window.initScrollReveal) window.initScrollReveal();
   if (window.markGlossaryChips) window.markGlossaryChips();
   initScrollMore('projects-container', 'projects-scroll-more');
+}
+
+// 10c. Projects "See all" page: every project, same cards as the Projects
+// panel, laid out as a full grid rather than the panel's scrollable list.
+window.renderProjectsAll = function() {
+  if (typeof MGB_PROJECTS === 'undefined') return;
+  const container = document.getElementById('projects-all-container');
+  if (!container) return;
+  container.innerHTML = sortedProjects().map(projectEntryHtml).join('');
+  if (window.initScrollReveal) window.initScrollReveal();
+  if (window.markGlossaryChips) window.markGlossaryChips();
 }
 
 // 10b. Tools renderer: every card shows the same three link buttons
@@ -1777,9 +1789,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // ----------------------------------------------------------------
 // An overlay key maps to the nav link it should highlight while open,
 // since every other section is hidden and the scroll-spy below has
-// nothing to react to. News "See all" has no nav link of its own, so it
-// highlights Projects (the section its "See all" link lives in).
-const OVERLAY_NAV_HASH = { 'blog-post': '#blogs', 'news-all': '#projects' };
+// nothing to react to. News "See all" and Projects "See all" have no nav
+// link of their own, so both highlight Projects (the section they live in).
+const OVERLAY_NAV_HASH = { 'blog-post': '#blogs', 'news-all': '#projects', 'projects-all': '#projects' };
 function handleRouting() {
   const hash = window.location.hash || '#home';
   const key = hash.substring(1);
