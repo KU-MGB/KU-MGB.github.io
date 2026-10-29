@@ -982,21 +982,24 @@ a:hover { color: var(--accent-hover); }
 
 /* ----------------------------------------------------------------
    8. PUBLICATIONS AND NEWS LIST ROWS
-   Publications render as compact list rows; news renders as its
-   own boxy card style further down. Shared hover styling for both.
+   Both render as individual boxed cards (border, background, shadow)
+   rather than a plain list separated by lines, so each entry reads as
+   its own clear unit. Shared hover styling for both.
    ---------------------------------------------------------------- */
 .pub-entry, .news-entry {
-  padding: 16px 12px;
-  margin: 0 -12px;
-  border: 1px solid transparent;
-  border-bottom-color: var(--border);
-  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin: 0 0 14px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
   position: relative;
-  transition: border-color var(--t-base);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
 }
-.pub-entry:last-child { border-bottom-color: transparent; }
+.pub-entry:last-child { margin-bottom: 0; }
 .pub-entry:hover, .news-entry:hover {
   border-color: var(--accent);
+  box-shadow: var(--shadow-md);
 }
 .pub-entry:hover .pub-title, .news-entry:hover .news-title { color: var(--accent); }
 .pub-entry:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
@@ -1056,19 +1059,12 @@ a:hover { color: var(--accent-hover); }
 .scroll-more-btn:hover { background: var(--accent-hover); transform: translateX(-50%) translateY(3px) scale(1.08); }
 
 .news-entry {
-  margin: 0 0 14px 0;
-  padding: 16px 18px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-sm);
   display: flex;
   align-items: flex-start;
   gap: 14px;
   text-decoration: none;
   color: inherit;
 }
-.news-entry:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 .news-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .news-body { min-width: 0; flex: 1; }
 .news-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; text-align: justify; }
