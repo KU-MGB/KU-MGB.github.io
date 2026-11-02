@@ -1544,7 +1544,7 @@ window.renderNews = function() {
     <div class='news-ticker-set news-ticker-clone' aria-hidden='true'>${sorted.map(newsEntryHtml).join('')}</div>
   `;
   if (window.initScrollReveal) window.initScrollReveal();
-  initNewsAutoScroll(container);
+  initNewsAutoScroll(container, document.getElementById('news-ticker-prev'), document.getElementById('news-ticker-next'));
 }
 
 // 11c. News "See all" page: every item, newest first, as a plain vertical
@@ -1564,7 +1564,9 @@ window.renderNewsAll = function() {
 // invisible and the rotation looks continuous, moving right-to-left.
 // Hovering, or touching/wheel-scrolling it, pauses the rotation for a few
 // seconds so a visitor can read at their own pace instead of fighting it.
-function initNewsAutoScroll(box) {
+// The prev/next arrow buttons step by one card and reuse the same pause
+// and wrap logic, so manual and automatic scrolling never fight each other.
+function initNewsAutoScroll(box, prevBtn, nextBtn) {
   if (box.dataset.autoscrollWired) return;
   box.dataset.autoscrollWired = 'true';
 
@@ -1574,12 +1576,18 @@ function initNewsAutoScroll(box) {
   let paused = false;
   let resumeTimer = null;
 
+  function wrapIfNeeded() {
+    const half = box.scrollWidth / 2;
+    if (half <= box.clientWidth) return;
+    if (box.scrollLeft >= half) box.scrollLeft -= half;
+  }
+
   setInterval(() => {
     if (paused) return;
     const half = box.scrollWidth / 2;
     if (half <= box.clientWidth) return;
     box.scrollLeft += STEP;
-    if (box.scrollLeft >= half) box.scrollLeft -= half;
+    wrapIfNeeded();
   }, TICK_MS);
 
   function pauseAwhile() {
@@ -1591,6 +1599,30 @@ function initNewsAutoScroll(box) {
   box.addEventListener('touchstart', pauseAwhile, { passive: true });
   box.addEventListener('mouseenter', () => { paused = true; });
   box.addEventListener('mouseleave', () => { clearTimeout(resumeTimer); paused = false; });
+
+  function cardStep() {
+    const card = box.querySelector('.news-entry');
+    const gap = 14;
+    return (card ? card.getBoundingClientRect().width : 320) + gap;
+  }
+  function goTo(dir) {
+    pauseAwhile();
+    const delta = cardStep();
+    const half = box.scrollWidth / 2;
+    if (dir < 0 && box.scrollLeft < delta) box.scrollLeft += half;
+    box.scrollBy({ left: dir * delta, behavior: 'smooth' });
+    setTimeout(wrapIfNeeded, 400);
+  }
+  if (prevBtn) prevBtn.addEventListener('click', () => goTo(-1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goTo(1));
+
+  function updateArrowVisibility() {
+    const show = box.scrollWidth / 2 > box.clientWidth;
+    if (prevBtn) prevBtn.style.display = show ? 'flex' : 'none';
+    if (nextBtn) nextBtn.style.display = show ? 'flex' : 'none';
+  }
+  updateArrowVisibility();
+  window.addEventListener('resize', updateArrowVisibility);
 }
 
 // 12. Group photo (People page): a slideshow (same dots/autoplay/swipe as

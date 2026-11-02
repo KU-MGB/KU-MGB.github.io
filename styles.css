@@ -973,6 +973,54 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 639px) {
   .news-ticker .news-entry { width: 260px; }
 }
+/* Cards vary a lot in title/description length; clamping both to a fixed
+   number of lines (rather than letting them run free) keeps every ticker
+   card roughly the same height instead of some towering over others. The
+   "See all" page (.news-all-list) shows the full, unclamped text. */
+.news-ticker .news-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.news-ticker .news-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Prev/next arrows for the News ticker: round buttons overlaid on the
+   left and right edges, same visual language as .scroll-more-btn. Hidden
+   entirely (via JS) when the ticker isn't wide enough to need scrolling. */
+.news-ticker-wrap { position: relative; }
+.news-ticker-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--t-fast), background var(--t-fast);
+  z-index: 5;
+}
+.news-ticker-arrow:hover { background: var(--accent-hover); }
+.news-ticker-prev { left: -4px; }
+.news-ticker-next { right: -4px; }
+.news-ticker-prev:hover { transform: translateY(-50%) translateX(-3px) scale(1.08); }
+.news-ticker-next:hover { transform: translateY(-50%) translateX(3px) scale(1.08); }
+@media (max-width: 639px) {
+  .news-ticker-prev { left: -2px; }
+  .news-ticker-next { right: -2px; }
+}
 
 /* ----------------------------------------------------------------
    8. PUBLICATIONS AND NEWS LIST ROWS
