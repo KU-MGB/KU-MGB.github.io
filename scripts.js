@@ -274,34 +274,34 @@ const MGB_PUBLICATIONS = [
 // News items, newest first. Shown as the auto-scrolling ticker next to Projects.
 const MGB_NEWS         = [
   {
-    "title": "Eva Højgaard Jensen defends her MSc thesis",
+    "title": "Eva defends her MSc thesis",
     "date": "2026-07-01",
     "category": "Graduation",
-    "description": "Eva successfully defended her thesis, \"Nothing is forever: analogue enrichment for microbial degradation of TFA\", supervised by Tue Kjærgaard Nielsen.",
+    "description": "Her thesis, \"Nothing is forever: analogue enrichment for microbial degradation of TFA\", was supervised by Tue Kjærgaard Nielsen.",
     "image": "Data/1_People/7_Alumni/eva-hojgaard-jensen.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7475913018447568897/"
   },
   {
-    "title": "Jonas Borup Randløv defends his BSc project",
+    "title": "Jonas defends his BSc project",
     "date": "2026-08-11",
     "category": "Graduation",
-    "description": "Jonas successfully defended his bachelor's project, \"Modelling Prospects of Catabolic Enzymes for Bioremediation of PFAS\", supervised by Tue Kjærgaard Nielsen and Shaban Ahmad. He continues into an MSc in Bioinformatics at UCPH.",
+    "description": "His project, \"Modelling Prospects of Catabolic Enzymes for Bioremediation of PFAS\", was supervised by Tue Kjærgaard Nielsen and Shaban Ahmad. He continues into an MSc in Bioinformatics at UCPH.",
     "image": "Data/1_People/7_Alumni/jonas-randlov.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7492905416046247936/"
   },
   {
-    "title": "Simone Cusimano joins the lab as a new PhD student",
+    "title": "Simone joins the lab as a new PhD student",
     "date": "2026-09-07",
     "category": "New Member",
-    "description": "Simone joins MGB Lab as a PhD student, working on overcoming fluoride toxicity to enable microbial PFAS bioremediation.",
+    "description": "She'll be working on overcoming fluoride toxicity to enable microbial PFAS bioremediation.",
     "image": "Data/1_People/3_PhD/simone-cusimano.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501569083591532544/"
   },
   {
-    "title": "Mohammad Shaukat Ali joins the lab as a visiting PhD researcher",
+    "title": "Shaukat joins the lab as a visiting PhD researcher",
     "date": "2026-09-23",
     "category": "New Member",
-    "description": "Shaukat joins MGB Lab for a six-month research exchange from the University of Campania \"Luigi Vanvitelli\", Italy, working on structural characterisation of bacterial defluorinating enzymes.",
+    "description": "He's here for a six-month research exchange from the University of Campania \"Luigi Vanvitelli\", Italy, working on structural characterisation of bacterial defluorinating enzymes.",
     "image": "Data/1_People/3_PhD/mohammad-shaukat-ali.webp",
     "link": "https://www.linkedin.com/posts/mohammad-shaukat-ali-803740144_pfas-bioinformatics-structuralbiology-ugcPost-7508477058717556736-ILG3/"
   },
@@ -314,15 +314,15 @@ const MGB_NEWS         = [
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_the-microbial-genomics-and-biodegradation-ugcPost-7510643345937932290-RpH-/"
   },
   {
-    "title": "Shaban Ahmad presents DeFluorX at PLEN Research Day",
+    "title": "Shaban presents DeFluorX at PLEN Research Day",
     "date": "2026-10-11",
     "category": "Talk",
-    "description": "Shaban presented protein-ligand modelling of catalytic enzymes for PFAS degradation using the lab's DeFluorX pipeline at PLEN Research Day, held in the Margrethe Bohr Hall, Niels Bohr Building, University of Copenhagen. A preprint on the work is in preparation.",
+    "description": "He presented protein-ligand modelling of catalytic enzymes for PFAS degradation using the lab's pipeline, at an event held in the Margrethe Bohr Hall, Niels Bohr Building, University of Copenhagen. A preprint on the work is in preparation.",
     "image": "Data/1_People/2_Postdocs/shaban-ahmad.webp",
     "link": "https://www.linkedin.com/posts/drshabanahmad_pfas-bioremediation-proteinligand-ugcPost-7514970895740760064-eN4u/"
   },
   {
-    "title": "Eva Højgaard Jensen leads new preprint on the first TFA-degrading microbial consortium",
+    "title": "Eva leads new preprint on the first TFA-degrading microbial consortium",
     "date": "2026-10-12",
     "category": "Preprint",
     "description": "Building on her MSc thesis, Eva and colleagues report a five-member microbial consortium that defluorinates trifluoroacetate (TFA) stepwise to difluoroacetate and then monofluoroacetate, confirmed by ¹⁹F-NMR and a fluoride ion-selective electrode. Genome sequencing identified two candidate dehalogenase enzymes now being validated.",
@@ -330,7 +330,7 @@ const MGB_NEWS         = [
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_tfa-pfas-pfas-share-7515628748386328578--aaZ/"
   },
   {
-    "title": "Shaban Ahmad leads new DeFluorX preprint on mechanism-guided PFAS enzyme discovery",
+    "title": "Shaban leads new DeFluorX preprint on mechanism-guided PFAS enzyme discovery",
     "date": "2026-10-16",
     "category": "Preprint",
     "description": "Shaban and colleagues describe DeFluorX, which co-folds thousands of fluoroacetate dehalogenase variants against PFAS with Boltz-2 and ranks them by defluorination geometry, identifying eight promising candidates confirmed by QM/MM.",

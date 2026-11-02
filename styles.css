@@ -1102,15 +1102,26 @@ a:hover { color: var(--accent-hover); }
    title - freeing that space for the title/description instead. */
 .news-media { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
 .news-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-.news-meta-vertical { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.news-meta-vertical { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .news-category-vertical, .news-date-vertical {
+  display: block;
   writing-mode: vertical-rl;
   text-orientation: sideways;
   white-space: nowrap;
   font-family: var(--sans);
   line-height: 1;
 }
-.news-category-vertical { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
+.news-category-vertical {
+  padding: 8px 4px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-full);
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 .news-date-vertical { font-size: 10.5px; color: var(--faint); }
 .news-body { min-width: 0; flex: 1; }
 .news-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; text-align: justify; }
