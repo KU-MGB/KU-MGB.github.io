@@ -293,7 +293,7 @@ const MGB_NEWS         = [
     "title": "Simone joins the lab as a new PhD student",
     "date": "2026-09-07",
     "category": "New Member",
-    "description": "She'll be working on overcoming fluoride toxicity to enable microbial PFAS bioremediation.",
+    "description": "He'll be working on overcoming fluoride toxicity to enable microbial PFAS bioremediation.",
     "image": "Data/1_People/3_PhD/simone-cusimano.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7501569083591532544/"
   },
