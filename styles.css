@@ -991,7 +991,7 @@ a:hover { color: var(--accent-hover); }
 }
 .news-ticker .news-desc {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1108,18 +1108,13 @@ a:hover { color: var(--accent-hover); }
    title - freeing that space for the title/description instead. */
 .news-media { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
 .news-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-/* Plain block stacking, not flex: a flex container whose items have a
-   different (vertical) writing-mode than the container is a known
-   cross-browser inconsistency ("orthogonal flows"), and was rendering
-   the category and date side by side instead of stacked. Block-level
-   elements always stack top to bottom regardless of their own internal
-   writing-mode, so that's used here instead; width:fit-content + auto
-   margins keeps each one centred since it shrinks to its rotated size. */
-.news-meta-vertical { display: block; }
+/* Category and date are two separate vertical columns side by side (the
+   category's rotated "line", then the date's rotated "line" next to it) -
+   a plain horizontal flex row, which (unlike flex-direction:column) is the
+   natural, well-supported case for laying out items with their own
+   vertical writing-mode next to each other. */
+.news-meta-vertical { display: flex; flex-direction: row; align-items: center; gap: 6px; }
 .news-category-vertical, .news-date-vertical {
-  display: block;
-  width: fit-content;
-  margin: 0 auto;
   writing-mode: vertical-rl;
   text-orientation: sideways;
   white-space: nowrap;
