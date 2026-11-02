@@ -969,9 +969,15 @@ a:hover { color: var(--accent-hover); }
 }
 .news-ticker::-webkit-scrollbar { display: none; }
 .news-ticker-set { display: flex; flex-direction: row; gap: 14px; flex-shrink: 0; }
-.news-ticker .news-entry { width: 320px; flex-shrink: 0; margin: 0; }
+/* Width follows content instead of every card being forced to the same
+   fixed size: the body sizes to its own text (up to a cap, beyond which it
+   wraps as usual), and the card hugs that width - a short item comes out
+   noticeably narrower than a long one. Height still stays uniform via the
+   title/desc line-clamping below. */
+.news-ticker .news-entry { flex-shrink: 0; min-width: 190px; max-width: 360px; margin: 0; }
+.news-ticker .news-body { flex: 0 0 auto; width: max-content; max-width: 240px; }
 @media (max-width: 639px) {
-  .news-ticker .news-entry { width: 260px; }
+  .news-ticker .news-body { max-width: 190px; }
 }
 /* Cards vary a lot in title/description length; clamping both to a fixed
    number of lines (rather than letting them run free) keeps every ticker

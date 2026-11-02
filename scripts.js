@@ -309,7 +309,7 @@ const MGB_NEWS         = [
     "title": "MGB Lab presents four talks at the first Environmental Pollutants conference (ENVP)",
     "date": "2026-10-06",
     "category": "Conference",
-    "description": "Eva Højgaard Jensen presented her discovery of TFA-degrading microorganisms, Asal Forouzandeh presented a new evidence hierarchy for PFAS degradation studies, Shaban Ahmad presented a large-scale protein-ligand study of fluoroacetate dehalogenases, and Sofie Linnea Bollen presented her work on cyanobacteria-PFAS interactions.",
+    "description": "Eva presented her discovery of TFA-degrading microorganisms, Asal a new evidence hierarchy for PFAS degradation studies, Shaban a large-scale protein-ligand study of fluoroacetate dehalogenases, and Sofie her work on cyanobacteria-PFAS interactions.",
     "image": "Data/2_Images/1_MGB_Lab_Fevicon.svg",
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_the-microbial-genomics-and-biodegradation-ugcPost-7510643345937932290-RpH-/"
   },
@@ -317,7 +317,7 @@ const MGB_NEWS         = [
     "title": "Shaban presents DeFluorX at PLEN Research Day",
     "date": "2026-10-11",
     "category": "Talk",
-    "description": "He presented protein-ligand modelling of catalytic enzymes for PFAS degradation using the lab's pipeline, at an event held in the Margrethe Bohr Hall, Niels Bohr Building, University of Copenhagen. A preprint on the work is in preparation.",
+    "description": "He presented protein-ligand modelling of catalytic enzymes for PFAS degradation using the lab's pipeline. A preprint on the work is in preparation.",
     "image": "Data/1_People/2_Postdocs/shaban-ahmad.webp",
     "link": "https://www.linkedin.com/posts/drshabanahmad_pfas-bioremediation-proteinligand-ugcPost-7514970895740760064-eN4u/"
   },
@@ -325,7 +325,7 @@ const MGB_NEWS         = [
     "title": "Eva leads new preprint on the first TFA-degrading microbial consortium",
     "date": "2026-10-12",
     "category": "Preprint",
-    "description": "Building on her MSc thesis, Eva and colleagues report a five-member microbial consortium that defluorinates trifluoroacetate (TFA) stepwise to difluoroacetate and then monofluoroacetate, confirmed by ¹⁹F-NMR and a fluoride ion-selective electrode. Genome sequencing identified two candidate dehalogenase enzymes now being validated.",
+    "description": "Building on her MSc thesis, Eva and colleagues report a five-member microbial consortium that defluorinates TFA stepwise via difluoroacetate to monofluoroacetate. Genome sequencing identified two candidate dehalogenase enzymes now being validated.",
     "image": "Data/1_People/7_Alumni/eva-hojgaard-jensen.webp",
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_tfa-pfas-pfas-share-7515628748386328578--aaZ/"
   },
