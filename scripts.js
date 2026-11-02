@@ -1515,21 +1515,27 @@ window.renderTools = function() {
 // transform, so a visitor's own wheel/touch scroll works natively and
 // pauses the rotation for a few seconds instead of fighting it. Only the 5
 // most recent items show here - the rest are on the "See all" page.
-// newsEntryHtml is shared with renderNewsAll below (the "See all" page),
-// so both render the exact same card markup.
-function newsEntryHtml(n) {
+// newsEntryHtml is shared with renderNewsAll below (the "See all" page).
+// The rotated category/date reads well in the compact ticker, but not in
+// the full-width "See all" list, so that page gets the plain horizontal
+// badge+date row instead (vertical=false) while the ticker keeps the
+// rotated layout (vertical=true, the default).
+function newsEntryHtml(n, vertical = true) {
   const tag = n.link ? 'a' : 'div';
   const openAttrs = n.link ? ` href='${esc(n.link)}' target='_blank' rel='noopener'` : '';
+  const avatar = n.image ? `<img src='${esc(adjustPath(n.image))}' alt='' class='news-avatar' loading='lazy'>` : '';
   return `
     <${tag} class='news-entry'${openAttrs} data-reveal>
+      ${vertical ? `
       <div class='news-media'>
-        ${n.image ? `<img src='${esc(adjustPath(n.image))}' alt='' class='news-avatar' loading='lazy'>` : ''}
+        ${avatar}
         <div class='news-meta-vertical'>
           <span class='news-category-vertical'>${esc(n.category)}</span>
           <span class='news-date-vertical'>${esc(n.date)}</span>
         </div>
-      </div>
+      </div>` : avatar}
       <div class='news-body'>
+        ${vertical ? '' : `<div class='news-meta'><span class='badge'>${esc(n.category)}</span><span class='news-date'>${esc(n.date)}</span></div>`}
         <h3 class='news-title'>${esc(n.title)}</h3>
         <p class='news-desc'>${esc(n.description)}</p>
       </div>
@@ -1544,9 +1550,10 @@ window.renderNews = function() {
   if (sorted.length === 0) return;
 
   container.classList.add('news-ticker');
+  const tickerCardsHtml = sorted.map(n => newsEntryHtml(n, true)).join('');
   container.innerHTML = `
-    <div class='news-ticker-set'>${sorted.map(newsEntryHtml).join('')}</div>
-    <div class='news-ticker-set news-ticker-clone' aria-hidden='true'>${sorted.map(newsEntryHtml).join('')}</div>
+    <div class='news-ticker-set'>${tickerCardsHtml}</div>
+    <div class='news-ticker-set news-ticker-clone' aria-hidden='true'>${tickerCardsHtml}</div>
   `;
   if (window.initScrollReveal) window.initScrollReveal();
   initNewsAutoScroll(container, document.getElementById('news-ticker-prev'), document.getElementById('news-ticker-next'));
@@ -1559,7 +1566,7 @@ window.renderNewsAll = function() {
   const container = document.getElementById('news-all-container');
   if (!container) return;
   const sorted = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
-  container.innerHTML = sorted.map(newsEntryHtml).join('');
+  container.innerHTML = sorted.map(n => newsEntryHtml(n, false)).join('');
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
