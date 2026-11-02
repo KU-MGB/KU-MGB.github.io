@@ -996,28 +996,36 @@ a:hover { color: var(--accent-hover); }
   overflow: hidden;
 }
 
-/* Prev/next arrows for the News ticker: fixed-size round buttons flanking
-   the ticker as flex items, so flexbox (not absolute-position math) keeps
-   them vertically centred on the row no matter how tall it is. Hidden
-   entirely (via JS) when the ticker isn't wide enough to need scrolling. */
-.news-ticker-wrap { display: flex; align-items: center; gap: 10px; }
-.news-ticker-wrap .news-ticker { flex: 1; min-width: 0; }
+/* Prev/next arrows for the News ticker: overlaid directly on the ticker's
+   left/right edges (not pushed off to the side), with no background fill,
+   so the cards scrolling underneath stay visible right up to the icon
+   itself. A drop-shadow keeps the icon readable over whatever card colour
+   happens to be passing behind it. Hidden entirely (via JS) when the
+   ticker isn't wide enough to need scrolling. */
+.news-ticker-wrap { position: relative; }
 .news-ticker-arrow {
-  flex-shrink: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 34px;
   height: 34px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 50%;
-  cursor: pointer;
+  background: transparent;
   border: none;
-  box-shadow: var(--shadow-md);
-  transition: transform var(--t-fast), background var(--t-fast);
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 18px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  transition: transform var(--t-fast), color var(--t-fast);
 }
-.news-ticker-arrow:hover { background: var(--accent-hover); transform: scale(1.08); }
+.news-ticker-prev { left: 4px; }
+.news-ticker-next { right: 4px; }
+.news-ticker-arrow:hover { color: var(--accent-hover); }
+.news-ticker-prev:hover { transform: translateY(-50%) translateX(-2px) scale(1.12); }
+.news-ticker-next:hover { transform: translateY(-50%) translateX(2px) scale(1.12); }
 
 /* ----------------------------------------------------------------
    8. PUBLICATIONS AND NEWS LIST ROWS
