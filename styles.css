@@ -974,10 +974,10 @@ a:hover { color: var(--accent-hover); }
    wraps as usual), and the card hugs that width - a short item comes out
    noticeably narrower than a long one. Height still stays uniform via the
    title/desc line-clamping below. */
-.news-ticker .news-entry { flex-shrink: 0; min-width: 190px; max-width: 360px; margin: 0; }
-.news-ticker .news-body { flex: 0 0 auto; width: max-content; max-width: 240px; }
+.news-ticker .news-entry { flex-shrink: 0; min-width: 190px; max-width: 420px; margin: 0; }
+.news-ticker .news-body { flex: 0 0 auto; width: max-content; max-width: 300px; }
 @media (max-width: 639px) {
-  .news-ticker .news-body { max-width: 190px; }
+  .news-ticker .news-body { max-width: 230px; }
 }
 /* Cards vary a lot in title/description length; clamping both to a fixed
    number of lines (rather than letting them run free) keeps every ticker

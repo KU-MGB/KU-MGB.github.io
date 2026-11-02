@@ -285,7 +285,7 @@ const MGB_NEWS         = [
     "title": "Jonas defends his BSc project",
     "date": "2026-08-11",
     "category": "Graduation",
-    "description": "His project, \"Modelling Prospects of Catabolic Enzymes for Bioremediation of PFAS\", was supervised by Tue Kjærgaard Nielsen and Shaban Ahmad. He continues into an MSc in Bioinformatics at UCPH.",
+    "description": "His project, \"Modelling Prospects of Catabolic Enzymes for Bioremediation of PFAS\", was supervised by Tue Kjærgaard Nielsen and Shaban Ahmad. He continues into an MSc in Bioinformatics.",
     "image": "Data/1_People/7_Alumni/jonas-randlov.webp",
     "link": "https://www.linkedin.com/feed/update/urn:li:activity:7492905416046247936/"
   },
@@ -301,7 +301,7 @@ const MGB_NEWS         = [
     "title": "Shaukat joins the lab as a visiting PhD researcher",
     "date": "2026-09-23",
     "category": "New Member",
-    "description": "He's here for a six-month research exchange from the University of Campania \"Luigi Vanvitelli\", Italy, working on structural characterisation of bacterial defluorinating enzymes.",
+    "description": "He's here for a six-month exchange from the University of Campania \"Luigi Vanvitelli\" (Italy), working on structural characterisation of bacterial defluorinating enzymes.",
     "image": "Data/1_People/3_PhD/mohammad-shaukat-ali.webp",
     "link": "https://www.linkedin.com/posts/mohammad-shaukat-ali-803740144_pfas-bioinformatics-structuralbiology-ugcPost-7508477058717556736-ILG3/"
   },
@@ -309,7 +309,7 @@ const MGB_NEWS         = [
     "title": "MGB Lab presents four talks at the first Environmental Pollutants conference (ENVP)",
     "date": "2026-10-06",
     "category": "Conference",
-    "description": "Eva presented her discovery of TFA-degrading microorganisms, Asal a new evidence hierarchy for PFAS degradation studies, Shaban a large-scale protein-ligand study of fluoroacetate dehalogenases, and Sofie her work on cyanobacteria-PFAS interactions.",
+    "description": "Eva presented her TFA-degrading microorganism discovery, Asal a new PFAS evidence hierarchy, Shaban a protein-ligand study of fluoroacetate dehalogenases, and Sofie her cyanobacteria-PFAS work.",
     "image": "Data/2_Images/1_MGB_Lab_Fevicon.svg",
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_the-microbial-genomics-and-biodegradation-ugcPost-7510643345937932290-RpH-/"
   },
@@ -325,7 +325,7 @@ const MGB_NEWS         = [
     "title": "Eva leads new preprint on the first TFA-degrading microbial consortium",
     "date": "2026-10-12",
     "category": "Preprint",
-    "description": "Building on her MSc thesis, Eva and colleagues report a five-member microbial consortium that defluorinates TFA stepwise via difluoroacetate to monofluoroacetate. Genome sequencing identified two candidate dehalogenase enzymes now being validated.",
+    "description": "Building on her thesis, Eva and colleagues report a five-member consortium that defluorinates TFA stepwise via difluoroacetate to monofluoroacetate, with genome sequencing identifying two candidate dehalogenases now being validated.",
     "image": "Data/1_People/7_Alumni/eva-hojgaard-jensen.webp",
     "link": "https://www.linkedin.com/posts/tue-kjaergaard-nielsen_tfa-pfas-pfas-share-7515628748386328578--aaZ/"
   },
@@ -333,7 +333,7 @@ const MGB_NEWS         = [
     "title": "Shaban leads new DeFluorX preprint on mechanism-guided PFAS enzyme discovery",
     "date": "2026-10-16",
     "category": "Preprint",
-    "description": "Shaban and colleagues describe DeFluorX, which co-folds thousands of fluoroacetate dehalogenase variants against PFAS with Boltz-2 and ranks them by defluorination geometry, identifying eight promising candidates confirmed by QM/MM.",
+    "description": "Shaban and colleagues describe DeFluorX, which co-folds thousands of FAcD variants against PFAS with Boltz-2, ranking them by defluorination geometry to identify eight candidates confirmed by QM/MM.",
     "image": "Data/1_People/2_Postdocs/shaban-ahmad.webp",
     "link": "https://www.linkedin.com/posts/drshabanahmad_pfas-foreverchemicals-enzymes-share-7518269472038825984-3QNp/"
   },
