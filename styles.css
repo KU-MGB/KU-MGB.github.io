@@ -974,10 +974,10 @@ a:hover { color: var(--accent-hover); }
    wraps as usual), and the card hugs that width - a short item comes out
    noticeably narrower than a long one. Height still stays uniform via the
    title/desc line-clamping below. */
-.news-ticker .news-entry { flex-shrink: 0; min-width: 190px; max-width: 420px; margin: 0; }
-.news-ticker .news-body { flex: 0 0 auto; width: max-content; max-width: 300px; }
+.news-ticker .news-entry { flex-shrink: 0; min-width: 180px; max-width: 360px; margin: 0; }
+.news-ticker .news-body { flex: 0 0 auto; width: max-content; max-width: 250px; }
 @media (max-width: 639px) {
-  .news-ticker .news-body { max-width: 230px; }
+  .news-ticker .news-body { max-width: 195px; }
 }
 /* Cards vary a lot in title/description length; clamping both to a fixed
    number of lines (rather than letting them run free) keeps every ticker
@@ -996,19 +996,22 @@ a:hover { color: var(--accent-hover); }
   overflow: hidden;
 }
 
-/* Prev/next arrows for the News ticker: flex items flanking the ticker
-   (so flexbox keeps them correctly centred at the true left/right sides,
-   not overlapping the cards), with no background fill - just the icon,
-   colour-filled with a drop-shadow for contrast. Hidden entirely (via JS)
-   when the ticker isn't wide enough to need scrolling. */
-.news-ticker-wrap { display: flex; align-items: center; gap: 6px; }
-.news-ticker-wrap .news-ticker { flex: 1; min-width: 0; }
+/* Prev/next arrows for the News ticker: overlaid on top of the ticker at
+   its true left/right edges (no reserved flex column either side, which
+   just left an empty white strip there), with no background fill - the
+   cards keep scrolling behind the icon itself. A drop-shadow keeps the
+   icon readable over whatever card colour is passing underneath it.
+   Hidden entirely (via JS) when the ticker isn't wide enough to scroll. */
+.news-ticker-wrap { position: relative; }
 .news-ticker-arrow {
-  flex-shrink: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
+  width: 30px;
   height: 34px;
   background: transparent;
   border: none;
@@ -1018,9 +1021,11 @@ a:hover { color: var(--accent-hover); }
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
   transition: transform var(--t-fast), color var(--t-fast);
 }
+.news-ticker-prev { left: 0; }
+.news-ticker-next { right: 0; }
 .news-ticker-arrow:hover { color: var(--accent-hover); }
-.news-ticker-prev:hover { transform: translateX(-2px) scale(1.12); }
-.news-ticker-next:hover { transform: translateX(2px) scale(1.12); }
+.news-ticker-prev:hover { transform: translateY(-50%) translateX(-2px) scale(1.12); }
+.news-ticker-next:hover { transform: translateY(-50%) translateX(2px) scale(1.12); }
 
 /* ----------------------------------------------------------------
    8. PUBLICATIONS AND NEWS LIST ROWS
@@ -1134,7 +1139,6 @@ a:hover { color: var(--accent-hover); }
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  margin-bottom: 8px;
 }
 .news-date-vertical { font-size: 10.5px; color: var(--faint); }
 .news-body { min-width: 0; flex: 1; }
