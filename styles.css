@@ -1102,9 +1102,18 @@ a:hover { color: var(--accent-hover); }
    title - freeing that space for the title/description instead. */
 .news-media { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
 .news-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-.news-meta-vertical { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+/* Plain block stacking, not flex: a flex container whose items have a
+   different (vertical) writing-mode than the container is a known
+   cross-browser inconsistency ("orthogonal flows"), and was rendering
+   the category and date side by side instead of stacked. Block-level
+   elements always stack top to bottom regardless of their own internal
+   writing-mode, so that's used here instead; width:fit-content + auto
+   margins keeps each one centred since it shrinks to its rotated size. */
+.news-meta-vertical { display: block; }
 .news-category-vertical, .news-date-vertical {
   display: block;
+  width: fit-content;
+  margin: 0 auto;
   writing-mode: vertical-rl;
   text-orientation: sideways;
   white-space: nowrap;
@@ -1121,6 +1130,7 @@ a:hover { color: var(--accent-hover); }
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  margin-bottom: 8px;
 }
 .news-date-vertical { font-size: 10.5px; color: var(--faint); }
 .news-body { min-width: 0; flex: 1; }
