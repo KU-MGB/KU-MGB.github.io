@@ -968,7 +968,12 @@ a:hover { color: var(--accent-hover); }
   scrollbar-width: none;
 }
 .news-ticker::-webkit-scrollbar { display: none; }
-.news-ticker-set { display: flex; flex-direction: row; gap: 14px; flex-shrink: 0; }
+/* margin-right (not a gap on .news-ticker itself) gives the seam between
+   the real set and its looping clone the same spacing as every other
+   card-to-card gap, while keeping both sets exactly the same width - the
+   auto-scroll's wrap-around math in initNewsAutoScroll depends on that
+   symmetry to loop without a jump. */
+.news-ticker-set { display: flex; flex-direction: row; gap: 14px; flex-shrink: 0; margin-right: 14px; }
 /* Width follows content instead of every card being forced to the same
    fixed size: the body sizes to its own text (up to a cap, beyond which it
    wraps as usual), and the card hugs that width - a short item comes out
@@ -1057,6 +1062,10 @@ a:hover { color: var(--accent-hover); }
 }
 .pub-entry:hover .pub-title, .news-entry:hover .news-title { color: var(--accent); }
 .pub-entry:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
+/* Same fill-on-hover treatment as the chips above, applied to the News
+   category pill - the rotated one in the ticker and the plain .badge one
+   on the "See all" page. */
+.news-entry:hover .news-category-vertical, .news-entry:hover .badge { background: var(--accent); color: #fff; }
 .pub-title, .news-title { font-family: var(--sans); font-size: 15.5px; font-weight: 600; color: var(--fg); line-height: 1.4; }
 .pub-authors { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 2px; }
 /* .news-meta/.news-date: the normal horizontal badge+date row, used only
@@ -1150,7 +1159,9 @@ a:hover { color: var(--accent-hover); }
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  transition: background var(--t-fast), color var(--t-fast);
 }
+.news-entry .badge { transition: background var(--t-fast), color var(--t-fast); }
 .news-date-vertical { font-size: 10.5px; color: var(--faint); }
 .news-body { min-width: 0; flex: 1; }
 .news-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; text-align: justify; }
