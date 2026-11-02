@@ -1003,6 +1003,13 @@ a:hover { color: var(--accent-hover); }
    icon readable over whatever card colour is passing underneath it.
    Hidden entirely (via JS) when the ticker isn't wide enough to scroll. */
 .news-ticker-wrap { position: relative; }
+/* #news-ticker-prev/#news-ticker-next (id selectors) guard position:absolute
+   against the [data-tip] attribute rule further down, which shares
+   .news-ticker-arrow's specificity and was winning by source order - it was
+   turning these into position:relative, so top:50%/translateY(-50%) offset
+   each button from its own normal-flow spot instead of centring it on the
+   ticker, landing prev near the top and next near the bottom. */
+#news-ticker-prev, #news-ticker-next { position: absolute; }
 .news-ticker-arrow {
   position: absolute;
   top: 50%;
