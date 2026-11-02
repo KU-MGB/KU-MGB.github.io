@@ -74,10 +74,10 @@
         <img src="Data/2_Images/2_MGB_Lab_Logo.svg" alt="MGB Lab: Microbial Genomics & Biodegradation" class="logo-lockup">
       </a>
       <div class="nav-links">
-        <a href="#projects">Projects</a>
         <a href="#people">People</a>
         <a href="#publications">Publications</a>
         <a href="#tools">Tools</a>
+        <a href="#projects">Projects</a>
         <a href="#blogs">Blogs</a>
       </div>
       <div class="nav-utils">
@@ -98,10 +98,10 @@
   <!-- Mobile menu: the panel that slides out from the navbar when the
        hamburger button is tapped. Only shown below 900px width. -->
   <div id="mobile-menu">
-    <a href="#projects">Projects</a>
     <a href="#people">People</a>
     <a href="#publications">Publications</a>
     <a href="#tools">Tools</a>
+    <a href="#projects">Projects</a>
     <a href="#blogs">Blogs</a>
     <button type="button" onclick="openJoinModal()" style="color:var(--accent)">Join Us &rarr;</button>
   </div>
@@ -212,26 +212,17 @@
     </section>
   </div>
 
-  <!-- PROJECTS: current projects on the left, news ticker on the right (900px and wider) -->
-  <div id="page-projects" class="page-view">
+  <!-- NEWS: full-width horizontal ticker, right after Home. Scrolls
+       right-to-left and shows the 5 most recent items; the rest are on
+       the "See all" overlay. No nav link of its own - it's already in
+       plain view right under Home. -->
+  <div id="page-news" class="page-view">
     <section class="page-section" data-reveal>
-      <div class="projects-news-grid">
-        <div class="projects-panel">
-          <div class="section-header-flex" style="margin-bottom:16px;">
-            <h2 class="section-title" style="margin-bottom:0;">Projects</h2>
-            <a href="#projects-all" class="text-link">See all &rarr;</a>
-          </div>
-          <div id="projects-container" class="scrollable-list"></div>
-          <button type="button" class="scroll-more-btn" id="projects-scroll-more" aria-label="Scroll for more projects" data-tip="Scroll More"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
-        </div>
-        <div class="news-col">
-          <div class="section-header-flex" style="margin-bottom:16px;">
-            <h2 class="section-title" style="margin-bottom:0;">News</h2>
-            <a href="#news-all" class="text-link">See all &rarr;</a>
-          </div>
-          <div id="news-container"></div>
-        </div>
+      <div class="section-header-flex" style="margin-bottom:16px;">
+        <h2 class="section-title" style="margin-bottom:0;">News</h2>
+        <a href="#news-all" class="text-link">See all &rarr;</a>
       </div>
+      <div id="news-container"></div>
     </section>
   </div>
 
@@ -283,6 +274,20 @@
       <div class="tools-panel">
         <div id="tools-container" class="scrollable-list"></div>
         <button type="button" class="scroll-more-btn" id="tools-scroll-more" aria-label="Scroll for more tools" data-tip="Scroll More"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+      </div>
+    </section>
+  </div>
+
+  <!-- PROJECTS: current and past projects, full width like Tools above -->
+  <div id="page-projects" class="page-view">
+    <section class="page-section" data-reveal>
+      <div class="section-header-flex" style="margin-bottom:16px;">
+        <h2 class="section-title" style="margin-bottom:0;">Projects</h2>
+        <a href="#projects-all" class="text-link">See all &rarr;</a>
+      </div>
+      <div class="projects-panel">
+        <div id="projects-container" class="scrollable-list"></div>
+        <button type="button" class="scroll-more-btn" id="projects-scroll-more" aria-label="Scroll for more projects" data-tip="Scroll More"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
       </div>
     </section>
   </div>

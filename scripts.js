@@ -1509,11 +1509,12 @@ window.renderTools = function() {
   initScrollMore('tools-container', 'tools-scroll-more');
 }
 
-// 11. News renderer: a boxy auto-scrolling ticker, same continuous
-// one-after-another rotation as before (item list duplicated once so the
-// loop wraps without a visible jump), just driven by real scrollTop
-// instead of a CSS transform, so a visitor's own wheel/touch scroll works
-// natively and pauses the rotation for a few seconds instead of fighting it.
+// 11. News renderer: a boxy auto-scrolling ticker, a single horizontal row
+// of cards rotating right-to-left (item list duplicated once so the loop
+// wraps without a visible jump), driven by real scrollLeft instead of a CSS
+// transform, so a visitor's own wheel/touch scroll works natively and
+// pauses the rotation for a few seconds instead of fighting it. Only the 5
+// most recent items show here - the rest are on the "See all" page.
 // newsEntryHtml is shared with renderNewsAll below (the "See all" page),
 // so both render the exact same card markup.
 function newsEntryHtml(n) {
@@ -1534,7 +1535,7 @@ window.renderNews = function() {
   if (typeof MGB_NEWS === 'undefined') return;
   const container = document.getElementById('news-container');
   if (!container) return;
-  const sorted = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+  const sorted = MGB_NEWS.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 5);
   if (sorted.length === 0) return;
 
   container.classList.add('news-ticker');
@@ -1557,10 +1558,10 @@ window.renderNewsAll = function() {
   if (window.initScrollReveal) window.initScrollReveal();
 }
 
-// 11b. Drives the News ticker's auto-scroll: nudges scrollTop forward on a
+// 11b. Drives the News ticker's auto-scroll: nudges scrollLeft forward on a
 // timer, and once it passes the first (real) item set, subtracts that same
 // amount back off. Since the clone set is an identical copy, that wrap is
-// invisible and the rotation looks continuous, same as the old CSS loop.
+// invisible and the rotation looks continuous, moving right-to-left.
 // Hovering, or touching/wheel-scrolling it, pauses the rotation for a few
 // seconds so a visitor can read at their own pace instead of fighting it.
 function initNewsAutoScroll(box) {
@@ -1575,10 +1576,10 @@ function initNewsAutoScroll(box) {
 
   setInterval(() => {
     if (paused) return;
-    const half = box.scrollHeight / 2;
-    if (half <= box.clientHeight) return;
-    box.scrollTop += STEP;
-    if (box.scrollTop >= half) box.scrollTop -= half;
+    const half = box.scrollWidth / 2;
+    if (half <= box.clientWidth) return;
+    box.scrollLeft += STEP;
+    if (box.scrollLeft >= half) box.scrollLeft -= half;
   }, TICK_MS);
 
   function pauseAwhile() {
@@ -1789,9 +1790,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // ----------------------------------------------------------------
 // An overlay key maps to the nav link it should highlight while open,
 // since every other section is hidden and the scroll-spy below has
-// nothing to react to. News "See all" and Projects "See all" have no nav
-// link of their own, so both highlight Projects (the section they live in).
-const OVERLAY_NAV_HASH = { 'blog-post': '#blogs', 'news-all': '#projects', 'projects-all': '#projects' };
+// nothing to react to. News has no nav link of its own (it sits in plain
+// view right under Home), so its "See all" overlay highlights nothing.
+const OVERLAY_NAV_HASH = { 'blog-post': '#blogs', 'projects-all': '#projects' };
 function handleRouting() {
   const hash = window.location.hash || '#home';
   const key = hash.substring(1);
@@ -1848,7 +1849,7 @@ function initSectionNav() {
     document.querySelectorAll('.nav-links a, #mobile-menu a').forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
   });
 
-  const sections = ['home', 'projects', 'people', 'publications', 'tools', 'blogs']
+  const sections = ['home', 'people', 'publications', 'tools', 'projects', 'blogs']
     .map(k => document.getElementById('page-' + k)).filter(Boolean);
   if (!sections.length || !('IntersectionObserver' in window)) return;
   const observer = new IntersectionObserver((entries) => {

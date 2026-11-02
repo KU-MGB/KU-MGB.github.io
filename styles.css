@@ -949,35 +949,29 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 639px) {
   .project-grid { grid-template-columns: 1fr; }
 }
-/* Projects on the left, news on the right, side by side from 900px up */
-.projects-news-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
-@media (min-width: 900px) {
-  .projects-news-grid { grid-template-columns: 1.6fr 1fr; }
-  .news-col { border-left: 1px solid var(--border); padding-left: 32px; }
-}
 
-/* News ticker: a fixed-height box that auto-scrolls through the news
-   cards (driven from JS, see initNewsAutoScroll in scripts.js) and loops
-   back to the top. The native scrollbar is hidden so it still looks like
-   a ticker, but a visitor's own wheel/touch scroll pauses the auto-scroll
-   for a few seconds so they can read at their own pace. The mask fades
-   the top and bottom edges so items don't appear to cut off abruptly. */
+/* News ticker: a single horizontal row of cards, full width, that
+   auto-scrolls right-to-left (driven from JS, see initNewsAutoScroll in
+   scripts.js) and loops back to the start. The native scrollbar is
+   hidden so it still looks like a ticker, but a visitor's own wheel/touch
+   scroll pauses the auto-scroll for a few seconds so they can read at
+   their own pace. The mask fades the left and right edges so cards don't
+   appear to cut off abruptly. Only the 5 most recent items are rendered
+   here (see renderNews) - the rest are on the "See all" overlay. */
 .news-ticker {
   position: relative;
-  max-height: 260px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border-radius: var(--radius-lg);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
   scrollbar-width: none;
 }
 .news-ticker::-webkit-scrollbar { display: none; }
-@media (min-width: 900px) {
-  /* Matches .projects-panel .scrollable-list's desktop height, so the two
-     side-by-side columns in .projects-news-grid end at the same line
-     instead of leaving a gap below the (otherwise shorter) News column. */
-  .news-ticker { max-height: 340px; }
+.news-ticker-set { display: flex; flex-direction: row; gap: 14px; flex-shrink: 0; }
+.news-ticker .news-entry { width: 320px; flex-shrink: 0; margin: 0; }
+@media (max-width: 639px) {
+  .news-ticker .news-entry { width: 260px; }
 }
 
 /* ----------------------------------------------------------------
@@ -1026,19 +1020,16 @@ a:hover { color: var(--accent-hover); }
 }
 .pub-panel .scrollable-list { max-height: 620px; }
 .blogs-panel .scrollable-list { max-height: 820px; }
-.tools-panel .scrollable-list { max-height: 580px; }
-/* Projects sits in a narrower column (beside News, see .projects-news-grid),
-   so its cards run taller than Tools' full-width ones - capped to a single
-   row here rather than two. */
-.projects-panel .scrollable-list { max-height: 340px; }
+/* Projects is full width just like Tools (same .project-grid, same
+   2-column layout), so it shares the same height cap at every breakpoint. */
+.tools-panel .scrollable-list, .projects-panel .scrollable-list { max-height: 580px; }
 /* Below 639px both grids drop to a single column (see .blog-grid and
    .project-grid), so "2 rows" there means 2 cards, not 4 - cards also run
    taller at that width since their text wraps more, so this needs its own
    number rather than reusing the desktop one. */
 @media (max-width: 639px) {
   .blogs-panel .scrollable-list { max-height: 860px; }
-  .tools-panel .scrollable-list { max-height: 660px; }
-  .projects-panel .scrollable-list { max-height: 660px; }
+  .tools-panel .scrollable-list, .projects-panel .scrollable-list { max-height: 660px; }
 }
 .scroll-more-btn {
   position: absolute;
