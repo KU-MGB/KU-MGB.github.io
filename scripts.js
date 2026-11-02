@@ -1522,9 +1522,14 @@ function newsEntryHtml(n) {
   const openAttrs = n.link ? ` href='${esc(n.link)}' target='_blank' rel='noopener'` : '';
   return `
     <${tag} class='news-entry'${openAttrs} data-reveal>
-      ${n.image ? `<img src='${esc(adjustPath(n.image))}' alt='' class='news-avatar' loading='lazy'>` : ''}
+      <div class='news-media'>
+        ${n.image ? `<img src='${esc(adjustPath(n.image))}' alt='' class='news-avatar' loading='lazy'>` : ''}
+        <div class='news-meta-vertical'>
+          <span class='news-category-vertical'>${esc(n.category)}</span>
+          <span class='news-date-vertical'>${esc(n.date)}</span>
+        </div>
+      </div>
       <div class='news-body'>
-        <div class='news-meta'><span class='badge'>${esc(n.category)}</span><span class='news-date'>${esc(n.date)}</span></div>
         <h3 class='news-title'>${esc(n.title)}</h3>
         <p class='news-desc'>${esc(n.description)}</p>
       </div>

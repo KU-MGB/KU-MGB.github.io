@@ -990,14 +990,14 @@ a:hover { color: var(--accent-hover); }
   overflow: hidden;
 }
 
-/* Prev/next arrows for the News ticker: round buttons overlaid on the
-   left and right edges, same visual language as .scroll-more-btn. Hidden
+/* Prev/next arrows for the News ticker: fixed-size round buttons flanking
+   the ticker as flex items, so flexbox (not absolute-position math) keeps
+   them vertically centred on the row no matter how tall it is. Hidden
    entirely (via JS) when the ticker isn't wide enough to need scrolling. */
-.news-ticker-wrap { position: relative; }
+.news-ticker-wrap { display: flex; align-items: center; gap: 10px; }
+.news-ticker-wrap .news-ticker { flex: 1; min-width: 0; }
 .news-ticker-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1010,17 +1010,8 @@ a:hover { color: var(--accent-hover); }
   border: none;
   box-shadow: var(--shadow-md);
   transition: transform var(--t-fast), background var(--t-fast);
-  z-index: 5;
 }
-.news-ticker-arrow:hover { background: var(--accent-hover); }
-.news-ticker-prev { left: -4px; }
-.news-ticker-next { right: -4px; }
-.news-ticker-prev:hover { transform: translateY(-50%) translateX(-3px) scale(1.08); }
-.news-ticker-next:hover { transform: translateY(-50%) translateX(3px) scale(1.08); }
-@media (max-width: 639px) {
-  .news-ticker-prev { left: -2px; }
-  .news-ticker-next { right: -2px; }
-}
+.news-ticker-arrow:hover { background: var(--accent-hover); transform: scale(1.08); }
 
 /* ----------------------------------------------------------------
    8. PUBLICATIONS AND NEWS LIST ROWS
@@ -1047,8 +1038,7 @@ a:hover { color: var(--accent-hover); }
 .pub-entry:hover .chip-container .chip { background: var(--accent); color: #fff; border-color: var(--accent); }
 .pub-title, .news-title { font-family: var(--sans); font-size: 15.5px; font-weight: 600; color: var(--fg); line-height: 1.4; }
 .pub-authors { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 2px; }
-.news-date { font-size: 12px; color: var(--faint); }
-.pub-meta, .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+.pub-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
 .pub-doi { font-family: var(--mono); }
 .pub-doi:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
@@ -1107,7 +1097,21 @@ a:hover { color: var(--accent-hover); }
   text-decoration: none;
   color: inherit;
 }
+/* News card media column: the photo, with the category and date printed
+   sideways underneath it, rather than in a horizontal row above the
+   title - freeing that space for the title/description instead. */
+.news-media { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
 .news-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.news-meta-vertical { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.news-category-vertical, .news-date-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+  white-space: nowrap;
+  font-family: var(--sans);
+  line-height: 1;
+}
+.news-category-vertical { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
+.news-date-vertical { font-size: 10.5px; color: var(--faint); }
 .news-body { min-width: 0; flex: 1; }
 .news-desc { color: var(--muted); font-size: 13.5px; margin-top: 4px; text-align: justify; }
 /* News "See all" page: the same .news-entry cards as the ticker, as a
